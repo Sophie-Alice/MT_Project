@@ -1,7 +1,7 @@
-name: "MT_Project"
+name: MT_Project
 output_dir: ../docs
 navbar:
-  title: "MT_Project"
+  title: MT_Project
   left:
   - text: Home
     href: index.html
@@ -9,6 +9,10 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  right:
+  - icon: fab fa-github
+    text: Source code
+    href: https://github.com/Sophie-Alice/MT_Project
 output:
   workflowr::wflow_html:
     toc: yes
