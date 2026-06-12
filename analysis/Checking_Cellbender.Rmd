@@ -1,0 +1,231 @@
+---
+title: "Checking_Cellbender"
+author: "Sophie"
+date: "2026-06-12"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Libraries
+
+```{r, message=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+```
+
+# Introduction
+
+First we want to double check whether Cellbender was performed correctly.
+
+# Get Directories
+
+```{r}
+Cellbender.master <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellbender_output"
+
+benderfiles <- list.files(
+  path = Cellbender.master, 
+  pattern = "cellbender_output.*\\.h5", 
+  full.names = TRUE, 
+  recursive = TRUE
+)
+
+Raw.master <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellranger_output"
+
+rawfiles <- list.files(
+  path = Raw.master, 
+  pattern = "sample.*\\.h5", 
+  full.names = TRUE, 
+  recursive = TRUE
+)
+
+
+```
+
+
+# Functions
+
+```{r}
+process_single_cell_pair <- function(b_file, r_file, s_name) {
+
+  # bender object
+  counts_b <- Read_CellBender_h5_Mat(b_file)
+  obj_b    <- CreateSeuratObject(counts = counts_b, project = paste0(s_name, "_Bender"))
+  obj_b[["percent.mt"]] <- PercentageFeatureSet(obj_b, pattern = "^MT-")
+  obj_b[["percent.rb"]] <- PercentageFeatureSet(obj_b, pattern = "^RP[SL]")
+  
+  meta_b <- obj_b@meta.data
+  meta_b$Method <- "Cellbender"
+  meta_b$Sample <- s_name
+  
+  # raw object
+  counts_r <- Read10X_h5(r_file)
+  obj_r    <- CreateSeuratObject(counts = counts_r, project = paste0(s_name, "_raw"))
+  obj_r[["percent.mt"]] <- PercentageFeatureSet(obj_r, pattern = "^MT-")
+  obj_r[["percent.rb"]] <- PercentageFeatureSet(obj_r, pattern = "^RP[SL]")
+  
+  meta_r <- obj_r@meta.data
+  meta_r$Method <- "Raw"
+  meta_r$Sample <- s_name
+  
+  columns_to_keep <- c("nCount_RNA", "nFeature_RNA", "percent.mt", "percent.rb", "Method", "Sample")
+  combined_metadata <- rbind(meta_b[, columns_to_keep], meta_r[, columns_to_keep])
+  
+  results <- list(
+    bender_obj = obj_b,
+    raw_obj    = obj_r,
+    metadata   = combined_metadata
+  )
+  
+  return(results)
+}
+
+
+##############################################
+
+generate_qc_plots <- function(df, s_name) {
+  
+  # 1. Filter data for the specific sample
+  sample_df <- df[df$Sample == s_name, ]
+  
+  # Plot
+  p1 <- ggplot(sample_df, aes(x = Method, y = nCount_RNA, fill = Method)) +
+    geom_violin(alpha = 0.7) +
+    theme_classic() +
+    labs(title = "nCount_RNA", x = NULL, y = NULL) + 
+    theme(legend.position = "none")
+
+  p2 <- ggplot(sample_df, aes(x = Method, y = nFeature_RNA, fill = Method)) +
+    geom_violin(alpha = 0.7) +
+    theme_classic() +
+    labs(title = "nFeature_RNA", x = NULL, y = NULL) + 
+    theme(legend.position = "none")
+
+  p3 <- ggplot(sample_df, aes(x = Method, y = percent.mt, fill = Method)) +
+    geom_violin(alpha = 0.7) +
+    theme_classic() +
+    labs(title = "percent.mt", x = NULL, y = NULL) + 
+    theme(legend.position = "none")
+
+  p4 <- ggplot(sample_df, aes(x = Method, y = percent.rb, fill = Method)) +
+    geom_violin(alpha = 0.7) +
+    theme_classic() +
+    labs(title = "percent.rb", x = NULL, y = NULL) + 
+    theme(legend.position = "none")
+
+  # patchwork
+  sample_grid <- (p1 + p2) / (p3 + p4) + 
+    plot_annotation(
+      title = s_name, 
+      theme = theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5))
+    )
+  
+  # Zoomed grid
+  p1_zoom <- p1 + coord_cartesian(ylim = c(0, 60000))
+  p3_zoom <- p3 + coord_cartesian(ylim = c(0, 5))
+  p4_zoom <- p4 + coord_cartesian(ylim = c(0, 5))
+  
+  sample_grid_zoom <- (p1_zoom + p2) / (p3_zoom + p4_zoom) + 
+    plot_annotation(
+      title = paste0(s_name, " (Zoom)"),
+      theme = theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5))
+    )
+  
+  print(sample_grid)
+  print(sample_grid_zoom)
+}
+
+
+```
+
+# Plotting QC values to see the effect of Cellbender
+
+```{r}
+seurat_bender_list <- list()
+seurat_raw_list    <- list()
+metadata_qc_list   <- list()
+
+
+sample_names <- gsub("cellbender_output_|_filtered\\.h5", "", basename(benderfiles))
+all_metadata_list <- list()
+
+for (i in seq_along(benderfiles)) {
+  
+  s_name <- sample_names[i]
+  b_file <- benderfiles[i]
+  
+  # Find the exact matching raw file
+  r_file <- rawfiles[grep(s_name, basename(rawfiles))][1]
+  
+  # Safety check to prevent crashing on missing files
+  if (is.na(r_file) || length(r_file) == 0) {
+    warning(paste("Skipping: No raw file found for", s_name))
+    next
+  }
+  
+  # Process pair
+  res <- process_single_cell_pair(b_file = b_file, r_file = r_file, s_name = s_name)
+  
+  df <- res$metadata
+  all_metadata_list[[s_name]] <- df
+  
+  # 
+  generate_qc_plots(df = df, s_name = s_name)
+  
+  rm(res, df)
+  gc()
+}
+
+
+## Combine Metadata into a Masterfile
+
+master_compare_df <- do.call(rbind, all_metadata_list)
+
+table(master_compare_df$Sample)
+```
+
+
+# Comparing Cellcounts
+
+```{r}
+counts_matrix <- table(master_compare_df$Sample, master_compare_df$Method)
+counts_wide <- as.data.frame.matrix(counts_matrix)
+counts_wide$Sample <- rownames(counts_wide)
+
+
+ggplot(counts_wide, aes(x = Raw, y = Cellbender)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey50", size = 0.8) +
+  geom_point(color = "#4682B4", size = 4, alpha = 0.9) +
+  
+  # Labels
+  geom_text_repel(aes(label = Sample), size = 3.5, fontface = "bold", box.padding = 0.4) +
+  
+  # Layout styling
+  theme_bw() +
+  labs(
+    title = "Cell Count Retention: Raw vs. Cellbender",
+    x = "Raw Cell Count (Cellranger)",
+    y = "Cellbender Cell Count"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+    plot.subtitle = element_text(size = 10, color = "grey30", hjust = 0.5),
+    axis.title = element_text(face = "bold", size = 11)
+  )
+
+```
+
+# Conclusion
+
+The h5 files seem good. Not corrupted and Cellbender worked.
+
+
+
