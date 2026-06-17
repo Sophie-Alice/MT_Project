@@ -13,7 +13,7 @@
 
 <meta name="date" content="2026-06-12" />
 
-<title>Checking_Cellbender</title>
+<title>QC</title>
 
 <script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -359,7 +359,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Checking_Cellbender</h1>
+<h1 class="title toc-ignore">QC</h1>
 <h4 class="author">Sophie</h4>
 <h4 class="date">2026-06-12</h4>
 
@@ -571,11 +571,10 @@ have uncommitted changes.
 <div id="versions" class="tab-pane fade">
 <p>
 These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/Checking_Cellbender.Rmd</code>)
-and HTML (<code>docs/Checking_Cellbender.html</code>) files. If you’ve
-configured a remote Git repository (see <code>?wflow_git_remote</code>),
-click on the hyperlinks in the table below to view the files as they
-were in that past version.
+made to the R Markdown (<code>analysis/QC.Rmd</code>) and HTML
+(<code>docs/QC.html</code>) files. If you’ve configured a remote Git
+repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
+in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -604,7 +603,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/0dbaf111ee095479b3e355735c65330f74099085/analysis/Checking_Cellbender.Rmd" target="_blank">0dbaf11</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/0dbaf111ee095479b3e355735c65330f74099085/analysis/QC.Rmd" target="_blank">0dbaf11</a>
 </td>
 <td>
 Sophie
@@ -614,40 +613,6 @@ Sophie
 </td>
 <td>
 Adding QC
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/Checking_Cellbender.html" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/c46783846b4965a883c7f4672b78435e8b1f8e54/analysis/Checking_Cellbender.Rmd" target="_blank">c467838</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-<td>
-Adding Cellbender QC
 </td>
 </tr>
 </tbody>
@@ -662,8 +627,8 @@ Adding Cellbender QC
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  894007 47.8    1718918 91.9  1315225 70.3
-Vcells 1566589 12.0    8388608 64.0  2320286 17.8</code></pre>
+Ncells  894077 47.8    1719118 91.9  1315225 70.3
+Vcells 1566782 12.0    8388608 64.0  2341663 17.9</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -673,15 +638,11 @@ library(scCustomize)
 library(patchwork)
 library(cowplot)
 library(ggrepel)
-library(workflowr)</code></pre>
+library(workflowr)
+library(scDblFinder)</code></pre>
 </div>
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
-<p>First we want to double check whether Cellbender was performed
-correctly.</p>
-</div>
-<div id="get-directories" class="section level1">
-<h1>Get Directories</h1>
+<div id="get-the-directory" class="section level1">
+<h1>Get the directory</h1>
 <pre class="r"><code>Cellbender.master &lt;- &quot;/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellbender_output&quot;
 
 benderfiles &lt;- list.files(
@@ -689,531 +650,265 @@ benderfiles &lt;- list.files(
   pattern = &quot;cellbender_output.*\\.h5&quot;, 
   full.names = TRUE, 
   recursive = TRUE
-)
-
-Raw.master &lt;- &quot;/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellranger_output&quot;
-
-rawfiles &lt;- list.files(
-  path = Raw.master, 
-  pattern = &quot;sample.*\\.h5&quot;, 
-  full.names = TRUE, 
-  recursive = TRUE
 )</code></pre>
 </div>
-<div id="functions" class="section level1">
-<h1>Functions</h1>
-<pre class="r"><code>process_single_cell_pair &lt;- function(b_file, r_file, s_name) {
+<div id="import-the-4-files-and-merge" class="section level1">
+<h1>Import the 4 files and merge</h1>
+<pre class="r"><code>merged_cb_matrix &lt;- Read_CellBender_h5_Multi_File(
+  data_dir = Cellbender.master,
+  custom_name = &quot;_filtered.h5&quot;,
+  filtered_h5 = TRUE,
+  merge = TRUE,
+  sample_list = c(
+    &quot;cellbender_output_Exp1L_CMF_NC&quot;,
+    &quot;cellbender_output_Exp1L_CMF_TGF&quot;,
+    &quot;cellbender_output_Exp1L_CMFHM_NC&quot;,
+    &quot;cellbender_output_Exp1L_CMFHM_TGF&quot;),
+  sample_names = c(
+    &quot;CMF_NC&quot;,
+    &quot;CMF_TGF&quot;,
+    &quot;CMFHM_NC&quot;,
+    &quot;CMFHM_TGF&quot;)
+)</code></pre>
+<pre><code>Reading Cell Bender H5 files from directory
+Preparing &amp; merging matrices.
+Creating final sparse matrix.</code></pre>
+<pre class="r"><code>Data &lt;- CreateSeuratObject(counts = merged_cb_matrix)
+head(Data@meta.data)</code></pre>
+<pre><code>                          orig.ident nCount_RNA nFeature_RNA
+CMF_NC_CTCGCTTGTATGTCAC-1        CMF      99106        10888
+CMF_NC_ACGCTCAGTCAATTCA-1        CMF      86903         9521
+CMF_NC_ATCGTACGTTCCTCGT-1        CMF      80289         8847
+CMF_NC_ACCCCAAGTGCAGGCA-1        CMF      77964        10780
+CMF_NC_CAGTTACGTCTCCAAG-1        CMF      77224         8685
+CMF_NC_CACATTAGTTGCGATT-1        CMF      75593         8946</code></pre>
+</div>
+<div id="adding-qc-variables" class="section level1">
+<h1>Adding QC variables</h1>
+<pre class="r"><code>Data[[&quot;percent.mt&quot;]] &lt;- PercentageFeatureSet(Data, pattern = &quot;^MT-&quot;)
+Data[[&quot;percent.rp&quot;]] &lt;- PercentageFeatureSet(Data, pattern = &quot;^RP[SL]&quot;)
 
-  # bender object
-  counts_b &lt;- Read_CellBender_h5_Mat(b_file)
-  obj_b    &lt;- CreateSeuratObject(counts = counts_b, project = paste0(s_name, &quot;_Bender&quot;))
-  obj_b[[&quot;percent.mt&quot;]] &lt;- PercentageFeatureSet(obj_b, pattern = &quot;^MT-&quot;)
-  obj_b[[&quot;percent.rb&quot;]] &lt;- PercentageFeatureSet(obj_b, pattern = &quot;^RP[SL]&quot;)
-  
-  meta_b &lt;- obj_b@meta.data
-  meta_b$Method &lt;- &quot;Cellbender&quot;
-  meta_b$Sample &lt;- s_name
-  
-  # raw object
-  counts_r &lt;- Read10X_h5(r_file)
-  obj_r    &lt;- CreateSeuratObject(counts = counts_r, project = paste0(s_name, &quot;_raw&quot;))
-  obj_r[[&quot;percent.mt&quot;]] &lt;- PercentageFeatureSet(obj_r, pattern = &quot;^MT-&quot;)
-  obj_r[[&quot;percent.rb&quot;]] &lt;- PercentageFeatureSet(obj_r, pattern = &quot;^RP[SL]&quot;)
-  
-  meta_r &lt;- obj_r@meta.data
-  meta_r$Method &lt;- &quot;Raw&quot;
-  meta_r$Sample &lt;- s_name
-  
-  columns_to_keep &lt;- c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;, &quot;percent.rb&quot;, &quot;Method&quot;, &quot;Sample&quot;)
-  combined_metadata &lt;- rbind(meta_b[, columns_to_keep], meta_r[, columns_to_keep])
-  
-  results &lt;- list(
-    bender_obj = obj_b,
-    raw_obj    = obj_r,
-    metadata   = combined_metadata
-  )
-  
-  return(results)
-}
+colnames(Data@meta.data)</code></pre>
+<pre><code>[1] &quot;orig.ident&quot;   &quot;nCount_RNA&quot;   &quot;nFeature_RNA&quot; &quot;percent.mt&quot;   &quot;percent.rp&quot;  </code></pre>
+</div>
+<div id="adding-metadata" class="section level1">
+<h1>Adding metadata</h1>
+<pre class="r"><code>Data$orig.ident &lt;- sub(&quot;_([^_]+)$&quot;, &quot;&quot;, rownames(Data@meta.data))
 
-
-##############################################
-
-generate_qc_plots &lt;- function(df, s_name) {
-  
-  # 1. Filter data for the specific sample
-  sample_df &lt;- df[df$Sample == s_name, ]
-  
-  # Plot
-  p1 &lt;- ggplot(sample_df, aes(x = Method, y = nCount_RNA, fill = Method)) +
-    geom_violin(alpha = 0.7) +
-    theme_classic() +
-    labs(title = &quot;nCount_RNA&quot;, x = NULL, y = NULL) + 
-    theme(legend.position = &quot;none&quot;)
-
-  p2 &lt;- ggplot(sample_df, aes(x = Method, y = nFeature_RNA, fill = Method)) +
-    geom_violin(alpha = 0.7) +
-    theme_classic() +
-    labs(title = &quot;nFeature_RNA&quot;, x = NULL, y = NULL) + 
-    theme(legend.position = &quot;none&quot;)
-
-  p3 &lt;- ggplot(sample_df, aes(x = Method, y = percent.mt, fill = Method)) +
-    geom_violin(alpha = 0.7) +
-    theme_classic() +
-    labs(title = &quot;percent.mt&quot;, x = NULL, y = NULL) + 
-    theme(legend.position = &quot;none&quot;)
-
-  p4 &lt;- ggplot(sample_df, aes(x = Method, y = percent.rb, fill = Method)) +
-    geom_violin(alpha = 0.7) +
-    theme_classic() +
-    labs(title = &quot;percent.rb&quot;, x = NULL, y = NULL) + 
-    theme(legend.position = &quot;none&quot;)
-
-  # patchwork
-  sample_grid &lt;- (p1 + p2) / (p3 + p4) + 
-    plot_annotation(
-      title = s_name, 
-      theme = theme(plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5))
-    )
-  
-  # Zoomed grid
-  p1_zoom &lt;- p1 + coord_cartesian(ylim = c(0, 60000))
-  p3_zoom &lt;- p3 + coord_cartesian(ylim = c(0, 5))
-  p4_zoom &lt;- p4 + coord_cartesian(ylim = c(0, 5))
-  
-  sample_grid_zoom &lt;- (p1_zoom + p2) / (p3_zoom + p4_zoom) + 
-    plot_annotation(
-      title = paste0(s_name, &quot; (Zoom)&quot;),
-      theme = theme(plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5))
-    )
-  
-  print(sample_grid)
-  print(sample_grid_zoom)
-}</code></pre>
-</div>
-<div id="plotting-qc-values-to-see-the-effect-of-cellbender"
-class="section level1">
-<h1>Plotting QC values to see the effect of Cellbender</h1>
-<pre class="r"><code>seurat_bender_list &lt;- list()
-seurat_raw_list    &lt;- list()
-metadata_qc_list   &lt;- list()
-
-
-sample_names &lt;- gsub(&quot;cellbender_output_|_filtered\\.h5&quot;, &quot;&quot;, basename(benderfiles))
-all_metadata_list &lt;- list()
-
-for (i in seq_along(benderfiles)) {
-  
-  s_name &lt;- sample_names[i]
-  b_file &lt;- benderfiles[i]
-  
-  # Find the exact matching raw file
-  r_file &lt;- rawfiles[grep(s_name, basename(rawfiles))][1]
-  
-  # Safety check to prevent crashing on missing files
-  if (is.na(r_file) || length(r_file) == 0) {
-    warning(paste(&quot;Skipping: No raw file found for&quot;, s_name))
-    next
-  }
-  
-  # Process pair
-  res &lt;- process_single_cell_pair(b_file = b_file, r_file = r_file, s_name = s_name)
-  
-  df &lt;- res$metadata
-  all_metadata_list[[s_name]] &lt;- df
-  
-  # 
-  generate_qc_plots(df = df, s_name = s_name)
-  
-  rm(res, df)
-  gc()
-}</code></pre>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
-Past versions of unnamed-chunk-4-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-1.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-2">
-Past versions of unnamed-chunk-4-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-2.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-3">
-Past versions of unnamed-chunk-4-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-3.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-4-4.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-4">
-Past versions of unnamed-chunk-4-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-4.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-4-5.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-5">
-Past versions of unnamed-chunk-4-5.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-5.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-4-6.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-6">
-Past versions of unnamed-chunk-4-6.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-6" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-6.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-4-7.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-7">
-Past versions of unnamed-chunk-4-7.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-7" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-7.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-4-8.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-8">
-Past versions of unnamed-chunk-4-8.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-8" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-8.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>## Combine Metadata into a Masterfile
-
-master_compare_df &lt;- do.call(rbind, all_metadata_list)
-
-table(master_compare_df$Sample)</code></pre>
+table(Data@meta.data$orig.ident)</code></pre>
 <pre><code>
-   Exp1L_CMF_NC   Exp1L_CMF_TGF  Exp1L_CMFHM_NC Exp1L_CMFHM_TGF 
-           6127            9302           11147            8366 </code></pre>
-</div>
-<div id="comparing-cellcounts" class="section level1">
-<h1>Comparing Cellcounts</h1>
-<pre class="r"><code>counts_matrix &lt;- table(master_compare_df$Sample, master_compare_df$Method)
-counts_wide &lt;- as.data.frame.matrix(counts_matrix)
-counts_wide$Sample &lt;- rownames(counts_wide)
+   CMF_NC   CMF_TGF  CMFHM_NC CMFHM_TGF 
+     2985      4549      5496      4012 </code></pre>
+<pre class="r"><code>Data$TGF_status &lt;- ifelse(
+  grepl(&quot;TGF&quot;, Data$orig.ident), 
+  &quot;TGF_B&quot;, 
+  &quot;NC&quot;
+)
+
+Data$Macrophage_status &lt;- ifelse(
+  grepl(&quot;CMFHM&quot;, Data$orig.ident), 
+  &quot;With_Macrophages&quot;, 
+  &quot;No_Macrophages&quot;
+)
+
+colnames(Data@meta.data)</code></pre>
+<pre><code>[1] &quot;orig.ident&quot;        &quot;nCount_RNA&quot;        &quot;nFeature_RNA&quot;     
+[4] &quot;percent.mt&quot;        &quot;percent.rp&quot;        &quot;TGF_status&quot;       
+[7] &quot;Macrophage_status&quot;</code></pre>
+<pre class="r"><code>head(Data@meta.data)</code></pre>
+<pre><code>                          orig.ident nCount_RNA nFeature_RNA  percent.mt
+CMF_NC_CTCGCTTGTATGTCAC-1     CMF_NC      99106        10888 0.034306702
+CMF_NC_ACGCTCAGTCAATTCA-1     CMF_NC      86903         9521 0.018411332
+CMF_NC_ATCGTACGTTCCTCGT-1     CMF_NC      80289         8847 0.001245501
+CMF_NC_ACCCCAAGTGCAGGCA-1     CMF_NC      77964        10780 0.069262737
+CMF_NC_CAGTTACGTCTCCAAG-1     CMF_NC      77224         8685 0.005179737
+CMF_NC_CACATTAGTTGCGATT-1     CMF_NC      75593         8946 0.062175069
+                          percent.rp TGF_status Macrophage_status
+CMF_NC_CTCGCTTGTATGTCAC-1  0.6699897         NC    No_Macrophages
+CMF_NC_ACGCTCAGTCAATTCA-1  0.2416487         NC    No_Macrophages
+CMF_NC_ATCGTACGTTCCTCGT-1  0.1320231         NC    No_Macrophages
+CMF_NC_ACCCCAAGTGCAGGCA-1  0.7913909         NC    No_Macrophages
+CMF_NC_CAGTTACGTCTCCAAG-1  0.1657516         NC    No_Macrophages
+CMF_NC_CACATTAGTTGCGATT-1  0.4987234         NC    No_Macrophages</code></pre>
+<pre class="r"><code>tail(Data@meta.data)</code></pre>
+<pre><code>                             orig.ident nCount_RNA nFeature_RNA percent.mt
+CMFHM_TGF_GGATGCAAGTGGCGTT-1  CMFHM_TGF        516          252  0.0000000
+CMFHM_TGF_GGCGAACAGCTAATGT-1  CMFHM_TGF        342           82  0.0000000
+CMFHM_TGF_GCGATTCAGTAATGGA-1  CMFHM_TGF        727          413  0.1375516
+CMFHM_TGF_CCGATTAAGAAGCGAT-1  CMFHM_TGF        242           71  0.0000000
+CMFHM_TGF_GTCCGCAAGGCTACAC-1  CMFHM_TGF        572          104 66.0839161
+CMFHM_TGF_TACCCTTAGCATGATT-1  CMFHM_TGF        505          127 61.9801980
+                             percent.rp TGF_status Macrophage_status
+CMFHM_TGF_GGATGCAAGTGGCGTT-1  13.372093      TGF_B  With_Macrophages
+CMFHM_TGF_GGCGAACAGCTAATGT-1   0.000000      TGF_B  With_Macrophages
+CMFHM_TGF_GCGATTCAGTAATGGA-1  21.182944      TGF_B  With_Macrophages
+CMFHM_TGF_CCGATTAAGAAGCGAT-1   0.000000      TGF_B  With_Macrophages
+CMFHM_TGF_GTCCGCAAGGCTACAC-1   3.671329      TGF_B  With_Macrophages
+CMFHM_TGF_TACCCTTAGCATGATT-1   7.920792      TGF_B  With_Macrophages</code></pre>
+<pre class="r"><code>p1 &lt;- VlnPlot(Data, features = &quot;nCount_RNA&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0) + theme(axis.title.x = element_blank()) + NoLegend()
+
+p2 &lt;- VlnPlot(Data, features = &quot;nFeature_RNA&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0) + theme(axis.title.x = element_blank()) + NoLegend()
+
+p3 &lt;- VlnPlot(Data, features = &quot;percent.mt&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0) + theme(axis.title.x = element_blank()) + NoLegend()
+
+p4 &lt;- VlnPlot(Data, features = &quot;percent.rp&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0) + theme(axis.title.x = element_blank()) + NoLegend()
 
 
-ggplot(counts_wide, aes(x = Raw, y = Cellbender)) +
-  geom_abline(intercept = 0, slope = 1, color = &quot;grey50&quot;, size = 0.8) +
-  geom_point(color = &quot;#4682B4&quot;, size = 4, alpha = 0.9) +
-  
-  # Labels
-  geom_text_repel(aes(label = Sample), size = 3.5, fontface = &quot;bold&quot;, box.padding = 0.4) +
-  
-  # Layout styling
-  theme_bw() +
-  labs(
-    title = &quot;Cell Count Retention: Raw vs. Cellbender&quot;,
-    x = &quot;Raw Cell Count (Cellranger)&quot;,
-    y = &quot;Cellbender Cell Count&quot;
-  ) +
-  theme(
-    plot.title = element_text(face = &quot;bold&quot;, size = 14, hjust = 0.5),
-    plot.subtitle = element_text(size = 10, color = &quot;grey30&quot;, hjust = 0.5),
-    axis.title = element_text(face = &quot;bold&quot;, size = 11)
-  )</code></pre>
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.
-This warning is displayed once per session.
-Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-generated.</code></pre>
-<p><img src="figure/Checking_Cellbender.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
-Past versions of unnamed-chunk-5-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-5-1.png" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-</tr>
-</tbody>
-</table>
+QC_pre_VlnPlots &lt;- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+QC_pre_VlnPlots</code></pre>
+<p><img src="figure/QC.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p1 &lt;- VlnPlot(Data, features = &quot;nCount_RNA&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, y.max = 30000) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+
+p2 &lt;- VlnPlot(Data, features = &quot;nFeature_RNA&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, y.max = 10000) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+p3 &lt;- VlnPlot(Data, features = &quot;percent.mt&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, y.max = 5) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+p4 &lt;- VlnPlot(Data, features = &quot;percent.rp&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, y.max = 10) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+
+QC_pre_VlnPlots_zoom &lt;- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+QC_pre_VlnPlots_zoom</code></pre>
+<p><img src="figure/QC.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
+<div id="doubletfinder" class="section level1">
+<h1>DoubletFinder</h1>
+<pre class="r"><code># Removing of extremely low nCount cells
+Data &lt;- subset(Data, subset = nCount_RNA &gt; 200 &amp;
+                 percent.rp &lt; 2.5)
+
+
+# scDblFinder
+Data_sce &lt;- as.SingleCellExperiment(Data)</code></pre>
+<pre><code>Warning: Layer &#39;data&#39; is empty</code></pre>
+<pre><code>Warning: Layer &#39;scale.data&#39; is empty</code></pre>
+<pre class="r"><code>Data_sce &lt;- scDblFinder(Data_sce, samples=&quot;orig.ident&quot;, clusters = TRUE)</code></pre>
+<pre><code>  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%</code></pre>
+<pre class="r"><code>table(Data_sce@colData$scDblFinder.class)</code></pre>
+<pre><code>
+singlet doublet 
+  13905    1203 </code></pre>
+<pre class="r"><code>Data_dbl &lt;- as.Seurat(Data_sce, counts = &quot;counts&quot;, data = &quot;counts&quot;)
+
+
+counts_table &lt;- table(Data_dbl$scDblFinder.class)
+n_singlet    &lt;- counts_table[&quot;singlet&quot;]
+n_doublet    &lt;- counts_table[&quot;doublet&quot;]
+
+
+singlet_label &lt;- paste0(&quot;Singlets (n=&quot;, n_singlet, &quot;)&quot;)
+doublet_label &lt;- paste0(&quot;Doublets (n=&quot;, n_doublet, &quot;)&quot;)
+
+
+Data_dbl$scDblFinder.n &lt;- ifelse(Data_dbl$scDblFinder.class == &quot;singlet&quot;, 
+                                     singlet_label, 
+                                     doublet_label)
+
+Data_dbl$scDblFinder.n &lt;- factor(Data_dbl$scDblFinder.n, 
+                                     levels = c(singlet_label, doublet_label))
+
+
+p1 &lt;- VlnPlot(Data_dbl, 
+              features = &quot;nCount_RNA&quot;, 
+              split.by = &quot;scDblFinder.n&quot;, 
+              group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, 
+              y.max = 50000) + 
+  theme(axis.title.x = element_blank()) + 
+  NoLegend()</code></pre>
+<pre><code>The default behaviour of split.by has changed.
+Separate violin plots are now plotted side-by-side.
+To restore the old behaviour of a single split violin,
+set split.plot = TRUE.
+      
+This message will be shown once per session.</code></pre>
+<pre class="r"><code>p2 &lt;- VlnPlot(Data_dbl, 
+              features = &quot;nFeature_RNA&quot;, 
+              split.by = &quot;scDblFinder.n&quot;, 
+              group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, 
+              y.max = 10000) + 
+  theme(axis.title.x = element_blank())
+
+
+p3 &lt;- VlnPlot(Data_dbl, 
+              features = &quot;percent.mt&quot;, 
+              split.by = &quot;scDblFinder.n&quot;, 
+              group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, 
+              y.max = 5) + 
+  theme(axis.title.x = element_blank())
+
+p4 &lt;- VlnPlot(Data_dbl, 
+              features = &quot;percent.rp&quot;, 
+              split.by = &quot;scDblFinder.n&quot;, 
+              group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, 
+              y.max = 5) + 
+  theme(axis.title.x = element_blank())
+# Combine using patchwork layout
+QC_pre_Doublets &lt;- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+
+# Render plot
+QC_pre_Doublets</code></pre>
+<pre><code>Warning: Removed 470 rows containing non-finite outside the scale range
+(`stat_ydensity()`).</code></pre>
+<pre><code>Warning: Removed 202 rows containing non-finite outside the scale range
+(`stat_ydensity()`).</code></pre>
+<pre><code>Warning: Removed 6 rows containing non-finite outside the scale range
+(`stat_ydensity()`).</code></pre>
+<p><img src="figure/QC.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Remove the doublets
+
+Data &lt;- subset(x = Data_dbl, subset = scDblFinder.class == &quot;singlet&quot;)
+table(Data@meta.data$scDblFinder.class)</code></pre>
+<pre><code>
+singlet doublet 
+  13905       0 </code></pre>
 </div>
-</div>
-<div id="conclusion" class="section level1">
-<h1>Conclusion</h1>
-<p>The h5 files seem good. Not corrupted and Cellbender worked.</p>
+<div id="qc-filtering" class="section level1">
+<h1>QC Filtering</h1>
+<pre class="r"><code>Data&lt;- subset(Data, subset = 
+                   nFeature_RNA &gt; 200 &amp;
+                   percent.mt &lt; 1.5 &amp;
+                   percent.rp &lt; 2.5 &amp;
+                   nCount_RNA &gt; 500 &amp;
+                   nCount_RNA &lt; 45000)
+
+
+p1 &lt;- VlnPlot(Data, features = &quot;nCount_RNA&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, y.max = 50000) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+
+p2 &lt;- VlnPlot(Data, features = &quot;nFeature_RNA&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, y.max = 10000) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+p3 &lt;- VlnPlot(Data, features = &quot;percent.mt&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, y.max = 4) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+p4 &lt;- VlnPlot(Data, features = &quot;percent.rp&quot;, group.by = &quot;orig.ident&quot;, 
+              pt.size = 0, y.max = 4) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+
+QC_pre_VlnPlots_zoom &lt;- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+QC_pre_VlnPlots_zoom</code></pre>
+<p><img src="figure/QC.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1243,60 +938,82 @@ time zone: Etc/UTC
 tzcode source: system (glibc)
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
 
 other attached packages:
- [1] ggrepel_0.9.6      cowplot_1.2.0      patchwork_1.3.2    scCustomize_3.2.4 
- [5] hdf5r_1.3.12       Seurat_5.4.0       SeuratObject_5.3.0 sp_2.2-0          
- [9] ggplot2_4.0.0      dplyr_1.1.4        readr_2.1.5        workflowr_1.7.2   
+ [1] scDblFinder_1.24.10         SingleCellExperiment_1.32.0
+ [3] SummarizedExperiment_1.40.0 Biobase_2.70.0             
+ [5] GenomicRanges_1.62.1        Seqinfo_1.0.0              
+ [7] IRanges_2.44.0              S4Vectors_0.48.0           
+ [9] BiocGenerics_0.56.0         generics_0.1.4             
+[11] MatrixGenerics_1.22.0       matrixStats_1.5.0          
+[13] ggrepel_0.9.6               cowplot_1.2.0              
+[15] patchwork_1.3.2             scCustomize_3.2.4          
+[17] hdf5r_1.3.12                Seurat_5.4.0               
+[19] SeuratObject_5.3.0          sp_2.2-0                   
+[21] ggplot2_4.0.0               dplyr_1.1.4                
+[23] readr_2.1.5                 workflowr_1.7.2            
 
 loaded via a namespace (and not attached):
-  [1] RColorBrewer_1.1-3     shape_1.4.6.1          rstudioapi_0.17.1     
-  [4] jsonlite_2.0.0         magrittr_2.0.4         ggbeeswarm_0.7.3      
-  [7] spatstat.utils_3.2-0   farver_2.1.2           rmarkdown_2.30        
- [10] GlobalOptions_0.1.3    fs_2.0.1               vctrs_0.6.5           
- [13] ROCR_1.0-12            spatstat.explore_3.5-3 paletteer_1.7.0       
- [16] janitor_2.2.1          forcats_1.0.1          htmltools_0.5.8.1     
- [19] sass_0.4.10            sctransform_0.4.3      parallelly_1.46.1     
- [22] KernSmooth_2.23-26     bslib_0.9.0            htmlwidgets_1.6.4     
- [25] ica_1.0-3              plyr_1.8.9             lubridate_1.9.4       
- [28] plotly_4.11.0          zoo_1.8-14             cachem_1.1.0          
- [31] whisker_0.4.1          igraph_2.2.1           mime_0.13             
- [34] lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-4          
- [37] R6_2.6.1               fastmap_1.2.0          snakecase_0.11.1      
- [40] fitdistrplus_1.2-5     future_1.69.0          shiny_1.11.1          
- [43] digest_0.6.37          colorspace_2.1-2       rematch2_2.1.2        
- [46] ps_1.9.1               rprojroot_2.1.1        tensor_1.5.1          
- [49] RSpectra_0.16-2        irlba_2.3.5.1          labeling_0.4.3        
- [52] progressr_0.18.0       timechange_0.3.0       spatstat.sparse_3.1-0 
- [55] httr_1.4.7             polyclip_1.10-7        abind_1.4-8           
- [58] compiler_4.5.2         bit64_4.6.0-1          withr_3.0.2           
- [61] S7_0.2.0               fastDummies_1.7.5      MASS_7.3-65           
- [64] tools_4.5.2            vipor_0.4.7            lmtest_0.9-40         
- [67] otel_0.2.0             beeswarm_0.4.0         httpuv_1.6.16         
- [70] future.apply_1.20.1    goftest_1.2-3          glue_1.8.0            
- [73] callr_3.7.6            nlme_3.1-168           promises_1.4.0        
- [76] grid_4.5.2             Rtsne_0.17             getPass_0.2-4         
- [79] cluster_2.1.8.1        reshape2_1.4.5         generics_0.1.4        
- [82] gtable_0.3.6           spatstat.data_3.1-9    tzdb_0.5.0            
- [85] tidyr_1.3.1            data.table_1.17.8      hms_1.1.4             
- [88] spatstat.geom_3.6-0    RcppAnnoy_0.0.23       RANN_2.6.2            
- [91] pillar_1.11.1          stringr_1.5.2          ggprism_1.0.7         
- [94] spam_2.11-3            RcppHNSW_0.6.0         later_1.4.4           
- [97] circlize_0.4.17        splines_4.5.2          lattice_0.22-7        
-[100] bit_4.6.0              survival_3.8-3         deldir_2.0-4          
-[103] tidyselect_1.2.1       miniUI_0.1.2           pbapply_1.7-4         
-[106] knitr_1.50             git2r_0.36.2           gridExtra_2.3         
-[109] scattermore_1.2        xfun_0.58              matrixStats_1.5.0     
-[112] stringi_1.8.7          lazyeval_0.2.2         yaml_2.3.10           
-[115] evaluate_1.0.5         codetools_0.2-20       tibble_3.3.0          
-[118] cli_3.6.5              uwot_0.2.4             xtable_1.8-4          
-[121] reticulate_1.44.1      processx_3.8.6         jquerylib_0.1.4       
-[124] Rcpp_1.1.0             mcprogress_0.1.1       globals_0.18.0        
-[127] spatstat.random_3.4-2  png_0.1-8              ggrastr_1.0.2         
-[130] spatstat.univar_3.1-4  parallel_4.5.2         dotCall64_1.2         
-[133] listenv_0.10.0         viridisLite_0.4.2      scales_1.4.0          
-[136] ggridges_0.5.7         purrr_1.1.0            rlang_1.1.7           </code></pre>
+  [1] fs_2.0.1                 spatstat.sparse_3.1-0    bitops_1.0-9            
+  [4] lubridate_1.9.4          httr_1.4.7               RColorBrewer_1.1-3      
+  [7] tools_4.5.2              sctransform_0.4.3        R6_2.6.1                
+ [10] lazyeval_0.2.2           uwot_0.2.4               withr_3.0.2             
+ [13] gridExtra_2.3            progressr_0.18.0         cli_3.6.5               
+ [16] spatstat.explore_3.5-3   fastDummies_1.7.5        labeling_0.4.3          
+ [19] sass_0.4.10              S7_0.2.0                 spatstat.data_3.1-9     
+ [22] ggridges_0.5.7           pbapply_1.7-4            Rsamtools_2.26.0        
+ [25] scater_1.38.0            parallelly_1.46.1        limma_3.67.0            
+ [28] mcprogress_0.1.1         rstudioapi_0.17.1        shape_1.4.6.1           
+ [31] BiocIO_1.20.0            ica_1.0-3                spatstat.random_3.4-2   
+ [34] Matrix_1.7-4             ggbeeswarm_0.7.3         abind_1.4-8             
+ [37] lifecycle_1.0.5          edgeR_4.9.2              whisker_0.4.1           
+ [40] yaml_2.3.10              snakecase_0.11.1         SparseArray_1.10.8      
+ [43] Rtsne_0.17               paletteer_1.7.0          grid_4.5.2              
+ [46] dqrng_0.4.1              promises_1.4.0           crayon_1.5.3            
+ [49] miniUI_0.1.2             lattice_0.22-7           beachmat_2.26.0         
+ [52] cigarillo_1.0.0          metapod_1.19.1           pillar_1.11.1           
+ [55] knitr_1.50               rjson_0.2.23             xgboost_3.2.0.1         
+ [58] future.apply_1.20.1      codetools_0.2-20         glue_1.8.0              
+ [61] getPass_0.2-4            spatstat.univar_3.1-4    data.table_1.17.8       
+ [64] vctrs_0.6.5              png_0.1-8                spam_2.11-3             
+ [67] gtable_0.3.6             rematch2_2.1.2           cachem_1.1.0            
+ [70] xfun_0.58                S4Arrays_1.10.1          mime_0.13               
+ [73] survival_3.8-3           statmod_1.5.1            bluster_1.20.0          
+ [76] fitdistrplus_1.2-5       ROCR_1.0-12              nlme_3.1-168            
+ [79] bit64_4.6.0-1            RcppAnnoy_0.0.23         GenomeInfoDb_1.46.2     
+ [82] rprojroot_2.1.1          bslib_0.9.0              irlba_2.3.5.1           
+ [85] vipor_0.4.7              KernSmooth_2.23-26       otel_0.2.0              
+ [88] colorspace_2.1-2         ggrastr_1.0.2            tidyselect_1.2.1        
+ [91] processx_3.8.6           bit_4.6.0                compiler_4.5.2          
+ [94] curl_7.0.0               git2r_0.36.2             BiocNeighbors_2.4.0     
+ [97] DelayedArray_0.36.0      plotly_4.11.0            rtracklayer_1.70.1      
+[100] scales_1.4.0             lmtest_0.9-40            callr_3.7.6             
+[103] stringr_1.5.2            digest_0.6.37            goftest_1.2-3           
+[106] spatstat.utils_3.2-0     rmarkdown_2.30           XVector_0.50.0          
+[109] htmltools_0.5.8.1        pkgconfig_2.0.3          fastmap_1.2.0           
+[112] rlang_1.1.7              GlobalOptions_0.1.3      htmlwidgets_1.6.4       
+[115] UCSC.utils_1.6.1         shiny_1.11.1             farver_2.1.2            
+[118] jquerylib_0.1.4          zoo_1.8-14               jsonlite_2.0.0          
+[121] BiocParallel_1.44.0      BiocSingular_1.27.1      RCurl_1.98-1.17         
+[124] magrittr_2.0.4           scuttle_1.21.0           dotCall64_1.2           
+[127] Rcpp_1.1.0               viridis_0.6.5            reticulate_1.44.1       
+[130] stringi_1.8.7            MASS_7.3-65              plyr_1.8.9              
+[133] parallel_4.5.2           listenv_0.10.0           forcats_1.0.1           
+[136] deldir_2.0-4             Biostrings_2.78.0        splines_4.5.2           
+[139] tensor_1.5.1             hms_1.1.4                circlize_0.4.17         
+[142] locfit_1.5-9.12          ps_1.9.1                 igraph_2.2.1            
+[145] spatstat.geom_3.6-0      RcppHNSW_0.6.0           reshape2_1.4.5          
+[148] ScaledMatrix_1.19.0      XML_3.99-0.19            evaluate_1.0.5          
+[151] scran_1.38.0             ggprism_1.0.7            tzdb_0.5.0              
+[154] httpuv_1.6.16            RANN_2.6.2               tidyr_1.3.1             
+[157] purrr_1.1.0              polyclip_1.10-7          future_1.69.0           
+[160] scattermore_1.2          rsvd_1.0.5               janitor_2.2.1           
+[163] xtable_1.8-4             restfulr_0.0.16          RSpectra_0.16-2         
+[166] later_1.4.4              viridisLite_0.4.2        tibble_3.3.0            
+[169] beeswarm_0.4.0           GenomicAlignments_1.46.0 cluster_2.1.8.1         
+[172] timechange_0.3.0         globals_0.18.0          </code></pre>
 </div>
 </div>
 </div>
