@@ -11,5 +11,5 @@ editor_options:
 Project MT
 
 * [Cellbender vs. Raw Data QC Comparison](Checking_Cellbender.html)
-
+* [QC](QC.html)
 
