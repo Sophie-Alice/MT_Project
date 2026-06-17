@@ -7,9 +7,12 @@ editor_options:
   chunk_output_type: inline
 ---
 
-# Libraries
+# Setup
 
 ```{r, message=FALSE}
+rm(list=ls())
+gc()
+
 library(readr)
 library(dplyr)
 library(ggplot2)

@@ -1,0 +1,317 @@
+---
+title: "QC"
+author: "Sophie"
+date: "2026-06-12"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Setup
+
+```{r, message=FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+```
+
+# Get the directory
+
+
+```{r}
+
+Cellbender.master <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellbender_output"
+
+benderfiles <- list.files(
+  path = Cellbender.master, 
+  pattern = "cellbender_output.*\\.h5", 
+  full.names = TRUE, 
+  recursive = TRUE
+)
+
+```
+
+# Import the 4 files and merge
+
+```{r}
+
+merged_cb_matrix <- Read_CellBender_h5_Multi_File(
+  data_dir = Cellbender.master,
+  custom_name = "_filtered.h5",
+  filtered_h5 = TRUE,
+  merge = TRUE,
+  sample_list = c(
+    "cellbender_output_Exp1L_CMF_NC",
+    "cellbender_output_Exp1L_CMF_TGF",
+    "cellbender_output_Exp1L_CMFHM_NC",
+    "cellbender_output_Exp1L_CMFHM_TGF"),
+  sample_names = c(
+    "CMF_NC",
+    "CMF_TGF",
+    "CMFHM_NC",
+    "CMFHM_TGF")
+)
+
+Data <- CreateSeuratObject(counts = merged_cb_matrix)
+head(Data@meta.data)
+
+```
+
+# Adding QC variables
+
+```{r}
+
+
+Data[["percent.mt"]] <- PercentageFeatureSet(Data, pattern = "^MT-")
+Data[["percent.rp"]] <- PercentageFeatureSet(Data, pattern = "^RP[SL]")
+
+colnames(Data@meta.data)
+
+```
+
+# Adding metadata
+
+```{r}
+
+Data$orig.ident <- sub("_([^_]+)$", "", rownames(Data@meta.data))
+
+table(Data@meta.data$orig.ident)
+
+Data$TGF_status <- ifelse(
+  grepl("TGF", Data$orig.ident), 
+  "TGF_B", 
+  "NC"
+)
+
+Data$Macrophage_status <- ifelse(
+  grepl("CMFHM", Data$orig.ident), 
+  "With_Macrophages", 
+  "No_Macrophages"
+)
+
+colnames(Data@meta.data)
+head(Data@meta.data)
+tail(Data@meta.data)
+```
+
+
+```{r, warning=FALSE}
+p1 <- VlnPlot(Data, features = "nCount_RNA", group.by = "orig.ident", 
+              pt.size = 0) + theme(axis.title.x = element_blank()) + NoLegend()
+
+p2 <- VlnPlot(Data, features = "nFeature_RNA", group.by = "orig.ident", 
+              pt.size = 0) + theme(axis.title.x = element_blank()) + NoLegend()
+
+p3 <- VlnPlot(Data, features = "percent.mt", group.by = "orig.ident", 
+              pt.size = 0) + theme(axis.title.x = element_blank()) + NoLegend()
+
+p4 <- VlnPlot(Data, features = "percent.rp", group.by = "orig.ident", 
+              pt.size = 0) + theme(axis.title.x = element_blank()) + NoLegend()
+
+
+QC_pre_VlnPlots <- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+QC_pre_VlnPlots
+
+p1 <- VlnPlot(Data, features = "nCount_RNA", group.by = "orig.ident", 
+              pt.size = 0, y.max = 30000) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+
+p2 <- VlnPlot(Data, features = "nFeature_RNA", group.by = "orig.ident", 
+              pt.size = 0, y.max = 10000) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+p3 <- VlnPlot(Data, features = "percent.mt", group.by = "orig.ident", 
+              pt.size = 0, y.max = 5) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+p4 <- VlnPlot(Data, features = "percent.rp", group.by = "orig.ident", 
+              pt.size = 0, y.max = 10) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+
+QC_pre_VlnPlots_zoom <- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+QC_pre_VlnPlots_zoom
+
+```
+
+# DoubletFinder
+
+```{r}
+
+# Removing of extremely low nCount cells
+Data <- subset(Data, subset = nCount_RNA > 200 &
+                 percent.rp < 2.5)
+
+
+# scDblFinder
+Data_sce <- as.SingleCellExperiment(Data)
+Data_sce <- scDblFinder(Data_sce, samples="orig.ident", clusters = TRUE)
+
+table(Data_sce@colData$scDblFinder.class)
+
+```
+
+```{r}
+
+Data_dbl <- as.Seurat(Data_sce, counts = "counts", data = "counts")
+
+
+counts_table <- table(Data_dbl$scDblFinder.class)
+n_singlet    <- counts_table["singlet"]
+n_doublet    <- counts_table["doublet"]
+
+
+singlet_label <- paste0("Singlets (n=", n_singlet, ")")
+doublet_label <- paste0("Doublets (n=", n_doublet, ")")
+
+
+Data_dbl$scDblFinder.n <- ifelse(Data_dbl$scDblFinder.class == "singlet", 
+                                     singlet_label, 
+                                     doublet_label)
+
+Data_dbl$scDblFinder.n <- factor(Data_dbl$scDblFinder.n, 
+                                     levels = c(singlet_label, doublet_label))
+
+
+p1 <- VlnPlot(Data_dbl, 
+              features = "nCount_RNA", 
+              split.by = "scDblFinder.n", 
+              group.by = "orig.ident", 
+              pt.size = 0, 
+              y.max = 50000) + 
+  theme(axis.title.x = element_blank()) + 
+  NoLegend()
+
+
+p2 <- VlnPlot(Data_dbl, 
+              features = "nFeature_RNA", 
+              split.by = "scDblFinder.n", 
+              group.by = "orig.ident", 
+              pt.size = 0, 
+              y.max = 10000) + 
+  theme(axis.title.x = element_blank())
+
+
+p3 <- VlnPlot(Data_dbl, 
+              features = "percent.mt", 
+              split.by = "scDblFinder.n", 
+              group.by = "orig.ident", 
+              pt.size = 0, 
+              y.max = 5) + 
+  theme(axis.title.x = element_blank())
+
+p4 <- VlnPlot(Data_dbl, 
+              features = "percent.rp", 
+              split.by = "scDblFinder.n", 
+              group.by = "orig.ident", 
+              pt.size = 0, 
+              y.max = 5) + 
+  theme(axis.title.x = element_blank())
+# Combine using patchwork layout
+QC_pre_Doublets <- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+
+# Render plot
+QC_pre_Doublets
+
+
+# Remove the doublets
+
+Data <- subset(x = Data_dbl, subset = scDblFinder.class == "singlet")
+table(Data@meta.data$scDblFinder.class)
+```
+
+# QC Filtering 
+
+```{r}
+
+Data<- subset(Data, subset = 
+                   nFeature_RNA > 200 &
+                   percent.mt < 1.5 &
+                   percent.rp < 2.5 &
+                   nCount_RNA > 500 &
+                   nCount_RNA < 45000)
+
+
+p1 <- VlnPlot(Data, features = "nCount_RNA", group.by = "orig.ident", 
+              pt.size = 0, y.max = 50000) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+
+p2 <- VlnPlot(Data, features = "nFeature_RNA", group.by = "orig.ident", 
+              pt.size = 0, y.max = 10000) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+p3 <- VlnPlot(Data, features = "percent.mt", group.by = "orig.ident", 
+              pt.size = 0, y.max = 4) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+p4 <- VlnPlot(Data, features = "percent.rp", group.by = "orig.ident", 
+              pt.size = 0, y.max = 4) + 
+  theme(axis.title.x = element_blank()) + NoLegend()
+
+
+QC_pre_VlnPlots_zoom <- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+QC_pre_VlnPlots_zoom
+
+```
+
+
+```{r}
+
+```
+
+
+
+
+
+```{r}
+
+
+
+```
+
+
+```{r}
+
+
+
+```
+
+
+```{r}
+
+
+
+```
+
+
+```{r}
+
+
+
+```
+
+
+```{r}
+
+
+
+```
+
+
+```{r}
+
+
+```
