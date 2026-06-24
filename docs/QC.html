@@ -15,7 +15,7 @@
 
 <title>QC</title>
 
-<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -390,7 +390,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-06-17
+<strong>Last updated:</strong> 2026-06-24
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0dbaf111ee095479b3e355735c65330f74099085targetblank0dbaf11a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree3378d5c6fa26c1441c22f22f86a66534c72bfedftargetblank3378d5ca">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/0dbaf111ee095479b3e355735c65330f74099085" target="_blank">0dbaf11</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/3378d5c6fa26c1441c22f22f86a66534c72bfedf" target="_blank">3378d5c</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0dbaf111ee095479b3e355735c65330f74099085targetblank0dbaf11a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree3378d5c6fa26c1441c22f22f86a66534c72bfedftargetblank3378d5ca"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/0dbaf111ee095479b3e355735c65330f74099085" target="_blank">0dbaf11</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/3378d5c6fa26c1441c22f22f86a66534c72bfedf" target="_blank">3378d5c</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -554,6 +554,7 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
     Ignored:    .Rproj.user/
 
 </code></pre>
@@ -603,6 +604,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/3378d5c6fa26c1441c22f22f86a66534c72bfedf/analysis/QC.Rmd" target="_blank">3378d5c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+<td>
+Tryinging
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/4803cc4f3c63d665174d9babbbb7979cae737e20/docs/QC.html" target="_blank">4803cc4</a>
+</td>
+<td>
+Sophie
+</td>
+<td>
+2026-06-17
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/0dbaf111ee095479b3e355735c65330f74099085/analysis/QC.Rmd" target="_blank">0dbaf11</a>
 </td>
 <td>
@@ -626,9 +661,9 @@ Adding QC
 <h1>Setup</h1>
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
-<pre><code>          used (Mb) gc trigger (Mb) max used (Mb)
-Ncells  894077 47.8    1719118 91.9  1315225 70.3
-Vcells 1566782 12.0    8388608 64.0  2341663 17.9</code></pre>
+<pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
+Ncells  907228 48.5    1751207 93.6         NA  1321095 70.6
+Vcells 1596135 12.2    8388608 64.0      16384  2392592 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -643,7 +678,7 @@ library(scDblFinder)</code></pre>
 </div>
 <div id="get-the-directory" class="section level1">
 <h1>Get the directory</h1>
-<pre class="r"><code>Cellbender.master &lt;- &quot;/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellbender_output&quot;
+<pre class="r"><code>Cellbender.master &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Cellbender_Output&quot;
 
 benderfiles &lt;- list.files(
   path = Cellbender.master, 
@@ -760,7 +795,44 @@ p4 &lt;- VlnPlot(Data, features = &quot;percent.rp&quot;, group.by = &quot;orig.
 
 QC_pre_VlnPlots &lt;- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
 QC_pre_VlnPlots</code></pre>
-<p><img src="figure/QC.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/QC.Rmd/unnamed-chunk-6-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/4803cc4f3c63d665174d9babbbb7979cae737e20/docs/figure/QC.Rmd/unnamed-chunk-6-1.png" target="_blank">4803cc4</a>
+</td>
+<td>
+Sophie
+</td>
+<td>
+2026-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>p1 &lt;- VlnPlot(Data, features = &quot;nCount_RNA&quot;, group.by = &quot;orig.ident&quot;, 
               pt.size = 0, y.max = 30000) + 
   theme(axis.title.x = element_blank()) + NoLegend()
@@ -781,7 +853,44 @@ p4 &lt;- VlnPlot(Data, features = &quot;percent.rp&quot;, group.by = &quot;orig.
 
 QC_pre_VlnPlots_zoom &lt;- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
 QC_pre_VlnPlots_zoom</code></pre>
-<p><img src="figure/QC.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/QC.Rmd/unnamed-chunk-6-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-2">
+Past versions of unnamed-chunk-6-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/4803cc4f3c63d665174d9babbbb7979cae737e20/docs/figure/QC.Rmd/unnamed-chunk-6-2.png" target="_blank">4803cc4</a>
+</td>
+<td>
+Sophie
+</td>
+<td>
+2026-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="doubletfinder" class="section level1">
 <h1>DoubletFinder</h1>
@@ -795,11 +904,107 @@ Data_sce &lt;- as.SingleCellExperiment(Data)</code></pre>
 <pre><code>Warning: Layer &#39;data&#39; is empty</code></pre>
 <pre><code>Warning: Layer &#39;scale.data&#39; is empty</code></pre>
 <pre class="r"><code>Data_sce &lt;- scDblFinder(Data_sce, samples=&quot;orig.ident&quot;, clusters = TRUE)</code></pre>
-<pre><code>  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%</code></pre>
+<pre><code>  |                                                                              |                                                                      |   0%</code></pre>
+<pre><code>Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)
+Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;normalizeCounts&#39; is deprecated.
+Use &#39;scrapper::normalizeCounts&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;sumCountsAcrossCells&#39; is deprecated.
+Use &#39;scrapper::aggregateAcrossCells&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;summarizeAssayByGroup&#39; is deprecated.
+Use &#39;scrapper::aggregateAcrossCells&#39; or &#39;beachmat::tatami.sums.by.group&#39; instead.</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;normalizeCounts&#39; is deprecated.
+Use &#39;scrapper::normalizeCounts&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>  |                                                                              |==================                                                    |  25%</code></pre>
+<pre><code>Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)
+Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;normalizeCounts&#39; is deprecated.
+Use &#39;scrapper::normalizeCounts&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;sumCountsAcrossCells&#39; is deprecated.
+Use &#39;scrapper::aggregateAcrossCells&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;summarizeAssayByGroup&#39; is deprecated.
+Use &#39;scrapper::aggregateAcrossCells&#39; or &#39;beachmat::tatami.sums.by.group&#39; instead.</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;normalizeCounts&#39; is deprecated.
+Use &#39;scrapper::normalizeCounts&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>  |                                                                              |===================================                                   |  50%</code></pre>
+<pre><code>Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)
+Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;normalizeCounts&#39; is deprecated.
+Use &#39;scrapper::normalizeCounts&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;sumCountsAcrossCells&#39; is deprecated.
+Use &#39;scrapper::aggregateAcrossCells&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;summarizeAssayByGroup&#39; is deprecated.
+Use &#39;scrapper::aggregateAcrossCells&#39; or &#39;beachmat::tatami.sums.by.group&#39; instead.</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;normalizeCounts&#39; is deprecated.
+Use &#39;scrapper::normalizeCounts&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>  |                                                                              |====================================================                  |  75%</code></pre>
+<pre><code>Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)
+Warning in .library_size_factors(assay(x, assay.type), ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;normalizeCounts&#39; is deprecated.
+Use &#39;scrapper::normalizeCounts&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;sumCountsAcrossCells&#39; is deprecated.
+Use &#39;scrapper::aggregateAcrossCells&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;summarizeAssayByGroup&#39; is deprecated.
+Use &#39;scrapper::aggregateAcrossCells&#39; or &#39;beachmat::tatami.sums.by.group&#39; instead.</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;normalizeCounts&#39; is deprecated.
+Use &#39;scrapper::normalizeCounts&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>Warning in .local(x, ...): &#39;librarySizeFactors&#39; is deprecated.
+Use &#39;scrapper::centerSizeFactors&#39; instead.
+See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>  |                                                                              |======================================================================| 100%</code></pre>
 <pre class="r"><code>table(Data_sce@colData$scDblFinder.class)</code></pre>
 <pre><code>
 singlet doublet 
-  13905    1203 </code></pre>
+  13909    1199 </code></pre>
 <pre class="r"><code>Data_dbl &lt;- as.Seurat(Data_sce, counts = &quot;counts&quot;, data = &quot;counts&quot;)
 
 
@@ -840,7 +1045,7 @@ This message will be shown once per session.</code></pre>
               group.by = &quot;orig.ident&quot;, 
               pt.size = 0, 
               y.max = 10000) + 
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank()) 
 
 
 p3 &lt;- VlnPlot(Data_dbl, 
@@ -849,7 +1054,8 @@ p3 &lt;- VlnPlot(Data_dbl,
               group.by = &quot;orig.ident&quot;, 
               pt.size = 0, 
               y.max = 5) + 
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank()) + 
+  NoLegend()
 
 p4 &lt;- VlnPlot(Data_dbl, 
               features = &quot;percent.rp&quot;, 
@@ -857,7 +1063,8 @@ p4 &lt;- VlnPlot(Data_dbl,
               group.by = &quot;orig.ident&quot;, 
               pt.size = 0, 
               y.max = 5) + 
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank()) 
+
 # Combine using patchwork layout
 QC_pre_Doublets &lt;- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
 
@@ -869,14 +1076,51 @@ QC_pre_Doublets</code></pre>
 (`stat_ydensity()`).</code></pre>
 <pre><code>Warning: Removed 6 rows containing non-finite outside the scale range
 (`stat_ydensity()`).</code></pre>
-<p><img src="figure/QC.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/QC.Rmd/unnamed-chunk-8-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/4803cc4f3c63d665174d9babbbb7979cae737e20/docs/figure/QC.Rmd/unnamed-chunk-8-1.png" target="_blank">4803cc4</a>
+</td>
+<td>
+Sophie
+</td>
+<td>
+2026-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Remove the doublets
 
 Data &lt;- subset(x = Data_dbl, subset = scDblFinder.class == &quot;singlet&quot;)
 table(Data@meta.data$scDblFinder.class)</code></pre>
 <pre><code>
 singlet doublet 
-  13905       0 </code></pre>
+  13909       0 </code></pre>
 </div>
 <div id="qc-filtering" class="section level1">
 <h1>QC Filtering</h1>
@@ -908,7 +1152,48 @@ p4 &lt;- VlnPlot(Data, features = &quot;percent.rp&quot;, group.by = &quot;orig.
 
 QC_pre_VlnPlots_zoom &lt;- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
 QC_pre_VlnPlots_zoom</code></pre>
-<p><img src="figure/QC.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/QC.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/4803cc4f3c63d665174d9babbbb7979cae737e20/docs/figure/QC.Rmd/unnamed-chunk-9-1.png" target="_blank">4803cc4</a>
+</td>
+<td>
+Sophie
+</td>
+<td>
+2026-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code># Save Data
+outputdir &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files&quot;
+
+saveRDS(Data, file = file.path(outputdir, &quot;Post_QC.rds&quot;))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -918,102 +1203,97 @@ Session information
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.5.2 (2025-10-31)
-Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 24.04.3 LTS
+<pre><code>R version 4.6.0 (2026-04-24)
+Platform: aarch64-apple-darwin23
+Running under: macOS Sequoia 15.7.7
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
-time zone: Etc/UTC
-tzcode source: system (glibc)
+time zone: Europe/Zurich
+tzcode source: internal
 
 attached base packages:
 [1] stats4    stats     graphics  grDevices utils     datasets  methods  
 [8] base     
 
 other attached packages:
- [1] scDblFinder_1.24.10         SingleCellExperiment_1.32.0
- [3] SummarizedExperiment_1.40.0 Biobase_2.70.0             
- [5] GenomicRanges_1.62.1        Seqinfo_1.0.0              
- [7] IRanges_2.44.0              S4Vectors_0.48.0           
- [9] BiocGenerics_0.56.0         generics_0.1.4             
-[11] MatrixGenerics_1.22.0       matrixStats_1.5.0          
-[13] ggrepel_0.9.6               cowplot_1.2.0              
-[15] patchwork_1.3.2             scCustomize_3.2.4          
-[17] hdf5r_1.3.12                Seurat_5.4.0               
-[19] SeuratObject_5.3.0          sp_2.2-0                   
-[21] ggplot2_4.0.0               dplyr_1.1.4                
-[23] readr_2.1.5                 workflowr_1.7.2            
+ [1] scDblFinder_1.26.2          SingleCellExperiment_1.34.0
+ [3] SummarizedExperiment_1.42.0 Biobase_2.72.0             
+ [5] GenomicRanges_1.64.0        Seqinfo_1.2.0              
+ [7] IRanges_2.46.0              S4Vectors_0.50.1           
+ [9] BiocGenerics_0.58.1         generics_0.1.4             
+[11] MatrixGenerics_1.24.0       matrixStats_1.5.0          
+[13] ggrepel_0.9.8               cowplot_1.2.0              
+[15] patchwork_1.3.2             scCustomize_3.3.0          
+[17] hdf5r_1.3.12                Seurat_5.5.0               
+[19] SeuratObject_5.4.0          sp_2.2-1                   
+[21] ggplot2_4.0.3               dplyr_1.2.1                
+[23] readr_2.2.0                 workflowr_1.7.2            
 
 loaded via a namespace (and not attached):
-  [1] fs_2.0.1                 spatstat.sparse_3.1-0    bitops_1.0-9            
-  [4] lubridate_1.9.4          httr_1.4.7               RColorBrewer_1.1-3      
-  [7] tools_4.5.2              sctransform_0.4.3        R6_2.6.1                
- [10] lazyeval_0.2.2           uwot_0.2.4               withr_3.0.2             
- [13] gridExtra_2.3            progressr_0.18.0         cli_3.6.5               
- [16] spatstat.explore_3.5-3   fastDummies_1.7.5        labeling_0.4.3          
- [19] sass_0.4.10              S7_0.2.0                 spatstat.data_3.1-9     
- [22] ggridges_0.5.7           pbapply_1.7-4            Rsamtools_2.26.0        
- [25] scater_1.38.0            parallelly_1.46.1        limma_3.67.0            
- [28] mcprogress_0.1.1         rstudioapi_0.17.1        shape_1.4.6.1           
- [31] BiocIO_1.20.0            ica_1.0-3                spatstat.random_3.4-2   
- [34] Matrix_1.7-4             ggbeeswarm_0.7.3         abind_1.4-8             
- [37] lifecycle_1.0.5          edgeR_4.9.2              whisker_0.4.1           
- [40] yaml_2.3.10              snakecase_0.11.1         SparseArray_1.10.8      
- [43] Rtsne_0.17               paletteer_1.7.0          grid_4.5.2              
- [46] dqrng_0.4.1              promises_1.4.0           crayon_1.5.3            
- [49] miniUI_0.1.2             lattice_0.22-7           beachmat_2.26.0         
- [52] cigarillo_1.0.0          metapod_1.19.1           pillar_1.11.1           
- [55] knitr_1.50               rjson_0.2.23             xgboost_3.2.0.1         
- [58] future.apply_1.20.1      codetools_0.2-20         glue_1.8.0              
- [61] getPass_0.2-4            spatstat.univar_3.1-4    data.table_1.17.8       
- [64] vctrs_0.6.5              png_0.1-8                spam_2.11-3             
+  [1] fs_2.1.0                 spatstat.sparse_3.2-0    bitops_1.0-9            
+  [4] lubridate_1.9.5          httr_1.4.8               RColorBrewer_1.1-3      
+  [7] tools_4.6.0              sctransform_0.4.3        R6_2.6.1                
+ [10] lazyeval_0.2.3           uwot_0.2.4               withr_3.0.3             
+ [13] gridExtra_2.3            progressr_0.19.0         cli_3.6.6               
+ [16] spatstat.explore_3.8-1   fastDummies_1.7.6        labeling_0.4.3          
+ [19] sass_0.4.10              S7_0.2.2                 spatstat.data_3.1-9     
+ [22] ggridges_0.5.7           pbapply_1.7-4            Rsamtools_2.28.0        
+ [25] scater_1.40.1            parallelly_1.47.0        limma_3.68.4            
+ [28] mcprogress_0.1.1         rstudioapi_0.19.0        shape_1.4.6.1           
+ [31] BiocIO_1.22.0            ica_1.0-3                spatstat.random_3.5-0   
+ [34] Matrix_1.7-5             ggbeeswarm_0.7.3         abind_1.4-8             
+ [37] lifecycle_1.0.5          whisker_0.4.1            yaml_2.3.12             
+ [40] edgeR_4.10.1             snakecase_0.11.1         SparseArray_1.12.2      
+ [43] Rtsne_0.17               paletteer_1.7.0          grid_4.6.0              
+ [46] promises_1.5.0           dqrng_0.4.1              crayon_1.5.3            
+ [49] miniUI_0.1.2             lattice_0.22-9           beachmat_2.28.0         
+ [52] cigarillo_1.2.0          metapod_1.20.0           pillar_1.11.1           
+ [55] knitr_1.51               rjson_0.2.23             xgboost_3.2.1.1         
+ [58] future.apply_1.20.2      codetools_0.2-20         glue_1.8.1              
+ [61] getPass_0.2-4            spatstat.univar_3.2-0    data.table_1.18.4       
+ [64] vctrs_0.7.3              png_0.1-9                spam_2.11-4             
  [67] gtable_0.3.6             rematch2_2.1.2           cachem_1.1.0            
- [70] xfun_0.58                S4Arrays_1.10.1          mime_0.13               
- [73] survival_3.8-3           statmod_1.5.1            bluster_1.20.0          
- [76] fitdistrplus_1.2-5       ROCR_1.0-12              nlme_3.1-168            
- [79] bit64_4.6.0-1            RcppAnnoy_0.0.23         GenomeInfoDb_1.46.2     
- [82] rprojroot_2.1.1          bslib_0.9.0              irlba_2.3.5.1           
+ [70] xfun_0.59                S4Arrays_1.12.0          mime_0.13               
+ [73] survival_3.8-6           statmod_1.5.2            bluster_1.22.0          
+ [76] fitdistrplus_1.2-6       ROCR_1.0-12              nlme_3.1-169            
+ [79] bit64_4.8.2              RcppAnnoy_0.0.23         GenomeInfoDb_1.48.0     
+ [82] rprojroot_2.1.1          bslib_0.11.0             irlba_2.3.7             
  [85] vipor_0.4.7              KernSmooth_2.23-26       otel_0.2.0              
  [88] colorspace_2.1-2         ggrastr_1.0.2            tidyselect_1.2.1        
- [91] processx_3.8.6           bit_4.6.0                compiler_4.5.2          
- [94] curl_7.0.0               git2r_0.36.2             BiocNeighbors_2.4.0     
- [97] DelayedArray_0.36.0      plotly_4.11.0            rtracklayer_1.70.1      
-[100] scales_1.4.0             lmtest_0.9-40            callr_3.7.6             
-[103] stringr_1.5.2            digest_0.6.37            goftest_1.2-3           
-[106] spatstat.utils_3.2-0     rmarkdown_2.30           XVector_0.50.0          
-[109] htmltools_0.5.8.1        pkgconfig_2.0.3          fastmap_1.2.0           
-[112] rlang_1.1.7              GlobalOptions_0.1.3      htmlwidgets_1.6.4       
-[115] UCSC.utils_1.6.1         shiny_1.11.1             farver_2.1.2            
-[118] jquerylib_0.1.4          zoo_1.8-14               jsonlite_2.0.0          
-[121] BiocParallel_1.44.0      BiocSingular_1.27.1      RCurl_1.98-1.17         
-[124] magrittr_2.0.4           scuttle_1.21.0           dotCall64_1.2           
-[127] Rcpp_1.1.0               viridis_0.6.5            reticulate_1.44.1       
+ [91] processx_3.9.0           bit_4.6.0                compiler_4.6.0          
+ [94] curl_7.1.0               git2r_0.36.2             BiocNeighbors_2.6.0     
+ [97] DelayedArray_0.38.2      plotly_4.12.0            rtracklayer_1.72.0      
+[100] scales_1.4.0             lmtest_0.9-40            callr_3.8.0             
+[103] stringr_1.6.0            digest_0.6.39            goftest_1.2-3           
+[106] spatstat.utils_3.2-3     rmarkdown_2.31           XVector_0.52.0          
+[109] htmltools_0.5.9          pkgconfig_2.0.3          fastmap_1.2.0           
+[112] rlang_1.2.0              GlobalOptions_0.1.4      htmlwidgets_1.6.4       
+[115] UCSC.utils_1.7.1         shiny_1.14.0             farver_2.1.2            
+[118] jquerylib_0.1.4          zoo_1.8-15               jsonlite_2.0.0          
+[121] BiocParallel_1.46.0      BiocSingular_1.28.0      RCurl_1.98-1.19         
+[124] magrittr_2.0.5           scuttle_1.22.0           dotCall64_1.2           
+[127] Rcpp_1.1.1-1.1           viridis_0.6.5            reticulate_1.46.0       
 [130] stringi_1.8.7            MASS_7.3-65              plyr_1.8.9              
-[133] parallel_4.5.2           listenv_0.10.0           forcats_1.0.1           
-[136] deldir_2.0-4             Biostrings_2.78.0        splines_4.5.2           
-[139] tensor_1.5.1             hms_1.1.4                circlize_0.4.17         
-[142] locfit_1.5-9.12          ps_1.9.1                 igraph_2.2.1            
-[145] spatstat.geom_3.6-0      RcppHNSW_0.6.0           reshape2_1.4.5          
-[148] ScaledMatrix_1.19.0      XML_3.99-0.19            evaluate_1.0.5          
-[151] scran_1.38.0             ggprism_1.0.7            tzdb_0.5.0              
-[154] httpuv_1.6.16            RANN_2.6.2               tidyr_1.3.1             
-[157] purrr_1.1.0              polyclip_1.10-7          future_1.69.0           
-[160] scattermore_1.2          rsvd_1.0.5               janitor_2.2.1           
-[163] xtable_1.8-4             restfulr_0.0.16          RSpectra_0.16-2         
-[166] later_1.4.4              viridisLite_0.4.2        tibble_3.3.0            
-[169] beeswarm_0.4.0           GenomicAlignments_1.46.0 cluster_2.1.8.1         
-[172] timechange_0.3.0         globals_0.18.0          </code></pre>
+[133] parallel_4.6.0           listenv_1.0.0            forcats_1.0.1           
+[136] deldir_2.0-4             Biostrings_2.80.1        splines_4.6.0           
+[139] tensor_1.5.1             hms_1.1.4                circlize_0.4.18         
+[142] locfit_1.5-9.12          igraph_2.3.2             spatstat.geom_3.8-1     
+[145] RcppHNSW_0.7.0           reshape2_1.4.5           ScaledMatrix_1.20.0     
+[148] XML_3.99-0.23            evaluate_1.0.5           scran_1.40.0            
+[151] ggprism_1.0.7            tzdb_0.5.0               httpuv_1.6.17           
+[154] RANN_2.6.2               tidyr_1.3.2              purrr_1.2.2             
+[157] polyclip_1.10-7          future_1.70.0            scattermore_1.2         
+[160] rsvd_1.0.5               janitor_2.2.1            xtable_1.8-8            
+[163] restfulr_0.0.17          RSpectra_0.16-2          later_1.4.8             
+[166] viridisLite_0.4.3        tibble_3.3.1             beeswarm_0.4.0          
+[169] GenomicAlignments_1.48.0 cluster_2.1.8.2          timechange_0.4.0        
+[172] globals_0.19.1          </code></pre>
 </div>
 </div>
 </div>
