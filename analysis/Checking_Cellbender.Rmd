@@ -32,7 +32,7 @@ First we want to double check whether Cellbender was performed correctly.
 # Get Directories
 
 ```{r}
-Cellbender.master <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellbender_output"
+Cellbender.master <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Cellbender_Output"
 
 benderfiles <- list.files(
   path = Cellbender.master, 
@@ -41,7 +41,7 @@ benderfiles <- list.files(
   recursive = TRUE
 )
 
-Raw.master <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellranger_output"
+Raw.master <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Raw_Output"
 
 rawfiles <- list.files(
   path = Raw.master, 
@@ -223,6 +223,7 @@ ggplot(counts_wide, aes(x = Raw, y = Cellbender)) +
     plot.subtitle = element_text(size = 10, color = "grey30", hjust = 0.5),
     axis.title = element_text(face = "bold", size = 11)
   )
+
 
 ```
 

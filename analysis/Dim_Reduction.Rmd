@@ -1,0 +1,341 @@
+---
+title: "Dim_Reduction"
+author: "Sophie"
+date: "2026-06-17"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+
+# Setup
+
+```{r, message=FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+```
+
+# Get the Data
+
+```{r}
+# path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_QC.rds"
+Data <- read_rds(path)
+Data
+```
+
+# Inspecting Data
+
+```{r}
+
+Data # 1 Assay (RNA) with count and data layer
+DefaultAssay(Data)
+
+#Data@meta.data <- Data@meta.data %>% select(-contains("scDblFinder"))
+Data@meta.data <- Data@meta.data %>% select(-("ident"))
+head(Data)
+
+table(Data$orig.ident)
+table(Data$TGF_status)
+table(Data$Macrophage_status)
+
+```
+
+# Normalization and scaling with SCtransform
+
+```{r}
+DefaultAssay(Data) <- "RNA"
+Data <- SplitObject(Data, split.by = "orig.ident")
+for (i in 1:length(Data)) {
+  Data[[i]] <- SCTransform(Data[[i]], 
+                             vst.flavor = "v2", 
+                             vars.to.regress = c("percent.mt"), 
+                             return.only.var.genes = TRUE,
+                             method = "glmGamPoi")
+}
+
+```
+
+# PCA
+
+```{r}
+features <- SelectIntegrationFeatures(object.list = Data, nfeatures = 3000)
+Data <- merge(x = Data[[1]], y = Data[2:length(Data)], merge.data=TRUE)
+VariableFeatures(Data) <- features
+Data <- RunPCA(Data)
+
+ElbowPlot(Data, ndims = 50)+
+  labs(
+    title = "Principal Component (PC) Variance Elbow Plot"
+  ) +
+  geom_vline(xintercept = 25, linetype = "dashed", color = "darkred", size = 0.8)+
+  theme_minimal(base_size = 11)
+
+
+
+```
+
+# Clustering without integration
+
+```{r}
+
+Dims <- 25
+
+
+Data <- RunUMAP(Data, dims = 1:Dims)
+Data <- FindNeighbors(Data, dims = 1:Dims)
+Graphs(Data)
+Data <- FindClusters(Data, graph.name = "SCT_snn", resolution = seq(0.1, 0.8, by=0.1))
+
+clustree::clustree(Data@meta.data[,grep("SCT_snn_res", colnames(Data@meta.data))],
+                   prefix = "SCT_snn_res.")+
+  labs(
+    title = "Clustree - Before integration"
+  ) +
+  xlab("Cluster") +
+  ylab("Resolution depth") +
+  theme_minimal(base_size = 11)
+
+DimPlot(Data, reduction = "umap", shuffle = T,
+        group.by = c("SCT_snn_res.0.1", "orig.ident"), ncol = 2)
+
+
+```
+
+# Intergration with Harmony
+
+```{r}
+
+Data <- RunHarmony(Data, 
+                     group.by.vars = "orig.ident", 
+                     dims.use = 1:Dims, 
+                     plot_convergence=TRUE, 
+                     .options = harmony_options(
+                       max.iter.cluster = 100,
+                       )
+                     )
+
+DefaultAssay(Data) <- "SCT"
+Data <- RunUMAP(Data, dims = 1:Dims, reduction = "harmony")
+Data <- FindNeighbors(Data, dims = 1:Dims, reduction = "harmony")
+Data <- FindClusters(Data, resolution = seq(0.1, 0.8, by=0.1))
+
+clustree::clustree(Data@meta.data[,grep("SCT_snn_res", colnames(Data@meta.data))],
+                   prefix = "SCT_snn_res.")+
+  labs(
+    title = "Clustree - After integration"
+  ) +
+  xlab("Cluster") +
+  ylab("Resolution depth") +
+  theme_minimal(base_size = 11)
+
+DimPlot(Data, reduction = "umap", shuffle = T,
+        group.by = c("SCT_snn_res.0.1", "SCT_snn_res.0.2", "SCT_snn_res.0.3", "orig.ident"), ncol = 2, label=T) 
+
+
+```
+
+# Top markers pers cluster
+
+```{r}
+DefaultAssay(Data) <- "RNA"
+Data <- NormalizeData(Data)
+Idents(Data) <- "SCT_snn_res.0.2"
+Markers <- FindAllMarkers(Data, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 1)
+
+
+#write.csv(Markers, here::here(output_dir_data, "DCM_RV_Markers_all_low_quality.csv"))
+Markers_top10 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC))
+#write.csv(Markers_top10, here::here(output_dir_data, "DCM_RV_Markers_top10_low_quality.csv"))
+Markers_top3 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 3, wt = avg_log2FC))
+#write.csv(Markers_top3, here::here(output_dir_data, "DCM_RV_Markers_top3_low_quality.csv"))
+
+
+```
+
+
+```{r}
+heatmap_cols <- colorRampPalette(RColorBrewer::brewer.pal(9,"RdBu"))(256)
+heatmap_cols <- rev(heatmap_cols[1:256])
+Heatmap <- DoHeatmap(subset(Data, cells = sample(colnames(Data), 10000)), label = FALSE, draw.line = F, features = Markers_top10$gene, assay = "SCT") +
+  scale_fill_gradientn(colours = heatmap_cols) +
+  theme(axis.text.y = element_text(size = 5)) +
+  theme(plot.margin = unit(c(0.1, 0, 0, 0), 
+                           "inches"))
+Heatmap
+
+DimPlot(Data, reduction = "umap", shuffle = T,
+        group.by = c("SCT_snn_res.0.2", "orig.ident"), ncol = 2, label=T)
+
+
+```
+
+
+```{r}
+
+VlnPlot(Data, features = c("nCount_RNA", "nFeature_RNA", "percent.mt", "percent.rp", "scDblFinder.score"), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())
+
+# Checking Cluster 0 -> Cardiomyocytes
+VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "0")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+dplyr::filter(Markers_top10, cluster == "0")
+# Checking Cluster 1 -> Monocytes
+VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "1")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+dplyr::filter(Markers_top10, cluster == "1")
+# Checking Cluster 2 -> proliferating cells
+VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "2")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+dplyr::filter(Markers_top10, cluster == "2")
+# Checking Cluster 3 -> For sure cardiac Fibroblasts
+VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "3")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+dplyr::filter(Markers_top10, cluster == "3")
+# Checking Cluster 4 -> TNNC1 high = beating subunit?
+VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "4")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+dplyr::filter(Markers_top10, cluster == "4")
+# Checking Cluster 5 -> SPTLC3: Could be the Hypoxic core?
+VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "5")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+dplyr::filter(Markers_top10, cluster == "5")
+# Checking Cluster 8 -> Dying cells: mitrochondrial gene count is high
+VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "6")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+dplyr::filter(Markers_top10, cluster == "6")
+# Checking Cluster 7 -> probably doublets
+VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "7")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+dplyr::filter(Markers_top10, cluster == "7")
+
+```
+
+
+
+
+```{r}
+
+# Remove only the clearly mitochondrial cluster and the left over doubles
+Data.clean <- subset(Data, subset = SCT_snn_res.0.2 %in% c("0", "1", "2", "3", "4","5"))
+
+s.genes <- cc.genes$s.genes
+g2m.genes <- cc.genes$g2m.genes
+Data.clean <- CellCycleScoring(Data.clean, s.features = s.genes, g2m.features = g2m.genes)
+
+
+DefaultAssay(Data.clean) <- "SCT"
+Data.clean <- SplitObject(Data.clean, split.by = "orig.ident")
+features <- SelectIntegrationFeatures(object.list = Data.clean, nfeatures = 3000)
+Data.clean <- merge(x = Data.clean[[1]], y = Data.clean[2:length(Data.clean)], merge.data=TRUE)
+VariableFeatures(Data.clean) <- features
+Data.clean <- RunPCA(Data.clean, npcs = 50)
+
+Data.clean <- RunHarmony(Data.clean, 
+                 group.by.vars = c("orig.ident"), 
+                 dims.use = 1:Dims, 
+                 plot_convergence=TRUE, 
+                 .options = harmony_options(
+                   max.iter.cluster = 100,
+                   )
+                 )
+
+DefaultAssay(Data.clean) <- "SCT"
+Data.clean <- RunUMAP(Data.clean, dims = 1:Dims, reduction = "harmony")
+Data.clean <- FindNeighbors(Data.clean, dims = 1:Dims, reduction = "harmony")
+Data.clean <- FindClusters(Data.clean, resolution = seq(0.1, 0.8, by=0.1))
+
+clustree::clustree(Data.clean@meta.data[,grep("SCT_snn_res", colnames(Data.clean@meta.data))],
+                   prefix = "SCT_snn_res.")
+DimPlot(Data.clean, reduction = "umap", shuffle = T,
+        group.by = "SCT_snn_res.0.1", label=T)
+DimPlot(Data.clean, reduction = "umap", shuffle = T,
+        group.by = "orig.ident", label=T)
+DimPlot(Data.clean, reduction = "umap", shuffle = T,
+        group.by = "Phase", label=T)
+```
+
+```{r}
+DimPlot(Data.clean, reduction = "umap", shuffle = T,
+        group.by = c("SCT_snn_res.0.1", "orig.ident"), ncol = 2, label=T)
+Idents(Data.clean) <- "SCT_snn_res.0.1"
+VlnPlot(Data.clean, features = c("nCount_RNA", "nFeature_RNA", "percent.mt", "percent.rp", "scDblFinder.score"), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())
+```
+
+```{r}
+
+### MArker genes
+
+DefaultAssay(Data.clean) <- "RNA"
+Idents(Data.clean) <- "SCT_snn_res.0.1"
+Markers <- FindAllMarkers(Data.clean, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 1)
+Markers_top10 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC))
+Markers_top3 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 3, wt = avg_log2FC))
+Markers_top5 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC))
+
+Markers_top10
+```
+
+```{r}
+
+
+FeaturePlot_scCustom(Data.clean, features = "CD163", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Macrophage marker
+FeaturePlot_scCustom(Data.clean, features = "FAP", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Activated Fibroblast Marker
+FeaturePlot_scCustom(Data.clean, features = "TTN", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Cardiomyocyte marker
+
+FeaturePlot_scCustom(Data.clean, features = c("CENPE", "MKI67"), pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Proliferation marker
+DimPlot(Data.clean, reduction = "umap", shuffle = T,
+        group.by = "Phase")
+
+FeaturePlot_scCustom(Data.clean, features = c("BNIP3", "VEGFA", "HIF1A"), pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) #Hypoxia?
+
+
+FeaturePlot_scCustom(Data.clean, features = c("ANKRD45", "KLHL20"), pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # failing cytokinesis, Binucleation process stuck????
+
+
+```
+
+# Renaming Cluster IDs
+
+```{r}
+new_cluster_ids <- c(
+  "0" = "Cardiomyocytes",
+  "1" = "Macrophages",
+  "2" = "Proliferating Cardiomyocytes",
+  "3" = "Cardiac Fibroblasts",
+  "4" = "Hypoxic Core?",
+  "5" = "Unknown?"
+)
+
+Data.clean <- RenameIdents(Data.clean, new_cluster_ids)
+Data.clean$cell_type <- Idents(Data.clean)
+
+DimPlot(Data.clean, reduction = "umap", shuffle = T,
+        group.by = "cell_type", label=F)
+```
+
+# Save File
+
+```{r}
+outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
+
+saveRDS(Data.clean, file = file.path(outputdir, "Post_Annotation.rds"))
+
+```
+
+```{r}
+
+
+```
+

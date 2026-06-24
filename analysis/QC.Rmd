@@ -31,7 +31,7 @@ library(scDblFinder)
 
 ```{r}
 
-Cellbender.master <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/Cellbender_output"
+Cellbender.master <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Cellbender_Output"
 
 benderfiles <- list.files(
   path = Cellbender.master, 
@@ -201,7 +201,7 @@ p2 <- VlnPlot(Data_dbl,
               group.by = "orig.ident", 
               pt.size = 0, 
               y.max = 10000) + 
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank()) 
 
 
 p3 <- VlnPlot(Data_dbl, 
@@ -210,7 +210,8 @@ p3 <- VlnPlot(Data_dbl,
               group.by = "orig.ident", 
               pt.size = 0, 
               y.max = 5) + 
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank()) + 
+  NoLegend()
 
 p4 <- VlnPlot(Data_dbl, 
               features = "percent.rp", 
@@ -218,7 +219,8 @@ p4 <- VlnPlot(Data_dbl,
               group.by = "orig.ident", 
               pt.size = 0, 
               y.max = 5) + 
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank()) 
+
 # Combine using patchwork layout
 QC_pre_Doublets <- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
 
@@ -265,53 +267,11 @@ p4 <- VlnPlot(Data, features = "percent.rp", group.by = "orig.ident",
 QC_pre_VlnPlots_zoom <- p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
 QC_pre_VlnPlots_zoom
 
-```
 
+# Save Data
+outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
 
-```{r}
-
-```
-
-
-
-
-
-```{r}
-
-
+saveRDS(Data, file = file.path(outputdir, "Post_QC.rds"))
 
 ```
 
-
-```{r}
-
-
-
-```
-
-
-```{r}
-
-
-
-```
-
-
-```{r}
-
-
-
-```
-
-
-```{r}
-
-
-
-```
-
-
-```{r}
-
-
-```
