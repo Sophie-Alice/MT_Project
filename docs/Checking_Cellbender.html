@@ -35,6 +35,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
@@ -233,6 +234,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -357,6 +361,14 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Checking_Cellbender</h1>
@@ -390,7 +402,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-06-24
+<strong>Last updated:</strong> 2026-06-26
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -521,15 +533,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree3378d5c6fa26c1441c22f22f86a66534c72bfedftargetblank3378d5ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreebccae0ac77cdbf87992ab319719fa470baea8631targetblankbccae0aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/3378d5c6fa26c1441c22f22f86a66534c72bfedf" target="_blank">3378d5c</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/bccae0ac77cdbf87992ab319719fa470baea8631" target="_blank">bccae0a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree3378d5c6fa26c1441c22f22f86a66534c72bfedftargetblank3378d5ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreebccae0ac77cdbf87992ab319719fa470baea8631targetblankbccae0aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +551,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/3378d5c6fa26c1441c22f22f86a66534c72bfedf" target="_blank">3378d5c</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/bccae0ac77cdbf87992ab319719fa470baea8631" target="_blank">bccae0a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -556,9 +568,6 @@ were generated:
 Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rproj.user/
-
-Untracked files:
-    Untracked:  Results1.html
 
 </code></pre>
 <p>
@@ -603,6 +612,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/bccae0ac77cdbf87992ab319719fa470baea8631/analysis/Checking_Cellbender.Rmd" target="_blank">bccae0a</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Adding more
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/Checking_Cellbender.html" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -695,13 +738,13 @@ Adding Cellbender QC
 </div>
 </div>
 </div>
-<div id="setup" class="section level1">
-<h1>Setup</h1>
+<div id="setup" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Setup</h1>
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907113 48.5    1750878 93.6         NA  1321095 70.6
-Vcells 1596008 12.2    8388608 64.0      16384  2392598 18.3</code></pre>
+Ncells  907121 48.5    1750901 93.6         NA  1321095 70.6
+Vcells 1596127 12.2    8388608 64.0      16384  2392689 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -713,13 +756,12 @@ library(cowplot)
 library(ggrepel)
 library(workflowr)</code></pre>
 </div>
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
+<div id="introduction" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Introduction</h1>
 <p>First we want to double check whether Cellbender was performed
 correctly.</p>
-</div>
-<div id="get-directories" class="section level1">
-<h1>Get Directories</h1>
+<div id="get-directories" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Get Directories</h2>
 <pre class="r"><code>Cellbender.master &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Cellbender_Output&quot;
 
 benderfiles &lt;- list.files(
@@ -738,8 +780,8 @@ rawfiles &lt;- list.files(
   recursive = TRUE
 )</code></pre>
 </div>
-<div id="functions" class="section level1">
-<h1>Functions</h1>
+<div id="functions" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Functions</h2>
 <pre class="r"><code>process_single_cell_pair &lt;- function(b_file, r_file, s_name) {
 
   # bender object
@@ -830,8 +872,9 @@ generate_qc_plots &lt;- function(df, s_name) {
 }</code></pre>
 </div>
 <div id="plotting-qc-values-to-see-the-effect-of-cellbender"
-class="section level1">
-<h1>Plotting QC values to see the effect of Cellbender</h1>
+class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Plotting QC values to
+see the effect of Cellbender</h2>
 <pre class="r"><code>seurat_bender_list &lt;- list()
 seurat_raw_list    &lt;- list()
 metadata_qc_list   &lt;- list()
@@ -891,6 +934,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-1.png" target="_blank">7cf7cb9</a>
 </td>
 <td>
@@ -927,6 +981,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-2.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-2.png" target="_blank">7cf7cb9</a>
@@ -967,6 +1032,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-3.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-3.png" target="_blank">7cf7cb9</a>
 </td>
 <td>
@@ -1003,6 +1079,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-4.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-4.png" target="_blank">7cf7cb9</a>
@@ -1043,6 +1130,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-5.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-5.png" target="_blank">7cf7cb9</a>
 </td>
 <td>
@@ -1079,6 +1177,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-6.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-6.png" target="_blank">7cf7cb9</a>
@@ -1119,6 +1228,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-7.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-7.png" target="_blank">7cf7cb9</a>
 </td>
 <td>
@@ -1157,6 +1277,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-8.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-4-8.png" target="_blank">7cf7cb9</a>
 </td>
 <td>
@@ -1179,8 +1310,9 @@ table(master_compare_df$Sample)</code></pre>
    Exp1L_CMF_NC   Exp1L_CMF_TGF  Exp1L_CMFHM_NC Exp1L_CMFHM_TGF 
            6127            9302           11147            8366 </code></pre>
 </div>
-<div id="comparing-cellcounts" class="section level1">
-<h1>Comparing Cellcounts</h1>
+<div id="comparing-cellcounts" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Comparing
+Cellcounts</h2>
 <pre class="r"><code>counts_matrix &lt;- table(master_compare_df$Sample, master_compare_df$Method)
 counts_wide &lt;- as.data.frame.matrix(counts_matrix)
 counts_wide$Sample &lt;- rownames(counts_wide)
@@ -1235,6 +1367,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-5-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/figure/Checking_Cellbender.Rmd/unnamed-chunk-5-1.png" target="_blank">7cf7cb9</a>
 </td>
 <td>
@@ -1249,8 +1392,9 @@ Sophie
 </div>
 </div>
 </div>
-<div id="conclusion" class="section level1">
-<h1>Conclusion</h1>
+</div>
+<div id="conclusion" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Conclusion</h1>
 <p>The h5 files seem good. Not corrupted and Cellbender worked.</p>
 <br>
 <p>
@@ -1319,7 +1463,7 @@ loaded via a namespace (and not attached):
  [97] splines_4.6.0          lattice_0.22-9         bit_4.6.0             
 [100] survival_3.8-6         deldir_2.0-4           tidyselect_1.2.1      
 [103] miniUI_0.1.2           pbapply_1.7-4          knitr_1.51            
-[106] git2r_0.36.2           gridExtra_2.3          scattermore_1.2       
+[106] git2r_0.36.2           gridExtra_2.3.1        scattermore_1.2       
 [109] xfun_0.59              matrixStats_1.5.0      stringi_1.8.7         
 [112] lazyeval_0.2.3         yaml_2.3.12            evaluate_1.0.5        
 [115] codetools_0.2-20       tibble_3.3.1           cli_3.6.6             
@@ -1387,6 +1531,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

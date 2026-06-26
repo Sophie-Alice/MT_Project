@@ -35,6 +35,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
@@ -233,6 +234,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -357,6 +361,14 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Dim_Reduction</h1>
@@ -390,7 +402,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-06-24
+<strong>Last updated:</strong> 2026-06-26
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -521,15 +533,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree3378d5c6fa26c1441c22f22f86a66534c72bfedftargetblank3378d5ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreebccae0ac77cdbf87992ab319719fa470baea8631targetblankbccae0aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/3378d5c6fa26c1441c22f22f86a66534c72bfedf" target="_blank">3378d5c</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/bccae0ac77cdbf87992ab319719fa470baea8631" target="_blank">bccae0a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree3378d5c6fa26c1441c22f22f86a66534c72bfedftargetblank3378d5ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreebccae0ac77cdbf87992ab319719fa470baea8631targetblankbccae0aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +551,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/3378d5c6fa26c1441c22f22f86a66534c72bfedf" target="_blank">3378d5c</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/bccae0ac77cdbf87992ab319719fa470baea8631" target="_blank">bccae0a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -605,6 +617,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/bccae0ac77cdbf87992ab319719fa470baea8631/analysis/Dim_Reduction.Rmd" target="_blank">bccae0a</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Adding more
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/Dim_Reduction.html" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/3378d5c6fa26c1441c22f22f86a66534c72bfedf/analysis/Dim_Reduction.Rmd" target="_blank">3378d5c</a>
 </td>
 <td>
@@ -624,13 +670,13 @@ Tryinging
 </div>
 </div>
 </div>
-<div id="setup" class="section level1">
-<h1>Setup</h1>
+<div id="setup" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Setup</h1>
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907246 48.5    1751258 93.6         NA  1321095 70.6
-Vcells 1596896 12.2    8388608 64.0      16384  2392594 18.3</code></pre>
+Ncells  907547 48.5    1752118 93.6         NA  1321095 70.6
+Vcells 1597676 12.2    8388608 64.0      16384  2392685 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -644,9 +690,8 @@ library(workflowr)
 library(scDblFinder)
 library(clustree)
 library(harmony)</code></pre>
-</div>
-<div id="get-the-data" class="section level1">
-<h1>Get the Data</h1>
+<div id="get-the-data" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Get the Data</h2>
 <pre class="r"><code># path &lt;- &quot;/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds&quot;
 path &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_QC.rds&quot;
 Data &lt;- read_rds(path)
@@ -656,8 +701,8 @@ Data</code></pre>
 Active assay: RNA (38606 features, 0 variable features)
  2 layers present: counts, data</code></pre>
 </div>
-<div id="inspecting-data" class="section level1">
-<h1>Inspecting Data</h1>
+<div id="inspecting-data" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Inspecting Data</h2>
 <pre class="r"><code>Data # 1 Assay (RNA) with count and data layer</code></pre>
 <pre><code>An object of class Seurat 
 38606 features across 13577 samples within 1 assay 
@@ -759,8 +804,9 @@ CMF_NC_ACATGAGGTAATGAAC-1                       FALSE Singlets (n=13909)</code><
             5889             7688 </code></pre>
 </div>
 <div id="normalization-and-scaling-with-sctransform"
-class="section level1">
-<h1>Normalization and scaling with SCtransform</h1>
+class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Normalization and
+scaling with SCtransform</h2>
 <pre class="r"><code>DefaultAssay(Data) &lt;- &quot;RNA&quot;
 Data &lt;- SplitObject(Data, split.by = &quot;orig.ident&quot;)
 for (i in 1:length(Data)) {
@@ -781,7 +827,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 22723 genes</code></pre>
 <pre><code>Computing corrected count matrix for 22723 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 8.812725 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 8.42408 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -798,7 +844,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 24429 genes</code></pre>
 <pre><code>Computing corrected count matrix for 24429 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 12.76976 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 11.54351 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -815,7 +861,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 25640 genes</code></pre>
 <pre><code>Computing corrected count matrix for 25640 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 17.3907 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 16.41828 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -832,15 +878,15 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 24767 genes</code></pre>
 <pre><code>Computing corrected count matrix for 24767 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 11.5744 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 11.30275 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
 <pre><code>Place corrected count matrix in counts slot</code></pre>
 <pre><code>Set default assay to SCT</code></pre>
 </div>
-<div id="pca" class="section level1">
-<h1>PCA</h1>
+<div id="pca" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> PCA</h2>
 <pre class="r"><code>features &lt;- SelectIntegrationFeatures(object.list = Data, nfeatures = 3000)
 Data &lt;- merge(x = Data[[1]], y = Data[2:length(Data)], merge.data=TRUE)
 VariableFeatures(Data) &lt;- features
@@ -892,9 +938,48 @@ This warning is displayed once per session.
 Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 generated.</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-5-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-5-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="clustering-without-integration" class="section level1">
-<h1>Clustering without integration</h1>
+</div>
+</div>
+<div id="clustering-without-integration" class="section level2"
+number="1.5">
+<h2><span class="header-section-number">1.5</span> Clustering without
+integration</h2>
 <pre class="r"><code>Dims &lt;- 25
 
 
@@ -902,21 +987,21 @@ Data &lt;- RunUMAP(Data, dims = 1:Dims)</code></pre>
 <pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 This message will be shown once per session</code></pre>
-<pre><code>17:49:41 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>17:49:41 Read 13577 rows and found 25 numeric columns</code></pre>
-<pre><code>17:49:41 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>17:49:41 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>16:35:23 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>16:35:23 Read 13577 rows and found 25 numeric columns</code></pre>
+<pre><code>16:35:23 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>16:35:23 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-17:49:41 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpQbDlSU/filee1997f5367b5
-17:49:41 Searching Annoy index using 1 thread, search_k = 3000
-17:49:44 Annoy recall = 100%
-17:49:45 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-17:49:46 Initializing from normalized Laplacian + noise (using RSpectra)
-17:49:46 Commencing optimization for 200 epochs, with 557838 positive edges
-17:49:46 Using rng type: pcg
-17:49:52 Optimization finished</code></pre>
+16:35:23 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpHkWjwF/file131917591ec4
+16:35:23 Searching Annoy index using 1 thread, search_k = 3000
+16:35:26 Annoy recall = 100%
+16:35:27 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+16:35:28 Initializing from normalized Laplacian + noise (using RSpectra)
+16:35:28 Commencing optimization for 200 epochs, with 557838 positive edges
+16:35:28 Using rng type: pcg
+16:35:33 Optimization finished</code></pre>
 <pre class="r"><code>Data &lt;- FindNeighbors(Data, dims = 1:Dims)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1004,12 +1089,87 @@ Elapsed time: 1 seconds</code></pre>
   ylab(&quot;Resolution depth&quot;) +
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-6-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-6-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data, reduction = &quot;umap&quot;, shuffle = T,
         group.by = c(&quot;SCT_snn_res.0.1&quot;, &quot;orig.ident&quot;), ncol = 2)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-6-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-2">
+Past versions of unnamed-chunk-6-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-6-2.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="intergration-with-harmony" class="section level1">
-<h1>Intergration with Harmony</h1>
+</div>
+</div>
+<div id="intergration-with-harmony" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Intergration with
+Harmony</h2>
 <pre class="r"><code>Data &lt;- RunHarmony(Data, 
                      group.by.vars = &quot;orig.ident&quot;, 
                      dims.use = 1:Dims, 
@@ -1030,23 +1190,60 @@ Elapsed time: 1 seconds</code></pre>
 <pre><code>Harmony 5/10</code></pre>
 <pre><code>Harmony converged after 5 iterations</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-7-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-7-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DefaultAssay(Data) &lt;- &quot;SCT&quot;
 Data &lt;- RunUMAP(Data, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>17:50:12 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>17:50:12 Read 13577 rows and found 25 numeric columns</code></pre>
-<pre><code>17:50:12 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>17:50:12 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>16:35:53 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>16:35:53 Read 13577 rows and found 25 numeric columns</code></pre>
+<pre><code>16:35:53 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>16:35:53 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-17:50:12 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpQbDlSU/filee19959f8c763
-17:50:12 Searching Annoy index using 1 thread, search_k = 3000
-17:50:15 Annoy recall = 100%
-17:50:16 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-17:50:17 Initializing from normalized Laplacian + noise (using RSpectra)
-17:50:17 Commencing optimization for 200 epochs, with 561634 positive edges
-17:50:17 Using rng type: pcg
-17:50:23 Optimization finished</code></pre>
+16:35:54 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpHkWjwF/file131911ee0268d
+16:35:54 Searching Annoy index using 1 thread, search_k = 3000
+16:35:56 Annoy recall = 100%
+16:35:57 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+16:35:58 Initializing from normalized Laplacian + noise (using RSpectra)
+16:35:58 Commencing optimization for 200 epochs, with 561634 positive edges
+16:35:58 Using rng type: pcg
+16:36:04 Optimization finished</code></pre>
 <pre class="r"><code>Data &lt;- FindNeighbors(Data, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1132,12 +1329,87 @@ Elapsed time: 1 seconds</code></pre>
   ylab(&quot;Resolution depth&quot;) +
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-7-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-2">
+Past versions of unnamed-chunk-7-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-7-2.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data, reduction = &quot;umap&quot;, shuffle = T,
         group.by = c(&quot;SCT_snn_res.0.1&quot;, &quot;SCT_snn_res.0.2&quot;, &quot;SCT_snn_res.0.3&quot;, &quot;orig.ident&quot;), ncol = 2, label=T) </code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-7-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-3">
+Past versions of unnamed-chunk-7-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-7-3.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="top-markers-pers-cluster" class="section level1">
-<h1>Top markers pers cluster</h1>
+</div>
+</div>
+<div id="top-markers-per-cluster" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Top markers per
+cluster</h2>
 <pre class="r"><code>DefaultAssay(Data) &lt;- &quot;RNA&quot;
 Data &lt;- NormalizeData(Data)
 Idents(Data) &lt;- &quot;SCT_snn_res.0.2&quot;
@@ -1181,14 +1453,162 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 <pre><code>Warning: Removed 2484 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-9-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data, reduction = &quot;umap&quot;, shuffle = T,
         group.by = c(&quot;SCT_snn_res.0.2&quot;, &quot;orig.ident&quot;), ncol = 2, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-9-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-2">
+Past versions of unnamed-chunk-9-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-9-2.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>VlnPlot(Data, features = c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;, &quot;percent.rp&quot;, &quot;scDblFinder.score&quot;), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Checking Cluster 0 -&gt; Cardiomyocytes
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;0&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-2">
+Past versions of unnamed-chunk-10-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-2.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>dplyr::filter(Markers_top10, cluster == &quot;0&quot;)</code></pre>
 <pre><code>           p_val avg_log2FC pct.1 pct.2     p_val_adj cluster        gene
 1   0.000000e+00   1.376569 0.734 0.412  0.000000e+00       0   LINC02552
@@ -1204,6 +1624,43 @@ VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;
 <pre class="r"><code># Checking Cluster 1 -&gt; Monocytes
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;1&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-3">
+Past versions of unnamed-chunk-10-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-3.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>dplyr::filter(Markers_top10, cluster == &quot;1&quot;)</code></pre>
 <pre><code>   p_val avg_log2FC pct.1 pct.2 p_val_adj cluster     gene
 1      0   9.397821 0.941 0.008         0       1 ARHGAP15
@@ -1219,6 +1676,43 @@ VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;
 <pre class="r"><code># Checking Cluster 2 -&gt; proliferating cells
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;2&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-4">
+Past versions of unnamed-chunk-10-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-4.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>dplyr::filter(Markers_top10, cluster == &quot;2&quot;)</code></pre>
 <pre><code>   p_val avg_log2FC pct.1 pct.2 p_val_adj cluster  gene
 1      0   4.827993 0.785 0.053         0       2  POLQ
@@ -1234,6 +1728,43 @@ VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;
 <pre class="r"><code># Checking Cluster 3 -&gt; For sure cardiac Fibroblasts
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;3&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-5">
+Past versions of unnamed-chunk-10-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-5.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>dplyr::filter(Markers_top10, cluster == &quot;3&quot;)</code></pre>
 <pre><code>   p_val avg_log2FC pct.1 pct.2 p_val_adj cluster    gene
 1      0   8.557582 0.914 0.016         0       3     FAP
@@ -1249,6 +1780,43 @@ VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;
 <pre class="r"><code># Checking Cluster 4 -&gt; TNNC1 high = beating subunit?
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;4&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-6">
+Past versions of unnamed-chunk-10-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-6.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>dplyr::filter(Markers_top10, cluster == &quot;4&quot;)</code></pre>
 <pre><code>           p_val avg_log2FC pct.1 pct.2     p_val_adj cluster   gene
 1   0.000000e+00   3.085112 0.934 0.260  0.000000e+00       4    MIF
@@ -1264,6 +1832,43 @@ VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;
 <pre class="r"><code># Checking Cluster 5 -&gt; SPTLC3: Could be the Hypoxic core?
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;5&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-7.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-7">
+Past versions of unnamed-chunk-10-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-7.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>dplyr::filter(Markers_top10, cluster == &quot;5&quot;)</code></pre>
 <pre><code>          p_val avg_log2FC pct.1 pct.2     p_val_adj cluster            gene
 1  0.000000e+00   5.762524 0.993 0.077  0.000000e+00       5 ENSG00000289426
@@ -1278,6 +1883,43 @@ VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;
 <pre class="r"><code># Checking Cluster 8 -&gt; Dying cells: mitrochondrial gene count is high
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;6&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-8.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-8">
+Past versions of unnamed-chunk-10-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-8.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>dplyr::filter(Markers_top10, cluster == &quot;6&quot;)</code></pre>
 <pre><code>           p_val avg_log2FC pct.1 pct.2     p_val_adj cluster            gene
 1  6.805747e-181   5.273211 0.771 0.095 2.627427e-176       6 ENSG00000289474
@@ -1293,6 +1935,43 @@ VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;
 <pre class="r"><code># Checking Cluster 7 -&gt; probably doublets
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;7&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-10-9.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-9">
+Past versions of unnamed-chunk-10-9.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-9.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>dplyr::filter(Markers_top10, cluster == &quot;7&quot;)</code></pre>
 <pre><code>           p_val avg_log2FC pct.1 pct.2     p_val_adj cluster            gene
 1  5.579230e-175   7.150568 0.511 0.013 2.153918e-170       7           ITGA8
@@ -1376,23 +2055,60 @@ Negative:  DOCK3, MSC-AS1, MIR222HG, ENSG00000286153, GPC4, ALCAM, FNIP2, RGCC, 
 <pre><code>Harmony 5/10</code></pre>
 <pre><code>Harmony converged after 5 iterations</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DefaultAssay(Data.clean) &lt;- &quot;SCT&quot;
 Data.clean &lt;- RunUMAP(Data.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>17:52:43 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>17:52:43 Read 13386 rows and found 25 numeric columns</code></pre>
-<pre><code>17:52:43 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>17:52:43 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>16:38:23 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>16:38:23 Read 13386 rows and found 25 numeric columns</code></pre>
+<pre><code>16:38:23 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>16:38:23 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-17:52:44 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpQbDlSU/filee1997ace7162
-17:52:44 Searching Annoy index using 1 thread, search_k = 3000
-17:52:47 Annoy recall = 100%
-17:52:47 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-17:52:48 Initializing from normalized Laplacian + noise (using RSpectra)
-17:52:48 Commencing optimization for 200 epochs, with 554098 positive edges
-17:52:48 Using rng type: pcg
-17:52:54 Optimization finished</code></pre>
+16:38:23 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpHkWjwF/file13191468e3cbd
+16:38:23 Searching Annoy index using 1 thread, search_k = 3000
+16:38:26 Annoy recall = 100%
+16:38:26 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+16:38:27 Initializing from normalized Laplacian + noise (using RSpectra)
+16:38:28 Commencing optimization for 200 epochs, with 554098 positive edges
+16:38:28 Using rng type: pcg
+16:38:33 Optimization finished</code></pre>
 <pre class="r"><code>Data.clean &lt;- FindNeighbors(Data.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1472,21 +2188,243 @@ Elapsed time: 1 seconds</code></pre>
 <pre class="r"><code>clustree::clustree(Data.clean@meta.data[,grep(&quot;SCT_snn_res&quot;, colnames(Data.clean@meta.data))],
                    prefix = &quot;SCT_snn_res.&quot;)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-2">
+Past versions of unnamed-chunk-11-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-2.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;SCT_snn_res.0.1&quot;, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-3">
+Past versions of unnamed-chunk-11-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-3.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;orig.ident&quot;, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-4">
+Past versions of unnamed-chunk-11-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-4.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;Phase&quot;, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-5">
+Past versions of unnamed-chunk-11-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-5.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = c(&quot;SCT_snn_res.0.1&quot;, &quot;orig.ident&quot;), ncol = 2, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-12-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>Idents(Data.clean) &lt;- &quot;SCT_snn_res.0.1&quot;
 VlnPlot(Data.clean, features = c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;, &quot;percent.rp&quot;, &quot;scDblFinder.score&quot;), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-12-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-2">
+Past versions of unnamed-chunk-12-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-2.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>### MArker genes
 
 DefaultAssay(Data.clean) &lt;- &quot;RNA&quot;
@@ -1575,27 +2513,287 @@ plot all cells in gradient color palette.
 
 -----This message will be shown once per session.-----</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-14-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-14-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = &quot;FAP&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Activated Fibroblast Marker</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-14-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-2">
+Past versions of unnamed-chunk-14-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-14-2.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = &quot;TTN&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Cardiomyocyte marker</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-14-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-3">
+Past versions of unnamed-chunk-14-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-14-3.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = c(&quot;CENPE&quot;, &quot;MKI67&quot;), pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Proliferation marker</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-14-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-4">
+Past versions of unnamed-chunk-14-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-14-4.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;Phase&quot;)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-14-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-5">
+Past versions of unnamed-chunk-14-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-14-5.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = c(&quot;BNIP3&quot;, &quot;VEGFA&quot;, &quot;HIF1A&quot;), pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) #Hypoxia?</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-14-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-6">
+Past versions of unnamed-chunk-14-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-14-6.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = c(&quot;ANKRD45&quot;, &quot;KLHL20&quot;), pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # failing cytokinesis, Binucleation process stuck????</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-14-7.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-7">
+Past versions of unnamed-chunk-14-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-14-7.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="renaming-cluster-ids" class="section level1">
-<h1>Renaming Cluster IDs</h1>
+</div>
+</div>
+<div id="renaming-cluster-ids" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Renaming Cluster
+IDs</h2>
 <pre class="r"><code>new_cluster_ids &lt;- c(
   &quot;0&quot; = &quot;Cardiomyocytes&quot;,
   &quot;1&quot; = &quot;Macrophages&quot;,
@@ -1611,9 +2809,46 @@ Data.clean$cell_type &lt;- Idents(Data.clean)
 DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;cell_type&quot;, label=F)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-15-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-1.png" target="_blank">f44fffe</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-24
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="save-file" class="section level1">
-<h1>Save File</h1>
+</div>
+</div>
+<div id="save-file" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> Save File</h2>
 <pre class="r"><code>outputdir &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files&quot;
 
 saveRDS(Data.clean, file = file.path(outputdir, &quot;Post_Annotation.rds&quot;))</code></pre>
@@ -1668,7 +2903,7 @@ loaded via a namespace (and not attached):
   [7] backports_1.5.1           tools_4.6.0              
   [9] sctransform_0.4.3         R6_2.6.1                 
  [11] lazyeval_0.2.3            uwot_0.2.4               
- [13] withr_3.0.3               gridExtra_2.3            
+ [13] withr_3.0.3               gridExtra_2.3.1          
  [15] progressr_0.19.0          cli_3.6.6                
  [17] spatstat.explore_3.8-1    fastDummies_1.7.6        
  [19] prismatic_1.1.2           labeling_0.4.3           
@@ -1760,6 +2995,7 @@ loaded via a namespace (and not attached):
 </div>
 </div>
 </div>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -1810,6 +3046,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {
