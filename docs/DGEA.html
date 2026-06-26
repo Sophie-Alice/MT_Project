@@ -35,6 +35,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
@@ -233,6 +234,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -356,6 +360,14 @@ div.tocify {
 </div><!--/.navbar -->
 
 <div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
 
@@ -521,15 +533,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree02b6129145e325659d079ebfaacd10c6fe19792ctargetblank02b6129a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0d589e1bfd6075ee1e82d2fa97f9661123abedbctargetblank0d589e1a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/02b6129145e325659d079ebfaacd10c6fe19792c" target="_blank">02b6129</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/0d589e1bfd6075ee1e82d2fa97f9661123abedbc" target="_blank">0d589e1</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree02b6129145e325659d079ebfaacd10c6fe19792ctargetblank02b6129a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0d589e1bfd6075ee1e82d2fa97f9661123abedbctargetblank0d589e1a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +551,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/02b6129145e325659d079ebfaacd10c6fe19792c" target="_blank">02b6129</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/0d589e1bfd6075ee1e82d2fa97f9661123abedbc" target="_blank">0d589e1</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -558,6 +570,8 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
+    Modified:   analysis/Checking_Cellbender.Rmd
+    Modified:   analysis/Dim_Reduction.Rmd
     Modified:   analysis/QC.Rmd
 
 </code></pre>
@@ -602,6 +616,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/0d589e1bfd6075ee1e82d2fa97f9661123abedbc/analysis/DGEA.Rmd" target="_blank">0d589e1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Adding more
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/116d234456b6fb5f08de18200ea2b5b997b2d5d3/docs/DGEA.html" target="_blank">116d234</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -660,13 +708,13 @@ Adding more
 </div>
 </div>
 </div>
-<div id="setup" class="section level1">
-<h1>Setup</h1>
+<div id="setup" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Setup</h1>
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907560 48.5    1752155 93.6         NA  1321095 70.6
-Vcells 1597689 12.2    8388608 64.0      16384  2392685 18.3</code></pre>
+Ncells  907544 48.5    1752110 93.6         NA  1321095 70.6
+Vcells 1597793 12.2    8388608 64.0      16384  2392685 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -690,8 +738,8 @@ library(ggvenn)
 
 #BiocManager::install(&quot;MAST&quot;)</code></pre>
 </div>
-<div id="get-the-data" class="section level1">
-<h1>Get the Data</h1>
+<div id="get-the-data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Get the Data</h1>
 <pre class="r"><code># path &lt;- &quot;/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds&quot;
 path &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds&quot;
 Data &lt;- read_rds(path)
@@ -706,8 +754,8 @@ Active assay: RNA (38606 features, 0 variable features)
 gradient_colors3 &lt;- custom_palette(6)
 gradient_colors4 &lt;- custom_palette(4)</code></pre>
 </div>
-<div id="functions" class="section level1">
-<h1>Functions</h1>
+<div id="functions" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Functions</h1>
 <pre class="r"><code>Volcano_Plots &lt;- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
   
   # Clean extreme values
@@ -748,11 +796,12 @@ gradient_colors4 &lt;- custom_palette(4)</code></pre>
   
   return(EV)
 }</code></pre>
+<div id="fibroblasts" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Fibroblasts</h2>
 </div>
-<div id="fibroblasts" class="section level1">
-<h1>Fibroblasts</h1>
-<div id="subset-the-data" class="section level2">
-<h2>Subset the data</h2>
+<div id="dgea-of-the-4-comparisons" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> DGEA of the 4
+Comparisons</h2>
 <pre class="r"><code>table(Data$cell_type)</code></pre>
 <pre><code>
               Cardiomyocytes                  Macrophages 
@@ -772,10 +821,10 @@ Fibroblasts$cdr &lt;- scale(colSums(GetAssayData(Fibroblasts, assay = &quot;RNA&
 
 
 fibroblast_deg_list &lt;- list()</code></pre>
-</div>
 <div id="baseline-fibrotic-response-to-tgf-b-without-macrophages"
-class="section level2">
-<h2>1. Baseline Fibrotic response to TGF-B without Macrophages</h2>
+class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Baseline Fibrotic
+response to TGF-B without Macrophages</h3>
 <pre class="r"><code>MAST.Res &lt;- FindMarkers(
   object = Fibroblasts,
   ident.1 = &quot;CMF_TGF&quot;,    
@@ -860,8 +909,9 @@ Sophie.Alice
 #write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Baseline_TGF_Response_sign.csv&quot;))</code></pre>
 </div>
 <div id="modulated-fibrotic-response-to-tgf-b-with-macrophages"
-class="section level2">
-<h2>2. Modulated Fibrotic response to TGF-B with Macrophages</h2>
+class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Modulated Fibrotic
+response to TGF-B with Macrophages</h3>
 <pre class="r"><code>MAST.Res &lt;- FindMarkers(
   object = Fibroblasts,
   ident.1 = &quot;CMFHM_TGF&quot;,    
@@ -944,8 +994,10 @@ Sophie.Alice
 <pre class="r"><code>#write.csv(MAST.Res, file = file.path(outputdir, &quot;Modulated_TGF_Response_all.csv&quot;))
 #write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Modulated_TGF_Response_sign.csv&quot;))</code></pre>
 </div>
-<div id="baseline-macrophage-response" class="section level2">
-<h2>3. Baseline Macrophage response</h2>
+<div id="baseline-macrophage-response" class="section level3"
+number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Baseline Macrophage
+response</h3>
 <pre class="r"><code>MAST.Res &lt;- FindMarkers(
   object = Fibroblasts,
   ident.1 = &quot;CMFHM_NC&quot;,    
@@ -1027,8 +1079,10 @@ Sophie.Alice
 <pre class="r"><code>#write.csv(MAST.Res, file = file.path(outputdir, &quot;Baseline_Mac_Response_all.csv&quot;))
 #write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Baseline_Mac_Response_sign.csv&quot;))</code></pre>
 </div>
-<div id="stimulated-macrophage-effect" class="section level2">
-<h2>4. Stimulated Macrophage Effect</h2>
+<div id="stimulated-macrophage-effect" class="section level3"
+number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Stimulated
+Macrophage Effect</h3>
 <pre class="r"><code>MAST.Res &lt;- FindMarkers(
   object = Fibroblasts,
   ident.1 = &quot;CMFHM_TGF&quot;,    
@@ -1112,8 +1166,10 @@ Sophie.Alice
 #write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Stim_Mac_Response_sign.csv&quot;))</code></pre>
 </div>
 </div>
-<div id="gene-crossover" class="section level1">
-<h1>Gene Crossover</h1>
+<div id="gene-crossover" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Gene Crossover</h2>
+<div id="get-the-deg" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Get the DEG</h3>
 <pre class="r"><code>upset_up_genes   &lt;- list()
 upset_down_genes &lt;- list()
 
@@ -1145,6 +1201,11 @@ upset_final_data &lt;- list(
   Up_Regulated   = upset_up_genes,
   Down_Regulated = upset_down_genes
 )</code></pre>
+</div>
+<div id="upsetplot-for-all-groups" class="section level3"
+number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> UpsetPlot for all
+Groups</h3>
 <pre class="r"><code>################################################### Upregulated Intersections
 
 upset(
@@ -1242,8 +1303,10 @@ Sophie.Alice
 </div>
 </div>
 </div>
-<div id="venn-diagram-of-all-ovelapping-genes" class="section level1">
-<h1>Venn diagram of all ovelapping genes</h1>
+<div id="venn-diagram-of-all-ovelapping-genes" class="section level3"
+number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Venn diagram of all
+ovelapping genes</h3>
 <pre class="r"><code>################################# upregulated genes
 
 ggvenn(
@@ -1357,9 +1420,9 @@ Sophie.Alice
 </div>
 <div
 id="venn-diagram-of-deg-upon-tgf-b-stimulation-with-and-without-macrophages"
-class="section level1">
-<h1>Venn diagram of DEG upon TGF-B stimulation with and without
-Macrophages</h1>
+class="section level3" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Venn diagram of DEG
+upon TGF-B stimulation with and without Macrophages</h3>
 <pre class="r"><code>################################# upregulated genes
 
 ggvenn(
@@ -1471,9 +1534,9 @@ Sophie.Alice
 </div>
 <div
 id="venn-diagram-of-deg-of-presence-of-macrophages-with-and-without-tgf-b-stimulation"
-class="section level1">
-<h1>Venn diagram of DEG of presence of Macrophages with and without
-TGF-B stimulation</h1>
+class="section level3" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Venn diagram of DEG
+of presence of Macrophages with and without TGF-B stimulation</h3>
 <pre class="r"><code>################################# upregulated genes
 
 ggvenn(
@@ -1695,6 +1758,8 @@ loaded via a namespace (and not attached):
 </div>
 </div>
 </div>
+</div>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -1745,6 +1810,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

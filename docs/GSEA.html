@@ -35,6 +35,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
@@ -233,6 +234,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -356,6 +360,14 @@ div.tocify {
 </div><!--/.navbar -->
 
 <div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
 
@@ -521,15 +533,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree02b6129145e325659d079ebfaacd10c6fe19792ctargetblank02b6129a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0d589e1bfd6075ee1e82d2fa97f9661123abedbctargetblank0d589e1a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/02b6129145e325659d079ebfaacd10c6fe19792c" target="_blank">02b6129</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/0d589e1bfd6075ee1e82d2fa97f9661123abedbc" target="_blank">0d589e1</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree02b6129145e325659d079ebfaacd10c6fe19792ctargetblank02b6129a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0d589e1bfd6075ee1e82d2fa97f9661123abedbctargetblank0d589e1a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +551,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/02b6129145e325659d079ebfaacd10c6fe19792c" target="_blank">02b6129</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/0d589e1bfd6075ee1e82d2fa97f9661123abedbc" target="_blank">0d589e1</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -558,6 +570,8 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
+    Modified:   analysis/Checking_Cellbender.Rmd
+    Modified:   analysis/Dim_Reduction.Rmd
     Modified:   analysis/QC.Rmd
 
 </code></pre>
@@ -602,6 +616,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/0d589e1bfd6075ee1e82d2fa97f9661123abedbc/analysis/GSEA.Rmd" target="_blank">0d589e1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Adding more
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/116d234456b6fb5f08de18200ea2b5b997b2d5d3/docs/GSEA.html" target="_blank">116d234</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -660,13 +708,13 @@ Adding more
 </div>
 </div>
 </div>
-<div id="setup" class="section level1">
-<h1>Setup</h1>
+<div id="setup" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Setup</h1>
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907546 48.5    1752115 93.6         NA  1321095 70.6
-Vcells 1596782 12.2    8388608 64.0      16384  2392685 18.3</code></pre>
+Ncells  907556 48.5    1752144 93.6         NA  1321095 70.6
+Vcells 1596933 12.2    8388608 64.0      16384  2392685 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -696,12 +744,13 @@ library(forcats)
 library(SCpubr)
 library(assertthat)</code></pre>
 </div>
-<div id="get-hallmark-pathways" class="section level1">
-<h1>Get Hallmark pathways</h1>
+<div id="get-hallmark-pathways" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Get Hallmark
+pathways</h1>
 <pre class="r"><code>Hallmark.pathways &lt;- gmtPathways(&quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt&quot;)</code></pre>
 </div>
-<div id="get-the-data" class="section level1">
-<h1>Get the Data</h1>
+<div id="get-the-data" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Get the Data</h1>
 <pre class="r"><code># path &lt;- &quot;/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds&quot;
 path &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/DGEA_output/Macrophages_all.csv&quot;
 Macrophages_all &lt;- read_csv(path)</code></pre>
@@ -731,8 +780,8 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <pre class="r"><code>custom_palette &lt;- colorRampPalette(c(&quot;#005EA8&quot;, &quot;#6DB335&quot;, &quot;#FFD966&quot;, &quot;#EDAAD2&quot;, &quot;#9F1C67&quot;))
 gradient_colors3 &lt;- custom_palette(6)</code></pre>
 </div>
-<div id="rank-the-data" class="section level1">
-<h1>Rank the data</h1>
+<div id="rank-the-data" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Rank the data</h1>
 <pre class="r"><code>Macrophages.ranked &lt;- Macrophages_all %&gt;%
   dplyr::select(gene, avg_log2FC) %&gt;%
   na.omit() %&gt;%
@@ -745,9 +794,10 @@ ranked &lt;- deframe(Macrophages.ranked)
 
 rank &lt;- ranked[names(ranked) != &quot;&quot;]</code></pre>
 </div>
-<div id="functional-gene-set-enrichment-analysis"
-class="section level1">
-<h1>Functional gene set enrichment Analysis</h1>
+<div id="functional-gene-set-enrichment-analysis" class="section level1"
+number="5">
+<h1><span class="header-section-number">5</span> Functional gene set
+enrichment Analysis</h1>
 <pre class="r"><code>set.seed(42)
 fgseares &lt;- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
 
@@ -763,8 +813,8 @@ fgseares.tidy.top.up   &lt;- head(fgseares.tidy, 15)
 fgseares.tidy.top.down &lt;- tail(fgseares.tidy, 15)
 fgseares.tidy.top.both &lt;- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)</code></pre>
 </div>
-<div id="visualization" class="section level1">
-<h1>Visualization</h1>
+<div id="visualization" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Visualization</h1>
 <pre class="r"><code>plot_df &lt;- fgseares.tidy.top.both %&gt;%
   mutate(
     padj_group = case_when(
@@ -844,8 +894,8 @@ Sophie.Alice
 </div>
 </div>
 </div>
-<div id="pah" class="section level1">
-<h1>PAH</h1>
+<div id="pah" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> PAH</h1>
 <pre class="r"><code>df &lt;- Macrophages_all
 
 # Upregulated Genes
@@ -911,12 +961,12 @@ GO:0040012 3.351172e-06
 GO:0072359 7.123929e-06
 GO:0061061 8.837256e-06
                                                                                                                                                                                                                                                                                                                                                                                                                                  geneID
-GO:0040011                                                                                              VASH1/SMAD7/SORL1/SLIT3/COL1A1/ROBO1/SEMA3C/HMOX1/ALOX5/USP14/COL3A1/GRN/ANOS1/TIMP1/TGFBR1/CXCL12/ITGAV/APOE/FBN2/PPARG/KIF21A/S100A4/RALA/CD63/SMURF2/PFN1/TMSB10/CORO1C/MAP4K4/RAB11A/ITGB1/PDE4B/MMP14/CD81/CXCL8/TALAM1/SLC12A2/MTUS1/DNM1L/ITGA6/PPIA/RNF7/CXADR/ITGB3/MMP2/TMSB4X/ACTG1/FN1/S100A11/SPATA13/DPYSL3/MAGI2
-GO:0009653 RPLP2/VASH1/SMAD7/SLIT3/SMAD6/COL1A1/IL1RN/ROBO1/SEMA3C/COL1A2/BICD1/ACTN1/HMOX1/ACTB/SKI/SOX4/RPL37A/SKIL/ALOX5/KIF26B/COL3A1/GRN/ANOS1/TGFBR1/CXCL12/ITGAV/APOE/FBN2/PPARG/KIF21A/RPL36/PBX3/RALA/ARHGAP32/IGF2/SDC2/CORO1C/MAP4K4/TGM2/CPM/RPL23/S100A6/ITGB1/MMP14/CD81/ZFPM2/CXCL8/FGD5/RPL27A/SLC12A2/ADAM12/LGR4/ACTC1/MTHFD1L/ALCAM/SPP1/RPL39/DNM1L/YWHAH/RPLP1/RPL5/ITGA6/ITGB3/ZFYVE27/MMP2/EPN2/CTNND2/ACTG1/FN1
-GO:0007155                                                                                                                            PARD3B/SMAD7/SMAD6/IL1RN/ROBO1/ACTN1/ACTB/SOX4/SMARCE1/CADM1/ALOX5/COL3A1/ANOS1/PSMA4/CXCL12/ITGAV/HSPD1/DLG2/CD63/IGF2/CEBPB/CORO1C/MAP4K4/TGM2/ITGB1/MMP14/CD81/IRAK1/CXCL8/S100A10/CD226/ADAM12/TNFRSF21/ALCAM/LMO7/SPP1/ANTXR1/ITGA6/PPIA/RNF7/CXADR/ITGB3/MMP2/CTNND2/ACTG1/FN1/S100A11/OLR1
-GO:0040012                                                                                                                                                     VASH1/SMAD7/SORL1/COL1A1/ROBO1/SEMA3C/HMOX1/USP14/COL3A1/GRN/TIMP1/TGFBR1/CXCL12/ITGAV/APOE/FBN2/PPARG/KIF21A/CD63/SMURF2/PFN1/TMSB10/CORO1C/MAP4K4/RAB11A/ITGB1/MMP14/CD81/CXCL8/TALAM1/MTUS1/DNM1L/ITGA6/RNF7/ITGB3/MMP2/TMSB4X/ACTG1/FN1/S100A11/SPATA13/DPYSL3/MAGI2
-GO:0072359                                                                                                                                                                               TRAF3IP2/VASH1/KRAS/SMAD7/SLIT3/ALPK3/SMAD6/COL1A1/ROBO1/SEMA3C/COL1A2/HMOX1/SKI/SOX4/ALOX5/COL3A1/GRN/TGFBR1/CXCL12/ITGAV/PPARG/TGM2/ITGB1/MMP14/TCF7L2/ZFPM2/SLC8A1/CXCL8/DNAAF4/SLC12A2/ADAM12/ACTC1/PDLIM7/CXADR/ITGB3/MMP2/EPN2/ACTG1/FN1
-GO:0061061                                                                                                                                                                                                                            RPLP2/SMAD7/ALPK3/ACTN1/ACTB/SKI/SOX4/RPL37A/SMARCE1/SKIL/UQCC2/COL3A1/TGFBR1/MTPN/RPL36/IGF2/RPL23/ITGB1/LARGE1/MMP14/TCF7L2/CD81/ZFPM2/SLC8A1/RPL27A/ADAM12/ACTC1/RPL39/RPLP1/RPL5/PDLIM7/CXADR
+GO:0040011                                                                                              FN1/MAP4K4/USP14/TMSB4X/RAB11A/DNM1L/ITGB1/ITGAV/ACTG1/PFN1/ITGB3/SPATA13/SLIT3/TGFBR1/S100A4/SEMA3C/COL1A1/TIMP1/CXCL8/CXADR/VASH1/CD63/PPARG/ROBO1/MTUS1/COL3A1/RALA/APOE/KIF21A/PPIA/MMP2/SORL1/MMP14/S100A11/SMURF2/CD81/PDE4B/MAGI2/TALAM1/SLC12A2/SMAD7/ANOS1/GRN/ALOX5/FBN2/CXCL12/DPYSL3/RNF7/CORO1C/TMSB10/ITGA6/HMOX1
+GO:0009653 FN1/ALCAM/KIF26B/RPL5/MAP4K4/RPLP1/RPLP2/FGD5/DNM1L/ITGB1/ITGAV/RPL36/ACTG1/ZFYVE27/ITGB3/PBX3/RPL39/SLIT3/TGFBR1/ZFPM2/SEMA3C/COL1A2/COL1A1/SOX4/CXCL8/RPL37A/VASH1/S100A6/RPL23/PPARG/YWHAH/ROBO1/ACTC1/MTHFD1L/COL3A1/RALA/ARHGAP32/ACTN1/BICD1/APOE/IL1RN/TGM2/KIF21A/SMAD6/MMP2/SKIL/ADAM12/ACTB/CPM/MMP14/CD81/RPL27A/SDC2/SLC12A2/LGR4/SPP1/SMAD7/ANOS1/GRN/ALOX5/SKI/FBN2/CXCL12/CORO1C/IGF2/ITGA6/HMOX1/EPN2/CTNND2
+GO:0007155                                                                                                                            FN1/SMARCE1/ALCAM/MAP4K4/IRAK1/ITGB1/ITGAV/ACTG1/ANTXR1/HSPD1/ITGB3/DLG2/PARD3B/OLR1/CADM1/LMO7/SOX4/CXCL8/CXADR/CD63/ROBO1/COL3A1/ACTN1/IL1RN/TGM2/SMAD6/S100A10/PPIA/MMP2/ADAM12/ACTB/MMP14/S100A11/CD81/CD226/CEBPB/PSMA4/TNFRSF21/SPP1/SMAD7/ANOS1/ALOX5/CXCL12/RNF7/CORO1C/IGF2/ITGA6/CTNND2
+GO:0040012                                                                                                                                                     FN1/MAP4K4/USP14/TMSB4X/RAB11A/DNM1L/ITGB1/ITGAV/ACTG1/PFN1/ITGB3/SPATA13/TGFBR1/SEMA3C/COL1A1/TIMP1/CXCL8/VASH1/CD63/PPARG/ROBO1/MTUS1/COL3A1/APOE/KIF21A/MMP2/SORL1/MMP14/S100A11/SMURF2/CD81/MAGI2/TALAM1/SMAD7/GRN/FBN2/CXCL12/DPYSL3/RNF7/CORO1C/TMSB10/ITGA6/HMOX1
+GO:0072359                                                                                                                                                                               FN1/TRAF3IP2/ITGB1/ITGAV/DNAAF4/ACTG1/ITGB3/PDLIM7/SLIT3/TGFBR1/ZFPM2/SEMA3C/COL1A2/COL1A1/SOX4/CXCL8/SLC8A1/CXADR/VASH1/PPARG/ROBO1/ACTC1/TCF7L2/COL3A1/TGM2/SMAD6/MMP2/ADAM12/MMP14/KRAS/SLC12A2/SMAD7/GRN/ALOX5/SKI/CXCL12/ALPK3/HMOX1/EPN2
+GO:0061061                                                                                                                                                                                                                            SMARCE1/RPL5/RPLP1/RPLP2/ITGB1/RPL36/PDLIM7/RPL39/TGFBR1/ZFPM2/SOX4/SLC8A1/CXADR/RPL37A/RPL23/ACTC1/TCF7L2/COL3A1/ACTN1/SKIL/ADAM12/ACTB/MMP14/LARGE1/UQCC2/MTPN/CD81/RPL27A/SMAD7/SKI/ALPK3/IGF2
            Count
 GO:0040011    52
 GO:0009653    69
@@ -964,12 +1014,12 @@ GO:0002682 8.235990e-07 8.235990e-07
 GO:0002376 8.235990e-07 8.235990e-07
 GO:0009617 8.235990e-07 8.235990e-07
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         geneID
-GO:0006955                                                           PARP14/VSIR/TRIM25/IRAK3/LCP2/HLA-DRB1/ST3GAL1/MAP3K1/CLEC2D/LILRB5/MX2/PLD3/CR1/CD4/HLA-DMB/FCGR2C/PRDM1/TEC/TLR4/HLA-DPB1/ZBTB46/ITGAM/TNFRSF11A/CD48/ATP1B1/NAGK/RAB7B/IFI16/LY96/NAIP/INPP5D/NLRP1/MPEG1/IL6R/ADAMDEC1/VNN1/PLA2G4A/FCGR2A/TNFSF8/SAMSN1/TXK/THEMIS2/LY86/APPL2/SAMHD1/GPR183/CLEC4A/CMKLR1/FCN1/ITGA4/PIK3CD/HLA-DQA1/CXCL2/NLRP3/SLAMF7/TNFRSF1B/CASP1/IGSF6/COLEC12/CD86/PDE4D/PRKCB/MBP/MEF2C/SAMD9/IFI44/RNF125/TNFRSF14/PSTPIP1
-GO:0006952                                                                                             PARP14/TRIM25/IRAK3/IL10RA/HLA-DRB1/SLC9A9/STAB1/LILRB5/MX2/PLD3/CR1/CD4/FCGR2C/PRDM1/TLR4/LGALS8/ITGAM/TNFRSF11A/CD48/ATP1B1/NAGK/RAB7B/FOS/IFI16/LY96/NAIP/INPP5D/NLRP1/MPEG1/IL6R/PLA2G4C/VNN1/BNIP3L/SIGLEC1/LRRK2/FCGR2A/AOAH/TXK/THEMIS2/LY86/EMILIN2/NAMPT/APPL2/SAMHD1/CLEC4A/CMKLR1/FCN1/PIK3CD/CXCL2/NLRP3/SLAMF7/TNFRSF1B/CASP1/COLEC12/IGF1/CD163/MMP9/ATG7/MLKL/MEF2C/SAMD9/RNF125/TNFRSF14/METRNL/PSTPIP1
-GO:0002764                                                                                                                                                                                                                                                                                  TRIM25/IRAK3/LCP2/HLA-DRB1/MAP3K1/CLEC2D/LILRB5/PLD3/CR1/CD4/FCGR2C/TEC/TLR4/HLA-DPB1/ITGAM/NAGK/RAB7B/IFI16/LY96/NAIP/INPP5D/NLRP1/FCGR2A/TXK/THEMIS2/APPL2/CMKLR1/FCN1/PIK3CD/NLRP3/CASP1/CD86/PDE4D/PRKCB/MEF2C/RNF125/TNFRSF14
-GO:0002682                                                                                                                       PARP14/VSIR/ACVR2A/TRIM25/IRAK3/LCP2/HLA-DRB1/MAP3K1/CLEC2D/LILRB5/PLD3/MPP1/CR1/CD4/HLA-DMB/FCGR2C/PRDM1/GCNT1/TEC/TLR4/HLA-DPB1/ITGAM/TNFRSF11A/NAGK/RAB7B/IFI16/LY96/NAIP/INPP5D/NLRP1/IL6R/PRKCA/VNN1/PLA2G4A/LRRK2/FCGR2A/TNFSF8/SAMSN1/TXK/THEMIS2/APPL2/SAMHD1/GPR183/CMKLR1/FCN1/ITGA4/PIK3CD/HLA-DQA1/NLRP3/TNFRSF1B/CASP1/COLEC12/IGF1/CD86/PDE4D/PRKCB/PTPRE/MEF2C/RNF125/TNFRSF14
-GO:0002376 RUBCN/PARP14/VSIR/ACVR2A/TRIM25/IRAK3/LCP2/HLA-DRB1/ST3GAL1/PDGFB/MAP3K1/CLEC2D/LILRB5/MX2/PLD3/MPP1/CR1/CD4/HLA-DMB/FCGR2C/PRDM1/GCNT1/TEC/TLR4/HLA-DPB1/ZBTB46/ITGAM/TNFRSF11A/CD48/ATP1B1/NAGK/RAB7B/IFI16/LY96/NAIP/INPP5D/NLRP1/MPEG1/IL6R/ADAMDEC1/PRKCA/VNN1/PLA2G4A/LRRK2/JAML/FCGR2A/TNFSF8/SAMSN1/TXK/THEMIS2/LY86/APPL2/SAMHD1/GPR183/CLEC4A/CMKLR1/FCN1/ITGA4/PIK3CD/HLA-DQA1/CXCL2/NLRP3/SLAMF7/TNFRSF1B/CASP1/IGSF6/COLEC12/IGF1/CD86/PDE4D/PRKCB/MBP/PTPRE/MEF2C/SAMD9/IFI44/RNF125/TNFRSF14/PSTPIP1
-GO:0009617                                                                                                                                                                                                                                                                                                                             IRAK3/IL10RA/HLA-DRB1/SLC9A9/STAB1/TLR4/ITGAM/TNFRSF11A/NAGK/FOS/LY96/NAIP/NLRP1/MPEG1/IL6R/PRKCA/LY86/EMILIN2/CXCL2/NLRP3/SASH1/TNFRSF1B/CASP1/COLEC12/CD86/MMP9/SCARB1/MEF2C/TNFRSF14
+GO:0006955                                                           PRKCB/IGSF6/LY86/PDE4D/CLEC4A/NLRP1/SLAMF7/IRAK3/FCGR2A/TNFRSF1B/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/LCP2/ST3GAL1/SAMHD1/PSTPIP1/PARP14/PLA2G4A/APPL2/FCGR2C/HLA-DMB/THEMIS2/RAB7B/NAGK/FCN1/MBP/CD4/ITGA4/LY96/PLD3/COLEC12/MX2/PRDM1/CMKLR1/CLEC2D/INPP5D/SAMSN1/IFI16/VNN1/CR1/TLR4/TEC/TNFSF8/ADAMDEC1/NLRP3/CXCL2/CASP1/IFI44/SAMD9/ITGAM/IL6R/NAIP/ZBTB46/PIK3CD/MEF2C/CD86/CD48/TNFRSF11A/MPEG1/GPR183/MAP3K1/VSIR/TNFRSF14/HLA-DPB1/HLA-DQA1/ATP1B1
+GO:0006952                                                                                             IL10RA/LY86/CLEC4A/LGALS8/NLRP1/SLAMF7/IRAK3/FCGR2A/TNFRSF1B/STAB1/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/SAMHD1/PSTPIP1/METRNL/PARP14/SIGLEC1/APPL2/FCGR2C/THEMIS2/RAB7B/NAGK/NAMPT/SLC9A9/FCN1/MLKL/CD4/FOS/LY96/PLD3/IGF1/COLEC12/MX2/LRRK2/PRDM1/CMKLR1/INPP5D/IFI16/VNN1/PLA2G4C/CR1/TLR4/AOAH/NLRP3/CXCL2/CASP1/BNIP3L/EMILIN2/SAMD9/ATG7/ITGAM/IL6R/NAIP/CD163/PIK3CD/MEF2C/CD48/TNFRSF11A/MPEG1/TNFRSF14/MMP9/ATP1B1
+GO:0002764                                                                                                                                                                                                                                                                                  PRKCB/PDE4D/NLRP1/IRAK3/FCGR2A/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/LCP2/APPL2/FCGR2C/THEMIS2/RAB7B/NAGK/FCN1/CD4/LY96/PLD3/CMKLR1/CLEC2D/INPP5D/IFI16/CR1/TLR4/TEC/NLRP3/CASP1/ITGAM/NAIP/PIK3CD/MEF2C/CD86/MAP3K1/TNFRSF14/HLA-DPB1
+GO:0002682                                                                                                                       PRKCB/PDE4D/NLRP1/IRAK3/FCGR2A/TNFRSF1B/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/LCP2/SAMHD1/PARP14/PLA2G4A/APPL2/FCGR2C/HLA-DMB/THEMIS2/RAB7B/NAGK/FCN1/CD4/ITGA4/LY96/PLD3/IGF1/COLEC12/LRRK2/PRDM1/CMKLR1/MPP1/CLEC2D/INPP5D/SAMSN1/IFI16/VNN1/PRKCA/CR1/TLR4/TEC/PTPRE/TNFSF8/NLRP3/CASP1/ITGAM/IL6R/NAIP/PIK3CD/MEF2C/CD86/TNFRSF11A/ACVR2A/GPR183/MAP3K1/VSIR/GCNT1/TNFRSF14/HLA-DPB1/HLA-DQA1
+GO:0002376 PRKCB/IGSF6/LY86/PDE4D/CLEC4A/NLRP1/SLAMF7/IRAK3/FCGR2A/TNFRSF1B/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/LCP2/ST3GAL1/SAMHD1/PSTPIP1/PARP14/PLA2G4A/APPL2/FCGR2C/HLA-DMB/THEMIS2/RAB7B/NAGK/FCN1/MBP/CD4/ITGA4/LY96/PLD3/IGF1/COLEC12/MX2/LRRK2/PRDM1/CMKLR1/RUBCN/MPP1/CLEC2D/INPP5D/JAML/SAMSN1/IFI16/VNN1/PRKCA/CR1/TLR4/TEC/PTPRE/TNFSF8/ADAMDEC1/NLRP3/CXCL2/CASP1/IFI44/SAMD9/ITGAM/IL6R/NAIP/ZBTB46/PIK3CD/MEF2C/CD86/CD48/TNFRSF11A/PDGFB/ACVR2A/MPEG1/GPR183/MAP3K1/VSIR/GCNT1/TNFRSF14/HLA-DPB1/HLA-DQA1/ATP1B1
+GO:0009617                                                                                                                                                                                                                                                                                                                             IL10RA/LY86/NLRP1/IRAK3/TNFRSF1B/STAB1/SCARB1/HLA-DRB1/NAGK/SLC9A9/FOS/LY96/COLEC12/PRKCA/TLR4/SASH1/NLRP3/CXCL2/CASP1/EMILIN2/ITGAM/IL6R/NAIP/MEF2C/CD86/TNFRSF11A/MPEG1/TNFRSF14/MMP9
            Count
 GO:0006955    69
 GO:0006952    65
@@ -1062,8 +1112,8 @@ Sophie.Alice
 </div>
 </div>
 </div>
-<div id="checking-mmp2" class="section level1">
-<h1>Checking MMP2</h1>
+<div id="checking-mmp2" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Checking MMP2</h1>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1242,6 +1292,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {
