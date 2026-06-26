@@ -1,0 +1,123 @@
+---
+title: "Proportions"
+author: "Sophie.Alice"
+date: "2026-06-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+# Setup
+
+```{r, message=FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+
+
+#BiocManager::install("speckle")
+```
+
+# Get the Data
+
+```{r}
+# path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+```
+
+# Check actual cell number with theoretical cell number
+
+ - CMF_NC = 4000 Cardiomyocytes + 1000 Fibroblasts?
+ - CMF_TGF = 
+ - CMFHM_NC = 
+ - CMFHM_TGF = 
+
+```{r}
+table(Data$orig.ident, Data$cell_type)
+```
+
+# Proportion visualization no statistics
+
+ - We might run into Problems downstream as the Fibroblast proportions are so different. But we'll see
+
+```{r}
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+
+####################################################### no. of cells
+
+cellCounts1 <- as.data.frame(table(Celltype = Data$cell_type, sample = Data$orig.ident))
+
+ggplot(data = cellCounts1, aes(x = sample, fill = Celltype, y = Freq)) +
+  geom_bar(stat = "identity") +
+  theme_bw() + 
+  scale_fill_manual(values = gradient_colors3) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  labs(title = "Proportions across Identities", x = "", y = "fraction of cells")
+
+####################################################### Proportions of cells
+
+props <- getTransformedProps(Data$cell_type, Data$orig.ident, transform="logit")
+cellPerc <- as.data.frame.table(props$Proportions)
+
+ggplot(data = cellPerc, aes(x = sample, fill = clusters, y = Freq)) +
+  geom_bar(stat = "identity") +
+  theme_bw() + 
+  scale_fill_manual(values = gradient_colors3) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  labs(title = "Proportions across Identities", x = "", y = "fraction of cells")
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```

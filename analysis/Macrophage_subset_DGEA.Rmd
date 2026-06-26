@@ -1,0 +1,152 @@
+---
+title: "Macrophage_subset_DGEA"
+author: "Sophie.Alice"
+date: "2026-06-26"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+# Setup
+
+```{r, message=FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+library(UpSetR)
+library(grid)
+library(ggvenn)
+
+#BiocManager::install("MAST")
+```
+
+# Get the Data
+
+```{r}
+# path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+# Functions
+
+```{r}
+
+
+Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
+  
+  # Clean extreme values
+  df <- Data
+  df <- df[is.finite(df$avg_log2FC) & is.finite(df$p_val_adj), ]
+  
+  # dynamic axis limits
+  xmax <- max(df$avg_log2FC, na.rm = TRUE)
+  xmin <- min(df$avg_log2FC, na.rm = TRUE)
+  ymax <- max(-log10(df$p_val_adj), na.rm = TRUE)
+  
+  # Add padding
+  xpad <- (xmax - xmin) * 0.1
+  ypad <- ymax * 0.1
+  
+  combined_subtitle <- paste0(Subtitle, " ● Thresholds: FDR < ", pCutoff, ", |Log2FC| > ", FCcutoff)
+  
+  EV <- EnhancedVolcano(
+    df,
+    lab = NA,
+    x = 'avg_log2FC',
+    y = 'p_val_adj',
+    xlab = 'log2 Foldchange',
+    ylab = "-log10 FDR",
+    legendLabels = c('NS','log2FC','FDR','FDR & log2FC'),
+    col = c("darkgrey", "#005EA8", "#FFD966", "#9F1C67"),
+    title = Title,
+    subtitle = combined_subtitle,   
+    xlim = c(xmin - xpad, xmax + xpad),
+    ylim = c(0, ymax + ypad),
+    pCutoff = pCutoff,              
+    FCcutoff = FCcutoff,            
+
+    cutoffLineType = 'dashed',      
+    cutoffLineCol = 'black',        
+    cutoffLineWidth = 0.6           
+  )
+  
+  return(EV)
+}
+
+
+```
+
+# Macrophages
+
+```{r}
+
+table(Data$cell_type)
+table(Data$orig.ident)
+
+Idents(Data) <- "orig.ident" 
+Macrophages <- subset(Data, cell_type == "Macrophages" & orig.ident %in% c("CMFHM_NC", "CMFHM_TGF"))
+table(Macrophages$orig.ident)
+
+
+Macrophages$cdr <- scale(colSums(GetAssayData(Macrophages, assay = "RNA", layer = "counts") > 0))
+
+Macrophages.MAST <- FindMarkers(
+  object = Macrophages,
+  ident.1 = "CMFHM_TGF",    
+  ident.2 = "CMFHM_NC",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+Macrophages.MAST <- Macrophages.MAST %>%
+  rownames_to_column(var = "gene")
+
+Macrophages.MAST.sign <- Macrophages.MAST %>%
+  filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
+
+Macrophages.MAST.sign
+
+
+colnames(Macrophages.MAST)
+
+
+Volcano_Plots(
+  Data = Macrophages.MAST,
+  Title = "DEG in Macrophages",
+  Subtitle = "TGF-\u03b2 vs. Control",
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)
+
+outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/DGEA_output"
+
+#write.csv(Macrophages.MAST, file = file.path(outputdir, "Macrophages_all.csv"))
+#write.csv(Macrophages.MAST.sign, file = file.path(outputdir, "Macrophages_sign.csv"))
+
+```

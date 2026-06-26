@@ -1,0 +1,470 @@
+---
+title: "DGEA"
+author: "Sophie.Alice"
+date: "2026-06-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Setup
+
+```{r, message=FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+library(UpSetR)
+library(grid)
+library(ggvenn)
+
+#BiocManager::install("MAST")
+```
+
+# Get the Data
+
+```{r}
+# path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+# Functions
+
+```{r}
+
+
+Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
+  
+  # Clean extreme values
+  df <- Data
+  df <- df[is.finite(df$avg_log2FC) & is.finite(df$p_val_adj), ]
+  
+  # dynamic axis limits
+  xmax <- max(df$avg_log2FC, na.rm = TRUE)
+  xmin <- min(df$avg_log2FC, na.rm = TRUE)
+  ymax <- max(-log10(df$p_val_adj), na.rm = TRUE)
+  
+  # Add padding
+  xpad <- (xmax - xmin) * 0.1
+  ypad <- ymax * 0.1
+  
+  combined_subtitle <- paste0(Subtitle, " ● Thresholds: FDR < ", pCutoff, ", |Log2FC| > ", FCcutoff)
+  
+  EV <- EnhancedVolcano(
+    df,
+    lab = NA,
+    x = 'avg_log2FC',
+    y = 'p_val_adj',
+    xlab = 'log2 Foldchange',
+    ylab = "-log10 FDR",
+    legendLabels = c('NS','log2FC','FDR','FDR & log2FC'),
+    col = c("darkgrey", "#005EA8", "#FFD966", "#9F1C67"),
+    title = Title,
+    subtitle = combined_subtitle,   
+    xlim = c(xmin - xpad, xmax + xpad),
+    ylim = c(0, ymax + ypad),
+    pCutoff = pCutoff,              
+    FCcutoff = FCcutoff,            
+
+    cutoffLineType = 'dashed',      
+    cutoffLineCol = 'black',        
+    cutoffLineWidth = 0.6           
+  )
+  
+  return(EV)
+}
+
+
+```
+
+# Fibroblasts
+
+## Subset the data
+
+```{r}
+
+table(Data$cell_type)
+table(Data$orig.ident)
+
+Idents(Data) <- "orig.ident" 
+Fibroblasts<- subset(Data, cell_type == "Cardiac Fibroblasts")
+
+Fibroblasts$cdr <- scale(colSums(GetAssayData(Fibroblasts, assay = "RNA", layer = "counts") > 0))
+
+
+fibroblast_deg_list <- list()
+
+```
+
+## 1. Baseline Fibrotic response to TGF-B without Macrophages
+
+```{r}
+
+
+MAST.Res <- FindMarkers(
+  object = Fibroblasts,
+  ident.1 = "CMF_TGF",    
+  ident.2 = "CMF_NC",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
+
+
+
+fibroblast_deg_list[["Baseline_TGF_Response"]] <- MAST.Res.sign
+
+head(MAST.Res.sign)
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG in MT-Fibroblasts without Macrophages",
+  Subtitle = "TGF-\u03b2 vs. Control",
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)
+
+#write.csv(MAST.Res, file = file.path(outputdir, "Baseline_TGF_Response_all.csv"))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, "Baseline_TGF_Response_sign.csv"))
+
+```
+
+## 2. Modulated Fibrotic response to TGF-B with Macrophages
+
+```{r}
+
+
+MAST.Res <- FindMarkers(
+  object = Fibroblasts,
+  ident.1 = "CMFHM_TGF",    
+  ident.2 = "CMFHM_NC",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
+
+head(MAST.Res.sign)
+
+fibroblast_deg_list[["Modulated_TGF_Response"]] <- MAST.Res.sign
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG in MT-Fibroblasts with Macrophages",
+  Subtitle = "TGF-\u03b2 vs. Control",
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)
+
+#write.csv(MAST.Res, file = file.path(outputdir, "Modulated_TGF_Response_all.csv"))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, "Modulated_TGF_Response_sign.csv"))
+
+```
+
+## 3. Baseline Macrophage response
+
+```{r}
+
+
+MAST.Res <- FindMarkers(
+  object = Fibroblasts,
+  ident.1 = "CMFHM_NC",    
+  ident.2 = "CMF_NC",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
+
+head(MAST.Res.sign)
+
+fibroblast_deg_list[["Baseline_Mac_Response"]] <- MAST.Res.sign
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG in MT-Fibroblasts unstimulated",
+  Subtitle = "with Macrophages vs. Control",
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)
+
+#write.csv(MAST.Res, file = file.path(outputdir, "Baseline_Mac_Response_all.csv"))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, "Baseline_Mac_Response_sign.csv"))
+
+```
+
+## 4. Stimulated Macrophage Effect
+
+```{r}
+
+MAST.Res <- FindMarkers(
+  object = Fibroblasts,
+  ident.1 = "CMFHM_TGF",    
+  ident.2 = "CMF_TGF",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
+
+head(MAST.Res.sign)
+
+fibroblast_deg_list[["Stim_Mac_Response"]] <- MAST.Res.sign
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG in MT-Fibroblasts stimulated with TGF-\u03b2",
+  Subtitle = "with Macrophages vs. Control",
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)
+
+#write.csv(MAST.Res, file = file.path(outputdir, "Stim_Mac_Response_all.csv"))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, "Stim_Mac_Response_sign.csv"))
+
+```
+
+# Gene Crossover
+
+```{r}
+
+upset_up_genes   <- list()
+upset_down_genes <- list()
+
+
+p_cutoff  <- 0.01
+fc_cutoff <- 1 
+
+for (comp_name in names(fibroblast_deg_list)) {
+
+  df <- fibroblast_deg_list[[comp_name]]
+  
+  if (!"gene" %in% colnames(df)) {
+    df <- df %>% rownames_to_column(var = "gene")
+  }
+  
+  upset_up_genes[[comp_name]] <- df %>%
+    filter(p_val_adj <= p_cutoff & avg_log2FC >= fc_cutoff) %>%
+    pull(gene) %>%
+    na.omit()
+  
+  upset_down_genes[[comp_name]] <- df %>%
+    filter(p_val_adj <= p_cutoff & avg_log2FC <= -fc_cutoff) %>%
+    pull(gene) %>%
+    na.omit()
+}
+
+# one master object
+upset_final_data <- list(
+  Up_Regulated   = upset_up_genes,
+  Down_Regulated = upset_down_genes
+)
+
+
+```
+
+
+```{r}
+
+################################################### Upregulated Intersections
+
+upset(
+  fromList(upset_final_data$Up_Regulated), 
+  nsets = 4,                       
+  order.by = "freq",               
+  main.bar.color = "#9F1C67",      
+  sets.bar.color = "darkgrey",     
+  text.scale = c(1.3, 1.3, 1, 1, 1.2, 1) 
+)
+
+
+################################################### Downregulated Intersections
+
+upset(
+  fromList(upset_final_data$Down_Regulated), 
+  nsets = 4, 
+  order.by = "freq", 
+  main.bar.color = "#005EA8", 
+  sets.bar.color = "darkgrey",
+  text.scale = c(1.3, 1.3, 1, 1, 1.2, 1)
+)
+
+```
+# Venn diagram of all ovelapping genes
+
+```{r}
+
+################################# upregulated genes
+
+ggvenn(
+  data = upset_final_data$Up_Regulated, 
+  columns = names(upset_final_data$Up_Regulated),                          
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = "Ovelap of sign. Upregulated Genes",
+    subtitle = paste0("Fibroblast Differential Expression ● Cutoffs: FDR < ", p_cutoff, ", |Log2FC| > ", fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = "bold", size = 16, color = "black"),
+    plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
+  )
+
+################################# downregulated genes
+
+ggvenn(
+  data = upset_final_data$Down_Regulated, 
+  columns = names(upset_final_data$Down_Regulated),                          
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = "Ovelap of sign. Downregulated Genes",
+    subtitle = paste0("Fibroblast Differential Expression ● Cutoffs: FDR < ", p_cutoff, ", |Log2FC| > ", fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = "bold", size = 16, color = "black"),
+    plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
+  )
+
+
+```
+
+# Venn diagram of DEG upon TGF-B stimulation with and without Macrophages
+
+```{r}
+
+################################# upregulated genes
+
+ggvenn(
+  data = upset_final_data$Up_Regulated[c("Baseline_TGF_Response", "Modulated_TGF_Response")], 
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = "Ovelap of sign. Upregulated Genes upon TGF-\u03b2 stimulation",
+    subtitle = paste0("Fibroblast Differential Expression ● Cutoffs: FDR < ", p_cutoff, ", |Log2FC| > ", fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = "bold", size = 13, color = "black"),
+    plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
+  )
+
+################################# downregulated genes
+
+ggvenn(
+  data = upset_final_data$Down_Regulated[c("Baseline_TGF_Response", "Modulated_TGF_Response")], 
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = "Ovelap of sign. Downregulated Genes upon TGF-\u03b2 stimulation",
+    subtitle = paste0("Fibroblast Differential Expression ● Cutoffs: FDR < ", p_cutoff, ", |Log2FC| > ", fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = "bold", size = 13, color = "black"),
+    plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
+  )
+
+
+```
+
+
+# Venn diagram of DEG of presence of Macrophages with and without TGF-B stimulation
+
+```{r}
+################################# upregulated genes
+
+ggvenn(
+  data = upset_final_data$Up_Regulated[c("Baseline_Mac_Response", "Stim_Mac_Response")],
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = "Ovelap of sign. Upregulated Genes upon Macrophage presence",
+    subtitle = paste0("Fibroblast Differential Expression ● Cutoffs: FDR < ", p_cutoff, ", |Log2FC| > ", fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = "bold", size = 13, color = "black"),
+    plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
+  )
+
+################################# downregulated genes
+
+ggvenn(
+  data = upset_final_data$Down_Regulated[c("Baseline_Mac_Response", "Stim_Mac_Response")],  
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = "Ovelap of sign. Downregulated Genes upon Macrophage presence",
+    subtitle = paste0("Fibroblast Differential Expression ● Cutoffs: FDR < ", p_cutoff, ", |Log2FC| > ", fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = "bold", size = 13, color = "black"),
+    plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
+  )
+
+```
+
+
+```{r}
+
+```

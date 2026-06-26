@@ -1,0 +1,291 @@
+---
+title: "GSEA Macrophages"
+author: "Sophie.Alice"
+date: "2026-06-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Setup
+
+```{r, message=FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+
+```
+
+# Get Hallmark pathways
+
+
+```{r}
+Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt")
+
+```
+
+
+# Get the Data
+
+```{r}
+# path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/DGEA_output/Macrophages_all.csv"
+Macrophages_all <- read_csv(path)
+Macrophages_all
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+```
+
+# Rank the data
+
+```{r}
+
+Macrophages.ranked <- Macrophages_all %>%
+  dplyr::select(gene, avg_log2FC) %>%
+  na.omit() %>%
+  distinct() %>%
+  group_by(gene) %>%
+  summarize(LFC = mean(avg_log2FC)) %>%
+  arrange(desc(LFC))
+
+ranked <- deframe(Macrophages.ranked)
+
+rank <- ranked[names(ranked) != ""]
+
+
+```
+
+# Functional gene set enrichment Analysis
+
+```{r}
+
+set.seed(42)
+fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
+
+fgseares.tidy <- fgseares %>%
+  as_tibble() %>%  
+  arrange(desc(NES))
+
+fgseares.tidy <- fgseares.tidy %>%
+  dplyr::select(-ES, -nMoreExtreme) 
+
+
+fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
+fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
+fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
+
+```
+
+# Visualization
+
+```{r}
+
+plot_df <- fgseares.tidy.top.both %>%
+  mutate(
+    padj_group = case_when(
+      padj <= 0.05 ~ "< 0.05",
+      padj <= 0.2  ~ "0.05 – 0.2",
+      TRUE         ~ "> 0.2"
+    ),
+    padj_group = factor(padj_group, levels = c("< 0.05", "0.05 – 0.2", "> 0.2")),
+    pathway = gsub("HALLMARK_", "", pathway),
+  )
+
+
+ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
+  geom_col(aes(fill = padj_group), color = "black", linewidth = 0.2) +
+  coord_flip() +
+  scale_x_discrete(position = "top", labels = scales::label_wrap(50)) +
+  scale_fill_manual(
+    name = "adj. p-value",
+    values = c(
+      "< 0.05"     = "#9F1C67",   
+      "0.05 – 0.2" = "#FFD966",   
+      "> 0.2"      = "#005EA8"    
+    ),
+    drop = FALSE 
+  ) +
+  labs(
+    x = "", 
+    y = "Normalized Enrichment Score (NES)", 
+    title = "GSEA: Hallmark Pathways",
+    subtitle = "MT: Pathway changes in Macrophages upon TGF-Beta stimulation"
+  ) +
+  theme_bw() +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic"),
+    legend.position = "left" 
+  )
+
+```
+
+
+# PAH
+
+
+```{r}
+
+df <- Macrophages_all
+
+# Upregulated Genes
+up_genes <- df %>%
+  filter(avg_log2FC > 0.5, p_val_adj <= 0.05) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Downregulated Genes
+down_genes <- df %>%
+  filter(avg_log2FC < -0.5, p_val_adj <= 0.05) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Background Universe Genes 
+universe <- df %>%
+  distinct(gene) %>% 
+  pull(gene) %>%                        
+  na.omit()
+
+```
+
+
+```{r}
+
+set.seed(42)
+
+Humanlibrary <- org.Hs.eg.db
+
+###################################### upregulated genes
+
+up.GO <- enrichGO(
+  gene          = up_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 5,
+  maxGSSize     = 800
+)
+
+simp.up.GO <- clusterProfiler::simplify(up.GO)
+
+head(simp.up.GO)
+
+###################################### downregulated genes
+
+down.GO <- enrichGO(
+  gene          = down_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 5,
+  maxGSSize     = 800
+)
+
+simp.down.GO <- clusterProfiler::simplify(down.GO)
+
+head(simp.down.GO)
+
+```
+
+
+```{r}
+
+go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
+go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
+
+go_combined <- rbind(go_up_df, go_down_df) %>%
+  group_by(Direction) %>%
+  slice_head(n = 15) %>% # Adjust 'n' to show more or fewer terms per panel
+  ungroup()
+
+
+go_plot_data <- go_combined %>%
+  mutate(
+    GeneRatio_num = sapply(GeneRatio, function(x) {
+      num_den <- as.numeric(strsplit(x, "/")[[1]])
+      return(num_den[1] / num_den[2])})) %>%
+  arrange(Direction, GeneRatio_num) %>%
+  mutate(Description = factor(Description, levels = unique(Description)))
+
+
+ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
+  geom_point(aes(color = p.adjust, size = Count)) +  
+  facet_wrap(~Direction, scales = "free_y", ncol = 1) +
+  
+  scale_color_viridis_c(
+    option = "plasma", 
+    name = "adj. p-value",                          
+    guide = guide_colorbar(reverse = TRUE)
+  ) +
+  scale_size_continuous(range = c(3, 8), name = "Gene Count") +
+  scale_y_discrete(labels = scales::label_wrap(45)) +
+  
+  theme_bw() + 
+  labs(
+    title = "DEG MT Macrophages: GO Biological Process Enrichment", 
+    subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
+    x = "Gene Ratio", 
+    y = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
+    axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
+    axis.title.x  = element_text(face = "bold"),
+    strip.text    = element_text(face = "bold", size = 10), # Customizes facet header boxes
+    legend.position = "right"
+  )
+```
+
+# Checking MMP2
+
+```{r}
+
+
+```
+
+
+```{r}
+
+```
