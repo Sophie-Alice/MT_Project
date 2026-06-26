@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Sophie.Alice" />
+
+<meta name="date" content="2026-06-25" />
+
+<title>DGEA</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MT_Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Sophie-Alice/MT_Project">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">DGEA</h1>
+<h4 class="author">Sophie.Alice</h4>
+<h4 class="date">2026-06-25</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2026-06-26
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>MT_Project/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20260612code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20260612)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20260612code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20260612)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0b82e50c20ee503c415e647485a3ecf6c441eb8ctargetblank0b82e50a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/0b82e50c20ee503c415e647485a3ecf6c441eb8c" target="_blank">0b82e50</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0b82e50c20ee503c415e647485a3ecf6c441eb8ctargetblank0b82e50a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/0b82e50c20ee503c415e647485a3ecf6c441eb8c" target="_blank">0b82e50</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rproj.user/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/DGEA.Rmd</code>) and HTML
+(<code>docs/DGEA.html</code>) files. If you’ve configured a remote Git
+repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
+in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/0b82e50c20ee503c415e647485a3ecf6c441eb8c/analysis/DGEA.Rmd" target="_blank">0b82e50</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Adding more
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<pre class="r"><code>rm(list=ls())
+gc()</code></pre>
+<pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
+Ncells  907256 48.5    1751287 93.6         NA  1321095 70.6
+Vcells 1596867 12.2    8388608 64.0      16384  2392685 18.3</code></pre>
+<pre class="r"><code>library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+library(UpSetR)
+library(grid)
+library(ggvenn)
+
+#BiocManager::install(&quot;MAST&quot;)</code></pre>
+</div>
+<div id="get-the-data" class="section level1">
+<h1>Get the Data</h1>
+<pre class="r"><code># path &lt;- &quot;/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds&quot;
+path &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds&quot;
+Data &lt;- read_rds(path)
+Data</code></pre>
+<pre><code>An object of class Seurat 
+65557 features across 13386 samples within 2 assays 
+Active assay: RNA (38606 features, 0 variable features)
+ 2 layers present: counts, data
+ 1 other assay present: SCT
+ 3 dimensional reductions calculated: pca, harmony, umap</code></pre>
+<pre class="r"><code>custom_palette &lt;- colorRampPalette(c(&quot;#005EA8&quot;, &quot;#6DB335&quot;, &quot;#FFD966&quot;, &quot;#EDAAD2&quot;, &quot;#9F1C67&quot;))
+gradient_colors3 &lt;- custom_palette(6)
+gradient_colors4 &lt;- custom_palette(4)</code></pre>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions</h1>
+<pre class="r"><code>Volcano_Plots &lt;- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
+  
+  # Clean extreme values
+  df &lt;- Data
+  df &lt;- df[is.finite(df$avg_log2FC) &amp; is.finite(df$p_val_adj), ]
+  
+  # dynamic axis limits
+  xmax &lt;- max(df$avg_log2FC, na.rm = TRUE)
+  xmin &lt;- min(df$avg_log2FC, na.rm = TRUE)
+  ymax &lt;- max(-log10(df$p_val_adj), na.rm = TRUE)
+  
+  # Add padding
+  xpad &lt;- (xmax - xmin) * 0.1
+  ypad &lt;- ymax * 0.1
+  
+  combined_subtitle &lt;- paste0(Subtitle, &quot; ● Thresholds: FDR &lt; &quot;, pCutoff, &quot;, |Log2FC| &gt; &quot;, FCcutoff)
+  
+  EV &lt;- EnhancedVolcano(
+    df,
+    lab = NA,
+    x = &#39;avg_log2FC&#39;,
+    y = &#39;p_val_adj&#39;,
+    xlab = &#39;log2 Foldchange&#39;,
+    ylab = &quot;-log10 FDR&quot;,
+    legendLabels = c(&#39;NS&#39;,&#39;log2FC&#39;,&#39;FDR&#39;,&#39;FDR &amp; log2FC&#39;),
+    col = c(&quot;darkgrey&quot;, &quot;#005EA8&quot;, &quot;#FFD966&quot;, &quot;#9F1C67&quot;),
+    title = Title,
+    subtitle = combined_subtitle,   
+    xlim = c(xmin - xpad, xmax + xpad),
+    ylim = c(0, ymax + ypad),
+    pCutoff = pCutoff,              
+    FCcutoff = FCcutoff,            
+
+    cutoffLineType = &#39;dashed&#39;,      
+    cutoffLineCol = &#39;black&#39;,        
+    cutoffLineWidth = 0.6           
+  )
+  
+  return(EV)
+}</code></pre>
+</div>
+<div id="fibroblasts" class="section level1">
+<h1>Fibroblasts</h1>
+<div id="subset-the-data" class="section level2">
+<h2>Subset the data</h2>
+<pre class="r"><code>table(Data$cell_type)</code></pre>
+<pre><code>
+              Cardiomyocytes                  Macrophages 
+                        7883                         1503 
+Proliferating Cardiomyocytes          Cardiac Fibroblasts 
+                        1418                         1354 
+               Hypoxic Core?                     Unknown? 
+                         644                          584 </code></pre>
+<pre class="r"><code>table(Data$orig.ident)</code></pre>
+<pre><code>
+   CMF_NC   CMF_TGF  CMFHM_NC CMFHM_TGF 
+     2389      3388      4316      3293 </code></pre>
+<pre class="r"><code>Idents(Data) &lt;- &quot;orig.ident&quot; 
+Fibroblasts&lt;- subset(Data, cell_type == &quot;Cardiac Fibroblasts&quot;)
+
+Fibroblasts$cdr &lt;- scale(colSums(GetAssayData(Fibroblasts, assay = &quot;RNA&quot;, layer = &quot;counts&quot;) &gt; 0))
+
+
+fibroblast_deg_list &lt;- list()</code></pre>
+</div>
+<div id="baseline-fibrotic-response-to-tgf-b-without-macrophages"
+class="section level2">
+<h2>1. Baseline Fibrotic response to TGF-B without Macrophages</h2>
+<pre class="r"><code>MAST.Res &lt;- FindMarkers(
+  object = Fibroblasts,
+  ident.1 = &quot;CMF_TGF&quot;,    
+  ident.2 = &quot;CMF_NC&quot;,     
+  test.use = &quot;MAST&quot;,
+  latent.vars = &quot;cdr&quot;,      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)</code></pre>
+<pre><code>
+Done!</code></pre>
+<pre><code>Combining coefficients and standard errors</code></pre>
+<pre><code>Calculating log-fold changes</code></pre>
+<pre><code>Calculating likelihood ratio tests</code></pre>
+<pre><code>Refitting on reduced model...</code></pre>
+<pre><code>
+Done!</code></pre>
+<pre class="r"><code>MAST.Res &lt;- MAST.Res %&gt;%
+  rownames_to_column(var = &quot;gene&quot;)
+
+MAST.Res.sign &lt;- MAST.Res %&gt;%
+  filter(p_val_adj &lt; 0.05 &amp; abs(avg_log2FC) &gt;= 0.5)
+
+
+
+fibroblast_deg_list[[&quot;Baseline_TGF_Response&quot;]] &lt;- MAST.Res.sign
+
+head(MAST.Res.sign)</code></pre>
+<pre><code>    gene         p_val avg_log2FC pct.1 pct.2     p_val_adj
+1  POSTN 3.311486e-137   3.496659 0.992 0.531 1.278432e-132
+2 IGFBP4 1.615034e-116  -3.572413 0.386 0.901 6.235001e-112
+3   SVIL 1.171654e-115  -2.121951 0.897 1.000 4.523288e-111
+4 BMERB1 2.716162e-113  -2.902352 0.700 0.943 1.048602e-108
+5    FAP 9.685246e-109   2.346524 0.967 0.677 3.739086e-104
+6 IGFBP3 2.877709e-108  -2.810918 0.701 0.964 1.110968e-103</code></pre>
+<pre class="r"><code>Volcano_Plots(
+  Data = MAST.Res,
+  Title = &quot;DEG in MT-Fibroblasts without Macrophages&quot;,
+  Subtitle = &quot;TGF-\u03b2 vs. Control&quot;,
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)</code></pre>
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.
+ℹ The deprecated feature was likely used in the EnhancedVolcano package.
+  Please report the issue to the authors.
+This warning is displayed once per session.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<pre><code>Warning: The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
+ℹ Please use the `linewidth` argument instead.
+ℹ The deprecated feature was likely used in the EnhancedVolcano package.
+  Please report the issue to the authors.
+This warning is displayed once per session.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-5-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#write.csv(MAST.Res, file = file.path(outputdir, &quot;Baseline_TGF_Response_all.csv&quot;))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Baseline_TGF_Response_sign.csv&quot;))</code></pre>
+</div>
+<div id="modulated-fibrotic-response-to-tgf-b-with-macrophages"
+class="section level2">
+<h2>2. Modulated Fibrotic response to TGF-B with Macrophages</h2>
+<pre class="r"><code>MAST.Res &lt;- FindMarkers(
+  object = Fibroblasts,
+  ident.1 = &quot;CMFHM_TGF&quot;,    
+  ident.2 = &quot;CMFHM_NC&quot;,     
+  test.use = &quot;MAST&quot;,
+  latent.vars = &quot;cdr&quot;,      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)</code></pre>
+<pre><code>
+Done!</code></pre>
+<pre><code>Combining coefficients and standard errors</code></pre>
+<pre><code>Calculating log-fold changes</code></pre>
+<pre><code>Calculating likelihood ratio tests</code></pre>
+<pre><code>Refitting on reduced model...</code></pre>
+<pre><code>
+Done!</code></pre>
+<pre class="r"><code>MAST.Res &lt;- MAST.Res %&gt;%
+  rownames_to_column(var = &quot;gene&quot;)
+
+MAST.Res.sign &lt;- MAST.Res %&gt;%
+  filter(p_val_adj &lt; 0.05 &amp; abs(avg_log2FC) &gt;= 0.5)
+
+head(MAST.Res.sign)</code></pre>
+<pre><code>       gene        p_val avg_log2FC pct.1 pct.2    p_val_adj
+1     TIMP3 2.615701e-29   2.141579 0.970 0.761 1.009817e-24
+2    IGFBP3 1.545308e-27  -2.957364 0.508 0.908 5.965816e-23
+3  CCDC102B 1.560355e-26  -4.170237 0.246 0.780 6.023906e-22
+4      EBF1 2.361971e-26  -2.469032 0.633 0.890 9.118625e-22
+5      COMP 3.221030e-23   3.294716 0.648 0.119 1.243511e-18
+6 BBOX1-AS1 7.479547e-23   3.004068 0.729 0.220 2.887554e-18</code></pre>
+<pre class="r"><code>fibroblast_deg_list[[&quot;Modulated_TGF_Response&quot;]] &lt;- MAST.Res.sign
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = &quot;DEG in MT-Fibroblasts with Macrophages&quot;,
+  Subtitle = &quot;TGF-\u03b2 vs. Control&quot;,
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-6-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#write.csv(MAST.Res, file = file.path(outputdir, &quot;Modulated_TGF_Response_all.csv&quot;))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Modulated_TGF_Response_sign.csv&quot;))</code></pre>
+</div>
+<div id="baseline-macrophage-response" class="section level2">
+<h2>3. Baseline Macrophage response</h2>
+<pre class="r"><code>MAST.Res &lt;- FindMarkers(
+  object = Fibroblasts,
+  ident.1 = &quot;CMFHM_NC&quot;,    
+  ident.2 = &quot;CMF_NC&quot;,     
+  test.use = &quot;MAST&quot;,
+  latent.vars = &quot;cdr&quot;,      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)</code></pre>
+<pre><code>
+Done!</code></pre>
+<pre><code>Combining coefficients and standard errors</code></pre>
+<pre><code>Calculating log-fold changes</code></pre>
+<pre><code>Calculating likelihood ratio tests</code></pre>
+<pre><code>Refitting on reduced model...</code></pre>
+<pre><code>
+Done!</code></pre>
+<pre class="r"><code>MAST.Res &lt;- MAST.Res %&gt;%
+  rownames_to_column(var = &quot;gene&quot;)
+
+MAST.Res.sign &lt;- MAST.Res %&gt;%
+  filter(p_val_adj &lt; 0.05 &amp; abs(avg_log2FC) &gt;= 0.5)
+
+head(MAST.Res.sign)</code></pre>
+<pre><code>      gene        p_val avg_log2FC pct.1 pct.2    p_val_adj
+1      LYZ 1.726612e-32   6.968859 0.706 0.005 6.665758e-28
+2     SPP1 1.039277e-28   5.821836 0.780 0.062 4.012234e-24
+3    ADIRF 1.879669e-27  -3.784739 0.183 0.693 7.256650e-23
+4   SLC1A3 2.050121e-26   4.642344 0.743 0.036 7.914699e-22
+5 SERPINE2 2.863102e-26  -2.573268 0.596 0.932 1.105329e-21
+6     SVIL 7.071307e-25  -1.689356 0.972 1.000 2.729949e-20</code></pre>
+<pre class="r"><code>fibroblast_deg_list[[&quot;Baseline_Mac_Response&quot;]] &lt;- MAST.Res.sign
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = &quot;DEG in MT-Fibroblasts unstimulated&quot;,
+  Subtitle = &quot;with Macrophages vs. Control&quot;,
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-7-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#write.csv(MAST.Res, file = file.path(outputdir, &quot;Baseline_Mac_Response_all.csv&quot;))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Baseline_Mac_Response_sign.csv&quot;))</code></pre>
+</div>
+<div id="stimulated-macrophage-effect" class="section level2">
+<h2>4. Stimulated Macrophage Effect</h2>
+<pre class="r"><code>MAST.Res &lt;- FindMarkers(
+  object = Fibroblasts,
+  ident.1 = &quot;CMFHM_TGF&quot;,    
+  ident.2 = &quot;CMF_TGF&quot;,     
+  test.use = &quot;MAST&quot;,
+  latent.vars = &quot;cdr&quot;,      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)</code></pre>
+<pre><code>
+Done!</code></pre>
+<pre><code>Combining coefficients and standard errors</code></pre>
+<pre><code>Calculating log-fold changes</code></pre>
+<pre><code>Calculating likelihood ratio tests</code></pre>
+<pre><code>Refitting on reduced model...</code></pre>
+<pre><code>
+Done!</code></pre>
+<pre class="r"><code>MAST.Res &lt;- MAST.Res %&gt;%
+  rownames_to_column(var = &quot;gene&quot;)
+
+MAST.Res.sign &lt;- MAST.Res %&gt;%
+  filter(p_val_adj &lt; 0.05 &amp; abs(avg_log2FC) &gt;= 0.5)
+
+head(MAST.Res.sign)</code></pre>
+<pre><code>     gene        p_val avg_log2FC pct.1 pct.2    p_val_adj
+1    TNIK 5.290538e-56   3.596706 0.588 0.052 2.042465e-51
+2 SIPA1L2 4.666826e-49   2.906083 0.739 0.241 1.801675e-44
+3    SPP1 1.676881e-47   4.619056 0.623 0.121 6.473768e-43
+4    FHL2 4.268401e-45   2.438518 0.623 0.605 1.647859e-40
+5   FHOD3 1.225799e-44   2.894430 0.739 0.351 4.732320e-40
+6     TTN 2.063151e-44   2.087590 0.940 0.529 7.965002e-40</code></pre>
+<pre class="r"><code>fibroblast_deg_list[[&quot;Stim_Mac_Response&quot;]] &lt;- MAST.Res.sign
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = &quot;DEG in MT-Fibroblasts stimulated with TGF-\u03b2&quot;,
+  Subtitle = &quot;with Macrophages vs. Control&quot;,
+  pCutoff = 0.01,    
+  FCcutoff = 1     
+)</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-8-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#write.csv(MAST.Res, file = file.path(outputdir, &quot;Stim_Mac_Response_all.csv&quot;))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Stim_Mac_Response_sign.csv&quot;))</code></pre>
+</div>
+</div>
+<div id="gene-crossover" class="section level1">
+<h1>Gene Crossover</h1>
+<pre class="r"><code>upset_up_genes   &lt;- list()
+upset_down_genes &lt;- list()
+
+
+p_cutoff  &lt;- 0.01
+fc_cutoff &lt;- 1 
+
+for (comp_name in names(fibroblast_deg_list)) {
+
+  df &lt;- fibroblast_deg_list[[comp_name]]
+  
+  if (!&quot;gene&quot; %in% colnames(df)) {
+    df &lt;- df %&gt;% rownames_to_column(var = &quot;gene&quot;)
+  }
+  
+  upset_up_genes[[comp_name]] &lt;- df %&gt;%
+    filter(p_val_adj &lt;= p_cutoff &amp; avg_log2FC &gt;= fc_cutoff) %&gt;%
+    pull(gene) %&gt;%
+    na.omit()
+  
+  upset_down_genes[[comp_name]] &lt;- df %&gt;%
+    filter(p_val_adj &lt;= p_cutoff &amp; avg_log2FC &lt;= -fc_cutoff) %&gt;%
+    pull(gene) %&gt;%
+    na.omit()
+}
+
+# one master object
+upset_final_data &lt;- list(
+  Up_Regulated   = upset_up_genes,
+  Down_Regulated = upset_down_genes
+)</code></pre>
+<pre class="r"><code>################################################### Upregulated Intersections
+
+upset(
+  fromList(upset_final_data$Up_Regulated), 
+  nsets = 4,                       
+  order.by = &quot;freq&quot;,               
+  main.bar.color = &quot;#9F1C67&quot;,      
+  sets.bar.color = &quot;darkgrey&quot;,     
+  text.scale = c(1.3, 1.3, 1, 1, 1.2, 1) 
+)</code></pre>
+<pre><code>Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+ℹ Please use tidy evaluation idioms with `aes()`.
+ℹ See also `vignette(&quot;ggplot2-in-packages&quot;)` for more information.
+ℹ The deprecated feature was likely used in the UpSetR package.
+  Please report the issue at &lt;https://github.com/hms-dbmi/UpSetR/issues&gt;.
+This warning is displayed once per session.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-10-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>################################################### Downregulated Intersections
+
+upset(
+  fromList(upset_final_data$Down_Regulated), 
+  nsets = 4, 
+  order.by = &quot;freq&quot;, 
+  main.bar.color = &quot;#005EA8&quot;, 
+  sets.bar.color = &quot;darkgrey&quot;,
+  text.scale = c(1.3, 1.3, 1, 1, 1.2, 1)
+)</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-10-2.png" alt="" width="672" style="display: block; margin: auto;" />
+# Venn diagram of all ovelapping genes</p>
+<pre class="r"><code>################################# upregulated genes
+
+ggvenn(
+  data = upset_final_data$Up_Regulated, 
+  columns = names(upset_final_data$Up_Regulated),                          
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = &quot;Ovelap of sign. Upregulated Genes&quot;,
+    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 16, color = &quot;black&quot;),
+    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
+  )</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-11-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>################################# downregulated genes
+
+ggvenn(
+  data = upset_final_data$Down_Regulated, 
+  columns = names(upset_final_data$Down_Regulated),                          
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = &quot;Ovelap of sign. Downregulated Genes&quot;,
+    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 16, color = &quot;black&quot;),
+    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
+  )</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-11-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="venn-diagram-of-deg-upon-tgf-b-stimulation-with-and-without-macrophages"
+class="section level1">
+<h1>Venn diagram of DEG upon TGF-B stimulation with and without
+Macrophages</h1>
+<pre class="r"><code>################################# upregulated genes
+
+ggvenn(
+  data = upset_final_data$Up_Regulated[c(&quot;Baseline_TGF_Response&quot;, &quot;Modulated_TGF_Response&quot;)], 
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = &quot;Ovelap of sign. Upregulated Genes upon TGF-\u03b2 stimulation&quot;,
+    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 13, color = &quot;black&quot;),
+    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
+  )</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-12-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>################################# downregulated genes
+
+ggvenn(
+  data = upset_final_data$Down_Regulated[c(&quot;Baseline_TGF_Response&quot;, &quot;Modulated_TGF_Response&quot;)], 
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = &quot;Ovelap of sign. Downregulated Genes upon TGF-\u03b2 stimulation&quot;,
+    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 13, color = &quot;black&quot;),
+    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
+  )</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-12-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="venn-diagram-of-deg-of-presence-of-macrophages-with-and-without-tgf-b-stimulation"
+class="section level1">
+<h1>Venn diagram of DEG of presence of Macrophages with and without
+TGF-B stimulation</h1>
+<pre class="r"><code>################################# upregulated genes
+
+ggvenn(
+  data = upset_final_data$Up_Regulated[c(&quot;Baseline_Mac_Response&quot;, &quot;Stim_Mac_Response&quot;)],
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = &quot;Ovelap of sign. Upregulated Genes upon Macrophage presence&quot;,
+    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 13, color = &quot;black&quot;),
+    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
+  )</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-13-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>################################# downregulated genes
+
+ggvenn(
+  data = upset_final_data$Down_Regulated[c(&quot;Baseline_Mac_Response&quot;, &quot;Stim_Mac_Response&quot;)],  
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = &quot;Ovelap of sign. Downregulated Genes upon Macrophage presence&quot;,
+    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 13, color = &quot;black&quot;),
+    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
+  )</code></pre>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-13-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.6.0 (2026-04-24)
+Platform: aarch64-apple-darwin23
+Running under: macOS Sequoia 15.7.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/Zurich
+tzcode source: internal
+
+attached base packages:
+[1] grid      stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] ggvenn_0.1.19               UpSetR_1.4.1               
+ [3] EnhancedVolcano_1.30.0      tibble_3.3.1               
+ [5] MAST_1.38.0                 speckle_1.12.0             
+ [7] harmony_2.0.5               Rcpp_1.1.1-1.1             
+ [9] clustree_0.5.1              ggraph_2.2.2               
+[11] scDblFinder_1.26.2          SingleCellExperiment_1.34.0
+[13] SummarizedExperiment_1.42.0 Biobase_2.72.0             
+[15] GenomicRanges_1.64.0        Seqinfo_1.2.0              
+[17] IRanges_2.46.0              S4Vectors_0.50.1           
+[19] BiocGenerics_0.58.1         generics_0.1.4             
+[21] MatrixGenerics_1.24.0       matrixStats_1.5.0          
+[23] ggrepel_0.9.8               cowplot_1.2.0              
+[25] patchwork_1.3.2             scCustomize_3.3.0          
+[27] hdf5r_1.3.12                Seurat_5.5.0               
+[29] SeuratObject_5.4.0          sp_2.2-1                   
+[31] ggplot2_4.0.3               dplyr_1.2.1                
+[33] readr_2.2.0                 workflowr_1.7.2            
+
+loaded via a namespace (and not attached):
+  [1] fs_2.1.0                 spatstat.sparse_3.2-0    bitops_1.0-9            
+  [4] lubridate_1.9.5          httr_1.4.8               RColorBrewer_1.1-3      
+  [7] tools_4.6.0              sctransform_0.4.3        R6_2.6.1                
+ [10] lazyeval_0.2.3           uwot_0.2.4               withr_3.0.3             
+ [13] prettyunits_1.2.0        gridExtra_2.3.1          progressr_0.19.0        
+ [16] cli_3.6.6                spatstat.explore_3.8-1   fastDummies_1.7.6       
+ [19] labeling_0.4.3           sass_0.4.10              S7_0.2.2                
+ [22] spatstat.data_3.1-9      ggridges_0.5.7           pbapply_1.7-4           
+ [25] Rsamtools_2.28.0         scater_1.40.1            parallelly_1.47.0       
+ [28] limma_3.68.4             mcprogress_0.1.1         rstudioapi_0.19.0       
+ [31] shape_1.4.6.1            BiocIO_1.22.0            ica_1.0-3               
+ [34] spatstat.random_3.5-0    Matrix_1.7-5             ggbeeswarm_0.7.3        
+ [37] abind_1.4-8              lifecycle_1.0.5          whisker_0.4.1           
+ [40] yaml_2.3.12              edgeR_4.10.1             snakecase_0.11.1        
+ [43] SparseArray_1.12.2       Rtsne_0.17               paletteer_1.7.0         
+ [46] promises_1.5.0           dqrng_0.4.1              crayon_1.5.3            
+ [49] miniUI_0.1.2             lattice_0.22-9           beachmat_2.28.0         
+ [52] cigarillo_1.2.0          metapod_1.20.0           pillar_1.11.1           
+ [55] knitr_1.51               rjson_0.2.23             xgboost_3.2.1.1         
+ [58] future.apply_1.20.2      codetools_0.2-20         glue_1.8.1              
+ [61] getPass_0.2-4            spatstat.univar_3.2-0    data.table_1.18.4       
+ [64] vctrs_0.7.3              png_0.1-9                spam_2.11-4             
+ [67] gtable_0.3.6             rematch2_2.1.2           cachem_1.1.0            
+ [70] xfun_0.59                S4Arrays_1.12.0          mime_0.13               
+ [73] tidygraph_1.3.1          survival_3.8-6           statmod_1.5.2           
+ [76] bluster_1.22.0           fitdistrplus_1.2-6       ROCR_1.0-12             
+ [79] nlme_3.1-169             bit64_4.8.2              progress_1.2.3          
+ [82] RcppAnnoy_0.0.23         GenomeInfoDb_1.48.0      rprojroot_2.1.1         
+ [85] bslib_0.11.0             irlba_2.3.7              vipor_0.4.7             
+ [88] KernSmooth_2.23-26       otel_0.2.0               colorspace_2.1-2        
+ [91] ggrastr_1.0.2            tidyselect_1.2.1         processx_3.9.0          
+ [94] bit_4.6.0                compiler_4.6.0           curl_7.1.0              
+ [97] git2r_0.36.2             BiocNeighbors_2.6.0      DelayedArray_0.38.2     
+[100] plotly_4.12.0            rtracklayer_1.72.0       scales_1.4.0            
+[103] lmtest_0.9-40            callr_3.8.0              stringr_1.6.0           
+[106] digest_0.6.39            goftest_1.2-3            spatstat.utils_3.2-3    
+[109] rmarkdown_2.31           XVector_0.52.0           htmltools_0.5.9         
+[112] pkgconfig_2.0.3          fastmap_1.2.0            rlang_1.2.0             
+[115] GlobalOptions_0.1.4      htmlwidgets_1.6.4        UCSC.utils_1.7.1        
+[118] shiny_1.14.0             farver_2.1.2             jquerylib_0.1.4         
+[121] zoo_1.8-15               jsonlite_2.0.0           BiocParallel_1.46.0     
+[124] BiocSingular_1.28.0      RCurl_1.98-1.19          magrittr_2.0.5          
+[127] scuttle_1.22.0           dotCall64_1.2            viridis_0.6.5           
+[130] reticulate_1.46.0        stringi_1.8.7            MASS_7.3-65             
+[133] plyr_1.8.9               parallel_4.6.0           listenv_1.0.0           
+[136] forcats_1.0.1            deldir_2.0-4             graphlayouts_1.2.4      
+[139] Biostrings_2.80.1        splines_4.6.0            tensor_1.5.1            
+[142] hms_1.1.4                circlize_0.4.18          locfit_1.5-9.12         
+[145] igraph_2.3.2             spatstat.geom_3.8-1      RcppHNSW_0.7.0          
+[148] reshape2_1.4.5           ScaledMatrix_1.20.0      XML_3.99-0.23           
+[151] evaluate_1.0.5           scran_1.40.0             ggprism_1.0.7           
+[154] tweenr_2.0.3             tzdb_0.5.0               httpuv_1.6.17           
+[157] RANN_2.6.2               tidyr_1.3.2              purrr_1.2.2             
+[160] polyclip_1.10-7          future_1.70.0            scattermore_1.2         
+[163] ggforce_0.5.0            rsvd_1.0.5               janitor_2.2.1           
+[166] xtable_1.8-8             restfulr_0.0.17          RSpectra_0.16-2         
+[169] later_1.4.8              viridisLite_0.4.3        memoise_2.0.1           
+[172] beeswarm_0.4.0           GenomicAlignments_1.48.0 cluster_2.1.8.2         
+[175] timechange_0.4.0         globals_0.19.1          </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

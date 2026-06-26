@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Sophie.Alice" />
+
+<meta name="date" content="2026-06-25" />
+
+<title>GSEA Macrophages</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MT_Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Sophie-Alice/MT_Project">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">GSEA Macrophages</h1>
+<h4 class="author">Sophie.Alice</h4>
+<h4 class="date">2026-06-25</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2026-06-26
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>MT_Project/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20260612code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20260612)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20260612code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20260612)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0b82e50c20ee503c415e647485a3ecf6c441eb8ctargetblank0b82e50a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/0b82e50c20ee503c415e647485a3ecf6c441eb8c" target="_blank">0b82e50</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0b82e50c20ee503c415e647485a3ecf6c441eb8ctargetblank0b82e50a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/0b82e50c20ee503c415e647485a3ecf6c441eb8c" target="_blank">0b82e50</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rproj.user/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/GSEA.Rmd</code>) and HTML
+(<code>docs/GSEA.html</code>) files. If you’ve configured a remote Git
+repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
+in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/0b82e50c20ee503c415e647485a3ecf6c441eb8c/analysis/GSEA.Rmd" target="_blank">0b82e50</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Adding more
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<pre class="r"><code>rm(list=ls())
+gc()</code></pre>
+<pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
+Ncells  907244 48.5    1751252 93.6         NA  1321095 70.6
+Vcells 1595964 12.2    8388608 64.0      16384  2392685 18.3</code></pre>
+<pre class="r"><code>library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)</code></pre>
+</div>
+<div id="get-hallmark-pathways" class="section level1">
+<h1>Get Hallmark pathways</h1>
+<pre class="r"><code>Hallmark.pathways &lt;- gmtPathways(&quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt&quot;)</code></pre>
+</div>
+<div id="get-the-data" class="section level1">
+<h1>Get the Data</h1>
+<pre class="r"><code># path &lt;- &quot;/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds&quot;
+path &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/DGEA_output/Macrophages_all.csv&quot;
+Macrophages_all &lt;- read_csv(path)</code></pre>
+<pre><code>New names:
+Rows: 5546 Columns: 7
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
+(1): gene dbl (6): ...1, p_val, avg_log2FC, pct.1, pct.2, p_val_adj
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...1`</code></pre>
+<pre class="r"><code>Macrophages_all</code></pre>
+<pre><code># A tibble: 5,546 × 7
+    ...1 gene        p_val avg_log2FC pct.1 pct.2 p_val_adj
+   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+ 1     1 SELENOP  1.23e-73     -2.40  0.382 0.729  4.76e-69
+ 2     2 SLC9A9   2.31e-71     -1.63  0.792 0.895  8.93e-67
+ 3     3 SKIL     5.27e-69      1.43  0.877 0.554  2.03e-64
+ 4     4 CD163L1  7.02e-69     -3.05  0.396 0.736  2.71e-64
+ 5     5 FGD5     1.76e-61      1.96  0.646 0.21   6.81e-57
+ 6     6 IGF1     2.23e-61     -4.29  0.073 0.429  8.61e-57
+ 7     7 AOAH     7.53e-59     -1.66  0.73  0.869  2.91e-54
+ 8     8 ATP8B4   8.56e-59     -1.39  0.68  0.873  3.31e-54
+ 9     9 F13A1    1.49e-58     -5.70  0.037 0.367  5.74e-54
+10    10 ARHGAP26 1.85e-54     -0.894 0.96  0.989  7.12e-50
+# ℹ 5,536 more rows</code></pre>
+<pre class="r"><code>custom_palette &lt;- colorRampPalette(c(&quot;#005EA8&quot;, &quot;#6DB335&quot;, &quot;#FFD966&quot;, &quot;#EDAAD2&quot;, &quot;#9F1C67&quot;))
+gradient_colors3 &lt;- custom_palette(6)</code></pre>
+</div>
+<div id="rank-the-data" class="section level1">
+<h1>Rank the data</h1>
+<pre class="r"><code>Macrophages.ranked &lt;- Macrophages_all %&gt;%
+  dplyr::select(gene, avg_log2FC) %&gt;%
+  na.omit() %&gt;%
+  distinct() %&gt;%
+  group_by(gene) %&gt;%
+  summarize(LFC = mean(avg_log2FC)) %&gt;%
+  arrange(desc(LFC))
+
+ranked &lt;- deframe(Macrophages.ranked)
+
+rank &lt;- ranked[names(ranked) != &quot;&quot;]</code></pre>
+</div>
+<div id="functional-gene-set-enrichment-analysis"
+class="section level1">
+<h1>Functional gene set enrichment Analysis</h1>
+<pre class="r"><code>set.seed(42)
+fgseares &lt;- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)</code></pre>
+<pre><code>Warning in fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000): You
+are trying to run fgseaSimple. It is recommended to use fgseaMultilevel. To run
+fgseaMultilevel, you need to remove the nperm argument in the fgsea function
+call.</code></pre>
+<pre class="r"><code>fgseares.tidy &lt;- fgseares %&gt;%
+  as_tibble() %&gt;%  
+  arrange(desc(NES))
+
+fgseares.tidy &lt;- fgseares.tidy %&gt;%
+  dplyr::select(-ES, -nMoreExtreme) 
+
+
+fgseares.tidy.top.up   &lt;- head(fgseares.tidy, 15)
+fgseares.tidy.top.down &lt;- tail(fgseares.tidy, 15)
+fgseares.tidy.top.both &lt;- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)</code></pre>
+</div>
+<div id="visualization" class="section level1">
+<h1>Visualization</h1>
+<pre class="r"><code>plot_df &lt;- fgseares.tidy.top.both %&gt;%
+  mutate(
+    padj_group = case_when(
+      padj &lt;= 0.05 ~ &quot;&lt; 0.05&quot;,
+      padj &lt;= 0.2  ~ &quot;0.05 – 0.2&quot;,
+      TRUE         ~ &quot;&gt; 0.2&quot;
+    ),
+    padj_group = factor(padj_group, levels = c(&quot;&lt; 0.05&quot;, &quot;0.05 – 0.2&quot;, &quot;&gt; 0.2&quot;)),
+    pathway = gsub(&quot;HALLMARK_&quot;, &quot;&quot;, pathway),
+  )
+
+
+ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
+  geom_col(aes(fill = padj_group), color = &quot;black&quot;, linewidth = 0.2) +
+  coord_flip() +
+  scale_x_discrete(position = &quot;top&quot;, labels = scales::label_wrap(50)) +
+  scale_fill_manual(
+    name = &quot;adj. p-value&quot;,
+    values = c(
+      &quot;&lt; 0.05&quot;     = &quot;#9F1C67&quot;,   
+      &quot;0.05 – 0.2&quot; = &quot;#FFD966&quot;,   
+      &quot;&gt; 0.2&quot;      = &quot;#005EA8&quot;    
+    ),
+    drop = FALSE 
+  ) +
+  labs(
+    x = &quot;&quot;, 
+    y = &quot;Normalized Enrichment Score (NES)&quot;, 
+    title = &quot;GSEA: Hallmark Pathways&quot;,
+    subtitle = &quot;MT: Pathway changes in Macrophages upon TGF-Beta stimulation&quot;
+  ) +
+  theme_bw() +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = &quot;bold&quot;),
+    plot.title      = element_text(hjust = 0, face = &quot;bold&quot;),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = &quot;italic&quot;),
+    legend.position = &quot;left&quot; 
+  )</code></pre>
+<p><img src="figure/GSEA.Rmd/unnamed-chunk-6-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pah" class="section level1">
+<h1>PAH</h1>
+<pre class="r"><code>df &lt;- Macrophages_all
+
+# Upregulated Genes
+up_genes &lt;- df %&gt;%
+  filter(avg_log2FC &gt; 0.5, p_val_adj &lt;= 0.05) %&gt;%
+  distinct(gene) %&gt;%   
+  pull(gene) %&gt;%                        
+  na.omit()
+
+# Downregulated Genes
+down_genes &lt;- df %&gt;%
+  filter(avg_log2FC &lt; -0.5, p_val_adj &lt;= 0.05) %&gt;%
+  distinct(gene) %&gt;%   
+  pull(gene) %&gt;%                        
+  na.omit()
+
+# Background Universe Genes 
+universe &lt;- df %&gt;%
+  distinct(gene) %&gt;% 
+  pull(gene) %&gt;%                        
+  na.omit()</code></pre>
+<pre class="r"><code>set.seed(42)
+
+Humanlibrary &lt;- org.Hs.eg.db
+
+###################################### upregulated genes
+
+up.GO &lt;- enrichGO(
+  gene          = up_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = &quot;SYMBOL&quot;,
+  ont           = &quot;BP&quot;,
+  pAdjustMethod = &quot;BH&quot;,
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 5,
+  maxGSSize     = 800
+)</code></pre>
+<pre><code>&#39;select()&#39; returned 1:1 mapping between keys and columns</code></pre>
+<pre><code>Warning in bitr(gene, fromType = fromType, toType = &quot;ENTREZID&quot;, OrgDb = OrgDb):
+3.52% of input gene IDs are fail to map...</code></pre>
+<pre><code>&#39;select()&#39; returned 1:many mapping between keys and columns</code></pre>
+<pre><code>Warning in bitr(gene, fromType = fromType, toType = &quot;ENTREZID&quot;, OrgDb = OrgDb):
+2.7% of input gene IDs are fail to map...</code></pre>
+<pre class="r"><code>simp.up.GO &lt;- clusterProfiler::simplify(up.GO)</code></pre>
+<pre><code>Warning: semData is not provided. It will be calculated automatically.</code></pre>
+<pre class="r"><code>head(simp.up.GO)</code></pre>
+<pre><code>                   ID                        Description GeneRatio  BgRatio
+GO:0040011 GO:0040011                         locomotion    52/254 369/4904
+GO:0009653 GO:0009653 anatomical structure morphogenesis    69/254 638/4904
+GO:0007155 GO:0007155                      cell adhesion    48/254 375/4904
+GO:0040012 GO:0040012           regulation of locomotion    43/254 319/4904
+GO:0072359 GO:0072359     circulatory system development    39/254 281/4904
+GO:0061061 GO:0061061       muscle structure development    32/254 205/4904
+           RichFactor FoldEnrichment   zScore       pvalue     p.adjust
+GO:0040011  0.1409214       2.720782 8.032887 6.989526e-12 3.521323e-08
+GO:0009653  0.1081505       2.088070 6.886179 4.301265e-10 1.083489e-06
+GO:0007155  0.1280000       2.471307 6.928499 1.602510e-09 2.691148e-06
+GO:0040012  0.1347962       2.602523 6.917532 2.660716e-09 3.351172e-06
+GO:0072359  0.1387900       2.679631 6.776828 7.070196e-09 7.123929e-06
+GO:0061061  0.1560976       3.013789 6.883503 1.052472e-08 8.837256e-06
+                 qvalue
+GO:0040011 3.521323e-08
+GO:0009653 1.083489e-06
+GO:0007155 2.691148e-06
+GO:0040012 3.351172e-06
+GO:0072359 7.123929e-06
+GO:0061061 8.837256e-06
+                                                                                                                                                                                                                                                                                                                                                                                                                                 geneID
+GO:0040011                                                                                              TMSB4X/CXCL8/APOE/PPARG/ITGB1/ITGB3/RNF7/PDE4B/MAGI2/SORL1/SLIT3/FBN2/ITGA6/ROBO1/HMOX1/MTUS1/ITGAV/KIF21A/TMSB10/CORO1C/SEMA3C/MAP4K4/RALA/SLC12A2/TALAM1/SPATA13/CXCL12/DPYSL3/SMURF2/ACTG1/CD81/ALOX5/PPIA/FN1/MMP2/COL1A1/DNM1L/S100A11/GRN/ANOS1/TGFBR1/S100A4/VASH1/RAB11A/CXADR/USP14/CD63/PFN1/MMP14/TIMP1/SMAD7/COL3A1
+GO:0009653 CXCL8/RPLP2/ACTB/APOE/BICD1/PPARG/ITGB1/SKI/ITGB3/SKIL/RPL5/IL1RN/ADAM12/FGD5/IGF2/SLIT3/ZFYVE27/FBN2/ITGA6/ROBO1/HMOX1/ACTC1/ACTN1/ITGAV/KIF21A/CORO1C/PBX3/SEMA3C/COL1A2/MAP4K4/RALA/ARHGAP32/SLC12A2/RPL23/MTHFD1L/CXCL12/ACTG1/CD81/SPP1/ALOX5/FN1/MMP2/RPL27A/TGM2/COL1A1/SOX4/DNM1L/RPL39/SDC2/S100A6/CPM/ALCAM/GRN/ANOS1/TGFBR1/RPL37A/VASH1/ZFPM2/MMP14/RPL36/SMAD7/COL3A1/SMAD6/CTNND2/EPN2/YWHAH/KIF26B/RPLP1/LGR4
+GO:0007155                                                                                                                            ANTXR1/CXCL8/ACTB/ITGB1/ITGB3/IRAK1/RNF7/PARD3B/IL1RN/ADAM12/IGF2/ITGA6/ROBO1/ACTN1/LMO7/ITGAV/CORO1C/DLG2/MAP4K4/OLR1/CXCL12/HSPD1/ACTG1/CD81/SPP1/ALOX5/PPIA/FN1/MMP2/CD226/TGM2/SOX4/CEBPB/S100A11/ALCAM/ANOS1/CADM1/CXADR/CD63/MMP14/PSMA4/SMAD7/COL3A1/SMAD6/S100A10/CTNND2/SMARCE1/TNFRSF21
+GO:0040012                                                                                                                                                     TMSB4X/CXCL8/APOE/PPARG/ITGB1/ITGB3/RNF7/MAGI2/SORL1/FBN2/ITGA6/ROBO1/HMOX1/MTUS1/ITGAV/KIF21A/TMSB10/CORO1C/SEMA3C/MAP4K4/TALAM1/SPATA13/CXCL12/DPYSL3/SMURF2/ACTG1/CD81/FN1/MMP2/COL1A1/DNM1L/S100A11/GRN/TGFBR1/VASH1/RAB11A/USP14/CD63/PFN1/MMP14/TIMP1/SMAD7/COL3A1
+GO:0072359                                                                                                                                                                               SLC8A1/CXCL8/KRAS/TRAF3IP2/PDLIM7/PPARG/ITGB1/DNAAF4/SKI/ITGB3/ADAM12/SLIT3/ROBO1/HMOX1/ACTC1/ITGAV/SEMA3C/COL1A2/SLC12A2/TCF7L2/ALPK3/CXCL12/ACTG1/ALOX5/FN1/MMP2/TGM2/COL1A1/SOX4/GRN/TGFBR1/VASH1/CXADR/ZFPM2/MMP14/SMAD7/COL3A1/SMAD6/EPN2
+GO:0061061                                                                                                                                                                                                                            SLC8A1/RPLP2/ACTB/PDLIM7/ITGB1/SKI/SKIL/RPL5/ADAM12/IGF2/ACTC1/UQCC2/ACTN1/RPL23/TCF7L2/MTPN/ALPK3/CD81/RPL27A/SOX4/RPL39/TGFBR1/RPL37A/CXADR/ZFPM2/LARGE1/MMP14/RPL36/SMAD7/COL3A1/RPLP1/SMARCE1
+           Count
+GO:0040011    52
+GO:0009653    69
+GO:0007155    48
+GO:0040012    43
+GO:0072359    39
+GO:0061061    32</code></pre>
+<pre class="r"><code>###################################### downregulated genes
+
+down.GO &lt;- enrichGO(
+  gene          = down_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = &quot;SYMBOL&quot;,
+  ont           = &quot;BP&quot;,
+  pAdjustMethod = &quot;BH&quot;,
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 5,
+  maxGSSize     = 800
+)</code></pre>
+<pre><code>&#39;select()&#39; returned 1:many mapping between keys and columns</code></pre>
+<pre><code>Warning in bitr(gene, fromType = fromType, toType = &quot;ENTREZID&quot;, OrgDb = OrgDb):
+3.68% of input gene IDs are fail to map...</code></pre>
+<pre><code>&#39;select()&#39; returned 1:many mapping between keys and columns</code></pre>
+<pre><code>Warning in bitr(gene, fromType = fromType, toType = &quot;ENTREZID&quot;, OrgDb = OrgDb):
+2.7% of input gene IDs are fail to map...</code></pre>
+<pre class="r"><code>simp.down.GO &lt;- clusterProfiler::simplify(down.GO)</code></pre>
+<pre><code>Warning: semData is not provided. It will be calculated automatically.</code></pre>
+<pre class="r"><code>head(simp.down.GO)</code></pre>
+<pre><code>                   ID                                  Description GeneRatio
+GO:0006955 GO:0006955                              immune response    69/257
+GO:0006952 GO:0006952                             defense response    65/257
+GO:0002764 GO:0002764 immune response-regulating signaling pathway    37/257
+GO:0002682 GO:0002682          regulation of immune system process    60/257
+GO:0002376 GO:0002376                        immune system process    79/257
+GO:0009617 GO:0009617                        response to bacterium    29/257
+            BgRatio RichFactor FoldEnrichment   zScore       pvalue
+GO:0006955 564/4904  0.1223404       2.334465 7.921601 2.269319e-12
+GO:0006952 548/4904  0.1186131       2.263342 7.378675 5.011432e-11
+GO:0002764 221/4904  0.1674208       3.194676 7.850830 1.141260e-10
+GO:0002682 517/4904  0.1160542       2.214512 6.865536 8.532305e-10
+GO:0002376 787/4904  0.1003812       1.915445 6.590834 1.097632e-09
+GO:0009617 156/4904  0.1858974       3.547241 7.603056 1.144342e-09
+               p.adjust       qvalue
+GO:0006955 1.143283e-08 1.143283e-08
+GO:0006952 1.262380e-07 1.262380e-07
+GO:0002764 1.437417e-07 1.437417e-07
+GO:0002682 8.235990e-07 8.235990e-07
+GO:0002376 8.235990e-07 8.235990e-07
+GO:0009617 8.235990e-07 8.235990e-07
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        geneID
+GO:0006955                                                           APPL2/MAP3K1/IGSF6/FCN1/HLA-DPB1/CXCL2/NLRP3/PLA2G4A/MEF2C/CASP1/ZBTB46/PIK3CD/CD48/SAMSN1/VNN1/PSTPIP1/CD86/MPEG1/CR1/SAMD9/IFI44/ADAMDEC1/ATP1B1/IFI16/ITGAM/PDE4D/NLRP1/THEMIS2/TNFSF8/TEC/TLR4/VSIR/CLEC2D/CD4/HLA-DRB1/LCP2/TNFRSF14/NAGK/RAB7B/GPR183/LY86/RNF125/CMKLR1/MBP/LY96/FCGR2A/HLA-DQA1/TNFRSF1B/INPP5D/NAIP/FCGR2C/HLA-DMB/IL6R/ITGA4/SAMHD1/SLAMF7/TNFRSF11A/TRIM25/COLEC12/MX2/PRKCB/PARP14/LILRB5/TXK/ST3GAL1/PRDM1/IRAK3/CLEC4A/PLD3
+GO:0006952                                                                                             APPL2/ATG7/FCN1/CXCL2/NLRP3/SIGLEC1/MEF2C/CASP1/PIK3CD/CD48/IL10RA/PLA2G4C/LRRK2/LGALS8/VNN1/METRNL/PSTPIP1/MPEG1/CR1/SAMD9/NAMPT/BNIP3L/ATP1B1/IFI16/ITGAM/NLRP1/THEMIS2/AOAH/TLR4/CD163/CD4/HLA-DRB1/TNFRSF14/NAGK/RAB7B/LY86/RNF125/CMKLR1/STAB1/EMILIN2/MLKL/LY96/FCGR2A/FOS/TNFRSF1B/INPP5D/NAIP/FCGR2C/IL6R/SAMHD1/SLAMF7/TNFRSF11A/MMP9/TRIM25/COLEC12/IGF1/MX2/PARP14/LILRB5/TXK/SLC9A9/PRDM1/IRAK3/CLEC4A/PLD3
+GO:0002764                                                                                                                                                                                                                                                                                  APPL2/MAP3K1/FCN1/HLA-DPB1/NLRP3/MEF2C/CASP1/PIK3CD/CD86/CR1/IFI16/ITGAM/PDE4D/NLRP1/THEMIS2/TEC/TLR4/CLEC2D/CD4/HLA-DRB1/LCP2/TNFRSF14/NAGK/RAB7B/RNF125/CMKLR1/LY96/FCGR2A/INPP5D/NAIP/FCGR2C/TRIM25/PRKCB/LILRB5/TXK/IRAK3/PLD3
+GO:0002682                                                                                                                       APPL2/MAP3K1/FCN1/HLA-DPB1/NLRP3/PLA2G4A/MEF2C/CASP1/PIK3CD/SAMSN1/ACVR2A/LRRK2/VNN1/PRKCA/CD86/CR1/IFI16/ITGAM/PDE4D/NLRP1/THEMIS2/TNFSF8/TEC/TLR4/VSIR/CLEC2D/CD4/HLA-DRB1/LCP2/TNFRSF14/NAGK/RAB7B/GPR183/RNF125/CMKLR1/GCNT1/LY96/FCGR2A/MPP1/HLA-DQA1/TNFRSF1B/INPP5D/NAIP/FCGR2C/HLA-DMB/IL6R/ITGA4/SAMHD1/TNFRSF11A/PTPRE/TRIM25/COLEC12/IGF1/PRKCB/PARP14/LILRB5/TXK/PRDM1/IRAK3/PLD3
+GO:0002376 APPL2/MAP3K1/IGSF6/FCN1/HLA-DPB1/CXCL2/NLRP3/PLA2G4A/MEF2C/CASP1/ZBTB46/PIK3CD/CD48/RUBCN/SAMSN1/ACVR2A/LRRK2/VNN1/PRKCA/PSTPIP1/CD86/MPEG1/CR1/SAMD9/IFI44/ADAMDEC1/ATP1B1/IFI16/ITGAM/PDE4D/NLRP1/THEMIS2/TNFSF8/TEC/TLR4/VSIR/CLEC2D/CD4/HLA-DRB1/LCP2/TNFRSF14/NAGK/RAB7B/GPR183/LY86/RNF125/CMKLR1/GCNT1/MBP/LY96/FCGR2A/JAML/MPP1/HLA-DQA1/TNFRSF1B/INPP5D/NAIP/FCGR2C/HLA-DMB/IL6R/ITGA4/SAMHD1/SLAMF7/TNFRSF11A/PDGFB/PTPRE/TRIM25/COLEC12/IGF1/MX2/PRKCB/PARP14/LILRB5/TXK/ST3GAL1/PRDM1/IRAK3/CLEC4A/PLD3
+GO:0009617                                                                                                                                                                                                                                                                                                                             CXCL2/NLRP3/MEF2C/CASP1/IL10RA/PRKCA/CD86/MPEG1/ITGAM/SCARB1/NLRP1/TLR4/HLA-DRB1/TNFRSF14/NAGK/LY86/STAB1/EMILIN2/LY96/FOS/TNFRSF1B/NAIP/IL6R/TNFRSF11A/MMP9/COLEC12/SASH1/SLC9A9/IRAK3
+           Count
+GO:0006955    69
+GO:0006952    65
+GO:0002764    37
+GO:0002682    60
+GO:0002376    79
+GO:0009617    29</code></pre>
+<pre class="r"><code>go_up_df   &lt;- as.data.frame(simp.up.GO) %&gt;% mutate(Direction = &quot;Up-regulated&quot;)
+go_down_df &lt;- as.data.frame(simp.down.GO) %&gt;% mutate(Direction = &quot;Down-regulated&quot;)
+
+go_combined &lt;- rbind(go_up_df, go_down_df) %&gt;%
+  group_by(Direction) %&gt;%
+  slice_head(n = 15) %&gt;% # Adjust &#39;n&#39; to show more or fewer terms per panel
+  ungroup()
+
+
+go_plot_data &lt;- go_combined %&gt;%
+  mutate(
+    GeneRatio_num = sapply(GeneRatio, function(x) {
+      num_den &lt;- as.numeric(strsplit(x, &quot;/&quot;)[[1]])
+      return(num_den[1] / num_den[2])})) %&gt;%
+  arrange(Direction, GeneRatio_num) %&gt;%
+  mutate(Description = factor(Description, levels = unique(Description)))
+
+
+ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
+  geom_point(aes(color = p.adjust, size = Count)) +  
+  facet_wrap(~Direction, scales = &quot;free_y&quot;, ncol = 1) +
+  
+  scale_color_viridis_c(
+    option = &quot;plasma&quot;, 
+    name = &quot;adj. p-value&quot;,                          
+    guide = guide_colorbar(reverse = TRUE)
+  ) +
+  scale_size_continuous(range = c(3, 8), name = &quot;Gene Count&quot;) +
+  scale_y_discrete(labels = scales::label_wrap(45)) +
+  
+  theme_bw() + 
+  labs(
+    title = &quot;DEG MT Macrophages: GO Biological Process Enrichment&quot;, 
+    subtitle = &quot;Comparing top enriched terms for Up-regulated vs Down-regulated genes&quot;,
+    x = &quot;Gene Ratio&quot;, 
+    y = &quot;&quot;
+  ) +
+  theme(
+    plot.title.position = &quot;plot&quot;, 
+    plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+    plot.subtitle = element_text(size = 10, face = &quot;italic&quot;, hjust = 0),
+    axis.text.y   = element_text(size = 9, color = &quot;black&quot;, face = &quot;bold&quot;),
+    axis.title.x  = element_text(face = &quot;bold&quot;),
+    strip.text    = element_text(face = &quot;bold&quot;, size = 10), # Customizes facet header boxes
+    legend.position = &quot;right&quot;
+  )</code></pre>
+<p><img src="figure/GSEA.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="checking-mmp2" class="section level1">
+<h1>Checking MMP2</h1>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.6.0 (2026-04-24)
+Platform: aarch64-apple-darwin23
+Running under: macOS Sequoia 15.7.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/Zurich
+tzcode source: internal
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] assertthat_0.2.1            SCpubr_3.0.1               
+ [3] forcats_1.0.1               fgsea_1.38.0               
+ [5] DOSE_4.6.0                  GO.db_3.23.1               
+ [7] org.Hs.eg.db_3.23.1         AnnotationDbi_1.74.0       
+ [9] clusterProfiler_4.20.0      ggtangle_0.1.2             
+[11] ggarchery_0.4.4             EnhancedVolcano_1.30.0     
+[13] tibble_3.3.1                MAST_1.38.0                
+[15] speckle_1.12.0              harmony_2.0.5              
+[17] Rcpp_1.1.1-1.1              clustree_0.5.1             
+[19] ggraph_2.2.2                scDblFinder_1.26.2         
+[21] SingleCellExperiment_1.34.0 SummarizedExperiment_1.42.0
+[23] Biobase_2.72.0              GenomicRanges_1.64.0       
+[25] Seqinfo_1.2.0               IRanges_2.46.0             
+[27] S4Vectors_0.50.1            BiocGenerics_0.58.1        
+[29] generics_0.1.4              MatrixGenerics_1.24.0      
+[31] matrixStats_1.5.0           ggrepel_0.9.8              
+[33] cowplot_1.2.0               patchwork_1.3.2            
+[35] scCustomize_3.3.0           hdf5r_1.3.12               
+[37] Seurat_5.5.0                SeuratObject_5.4.0         
+[39] sp_2.2-1                    ggplot2_4.0.3              
+[41] dplyr_1.2.1                 readr_2.2.0                
+[43] workflowr_1.7.2            
+
+loaded via a namespace (and not attached):
+  [1] vroom_1.7.1              goftest_1.2-3            Biostrings_2.80.1       
+  [4] vctrs_0.7.3              spatstat.random_3.5-0    digest_0.6.39           
+  [7] png_0.1-9                shape_1.4.6.1            git2r_0.36.2            
+ [10] deldir_2.0-4             parallelly_1.47.0        fontLiberation_0.1.0    
+ [13] MASS_7.3-65              reshape2_1.4.5           qvalue_2.44.0           
+ [16] httpuv_1.6.17            withr_3.0.3              ggrastr_1.0.2           
+ [19] xfun_0.59                ggfun_0.2.0              survival_3.8-6          
+ [22] memoise_2.0.1            ggbeeswarm_0.7.3         gson_0.1.0              
+ [25] janitor_2.2.1            systemfonts_1.3.2        tidytree_0.4.7          
+ [28] zoo_1.8-15               GlobalOptions_0.1.4      pbapply_1.7-4           
+ [31] rematch2_2.1.2           KEGGREST_1.52.2          promises_1.5.0          
+ [34] otel_0.2.0               httr_1.4.8               restfulr_0.0.17         
+ [37] globals_0.19.1           fitdistrplus_1.2-6       rstudioapi_0.19.0       
+ [40] UCSC.utils_1.7.1         miniUI_0.1.2             processx_3.9.0          
+ [43] curl_7.1.0               ScaledMatrix_1.20.0      polyclip_1.10-7         
+ [46] SparseArray_1.12.2       xtable_1.8-8             stringr_1.6.0           
+ [49] evaluate_1.0.5           S4Arrays_1.12.0          hms_1.1.4               
+ [52] irlba_2.3.7              colorspace_2.1-2         ROCR_1.0-12             
+ [55] reticulate_1.46.0        spatstat.data_3.1-9      magrittr_2.0.5          
+ [58] lmtest_0.9-40            snakecase_0.11.1         later_1.4.8             
+ [61] viridis_0.6.5            ggtree_4.2.0             lattice_0.22-9          
+ [64] spatstat.geom_3.8-1      future.apply_1.20.2      getPass_0.2-4           
+ [67] scattermore_1.2          XML_3.99-0.23            scuttle_1.22.0          
+ [70] RcppAnnoy_0.0.23         pillar_1.11.1            nlme_3.1-169            
+ [73] compiler_4.6.0           beachmat_2.28.0          RSpectra_0.16-2         
+ [76] stringi_1.8.7            tensor_1.5.1             lubridate_1.9.5         
+ [79] GenomicAlignments_1.48.0 plyr_1.8.9               crayon_1.5.3            
+ [82] abind_1.4-8              BiocIO_1.22.0            scater_1.40.1           
+ [85] gridGraphics_0.5-1       locfit_1.5-9.12          graphlayouts_1.2.4      
+ [88] bit_4.6.0                fastmatch_1.1-8          whisker_0.4.1           
+ [91] codetools_0.2-20         BiocSingular_1.28.0      bslib_0.11.0            
+ [94] paletteer_1.7.0          plotly_4.12.0            mime_0.13               
+ [97] splines_4.6.0            circlize_0.4.18          fastDummies_1.7.6       
+[100] tidydr_0.0.6             utf8_1.2.6               knitr_1.51              
+[103] blob_1.3.0               fs_2.1.0                 listenv_1.0.0           
+[106] ggplotify_0.1.3          Matrix_1.7-5             callr_3.8.0             
+[109] statmod_1.5.2            tzdb_0.5.0               tweenr_2.0.3            
+[112] pkgconfig_2.0.3          tools_4.6.0              cachem_1.1.0            
+[115] cigarillo_1.2.0          RSQLite_3.53.2           viridisLite_0.4.3       
+[118] DBI_1.3.0                fastmap_1.2.0            rmarkdown_2.31          
+[121] scales_1.4.0             grid_4.6.0               ica_1.0-3               
+[124] Rsamtools_2.28.0         sass_0.4.10              ggprism_1.0.7           
+[127] dotCall64_1.2            RANN_2.6.2               farver_2.1.2            
+[130] scatterpie_0.2.6         tidygraph_1.3.1          yaml_2.3.12             
+[133] rtracklayer_1.72.0       cli_3.6.6                purrr_1.2.2             
+[136] lifecycle_1.0.5          uwot_0.2.4               bluster_1.22.0          
+[139] BiocParallel_1.46.0      timechange_0.4.0         gtable_0.3.6            
+[142] rjson_0.2.23             ggridges_0.5.7           progressr_0.19.0        
+[145] ape_5.8-1                parallel_4.6.0           limma_3.68.4            
+[148] enrichit_0.1.5           jsonlite_2.0.0           edgeR_4.10.1            
+[151] RcppHNSW_0.7.0           bitops_1.0-9             bit64_4.8.2             
+[154] xgboost_3.2.1.1          Rtsne_0.17               yulab.utils_0.2.4       
+[157] spatstat.utils_3.2-3     BiocNeighbors_2.6.0      aisdk_1.4.12            
+[160] jquerylib_0.1.4          metapod_1.20.0           GOSemSim_2.38.0         
+[163] dqrng_0.4.1              spatstat.univar_3.2-0    lazyeval_0.2.3          
+[166] shiny_1.14.0             htmltools_0.5.9          enrichplot_1.32.0       
+[169] sctransform_0.4.3        rappdirs_0.3.4           glue_1.8.1              
+[172] spam_2.11-4              httr2_1.2.3              XVector_0.52.0          
+[175] gdtools_0.5.1            RCurl_1.98-1.19          treeio_1.36.1           
+[178] rprojroot_2.1.1          scran_1.40.0             gridExtra_2.3.1         
+[181] igraph_2.3.2             R6_2.6.1                 ggiraph_0.9.6           
+[184] tidyr_1.3.2              labeling_0.4.3           cluster_2.1.8.2         
+[187] aplot_0.3.0              GenomeInfoDb_1.48.0      mcprogress_0.1.1        
+[190] DelayedArray_0.38.2      tidyselect_1.2.1         vipor_0.4.7             
+[193] ggforce_0.5.0            fontBitstreamVera_0.1.1  future_1.70.0           
+[196] rsvd_1.0.5               KernSmooth_2.23-26       S7_0.2.2                
+[199] fontquiver_0.2.1         data.table_1.18.4        htmlwidgets_1.6.4       
+[202] RColorBrewer_1.1-3       rlang_1.2.0              spatstat.sparse_3.2-0   
+[205] spatstat.explore_3.8-1   ggnewscale_0.5.2         beeswarm_0.4.0          </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
