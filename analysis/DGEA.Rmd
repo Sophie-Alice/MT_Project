@@ -9,7 +9,7 @@ editor_options:
 
 # Setup
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning = FALSE}
 rm(list=ls())
 gc()
 
@@ -39,7 +39,7 @@ library(ggvenn)
 
 # Get the Data
 
-```{r}
+```{r, warning = FALSE}
 # path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
 path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
 Data <- read_rds(path)
@@ -52,7 +52,7 @@ gradient_colors4 <- custom_palette(4)
 
 # Functions
 
-```{r}
+```{r, warning = FALSE}
 
 
 Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
@@ -103,7 +103,7 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
 
 ## Subset the data
 
-```{r}
+```{r, warning = FALSE}
 
 table(Data$cell_type)
 table(Data$orig.ident)
@@ -120,7 +120,7 @@ fibroblast_deg_list <- list()
 
 ## 1. Baseline Fibrotic response to TGF-B without Macrophages
 
-```{r}
+```{r, warning = FALSE}
 
 
 MAST.Res <- FindMarkers(
@@ -161,7 +161,7 @@ Volcano_Plots(
 
 ## 2. Modulated Fibrotic response to TGF-B with Macrophages
 
-```{r}
+```{r, warning = FALSE}
 
 
 MAST.Res <- FindMarkers(
@@ -200,7 +200,7 @@ Volcano_Plots(
 
 ## 3. Baseline Macrophage response
 
-```{r}
+```{r, warning = FALSE}
 
 
 MAST.Res <- FindMarkers(
@@ -238,7 +238,7 @@ Volcano_Plots(
 
 ## 4. Stimulated Macrophage Effect
 
-```{r}
+```{r, warning = FALSE}
 
 MAST.Res <- FindMarkers(
   object = Fibroblasts,
@@ -276,7 +276,7 @@ Volcano_Plots(
 
 # Gene Crossover
 
-```{r}
+```{r, warning = FALSE}
 
 upset_up_genes   <- list()
 upset_down_genes <- list()
@@ -314,7 +314,7 @@ upset_final_data <- list(
 ```
 
 
-```{r}
+```{r, warning = FALSE}
 
 ################################################### Upregulated Intersections
 
@@ -342,7 +342,7 @@ upset(
 ```
 # Venn diagram of all ovelapping genes
 
-```{r}
+```{r, warning = FALSE}
 
 ################################# upregulated genes
 
@@ -385,7 +385,7 @@ ggvenn(
 
 # Venn diagram of DEG upon TGF-B stimulation with and without Macrophages
 
-```{r}
+```{r, warning = FALSE}
 
 ################################# upregulated genes
 
@@ -427,7 +427,7 @@ ggvenn(
 
 # Venn diagram of DEG of presence of Macrophages with and without TGF-B stimulation
 
-```{r}
+```{r, warning = FALSE}
 ################################# upregulated genes
 
 ggvenn(

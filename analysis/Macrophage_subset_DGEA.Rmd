@@ -10,7 +10,7 @@ editor_options:
 
 # Setup
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning = FALSE}
 rm(list=ls())
 gc()
 
@@ -40,7 +40,7 @@ library(ggvenn)
 
 # Get the Data
 
-```{r}
+```{r, warning = FALSE}
 # path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
 path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
 Data <- read_rds(path)
@@ -53,7 +53,7 @@ gradient_colors4 <- custom_palette(4)
 
 # Functions
 
-```{r}
+```{r, warning = FALSE}
 
 
 Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
@@ -102,7 +102,7 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
 
 # Macrophages
 
-```{r}
+```{r, warning = FALSE}
 
 table(Data$cell_type)
 table(Data$orig.ident)

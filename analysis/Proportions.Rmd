@@ -10,7 +10,7 @@ editor_options:
 
 # Setup
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning = FALSE}
 rm(list=ls())
 gc()
 
@@ -35,7 +35,7 @@ library(speckle)
 
 # Get the Data
 
-```{r}
+```{r, warning = FALSE}
 # path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
 path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
 Data <- read_rds(path)
@@ -49,7 +49,7 @@ Data
  - CMFHM_NC = 
  - CMFHM_TGF = 
 
-```{r}
+```{r, warning = FALSE}
 table(Data$orig.ident, Data$cell_type)
 ```
 
@@ -57,7 +57,7 @@ table(Data$orig.ident, Data$cell_type)
 
  - We might run into Problems downstream as the Fibroblast proportions are so different. But we'll see
 
-```{r}
+```{r, warning = FALSE}
 
 custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
 gradient_colors3 <- custom_palette(6)
@@ -87,37 +87,3 @@ ggplot(data = cellPerc, aes(x = sample, fill = clusters, y = Freq)) +
 
 ```
 
-
-```{r}
-
-```
-
-
-```{r}
-
-```
-
-
-```{r}
-
-```
-
-
-```{r}
-
-```
-
-
-```{r}
-
-```
-
-
-```{r}
-
-```
-
-
-```{r}
-
-```

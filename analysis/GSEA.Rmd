@@ -9,7 +9,7 @@ editor_options:
 
 # Setup
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning = FALSE}
 rm(list=ls())
 gc()
 
@@ -47,7 +47,7 @@ library(assertthat)
 # Get Hallmark pathways
 
 
-```{r}
+```{r,warning = FALSE}
 Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt")
 
 ```
@@ -55,7 +55,7 @@ Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Pro
 
 # Get the Data
 
-```{r}
+```{r,warning = FALSE}
 # path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
 path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/DGEA_output/Macrophages_all.csv"
 Macrophages_all <- read_csv(path)
@@ -67,7 +67,7 @@ gradient_colors3 <- custom_palette(6)
 
 # Rank the data
 
-```{r}
+```{r,warning = FALSE}
 
 Macrophages.ranked <- Macrophages_all %>%
   dplyr::select(gene, avg_log2FC) %>%
@@ -86,7 +86,7 @@ rank <- ranked[names(ranked) != ""]
 
 # Functional gene set enrichment Analysis
 
-```{r}
+```{r,warning = FALSE}
 
 set.seed(42)
 fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
@@ -107,7 +107,7 @@ fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
 
 # Visualization
 
-```{r}
+```{r,warning = FALSE}
 
 plot_df <- fgseares.tidy.top.both %>%
   mutate(
@@ -156,7 +156,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
 # PAH
 
 
-```{r}
+```{r,warning = FALSE}
 
 df <- Macrophages_all
 
@@ -183,7 +183,7 @@ universe <- df %>%
 ```
 
 
-```{r}
+```{r, warning = FALSE}
 
 set.seed(42)
 
@@ -228,7 +228,7 @@ head(simp.down.GO)
 ```
 
 
-```{r}
+```{r, warning = FALSE}
 
 go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
 go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
@@ -280,7 +280,7 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
 
 # Checking MMP2
 
-```{r}
+```{r, warning = FALSE}
 
 
 ```
