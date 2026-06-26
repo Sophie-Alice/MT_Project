@@ -278,7 +278,7 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
   )
 ```
 
-# Checking MMP2
+# Checking MMP2 
 
 ```{r, warning = FALSE}
 

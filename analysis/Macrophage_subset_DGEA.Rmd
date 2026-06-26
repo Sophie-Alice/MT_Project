@@ -100,7 +100,7 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
 
 ```
 
-# Macrophages
+## Macrophages
 
 ```{r, warning = FALSE}
 
@@ -130,8 +130,7 @@ Macrophages.MAST <- Macrophages.MAST %>%
 Macrophages.MAST.sign <- Macrophages.MAST %>%
   filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
 
-Macrophages.MAST.sign
-
+head(Macrophages.MAST.sign)
 
 colnames(Macrophages.MAST)
 

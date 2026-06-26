@@ -99,9 +99,9 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
 
 ```
 
-# Fibroblasts
+## Fibroblasts
 
-## Subset the data
+## DGEA of the 4 Comparisons 
 
 ```{r, warning = FALSE}
 
@@ -118,7 +118,7 @@ fibroblast_deg_list <- list()
 
 ```
 
-## 1. Baseline Fibrotic response to TGF-B without Macrophages
+### Baseline Fibrotic response to TGF-B without Macrophages
 
 ```{r, warning = FALSE}
 
@@ -159,7 +159,7 @@ Volcano_Plots(
 
 ```
 
-## 2. Modulated Fibrotic response to TGF-B with Macrophages
+### Modulated Fibrotic response to TGF-B with Macrophages
 
 ```{r, warning = FALSE}
 
@@ -198,7 +198,7 @@ Volcano_Plots(
 
 ```
 
-## 3. Baseline Macrophage response
+### Baseline Macrophage response
 
 ```{r, warning = FALSE}
 
@@ -236,7 +236,7 @@ Volcano_Plots(
 
 ```
 
-## 4. Stimulated Macrophage Effect
+### Stimulated Macrophage Effect
 
 ```{r, warning = FALSE}
 
@@ -274,7 +274,9 @@ Volcano_Plots(
 
 ```
 
-# Gene Crossover
+## Gene Crossover
+
+### Get the DEG
 
 ```{r, warning = FALSE}
 
@@ -313,6 +315,7 @@ upset_final_data <- list(
 
 ```
 
+### UpsetPlot for all Groups
 
 ```{r, warning = FALSE}
 
@@ -340,7 +343,8 @@ upset(
 )
 
 ```
-# Venn diagram of all ovelapping genes
+
+### Venn diagram of all ovelapping genes
 
 ```{r, warning = FALSE}
 
@@ -383,7 +387,7 @@ ggvenn(
 
 ```
 
-# Venn diagram of DEG upon TGF-B stimulation with and without Macrophages
+### Venn diagram of DEG upon TGF-B stimulation with and without Macrophages
 
 ```{r, warning = FALSE}
 
@@ -425,7 +429,7 @@ ggvenn(
 ```
 
 
-# Venn diagram of DEG of presence of Macrophages with and without TGF-B stimulation
+### Venn diagram of DEG of presence of Macrophages with and without TGF-B stimulation
 
 ```{r, warning = FALSE}
 ################################# upregulated genes
@@ -464,7 +468,3 @@ ggvenn(
 
 ```
 
-
-```{r}
-
-```
