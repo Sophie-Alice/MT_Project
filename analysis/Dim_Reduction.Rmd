@@ -29,7 +29,7 @@ library(clustree)
 library(harmony)
 ```
 
-# Get the Data
+## Get the Data
 
 ```{r}
 # path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
@@ -38,7 +38,7 @@ Data <- read_rds(path)
 Data
 ```
 
-# Inspecting Data
+## Inspecting Data
 
 ```{r}
 
@@ -55,7 +55,7 @@ table(Data$Macrophage_status)
 
 ```
 
-# Normalization and scaling with SCtransform
+## Normalization and scaling with SCtransform
 
 ```{r}
 DefaultAssay(Data) <- "RNA"
@@ -70,7 +70,7 @@ for (i in 1:length(Data)) {
 
 ```
 
-# PCA
+## PCA
 
 ```{r}
 features <- SelectIntegrationFeatures(object.list = Data, nfeatures = 3000)
@@ -89,7 +89,7 @@ ElbowPlot(Data, ndims = 50)+
 
 ```
 
-# Clustering without integration
+## Clustering without integration
 
 ```{r}
 
@@ -116,7 +116,7 @@ DimPlot(Data, reduction = "umap", shuffle = T,
 
 ```
 
-# Intergration with Harmony
+## Intergration with Harmony
 
 ```{r}
 
@@ -149,7 +149,7 @@ DimPlot(Data, reduction = "umap", shuffle = T,
 
 ```
 
-# Top markers pers cluster
+## Top markers per cluster
 
 ```{r}
 DefaultAssay(Data) <- "RNA"
@@ -306,7 +306,7 @@ FeaturePlot_scCustom(Data.clean, features = c("ANKRD45", "KLHL20"), pt.size = 0,
 
 ```
 
-# Renaming Cluster IDs
+## Renaming Cluster IDs
 
 ```{r}
 new_cluster_ids <- c(
@@ -325,7 +325,7 @@ DimPlot(Data.clean, reduction = "umap", shuffle = T,
         group.by = "cell_type", label=F)
 ```
 
-# Save File
+## Save File
 
 ```{r}
 outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"

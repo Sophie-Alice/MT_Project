@@ -9,7 +9,7 @@ editor_options:
 
 # Setup
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning = FALSE}
 rm(list=ls())
 gc()
 
@@ -29,7 +29,7 @@ library(scDblFinder)
 # Get the directory
 
 
-```{r}
+```{r, warning = FALSE}
 
 Cellbender.master <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Cellbender_Output"
 
@@ -42,9 +42,9 @@ benderfiles <- list.files(
 
 ```
 
-# Import the 4 files and merge
+## Import the 4 files and merge
 
-```{r}
+```{r, warning = FALSE}
 
 merged_cb_matrix <- Read_CellBender_h5_Multi_File(
   data_dir = Cellbender.master,
@@ -68,9 +68,9 @@ head(Data@meta.data)
 
 ```
 
-# Adding QC variables
+## Adding QC variables
 
-```{r}
+```{r, warning = FALSE}
 
 
 Data[["percent.mt"]] <- PercentageFeatureSet(Data, pattern = "^MT-")
@@ -80,9 +80,9 @@ colnames(Data@meta.data)
 
 ```
 
-# Adding metadata
+## Adding metadata
 
-```{r}
+```{r, warning = FALSE}
 
 Data$orig.ident <- sub("_([^_]+)$", "", rownames(Data@meta.data))
 
@@ -146,9 +146,9 @@ QC_pre_VlnPlots_zoom
 
 ```
 
-# DoubletFinder
+## DoubletFinder
 
-```{r}
+```{r, warning = FALSE}
 
 # Removing of extremely low nCount cells
 Data <- subset(Data, subset = nCount_RNA > 200 &
@@ -163,7 +163,7 @@ table(Data_sce@colData$scDblFinder.class)
 
 ```
 
-```{r}
+```{r, warning = FALSE}
 
 Data_dbl <- as.Seurat(Data_sce, counts = "counts", data = "counts")
 
@@ -234,9 +234,9 @@ Data <- subset(x = Data_dbl, subset = scDblFinder.class == "singlet")
 table(Data@meta.data$scDblFinder.class)
 ```
 
-# QC Filtering 
+## QC Filtering 
 
-```{r}
+```{r, warning = FALSE}
 
 Data<- subset(Data, subset = 
                    nFeature_RNA > 200 &
@@ -271,7 +271,7 @@ QC_pre_VlnPlots_zoom
 # Save Data
 outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
 
-saveRDS(Data, file = file.path(outputdir, "Post_QC.rds"))
+#saveRDS(Data, file = file.path(outputdir, "Post_QC.rds"))
 
 ```
 

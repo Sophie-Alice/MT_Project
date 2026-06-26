@@ -29,7 +29,7 @@ library(workflowr)
 
 First we want to double check whether Cellbender was performed correctly.
 
-# Get Directories
+## Get Directories
 
 ```{r}
 Cellbender.master <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Cellbender_Output"
@@ -54,7 +54,7 @@ rawfiles <- list.files(
 ```
 
 
-# Functions
+## Functions
 
 ```{r}
 process_single_cell_pair <- function(b_file, r_file, s_name) {
@@ -149,7 +149,7 @@ generate_qc_plots <- function(df, s_name) {
 
 ```
 
-# Plotting QC values to see the effect of Cellbender
+## Plotting QC values to see the effect of Cellbender
 
 ```{r}
 seurat_bender_list <- list()
@@ -196,7 +196,7 @@ table(master_compare_df$Sample)
 ```
 
 
-# Comparing Cellcounts
+## Comparing Cellcounts
 
 ```{r}
 counts_matrix <- table(master_compare_df$Sample, master_compare_df$Method)
