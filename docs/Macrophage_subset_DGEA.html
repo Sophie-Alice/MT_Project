@@ -13,7 +13,7 @@
 
 <meta name="date" content="2026-06-26" />
 
-<title>Macrophage_subset_DGEA</title>
+<title>Macrophages DGEA</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -371,7 +371,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Macrophage_subset_DGEA</h1>
+<h1 class="title toc-ignore">Macrophages DGEA</h1>
 <h4 class="author">Sophie.Alice</h4>
 <h4 class="date">2026-06-26</h4>
 
@@ -402,7 +402,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-06-26
+<strong>Last updated:</strong> 2026-06-30
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -533,15 +533,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0d589e1bfd6075ee1e82d2fa97f9661123abedbctargetblank0d589e1a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeb844b3a6456d3ee3935bd82ec699a7df399e1ef8targetblankb844b3aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/0d589e1bfd6075ee1e82d2fa97f9661123abedbc" target="_blank">0d589e1</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/b844b3a6456d3ee3935bd82ec699a7df399e1ef8" target="_blank">b844b3a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0d589e1bfd6075ee1e82d2fa97f9661123abedbctargetblank0d589e1a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeb844b3a6456d3ee3935bd82ec699a7df399e1ef8targetblankb844b3aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -551,7 +551,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/0d589e1bfd6075ee1e82d2fa97f9661123abedbc" target="_blank">0d589e1</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/b844b3a6456d3ee3935bd82ec699a7df399e1ef8" target="_blank">b844b3a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -568,11 +568,6 @@ were generated:
 Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rproj.user/
-
-Unstaged changes:
-    Modified:   analysis/Checking_Cellbender.Rmd
-    Modified:   analysis/Dim_Reduction.Rmd
-    Modified:   analysis/QC.Rmd
 
 </code></pre>
 <p>
@@ -618,6 +613,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/b844b3a6456d3ee3935bd82ec699a7df399e1ef8/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">b844b3a</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-30
+</td>
+<td>
+adding CM subtype identification
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/2eaf68c7be72e00de176d396d47fbf9d186bff17/docs/Macrophage_subset_DGEA.html" target="_blank">2eaf68c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -716,7 +745,7 @@ Adding more
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
 Ncells  907192 48.5    1751104 93.6         NA  1321095 70.6
-Vcells 1595689 12.2    8388608 64.0      16384  2392689 18.3</code></pre>
+Vcells 1595778 12.2    8388608 64.0      16384  2392630 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -798,8 +827,9 @@ gradient_colors4 &lt;- custom_palette(4)</code></pre>
   
   return(EV)
 }</code></pre>
-<div id="macrophages" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Macrophages</h2>
+</div>
+<div id="macrophages" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Macrophages</h1>
 <pre class="r"><code>table(Data$cell_type)</code></pre>
 <pre><code>
               Cardiomyocytes                  Macrophages 
@@ -1009,7 +1039,6 @@ loaded via a namespace (and not attached):
 [169] later_1.4.8              viridisLite_0.4.3        memoise_2.0.1           
 [172] beeswarm_0.4.0           GenomicAlignments_1.48.0 cluster_2.1.8.2         
 [175] timechange_0.4.0         globals_0.19.1          </code></pre>
-</div>
 </div>
 </div>
 </div>

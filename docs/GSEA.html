@@ -13,7 +13,7 @@
 
 <meta name="date" content="2026-06-25" />
 
-<title>GSEA Macrophages</title>
+<title>Macrophages GSEA</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -371,7 +371,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">GSEA Macrophages</h1>
+<h1 class="title toc-ignore">Macrophages GSEA</h1>
 <h4 class="author">Sophie.Alice</h4>
 <h4 class="date">2026-06-25</h4>
 
@@ -402,7 +402,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-06-26
+<strong>Last updated:</strong> 2026-06-30
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -533,15 +533,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0d589e1bfd6075ee1e82d2fa97f9661123abedbctargetblank0d589e1a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeb844b3a6456d3ee3935bd82ec699a7df399e1ef8targetblankb844b3aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/0d589e1bfd6075ee1e82d2fa97f9661123abedbc" target="_blank">0d589e1</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/b844b3a6456d3ee3935bd82ec699a7df399e1ef8" target="_blank">b844b3a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree0d589e1bfd6075ee1e82d2fa97f9661123abedbctargetblank0d589e1a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeb844b3a6456d3ee3935bd82ec699a7df399e1ef8targetblankb844b3aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -551,7 +551,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/0d589e1bfd6075ee1e82d2fa97f9661123abedbc" target="_blank">0d589e1</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/b844b3a6456d3ee3935bd82ec699a7df399e1ef8" target="_blank">b844b3a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -568,11 +568,6 @@ were generated:
 Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rproj.user/
-
-Unstaged changes:
-    Modified:   analysis/Checking_Cellbender.Rmd
-    Modified:   analysis/Dim_Reduction.Rmd
-    Modified:   analysis/QC.Rmd
 
 </code></pre>
 <p>
@@ -616,6 +611,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/b844b3a6456d3ee3935bd82ec699a7df399e1ef8/analysis/GSEA.Rmd" target="_blank">b844b3a</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-30
+</td>
+<td>
+adding CM subtype identification
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/2eaf68c7be72e00de176d396d47fbf9d186bff17/docs/GSEA.html" target="_blank">2eaf68c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -713,8 +742,8 @@ Adding more
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907556 48.5    1752144 93.6         NA  1321095 70.6
-Vcells 1596933 12.2    8388608 64.0      16384  2392685 18.3</code></pre>
+Ncells  907514 48.5    1752024 93.6         NA  1321095 70.6
+Vcells 1596949 12.2    8388608 64.0      16384  2392626 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -742,12 +771,14 @@ library(DOSE)
 library(fgsea)
 library(forcats)
 library(SCpubr)
-library(assertthat)</code></pre>
+library(assertthat)
+library(UCell)</code></pre>
 </div>
 <div id="get-hallmark-pathways" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Get Hallmark
 pathways</h1>
-<pre class="r"><code>Hallmark.pathways &lt;- gmtPathways(&quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt&quot;)</code></pre>
+<pre class="r"><code>Hallmark.pathways &lt;- gmtPathways(&quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt&quot;)
+Reactome.pathways &lt;- gmtPathways(&quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/c2.cp.reactome.v2026.1.Hs.symbols.gmt&quot;)</code></pre>
 </div>
 <div id="get-the-data" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Get the Data</h1>
@@ -762,23 +793,19 @@ Rows: 5546 Columns: 7
 ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
 Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -&gt; `...1`</code></pre>
-<pre class="r"><code>Macrophages_all</code></pre>
-<pre><code># A tibble: 5,546 × 7
-    ...1 gene        p_val avg_log2FC pct.1 pct.2 p_val_adj
-   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
- 1     1 SELENOP  1.23e-73     -2.40  0.382 0.729  4.76e-69
- 2     2 SLC9A9   2.31e-71     -1.63  0.792 0.895  8.93e-67
- 3     3 SKIL     5.27e-69      1.43  0.877 0.554  2.03e-64
- 4     4 CD163L1  7.02e-69     -3.05  0.396 0.736  2.71e-64
- 5     5 FGD5     1.76e-61      1.96  0.646 0.21   6.81e-57
- 6     6 IGF1     2.23e-61     -4.29  0.073 0.429  8.61e-57
- 7     7 AOAH     7.53e-59     -1.66  0.73  0.869  2.91e-54
- 8     8 ATP8B4   8.56e-59     -1.39  0.68  0.873  3.31e-54
- 9     9 F13A1    1.49e-58     -5.70  0.037 0.367  5.74e-54
-10    10 ARHGAP26 1.85e-54     -0.894 0.96  0.989  7.12e-50
-# ℹ 5,536 more rows</code></pre>
+<pre class="r"><code>head(Macrophages_all)</code></pre>
+<pre><code># A tibble: 6 × 7
+   ...1 gene       p_val avg_log2FC pct.1 pct.2 p_val_adj
+  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+1     1 SELENOP 1.23e-73      -2.40 0.382 0.729  4.76e-69
+2     2 SLC9A9  2.31e-71      -1.63 0.792 0.895  8.93e-67
+3     3 SKIL    5.27e-69       1.43 0.877 0.554  2.03e-64
+4     4 CD163L1 7.02e-69      -3.05 0.396 0.736  2.71e-64
+5     5 FGD5    1.76e-61       1.96 0.646 0.21   6.81e-57
+6     6 IGF1    2.23e-61      -4.29 0.073 0.429  8.61e-57</code></pre>
 <pre class="r"><code>custom_palette &lt;- colorRampPalette(c(&quot;#005EA8&quot;, &quot;#6DB335&quot;, &quot;#FFD966&quot;, &quot;#EDAAD2&quot;, &quot;#9F1C67&quot;))
-gradient_colors3 &lt;- custom_palette(6)</code></pre>
+gradient_colors3 &lt;- custom_palette(6)
+gradient_colors2 &lt;- custom_palette(2)</code></pre>
 </div>
 <div id="rank-the-data" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Rank the data</h1>
@@ -798,7 +825,8 @@ rank &lt;- ranked[names(ranked) != &quot;&quot;]</code></pre>
 number="5">
 <h1><span class="header-section-number">5</span> Functional gene set
 enrichment Analysis</h1>
-<pre class="r"><code>set.seed(42)
+<pre class="r"><code>############################## Hallmark
+set.seed(42)
 fgseares &lt;- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
 
 fgseares.tidy &lt;- fgseares %&gt;%
@@ -931,7 +959,7 @@ up.GO &lt;- enrichGO(
   ont           = &quot;BP&quot;,
   pAdjustMethod = &quot;BH&quot;,
   pvalueCutoff  = 0.1,       
-  minGSSize     = 5,
+  minGSSize     = 15,
   maxGSSize     = 800
 )</code></pre>
 <pre><code>&#39;select()&#39; returned 1:1 mapping between keys and columns</code></pre>
@@ -947,26 +975,26 @@ GO:0040012 GO:0040012           regulation of locomotion    43/254 319/4904
 GO:0072359 GO:0072359     circulatory system development    39/254 281/4904
 GO:0061061 GO:0061061       muscle structure development    32/254 205/4904
            RichFactor FoldEnrichment   zScore       pvalue     p.adjust
-GO:0040011  0.1409214       2.720782 8.032887 6.989526e-12 3.521323e-08
-GO:0009653  0.1081505       2.088070 6.886179 4.301265e-10 1.083489e-06
-GO:0007155  0.1280000       2.471307 6.928499 1.602510e-09 2.691148e-06
-GO:0040012  0.1347962       2.602523 6.917532 2.660716e-09 3.351172e-06
-GO:0072359  0.1387900       2.679631 6.776828 7.070196e-09 7.123929e-06
-GO:0061061  0.1560976       3.013789 6.883503 1.052472e-08 8.837256e-06
+GO:0040011  0.1409214       2.720782 8.032887 6.989526e-12 1.771146e-08
+GO:0009653  0.1081505       2.088070 6.886179 4.301265e-10 5.449703e-07
+GO:0007155  0.1280000       2.471307 6.928499 1.602510e-09 1.353586e-06
+GO:0040012  0.1347962       2.602523 6.917532 2.660716e-09 1.685564e-06
+GO:0072359  0.1387900       2.679631 6.776828 7.070196e-09 3.583175e-06
+GO:0061061  0.1560976       3.013789 6.883503 1.052472e-08 4.444940e-06
                  qvalue
-GO:0040011 3.521323e-08
-GO:0009653 1.083489e-06
-GO:0007155 2.691148e-06
-GO:0040012 3.351172e-06
-GO:0072359 7.123929e-06
-GO:0061061 8.837256e-06
+GO:0040011 1.771146e-08
+GO:0009653 5.449703e-07
+GO:0007155 1.353586e-06
+GO:0040012 1.685564e-06
+GO:0072359 3.583175e-06
+GO:0061061 4.444940e-06
                                                                                                                                                                                                                                                                                                                                                                                                                                  geneID
-GO:0040011                                                                                              FN1/MAP4K4/USP14/TMSB4X/RAB11A/DNM1L/ITGB1/ITGAV/ACTG1/PFN1/ITGB3/SPATA13/SLIT3/TGFBR1/S100A4/SEMA3C/COL1A1/TIMP1/CXCL8/CXADR/VASH1/CD63/PPARG/ROBO1/MTUS1/COL3A1/RALA/APOE/KIF21A/PPIA/MMP2/SORL1/MMP14/S100A11/SMURF2/CD81/PDE4B/MAGI2/TALAM1/SLC12A2/SMAD7/ANOS1/GRN/ALOX5/FBN2/CXCL12/DPYSL3/RNF7/CORO1C/TMSB10/ITGA6/HMOX1
-GO:0009653 FN1/ALCAM/KIF26B/RPL5/MAP4K4/RPLP1/RPLP2/FGD5/DNM1L/ITGB1/ITGAV/RPL36/ACTG1/ZFYVE27/ITGB3/PBX3/RPL39/SLIT3/TGFBR1/ZFPM2/SEMA3C/COL1A2/COL1A1/SOX4/CXCL8/RPL37A/VASH1/S100A6/RPL23/PPARG/YWHAH/ROBO1/ACTC1/MTHFD1L/COL3A1/RALA/ARHGAP32/ACTN1/BICD1/APOE/IL1RN/TGM2/KIF21A/SMAD6/MMP2/SKIL/ADAM12/ACTB/CPM/MMP14/CD81/RPL27A/SDC2/SLC12A2/LGR4/SPP1/SMAD7/ANOS1/GRN/ALOX5/SKI/FBN2/CXCL12/CORO1C/IGF2/ITGA6/HMOX1/EPN2/CTNND2
-GO:0007155                                                                                                                            FN1/SMARCE1/ALCAM/MAP4K4/IRAK1/ITGB1/ITGAV/ACTG1/ANTXR1/HSPD1/ITGB3/DLG2/PARD3B/OLR1/CADM1/LMO7/SOX4/CXCL8/CXADR/CD63/ROBO1/COL3A1/ACTN1/IL1RN/TGM2/SMAD6/S100A10/PPIA/MMP2/ADAM12/ACTB/MMP14/S100A11/CD81/CD226/CEBPB/PSMA4/TNFRSF21/SPP1/SMAD7/ANOS1/ALOX5/CXCL12/RNF7/CORO1C/IGF2/ITGA6/CTNND2
-GO:0040012                                                                                                                                                     FN1/MAP4K4/USP14/TMSB4X/RAB11A/DNM1L/ITGB1/ITGAV/ACTG1/PFN1/ITGB3/SPATA13/TGFBR1/SEMA3C/COL1A1/TIMP1/CXCL8/VASH1/CD63/PPARG/ROBO1/MTUS1/COL3A1/APOE/KIF21A/MMP2/SORL1/MMP14/S100A11/SMURF2/CD81/MAGI2/TALAM1/SMAD7/GRN/FBN2/CXCL12/DPYSL3/RNF7/CORO1C/TMSB10/ITGA6/HMOX1
-GO:0072359                                                                                                                                                                               FN1/TRAF3IP2/ITGB1/ITGAV/DNAAF4/ACTG1/ITGB3/PDLIM7/SLIT3/TGFBR1/ZFPM2/SEMA3C/COL1A2/COL1A1/SOX4/CXCL8/SLC8A1/CXADR/VASH1/PPARG/ROBO1/ACTC1/TCF7L2/COL3A1/TGM2/SMAD6/MMP2/ADAM12/MMP14/KRAS/SLC12A2/SMAD7/GRN/ALOX5/SKI/CXCL12/ALPK3/HMOX1/EPN2
-GO:0061061                                                                                                                                                                                                                            SMARCE1/RPL5/RPLP1/RPLP2/ITGB1/RPL36/PDLIM7/RPL39/TGFBR1/ZFPM2/SOX4/SLC8A1/CXADR/RPL37A/RPL23/ACTC1/TCF7L2/COL3A1/ACTN1/SKIL/ADAM12/ACTB/MMP14/LARGE1/UQCC2/MTPN/CD81/RPL27A/SMAD7/SKI/ALPK3/IGF2
+GO:0040011                                                                                              CD81/RAB11A/SPATA13/COL1A1/MMP14/RNF7/FBN2/TMSB4X/MAP4K4/VASH1/PDE4B/SMAD7/MTUS1/ITGB3/CD63/CORO1C/TMSB10/COL3A1/KIF21A/TGFBR1/ROBO1/ITGA6/SLIT3/ANOS1/GRN/PPARG/SMURF2/SEMA3C/PFN1/S100A4/TIMP1/MMP2/CXCL12/SORL1/RALA/DNM1L/ITGAV/CXCL8/CXADR/PPIA/TALAM1/SLC12A2/ACTG1/DPYSL3/MAGI2/ALOX5/FN1/USP14/S100A11/APOE/ITGB1/HMOX1
+GO:0009653 CTNND2/EPN2/CD81/SOX4/ACTN1/COL1A1/ADAM12/MMP14/ALCAM/FBN2/MTHFD1L/ACTB/SKIL/MAP4K4/VASH1/LGR4/SMAD6/SMAD7/ACTC1/PBX3/ITGB3/KIF26B/CORO1C/SDC2/COL3A1/RPL27A/KIF21A/TGFBR1/BICD1/ROBO1/YWHAH/ITGA6/SLIT3/ANOS1/GRN/PPARG/SPP1/COL1A2/SEMA3C/CPM/MMP2/FGD5/CXCL12/ARHGAP32/RALA/IGF2/DNM1L/RPL39/IL1RN/TGM2/RPLP1/ITGAV/CXCL8/ZFPM2/RPL37A/RPL5/SLC12A2/ACTG1/RPLP2/RPL23/SKI/ALOX5/FN1/ZFYVE27/RPL36/APOE/ITGB1/S100A6/HMOX1
+GO:0007155                                                                                                                            CTNND2/CD81/OLR1/SOX4/PARD3B/ACTN1/SMARCE1/ADAM12/MMP14/RNF7/ALCAM/ACTB/MAP4K4/TNFRSF21/SMAD6/SMAD7/DLG2/ITGB3/CD63/CORO1C/CEBPB/COL3A1/CD226/IRAK1/LMO7/ROBO1/HSPD1/ITGA6/ANOS1/CADM1/SPP1/MMP2/PSMA4/CXCL12/ANTXR1/IGF2/IL1RN/TGM2/ITGAV/CXCL8/CXADR/PPIA/ACTG1/ALOX5/FN1/S100A11/ITGB1/S100A10
+GO:0040012                                                                                                                                                     CD81/RAB11A/SPATA13/COL1A1/MMP14/RNF7/FBN2/TMSB4X/MAP4K4/VASH1/SMAD7/MTUS1/ITGB3/CD63/CORO1C/TMSB10/COL3A1/KIF21A/TGFBR1/ROBO1/ITGA6/GRN/PPARG/SMURF2/SEMA3C/PFN1/TIMP1/MMP2/CXCL12/SORL1/DNM1L/ITGAV/CXCL8/TALAM1/ACTG1/DPYSL3/MAGI2/FN1/USP14/S100A11/APOE/ITGB1/HMOX1
+GO:0072359                                                                                                                                                                               EPN2/SOX4/COL1A1/ADAM12/MMP14/VASH1/PDLIM7/SMAD6/SMAD7/ACTC1/ITGB3/COL3A1/TGFBR1/TRAF3IP2/ROBO1/SLIT3/GRN/TCF7L2/PPARG/COL1A2/SEMA3C/MMP2/KRAS/CXCL12/TGM2/DNAAF4/ITGAV/SLC8A1/CXCL8/CXADR/ZFPM2/SLC12A2/ALPK3/ACTG1/SKI/ALOX5/FN1/ITGB1/HMOX1
+GO:0061061                                                                                                                                                                                                                            CD81/SOX4/ACTN1/SMARCE1/ADAM12/LARGE1/MMP14/ACTB/SKIL/PDLIM7/SMAD7/ACTC1/UQCC2/COL3A1/RPL27A/TGFBR1/TCF7L2/MTPN/IGF2/RPL39/RPLP1/SLC8A1/CXADR/ZFPM2/RPL37A/RPL5/ALPK3/RPLP2/RPL23/SKI/RPL36/ITGB1
            Count
 GO:0040011    52
 GO:0009653    69
@@ -984,7 +1012,7 @@ down.GO &lt;- enrichGO(
   ont           = &quot;BP&quot;,
   pAdjustMethod = &quot;BH&quot;,
   pvalueCutoff  = 0.1,       
-  minGSSize     = 5,
+  minGSSize     = 15,
   maxGSSize     = 800
 )</code></pre>
 <pre><code>&#39;select()&#39; returned 1:many mapping between keys and columns
@@ -1007,19 +1035,19 @@ GO:0002682 517/4904  0.1160542       2.214512 6.865536 8.532305e-10
 GO:0002376 787/4904  0.1003812       1.915445 6.590834 1.097632e-09
 GO:0009617 156/4904  0.1858974       3.547241 7.603056 1.144342e-09
                p.adjust       qvalue
-GO:0006955 1.143283e-08 1.143283e-08
-GO:0006952 1.262380e-07 1.262380e-07
-GO:0002764 1.437417e-07 1.437417e-07
-GO:0002682 8.235990e-07 8.235990e-07
-GO:0002376 8.235990e-07 8.235990e-07
-GO:0009617 8.235990e-07 8.235990e-07
+GO:0006955 5.750455e-09 5.750455e-09
+GO:0006952 6.349484e-08 6.349484e-08
+GO:0002764 7.229880e-08 7.229880e-08
+GO:0002682 4.142517e-07 4.142517e-07
+GO:0002376 4.142517e-07 4.142517e-07
+GO:0009617 4.142517e-07 4.142517e-07
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         geneID
-GO:0006955                                                           PRKCB/IGSF6/LY86/PDE4D/CLEC4A/NLRP1/SLAMF7/IRAK3/FCGR2A/TNFRSF1B/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/LCP2/ST3GAL1/SAMHD1/PSTPIP1/PARP14/PLA2G4A/APPL2/FCGR2C/HLA-DMB/THEMIS2/RAB7B/NAGK/FCN1/MBP/CD4/ITGA4/LY96/PLD3/COLEC12/MX2/PRDM1/CMKLR1/CLEC2D/INPP5D/SAMSN1/IFI16/VNN1/CR1/TLR4/TEC/TNFSF8/ADAMDEC1/NLRP3/CXCL2/CASP1/IFI44/SAMD9/ITGAM/IL6R/NAIP/ZBTB46/PIK3CD/MEF2C/CD86/CD48/TNFRSF11A/MPEG1/GPR183/MAP3K1/VSIR/TNFRSF14/HLA-DPB1/HLA-DQA1/ATP1B1
-GO:0006952                                                                                             IL10RA/LY86/CLEC4A/LGALS8/NLRP1/SLAMF7/IRAK3/FCGR2A/TNFRSF1B/STAB1/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/SAMHD1/PSTPIP1/METRNL/PARP14/SIGLEC1/APPL2/FCGR2C/THEMIS2/RAB7B/NAGK/NAMPT/SLC9A9/FCN1/MLKL/CD4/FOS/LY96/PLD3/IGF1/COLEC12/MX2/LRRK2/PRDM1/CMKLR1/INPP5D/IFI16/VNN1/PLA2G4C/CR1/TLR4/AOAH/NLRP3/CXCL2/CASP1/BNIP3L/EMILIN2/SAMD9/ATG7/ITGAM/IL6R/NAIP/CD163/PIK3CD/MEF2C/CD48/TNFRSF11A/MPEG1/TNFRSF14/MMP9/ATP1B1
-GO:0002764                                                                                                                                                                                                                                                                                  PRKCB/PDE4D/NLRP1/IRAK3/FCGR2A/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/LCP2/APPL2/FCGR2C/THEMIS2/RAB7B/NAGK/FCN1/CD4/LY96/PLD3/CMKLR1/CLEC2D/INPP5D/IFI16/CR1/TLR4/TEC/NLRP3/CASP1/ITGAM/NAIP/PIK3CD/MEF2C/CD86/MAP3K1/TNFRSF14/HLA-DPB1
-GO:0002682                                                                                                                       PRKCB/PDE4D/NLRP1/IRAK3/FCGR2A/TNFRSF1B/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/LCP2/SAMHD1/PARP14/PLA2G4A/APPL2/FCGR2C/HLA-DMB/THEMIS2/RAB7B/NAGK/FCN1/CD4/ITGA4/LY96/PLD3/IGF1/COLEC12/LRRK2/PRDM1/CMKLR1/MPP1/CLEC2D/INPP5D/SAMSN1/IFI16/VNN1/PRKCA/CR1/TLR4/TEC/PTPRE/TNFSF8/NLRP3/CASP1/ITGAM/IL6R/NAIP/PIK3CD/MEF2C/CD86/TNFRSF11A/ACVR2A/GPR183/MAP3K1/VSIR/GCNT1/TNFRSF14/HLA-DPB1/HLA-DQA1
-GO:0002376 PRKCB/IGSF6/LY86/PDE4D/CLEC4A/NLRP1/SLAMF7/IRAK3/FCGR2A/TNFRSF1B/RNF125/TXK/LILRB5/TRIM25/HLA-DRB1/LCP2/ST3GAL1/SAMHD1/PSTPIP1/PARP14/PLA2G4A/APPL2/FCGR2C/HLA-DMB/THEMIS2/RAB7B/NAGK/FCN1/MBP/CD4/ITGA4/LY96/PLD3/IGF1/COLEC12/MX2/LRRK2/PRDM1/CMKLR1/RUBCN/MPP1/CLEC2D/INPP5D/JAML/SAMSN1/IFI16/VNN1/PRKCA/CR1/TLR4/TEC/PTPRE/TNFSF8/ADAMDEC1/NLRP3/CXCL2/CASP1/IFI44/SAMD9/ITGAM/IL6R/NAIP/ZBTB46/PIK3CD/MEF2C/CD86/CD48/TNFRSF11A/PDGFB/ACVR2A/MPEG1/GPR183/MAP3K1/VSIR/GCNT1/TNFRSF14/HLA-DPB1/HLA-DQA1/ATP1B1
-GO:0009617                                                                                                                                                                                                                                                                                                                             IL10RA/LY86/NLRP1/IRAK3/TNFRSF1B/STAB1/SCARB1/HLA-DRB1/NAGK/SLC9A9/FOS/LY96/COLEC12/PRKCA/TLR4/SASH1/NLRP3/CXCL2/CASP1/EMILIN2/ITGAM/IL6R/NAIP/MEF2C/CD86/TNFRSF11A/MPEG1/TNFRSF14/MMP9
+GO:0006955                                                           FCN1/PARP14/PDE4D/PLD3/APPL2/IGSF6/CD4/MEF2C/LY86/LY96/FCGR2A/TXK/GPR183/VSIR/ADAMDEC1/FCGR2C/HLA-DMB/CLEC2D/PLA2G4A/PSTPIP1/ITGAM/ZBTB46/NAIP/HLA-DPB1/NLRP3/CXCL2/NLRP1/CMKLR1/LILRB5/PRDM1/VNN1/CASP1/TEC/TLR4/TRIM25/SAMHD1/NAGK/RAB7B/MAP3K1/CR1/MPEG1/TNFRSF14/COLEC12/HLA-DQA1/TNFSF8/SLAMF7/LCP2/HLA-DRB1/TNFRSF11A/CD48/MBP/IL6R/SAMD9/IFI44/CLEC4A/IFI16/THEMIS2/PIK3CD/MX2/ITGA4/TNFRSF1B/SAMSN1/RNF125/CD86/ST3GAL1/PRKCB/INPP5D/ATP1B1/IRAK3
+GO:0006952                                                                                             FCN1/PARP14/PLD3/APPL2/CD4/MEF2C/LY86/LY96/FCGR2A/TXK/SLC9A9/FCGR2C/SIGLEC1/PSTPIP1/METRNL/ITGAM/NAIP/LRRK2/NAMPT/NLRP3/CXCL2/NLRP1/CMKLR1/LILRB5/PRDM1/VNN1/EMILIN2/CASP1/FOS/TLR4/TRIM25/SAMHD1/NAGK/RAB7B/CR1/MPEG1/TNFRSF14/LGALS8/CD163/COLEC12/IGF1/IL10RA/AOAH/SLAMF7/HLA-DRB1/STAB1/TNFRSF11A/CD48/MLKL/BNIP3L/IL6R/SAMD9/CLEC4A/IFI16/THEMIS2/PIK3CD/MX2/ATG7/TNFRSF1B/RNF125/INPP5D/PLA2G4C/ATP1B1/MMP9/IRAK3
+GO:0002764                                                                                                                                                                                                                                                                                  FCN1/PDE4D/PLD3/APPL2/CD4/MEF2C/LY96/FCGR2A/TXK/FCGR2C/CLEC2D/ITGAM/NAIP/HLA-DPB1/NLRP3/NLRP1/CMKLR1/LILRB5/CASP1/TEC/TLR4/TRIM25/NAGK/RAB7B/MAP3K1/CR1/TNFRSF14/LCP2/HLA-DRB1/IFI16/THEMIS2/PIK3CD/RNF125/CD86/PRKCB/INPP5D/IRAK3
+GO:0002682                                                                                                                       FCN1/PARP14/PDE4D/PLD3/APPL2/CD4/MEF2C/LY96/FCGR2A/TXK/GPR183/PTPRE/VSIR/FCGR2C/HLA-DMB/CLEC2D/PLA2G4A/ITGAM/NAIP/LRRK2/HLA-DPB1/NLRP3/NLRP1/CMKLR1/LILRB5/PRDM1/PRKCA/VNN1/CASP1/TEC/TLR4/TRIM25/SAMHD1/NAGK/RAB7B/MAP3K1/CR1/TNFRSF14/COLEC12/IGF1/HLA-DQA1/GCNT1/TNFSF8/LCP2/HLA-DRB1/TNFRSF11A/IL6R/ACVR2A/IFI16/MPP1/THEMIS2/PIK3CD/ITGA4/TNFRSF1B/SAMSN1/RNF125/CD86/PRKCB/INPP5D/IRAK3
+GO:0002376 FCN1/PARP14/PDE4D/PLD3/APPL2/IGSF6/CD4/MEF2C/LY86/LY96/FCGR2A/TXK/GPR183/PTPRE/VSIR/ADAMDEC1/FCGR2C/HLA-DMB/CLEC2D/PLA2G4A/PSTPIP1/ITGAM/ZBTB46/NAIP/LRRK2/RUBCN/HLA-DPB1/NLRP3/CXCL2/NLRP1/CMKLR1/LILRB5/PRDM1/PRKCA/VNN1/CASP1/TEC/TLR4/TRIM25/SAMHD1/NAGK/RAB7B/MAP3K1/CR1/MPEG1/TNFRSF14/COLEC12/IGF1/HLA-DQA1/GCNT1/TNFSF8/SLAMF7/LCP2/HLA-DRB1/TNFRSF11A/PDGFB/CD48/MBP/IL6R/SAMD9/IFI44/CLEC4A/ACVR2A/IFI16/MPP1/THEMIS2/PIK3CD/MX2/ITGA4/TNFRSF1B/JAML/SAMSN1/RNF125/CD86/ST3GAL1/PRKCB/INPP5D/ATP1B1/IRAK3
+GO:0009617                                                                                                                                                                                                                                                                                                                             MEF2C/LY86/LY96/SLC9A9/ITGAM/NAIP/NLRP3/CXCL2/NLRP1/PRKCA/EMILIN2/CASP1/FOS/TLR4/NAGK/MPEG1/SASH1/TNFRSF14/COLEC12/IL10RA/SCARB1/HLA-DRB1/STAB1/TNFRSF11A/IL6R/TNFRSF1B/CD86/MMP9/IRAK3
            Count
 GO:0006955    69
 GO:0006952    65
@@ -1032,7 +1060,7 @@ go_down_df &lt;- as.data.frame(simp.down.GO) %&gt;% mutate(Direction = &quot;Dow
 
 go_combined &lt;- rbind(go_up_df, go_down_df) %&gt;%
   group_by(Direction) %&gt;%
-  slice_head(n = 15) %&gt;% # Adjust &#39;n&#39; to show more or fewer terms per panel
+  slice_head(n = 10) %&gt;% # Adjust &#39;n&#39; to show more or fewer terms per panel
   ungroup()
 
 
@@ -1111,9 +1139,6 @@ Sophie.Alice
 </table>
 </div>
 </div>
-</div>
-<div id="checking-mmp2" class="section level1" number="8">
-<h1><span class="header-section-number">8</span> Checking MMP2</h1>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1142,28 +1167,28 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] assertthat_0.2.1            SCpubr_3.0.1               
- [3] forcats_1.0.1               fgsea_1.38.0               
- [5] DOSE_4.6.0                  GO.db_3.23.1               
- [7] org.Hs.eg.db_3.23.1         AnnotationDbi_1.74.0       
- [9] clusterProfiler_4.20.0      ggtangle_0.1.2             
-[11] ggarchery_0.4.4             EnhancedVolcano_1.30.0     
-[13] tibble_3.3.1                MAST_1.38.0                
-[15] speckle_1.12.0              harmony_2.0.5              
-[17] Rcpp_1.1.1-1.1              clustree_0.5.1             
-[19] ggraph_2.2.2                scDblFinder_1.26.2         
-[21] SingleCellExperiment_1.34.0 SummarizedExperiment_1.42.0
-[23] Biobase_2.72.0              GenomicRanges_1.64.0       
-[25] Seqinfo_1.2.0               IRanges_2.46.0             
-[27] S4Vectors_0.50.1            BiocGenerics_0.58.1        
-[29] generics_0.1.4              MatrixGenerics_1.24.0      
-[31] matrixStats_1.5.0           ggrepel_0.9.8              
-[33] cowplot_1.2.0               patchwork_1.3.2            
-[35] scCustomize_3.3.0           hdf5r_1.3.12               
-[37] Seurat_5.5.0                SeuratObject_5.4.0         
-[39] sp_2.2-1                    ggplot2_4.0.3              
-[41] dplyr_1.2.1                 readr_2.2.0                
-[43] workflowr_1.7.2            
+ [1] UCell_2.16.0                assertthat_0.2.1           
+ [3] SCpubr_3.0.1                forcats_1.0.1              
+ [5] fgsea_1.38.0                DOSE_4.6.0                 
+ [7] GO.db_3.23.1                org.Hs.eg.db_3.23.1        
+ [9] AnnotationDbi_1.74.0        clusterProfiler_4.20.0     
+[11] ggtangle_0.1.2              ggarchery_0.4.4            
+[13] EnhancedVolcano_1.30.0      tibble_3.3.1               
+[15] MAST_1.38.0                 speckle_1.12.0             
+[17] harmony_2.0.5               Rcpp_1.1.1-1.1             
+[19] clustree_0.5.1              ggraph_2.2.2               
+[21] scDblFinder_1.26.2          SingleCellExperiment_1.34.0
+[23] SummarizedExperiment_1.42.0 Biobase_2.72.0             
+[25] GenomicRanges_1.64.0        Seqinfo_1.2.0              
+[27] IRanges_2.46.0              S4Vectors_0.50.1           
+[29] BiocGenerics_0.58.1         generics_0.1.4             
+[31] MatrixGenerics_1.24.0       matrixStats_1.5.0          
+[33] ggrepel_0.9.8               cowplot_1.2.0              
+[35] patchwork_1.3.2             scCustomize_3.3.0          
+[37] hdf5r_1.3.12                Seurat_5.5.0               
+[39] SeuratObject_5.4.0          sp_2.2-1                   
+[41] ggplot2_4.0.3               dplyr_1.2.1                
+[43] readr_2.2.0                 workflowr_1.7.2            
 
 loaded via a namespace (and not attached):
   [1] vroom_1.7.1              goftest_1.2-3            Biostrings_2.80.1       
