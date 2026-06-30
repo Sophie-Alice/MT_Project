@@ -1,5 +1,5 @@
 ---
-title: "DGEA"
+title: "Fibroblasts DGEA"
 author: "Sophie.Alice"
 date: "2026-06-25"
 output: workflowr::wflow_html
@@ -99,7 +99,7 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
 
 ```
 
-## Fibroblasts
+# Fibroblasts
 
 ## DGEA of the 4 Comparisons 
 

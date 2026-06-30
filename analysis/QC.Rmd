@@ -42,7 +42,7 @@ benderfiles <- list.files(
 
 ```
 
-## Import the 4 files and merge
+# Import the 4 files and merge
 
 ```{r, warning = FALSE}
 
@@ -68,7 +68,7 @@ head(Data@meta.data)
 
 ```
 
-## Adding QC variables
+# Adding QC variables
 
 ```{r, warning = FALSE}
 
@@ -80,7 +80,7 @@ colnames(Data@meta.data)
 
 ```
 
-## Adding metadata
+# Adding metadata
 
 ```{r, warning = FALSE}
 
@@ -146,7 +146,7 @@ QC_pre_VlnPlots_zoom
 
 ```
 
-## DoubletFinder
+# DoubletFinder
 
 ```{r, warning = FALSE}
 
@@ -234,7 +234,7 @@ Data <- subset(x = Data_dbl, subset = scDblFinder.class == "singlet")
 table(Data@meta.data$scDblFinder.class)
 ```
 
-## QC Filtering 
+# QC Filtering 
 
 ```{r, warning = FALSE}
 

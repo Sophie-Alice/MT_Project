@@ -42,13 +42,13 @@ Data <- read_rds(path)
 Data
 ```
 
-## Check actual cell number with theoretical cell number
+# Check actual cell number with theoretical cell number
 
 ```{r, warning = FALSE}
 table(Data$orig.ident, Data$cell_type)
 ```
 
-## Proportion visualization no statistics
+# Proportion visualization no statistics
 
  - We might run into Problems downstream as the Fibroblast proportions are so different. But we'll see
 

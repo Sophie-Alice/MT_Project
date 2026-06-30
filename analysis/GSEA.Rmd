@@ -1,5 +1,5 @@
 ---
-title: "GSEA Macrophages"
+title: "Macrophages GSEA"
 author: "Sophie.Alice"
 date: "2026-06-25"
 output: workflowr::wflow_html
@@ -41,15 +41,15 @@ library(fgsea)
 library(forcats)
 library(SCpubr)
 library(assertthat)
+library(UCell)
 
 ```
 
 # Get Hallmark pathways
 
-
 ```{r,warning = FALSE}
 Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt")
-
+Reactome.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/c2.cp.reactome.v2026.1.Hs.symbols.gmt")
 ```
 
 
@@ -59,10 +59,12 @@ Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Pro
 # path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
 path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/DGEA_output/Macrophages_all.csv"
 Macrophages_all <- read_csv(path)
-Macrophages_all
+head(Macrophages_all)
 
 custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
 gradient_colors3 <- custom_palette(6)
+gradient_colors2 <- custom_palette(2)
+
 ```
 
 # Rank the data
@@ -88,6 +90,7 @@ rank <- ranked[names(ranked) != ""]
 
 ```{r,warning = FALSE}
 
+############################## Hallmark
 set.seed(42)
 fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
 
@@ -102,6 +105,7 @@ fgseares.tidy <- fgseares.tidy %>%
 fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
 fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
 fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
+
 
 ```
 
@@ -149,6 +153,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
     plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic"),
     legend.position = "left" 
   )
+
 
 ```
 
@@ -199,7 +204,7 @@ up.GO <- enrichGO(
   ont           = "BP",
   pAdjustMethod = "BH",
   pvalueCutoff  = 0.1,       
-  minGSSize     = 5,
+  minGSSize     = 15,
   maxGSSize     = 800
 )
 
@@ -217,7 +222,7 @@ down.GO <- enrichGO(
   ont           = "BP",
   pAdjustMethod = "BH",
   pvalueCutoff  = 0.1,       
-  minGSSize     = 5,
+  minGSSize     = 15,
   maxGSSize     = 800
 )
 
@@ -235,7 +240,7 @@ go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated
 
 go_combined <- rbind(go_up_df, go_down_df) %>%
   group_by(Direction) %>%
-  slice_head(n = 15) %>% # Adjust 'n' to show more or fewer terms per panel
+  slice_head(n = 10) %>% # Adjust 'n' to show more or fewer terms per panel
   ungroup()
 
 
@@ -278,14 +283,4 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
   )
 ```
 
-# Checking MMP2 
 
-```{r, warning = FALSE}
-
-
-```
-
-
-```{r}
-
-```

@@ -1,5 +1,5 @@
 ---
-title: "Dim_Reduction"
+title: "Dimentianality Reduction"
 author: "Sophie"
 date: "2026-06-17"
 output: workflowr::wflow_html
@@ -330,7 +330,7 @@ DimPlot(Data.clean, reduction = "umap", shuffle = T,
 ```{r}
 outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
 
-saveRDS(Data.clean, file = file.path(outputdir, "Post_Annotation.rds"))
+# saveRDS(Data.clean, file = file.path(outputdir, "Post_Annotation.rds"))
 
 ```
 

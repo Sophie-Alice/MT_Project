@@ -1,5 +1,5 @@
 ---
-title: "Checking_Cellbender"
+title: "Checking Cellbender"
 author: "Sophie"
 date: "2026-06-12"
 output: workflowr::wflow_html

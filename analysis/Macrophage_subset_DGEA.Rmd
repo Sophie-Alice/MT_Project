@@ -1,5 +1,5 @@
 ---
-title: "Macrophage_subset_DGEA"
+title: "Macrophages DGEA"
 author: "Sophie.Alice"
 date: "2026-06-26"
 output: workflowr::wflow_html
@@ -100,7 +100,7 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
 
 ```
 
-## Macrophages
+# Macrophages
 
 ```{r, warning = FALSE}
 

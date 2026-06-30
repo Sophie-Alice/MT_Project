@@ -1,0 +1,688 @@
+---
+title: "CM Subtypes"
+author: "Sophie.Alice"
+date: "2026-06-30"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+
+```
+
+# Get the Data
+
+```{r, warning = FALSE}
+# path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+
+DimPlot(Data, reduction = "umap", shuffle = T,
+        group.by = "SCT_snn_res.0.1", label=T)
+```
+
+# Subset only the CM
+
+```{r, warning = FALSE}
+
+Data <- subset(Data, !(cell_type %in% c("Cardiac Fibroblasts", "Macrophages")))
+
+DimPlot(Data, reduction = "umap", shuffle = T,
+        group.by = "SCT_snn_res.0.1", label=T)
+
+```
+
+# Functions
+
+```{r, warning = FALSE}
+
+
+Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
+  
+  # Clean extreme values
+  df <- Data
+  df <- df[is.finite(df$avg_log2FC) & is.finite(df$p_val_adj), ]
+  
+  if (any(df$p_val_adj == 0)) {
+    min_nonzero <- min(df$p_val_adj[df$p_val_adj > 0], na.rm = TRUE)
+
+    if(is.infinite(min_nonzero)) min_nonzero <- 1e-500 
+    df$p_val_adj[df$p_val_adj == 0] <- min_nonzero
+  }
+  
+  # dynamic axis limits
+  xmax <- max(df$avg_log2FC, na.rm = TRUE)
+  xmin <- min(df$avg_log2FC, na.rm = TRUE)
+  ymax <- max(-log10(df$p_val_adj), na.rm = TRUE)
+  
+  # Add padding
+  xpad <- (xmax - xmin) * 0.1
+  ypad <- ymax * 0.1
+  
+  combined_subtitle <- paste0(Subtitle, " ● Thresholds: FDR < ", pCutoff, ", |Log2FC| > ", FCcutoff)
+  
+  EV <- EnhancedVolcano(
+    df,
+    lab = df$gene,
+    x = 'avg_log2FC',
+    y = 'p_val_adj',
+    xlab = 'log2 Foldchange',
+    ylab = "-log10 FDR",
+    legendLabels = c('NS','log2FC','FDR','FDR & log2FC'),
+    col = c("darkgrey", "#005EA8", "#FFD966", "#9F1C67"),
+    title = Title,
+    subtitle = combined_subtitle,   
+    xlim = c(xmin - xpad, xmax + xpad),
+    ylim = c(0, ymax + ypad),
+    pCutoff = pCutoff,              
+    FCcutoff = FCcutoff,            
+
+    cutoffLineType = 'dashed',      
+    cutoffLineCol = 'black',        
+    cutoffLineWidth = 0.6,
+    labSize = 3.0,
+    drawConnectors = TRUE,
+    widthConnectors = 0.5
+  )
+  
+  return(EV)
+}
+
+
+```
+
+
+# Difference between Cluster 0 and Cluste 4 (Hypoxia?)
+
+## DGEA
+
+```{r, warning = FALSE}
+
+deg_list <- list()
+
+table(Data$SCT_snn_res.0.1)
+Idents(Data) <- "SCT_snn_res.0.1"
+
+MAST.Res <- FindMarkers(
+  object = Data,
+  ident.1 = "4",    
+  ident.2 = "0",     
+  test.use = "MAST",
+  logfc.threshold = 0.5,      
+  min.pct = 0.3             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
+
+MAST.Res.sign$gene
+
+deg_list[["0 vs. 4"]] <- MAST.Res
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG Cluster 0 vs. Cluster 4",
+  Subtitle = "",
+  pCutoff = 0.05,    
+  FCcutoff = 0.5     
+)
+
+
+```
+
+## FGSEA
+
+### Get Hallmark pathways
+
+```{r,warning = FALSE}
+Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt")
+```
+
+### Rank the data
+
+```{r,warning = FALSE}
+
+DEG <- deg_list[["0 vs. 4"]]
+
+DEG.ranked <- DEG %>%
+  dplyr::select(gene, avg_log2FC) %>%
+  na.omit() %>%
+  distinct() %>%
+  group_by(gene) %>%
+  summarize(LFC = mean(avg_log2FC)) %>%
+  arrange(desc(LFC))
+
+ranked <- deframe(DEG.ranked)
+
+rank <- ranked[names(ranked) != ""]
+
+```
+
+### Functional gene set enrichment Analysis
+
+```{r,warning = FALSE}
+
+############################## Hallmark
+set.seed(42)
+fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
+
+fgseares.tidy <- fgseares %>%
+  as_tibble() %>%  
+  arrange(desc(NES))
+
+fgseares.tidy <- fgseares.tidy %>%
+  dplyr::select(-ES, -nMoreExtreme) 
+
+
+fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
+fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
+fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
+fgseares.tidy.top.both
+
+```
+
+### Visualization
+
+```{r,warning = FALSE}
+
+plot_df <- fgseares.tidy.top.both %>%
+  mutate(
+    padj_group = case_when(
+      padj <= 0.05 ~ "< 0.05",
+      padj <= 0.2  ~ "0.05 – 0.2",
+      TRUE         ~ "> 0.2"
+    ),
+    padj_group = factor(padj_group, levels = c("< 0.05", "0.05 – 0.2", "> 0.2")),
+    pathway = gsub("HALLMARK_", "", pathway),
+  )
+
+
+ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
+  geom_col(aes(fill = padj_group), color = "black", linewidth = 0.2) +
+  coord_flip() +
+  scale_x_discrete(position = "top", labels = scales::label_wrap(50)) +
+  scale_fill_manual(
+    name = "adj. p-value",
+    values = c(
+      "< 0.05"     = "#9F1C67",   
+      "0.05 – 0.2" = "#FFD966",   
+      "> 0.2"      = "#005EA8"    
+    ),
+    drop = FALSE 
+  ) +
+  labs(
+    x = "", 
+    y = "Normalized Enrichment Score (NES)", 
+    title = "GSEA: Hallmark Pathways",
+    subtitle = "MT: Pathway changes Cluster 4 compared to Cluster 0"
+  ) +
+  theme_bw() +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic"),
+    legend.position = "left" 
+  )
+
+
+```
+
+## PAH
+
+```{r,warning = FALSE}
+
+df <- deg_list[["0 vs. 4"]]
+
+# Upregulated Genes
+up_genes <- df %>%
+  filter(avg_log2FC > 0.5, p_val_adj <= 0.05) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Downregulated Genes
+down_genes <- df %>%
+  filter(avg_log2FC < -0.5, p_val_adj <= 0.05) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Background Universe Genes 
+universe <- df %>%
+  distinct(gene) %>% 
+  pull(gene) %>%                        
+  na.omit()
+
+```
+
+
+```{r, warning = FALSE}
+
+set.seed(42)
+
+Humanlibrary <- org.Hs.eg.db
+
+###################################### upregulated genes
+
+up.GO <- enrichGO(
+  gene          = up_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.up.GO <- clusterProfiler::simplify(up.GO)
+
+head(simp.up.GO)
+
+###################################### downregulated genes
+
+down.GO <- enrichGO(
+  gene          = down_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.down.GO <- clusterProfiler::simplify(down.GO)
+
+head(simp.down.GO)
+
+```
+
+```{r, warning = FALSE}
+
+go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
+go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
+
+go_combined <- rbind(go_up_df, go_down_df) %>%
+  group_by(Direction) %>%
+  slice_head(n = 10) %>% # Adjust 'n' to show more or fewer terms per panel
+  ungroup()
+
+
+go_plot_data <- go_combined %>%
+  mutate(
+    GeneRatio_num = sapply(GeneRatio, function(x) {
+      num_den <- as.numeric(strsplit(x, "/")[[1]])
+      return(num_den[1] / num_den[2])})) %>%
+  arrange(Direction, GeneRatio_num) %>%
+  mutate(Description = factor(Description, levels = unique(Description)))
+
+
+ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
+  geom_point(aes(color = p.adjust, size = Count)) +  
+  facet_wrap(~Direction, scales = "free_y", ncol = 1) +
+  
+  scale_color_viridis_c(
+    option = "plasma", 
+    name = "adj. p-value",                          
+    guide = guide_colorbar(reverse = TRUE)
+  ) +
+  scale_size_continuous(range = c(3, 8), name = "Gene Count") +
+  scale_y_discrete(labels = scales::label_wrap(45)) +
+  
+  theme_bw() + 
+  labs(
+    title = "DEG MT 0 vs 4: GO Biological Process Enrichment", 
+    subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
+    x = "Gene Ratio", 
+    y = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
+    axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
+    axis.title.x  = element_text(face = "bold"),
+    strip.text    = element_text(face = "bold", size = 10), # Customizes facet header boxes
+    legend.position = "right"
+  )
+```
+
+## Check for Hypoxia markers
+
+```{r, warning = FALSE}
+
+# 3 different Hypoxia genesets
+
+# M13324
+hypox1 <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/BIOCARTA_HIF_PATHWAY.v2026.1.Hs.gmt")
+
+# M5202
+hypox2 <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/BIOCARTA_P53HYPOXIA_PATHWAY.v2026.1.Hs.gmt")
+
+# M25398
+hypox3 <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_HYPOXIA.v2026.1.Hs.gmt")
+
+SCpubr::do_DotPlot(Data, 
+                   features = hypox1,
+                   dot.scale = 10,
+                   plot.title = "Hypoxia Marker Expression Across Clusters") 
+
+Data <- AddModuleScore_UCell(
+  Data,
+  features = hypox1
+)
+
+FeaturePlot_scCustom(Data, features = "BIOCARTA_HIF_PATHWAY_UCell")
+
+#####################################################################
+
+SCpubr::do_DotPlot(Data, 
+                   features = hypox2,
+                   dot.scale = 10,
+                   plot.title = "Hypoxia Marker Expression Across Clusters") 
+
+Data <- AddModuleScore_UCell(
+  Data,
+  features = hypox2
+)
+
+FeaturePlot_scCustom(Data, features = "BIOCARTA_P53HYPOXIA_PATHWAY_UCell")
+
+#####################################################################
+
+SCpubr::do_DotPlot(Data, 
+                   features = hypox3,
+                   dot.scale = 10,
+                   plot.title = "Hypoxia Marker Expression Across Clusters") 
+
+Data <- AddModuleScore_UCell(
+  Data,
+  features = hypox3
+)
+
+FeaturePlot_scCustom(Data, features = "GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_HYPOXIA_UCell")
+
+```
+
+# Conclusion Cluster 4
+
+Highly propable that this cluster is the ischemic core of the MT.
+
+
+# Difference between Cluster 0 and Cluste 5 (Unknown?)
+
+## DGEA
+
+```{r, warning = FALSE}
+
+deg_list <- list()
+
+table(Data$SCT_snn_res.0.1)
+Idents(Data) <- "SCT_snn_res.0.1"
+
+MAST.Res <- FindMarkers(
+  object = Data,
+  ident.1 = "5",    
+  ident.2 = "0",     
+  test.use = "MAST",
+  logfc.threshold = 0.5,      
+  min.pct = 0.3             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
+
+MAST.Res.sign$gene
+
+deg_list[["0 vs. 5"]] <- MAST.Res
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG Cluster 0 vs. Cluster 5",
+  Subtitle = "",
+  pCutoff = 0.05,    
+  FCcutoff = 0.5     
+)
+
+
+```
+
+## FGSEA
+
+### Rank the data
+
+```{r,warning = FALSE}
+
+DEG <- deg_list[["0 vs. 5"]]
+
+DEG.ranked <- DEG %>%
+  dplyr::select(gene, avg_log2FC) %>%
+  na.omit() %>%
+  distinct() %>%
+  group_by(gene) %>%
+  summarize(LFC = mean(avg_log2FC)) %>%
+  arrange(desc(LFC))
+
+ranked <- deframe(DEG.ranked)
+
+rank <- ranked[names(ranked) != ""]
+
+```
+
+### Functional gene set enrichment Analysis
+
+```{r,warning = FALSE}
+
+############################## Hallmark
+set.seed(42)
+fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
+
+fgseares.tidy <- fgseares %>%
+  as_tibble() %>%  
+  arrange(desc(NES))
+
+fgseares.tidy <- fgseares.tidy %>%
+  dplyr::select(-ES, -nMoreExtreme) 
+
+
+fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
+fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
+fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
+fgseares.tidy.top.both
+
+# size is always 1 so this is not informative  
+```
+
+### Visualization
+
+```{r,warning = FALSE}
+
+plot_df <- fgseares.tidy.top.both %>%
+  mutate(
+    padj_group = case_when(
+      padj <= 0.05 ~ "< 0.05",
+      padj <= 0.2  ~ "0.05 – 0.2",
+      TRUE         ~ "> 0.2"
+    ),
+    padj_group = factor(padj_group, levels = c("< 0.05", "0.05 – 0.2", "> 0.2")),
+    pathway = gsub("HALLMARK_", "", pathway),
+  )
+
+
+ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
+  geom_col(aes(fill = padj_group), color = "black", linewidth = 0.2) +
+  coord_flip() +
+  scale_x_discrete(position = "top", labels = scales::label_wrap(50)) +
+  scale_fill_manual(
+    name = "adj. p-value",
+    values = c(
+      "< 0.05"     = "#9F1C67",   
+      "0.05 – 0.2" = "#FFD966",   
+      "> 0.2"      = "#005EA8"    
+    ),
+    drop = FALSE 
+  ) +
+  labs(
+    x = "", 
+    y = "Normalized Enrichment Score (NES)", 
+    title = "GSEA: Hallmark Pathways",
+    subtitle = "MT: Pathway changes Cluster 5 compared to Cluster 0"
+  ) +
+  theme_bw() +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic"),
+    legend.position = "left" 
+  )
+
+
+```
+
+## PAH
+
+-> 0 enriched terms found
+
+```{r,warning = FALSE}
+
+df <- deg_list[["0 vs. 5"]]
+
+# Upregulated Genes
+up_genes <- df %>%
+  filter(avg_log2FC > 0.5, p_val_adj <= 0.05) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Downregulated Genes
+ # -> none
+
+# Background Universe Genes 
+universe <- df %>%
+  distinct(gene) %>% 
+  pull(gene) %>%                        
+  na.omit()
+
+```
+
+
+```{r, warning = FALSE}
+
+set.seed(42)
+
+Humanlibrary <- org.Hs.eg.db
+
+###################################### upregulated genes
+
+up.GO <- enrichGO(
+  gene          = up_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+up.GO
+
+###################################### downregulated genes
+
+# none present
+
+```
+
+### Look at the marker genes
+
+```{r, warning = FALSE}
+marker.gene.df <- deg_list[["0 vs. 5"]]
+marker.genes <- marker.gene.df$gene
+marker.genes.sign <- marker.gene.df %>%
+  filter(avg_log2FC > 0.5, p_val_adj <= 0.05) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+FeaturePlot_scCustom(Data, features = marker.genes.sign[1:6])
+FeaturePlot_scCustom(Data, features = marker.genes.sign[7:12])
+FeaturePlot_scCustom(Data, features = marker.genes.sign[13:16])
+
+```
+
+
+### First Slice of the Marker genes is the most pronounced: 
+
+- ENSG00000289426 = Antisense to ANKRD45
+- CLEC2A = also regulation of actin filament polymerization (GeneCards); facilitates immune recognition of keratinocytes leading to natural killer cell mediated cytotoxicity
+- ANKRD45 = The protein is linked to proliferative control and to structures that organize the final stages of cell division (GeneCards)
+- ENSG00000289578 = Antisense to FAM3C (Also upregulated)
+- KLHL20: Promotes Lys-33-linked ubiquitination and proteasomal degradation; Enhances HIF-1 Signaling
+- KLRF2: Is activated by CLEC2A 
+- ENSG00000286339: Antsense to CEP85L
+- SBF2: Guanine nucleotide exchange factor (GEF) which activates RAB21 and possibly RAB28 (key regulators of intracellular membrane trafficking)
+- CEP85L: centrosome-associated protein 
+- FAM3C: linked to signal transduction and gene-expression programs. Extracellular regulator rather than an intracellular enzyme.?
+
+
+# Conlucion for Cluster 5
+
+I have no Idea.
+
