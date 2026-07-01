@@ -43,7 +43,7 @@ library(forcats)
 library(SCpubr)
 library(assertthat)
 library(UCell)
-
+library(DT)
 ```
 
 # Get the Data
@@ -129,6 +129,22 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
   return(EV)
 }
 
+############################## Datatables 
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover'       
+  )
+}
 
 ```
 
@@ -149,8 +165,8 @@ MAST.Res <- FindMarkers(
   ident.1 = "4",    
   ident.2 = "0",     
   test.use = "MAST",
-  logfc.threshold = 0.5,      
-  min.pct = 0.3             
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
 )
 
 MAST.Res <- MAST.Res %>%
@@ -159,7 +175,7 @@ MAST.Res <- MAST.Res %>%
 MAST.Res.sign <- MAST.Res %>%
   filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
 
-MAST.Res.sign$gene
+create_table(MAST.Res.sign)
 
 deg_list[["0 vs. 4"]] <- MAST.Res
 
@@ -216,13 +232,13 @@ fgseares.tidy <- fgseares %>%
   arrange(desc(NES))
 
 fgseares.tidy <- fgseares.tidy %>%
-  dplyr::select(-ES, -nMoreExtreme) 
-
+  dplyr::select(-leadingEdge ,-ES, -nMoreExtreme) 
 
 fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
 fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
 fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
-fgseares.tidy.top.both
+
+create_table(fgseares.tidy.top.both)
 
 ```
 
@@ -325,7 +341,10 @@ up.GO <- enrichGO(
 
 simp.up.GO <- clusterProfiler::simplify(up.GO)
 
-head(simp.up.GO)
+simp.up.GO.show <- as.data.frame(simp.up.GO)
+simp.up.GO.show <- simp.up.GO.show %>%
+  dplyr::select(-geneID) 
+create_table(simp.up.GO.show)
 
 ###################################### downregulated genes
 
@@ -343,7 +362,11 @@ down.GO <- enrichGO(
 
 simp.down.GO <- clusterProfiler::simplify(down.GO)
 
-head(simp.down.GO)
+simp.down.GO.show <- as.data.frame(simp.down.GO)
+simp.down.GO.show <- simp.down.GO.show %>%
+  dplyr::select(-geneID) 
+
+create_table(simp.down.GO.show)
 
 ```
 
@@ -475,8 +498,8 @@ MAST.Res <- FindMarkers(
   ident.1 = "5",    
   ident.2 = "0",     
   test.use = "MAST",
-  logfc.threshold = 0.5,      
-  min.pct = 0.3             
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
 )
 
 MAST.Res <- MAST.Res %>%
@@ -485,7 +508,7 @@ MAST.Res <- MAST.Res %>%
 MAST.Res.sign <- MAST.Res %>%
   filter(p_val_adj < 0.05 & abs(avg_log2FC) >= 0.5)
 
-MAST.Res.sign$gene
+create_table(MAST.Res.sign)
 
 deg_list[["0 vs. 5"]] <- MAST.Res
 
@@ -536,13 +559,14 @@ fgseares.tidy <- fgseares %>%
   arrange(desc(NES))
 
 fgseares.tidy <- fgseares.tidy %>%
-  dplyr::select(-ES, -nMoreExtreme) 
+  dplyr::select(-leadingEdge, -ES, -nMoreExtreme) 
 
 
 fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
 fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
 fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
-fgseares.tidy.top.both
+
+create_table(fgseares.tidy.top.both)
 
 # size is always 1 so this is not informative  
 ```
@@ -644,6 +668,7 @@ up.GO <- enrichGO(
 
 up.GO
 
+
 ###################################### downregulated genes
 
 # none present
@@ -670,19 +695,19 @@ FeaturePlot_scCustom(Data, features = marker.genes.sign[13:16])
 
 ### First Slice of the Marker genes is the most pronounced: 
 
-- ENSG00000289426 = Antisense to ANKRD45
-- CLEC2A = also regulation of actin filament polymerization (GeneCards); facilitates immune recognition of keratinocytes leading to natural killer cell mediated cytotoxicity
-- ANKRD45 = The protein is linked to proliferative control and to structures that organize the final stages of cell division (GeneCards)
-- ENSG00000289578 = Antisense to FAM3C (Also upregulated)
-- KLHL20: Promotes Lys-33-linked ubiquitination and proteasomal degradation; Enhances HIF-1 Signaling
-- KLRF2: Is activated by CLEC2A 
-- ENSG00000286339: Antsense to CEP85L
-- SBF2: Guanine nucleotide exchange factor (GEF) which activates RAB21 and possibly RAB28 (key regulators of intracellular membrane trafficking)
-- CEP85L: centrosome-associated protein 
-- FAM3C: linked to signal transduction and gene-expression programs. Extracellular regulator rather than an intracellular enzyme.?
+- **ENSG00000289426** = Antisense to **ANKRD45**
+- **CLEC2A** = also regulation of actin filament polymerization (GeneCards); facilitates immune recognition of keratinocytes leading to natural killer cell mediated cytotoxicity
+- **ANKRD45** = The protein is linked to proliferative control and to structures that organize the final stages of cell division (GeneCards)
+- **ENSG00000289578** = Antisense to **FAM3C** (Also upregulated)
+- **KLHL20**: Promotes Lys-33-linked ubiquitination and proteasomal degradation; Enhances **HIF-1** Signaling
+- **KLRF2**: Is activated by **CLEC2A** 
+- **ENSG00000286339**: Antsense to **CEP85L**
+- **SBF2**: Guanine nucleotide exchange factor (GEF) which activates **RAB21** and possibly **RAB28** (key regulators of intracellular membrane trafficking)
+- **CEP85L**: centrosome-associated protein 
+- **FAM3C**: linked to signal transduction and gene-expression programs. Extracellular regulator rather than an intracellular enzyme.?
 
 
 # Conlucion for Cluster 5
 
-I have no Idea.
+??
 

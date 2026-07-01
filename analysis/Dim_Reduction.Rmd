@@ -27,11 +27,33 @@ library(workflowr)
 library(scDblFinder)
 library(clustree)
 library(harmony)
+library(DT)
 ```
+
+# Functions
+
+```{r, warning = FALSE}
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover'       
+  )
+}
+```
+
+# Dimentionality reduction
 
 ## Get the Data
 
-```{r}
+```{r, warning = FALSE}
 # path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
 path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_QC.rds"
 Data <- read_rds(path)
@@ -40,14 +62,12 @@ Data
 
 ## Inspecting Data
 
-```{r}
+```{r, warning = FALSE}
 
 Data # 1 Assay (RNA) with count and data layer
 DefaultAssay(Data)
 
-#Data@meta.data <- Data@meta.data %>% select(-contains("scDblFinder"))
-Data@meta.data <- Data@meta.data %>% select(-("ident"))
-head(Data)
+create_table(head(Data))
 
 table(Data$orig.ident)
 table(Data$TGF_status)
@@ -57,7 +77,7 @@ table(Data$Macrophage_status)
 
 ## Normalization and scaling with SCtransform
 
-```{r}
+```{r, warning = FALSE}
 DefaultAssay(Data) <- "RNA"
 Data <- SplitObject(Data, split.by = "orig.ident")
 for (i in 1:length(Data)) {
@@ -72,7 +92,7 @@ for (i in 1:length(Data)) {
 
 ## PCA
 
-```{r}
+```{r, warning = FALSE}
 features <- SelectIntegrationFeatures(object.list = Data, nfeatures = 3000)
 Data <- merge(x = Data[[1]], y = Data[2:length(Data)], merge.data=TRUE)
 VariableFeatures(Data) <- features
@@ -86,12 +106,11 @@ ElbowPlot(Data, ndims = 50)+
   theme_minimal(base_size = 11)
 
 
-
 ```
 
 ## Clustering without integration
 
-```{r}
+```{r, warning = FALSE}
 
 Dims <- 25
 
@@ -118,7 +137,7 @@ DimPlot(Data, reduction = "umap", shuffle = T,
 
 ## Intergration with Harmony
 
-```{r}
+```{r, warning = FALSE}
 
 Data <- RunHarmony(Data, 
                      group.by.vars = "orig.ident", 
@@ -151,24 +170,21 @@ DimPlot(Data, reduction = "umap", shuffle = T,
 
 ## Top markers per cluster
 
-```{r}
+```{r, warning = FALSE}
 DefaultAssay(Data) <- "RNA"
 Data <- NormalizeData(Data)
 Idents(Data) <- "SCT_snn_res.0.2"
 Markers <- FindAllMarkers(Data, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 1)
 
 
-#write.csv(Markers, here::here(output_dir_data, "DCM_RV_Markers_all_low_quality.csv"))
 Markers_top10 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC))
-#write.csv(Markers_top10, here::here(output_dir_data, "DCM_RV_Markers_top10_low_quality.csv"))
 Markers_top3 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 3, wt = avg_log2FC))
-#write.csv(Markers_top3, here::here(output_dir_data, "DCM_RV_Markers_top3_low_quality.csv"))
 
-
+create_table(Markers_top10)
 ```
 
 
-```{r}
+```{r, warning = FALSE}
 heatmap_cols <- colorRampPalette(RColorBrewer::brewer.pal(9,"RdBu"))(256)
 heatmap_cols <- rev(heatmap_cols[1:256])
 Heatmap <- DoHeatmap(subset(Data, cells = sample(colnames(Data), 10000)), label = FALSE, draw.line = F, features = Markers_top10$gene, assay = "SCT") +
@@ -185,41 +201,41 @@ DimPlot(Data, reduction = "umap", shuffle = T,
 ```
 
 
-```{r}
+```{r, warning = FALSE}
 
 VlnPlot(Data, features = c("nCount_RNA", "nFeature_RNA", "percent.mt", "percent.rp", "scDblFinder.score"), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())
 
 # Checking Cluster 0 -> Cardiomyocytes
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "0")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
-dplyr::filter(Markers_top10, cluster == "0")
+create_table(dplyr::filter(Markers_top10, cluster == "0"))
 # Checking Cluster 1 -> Monocytes
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "1")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
-dplyr::filter(Markers_top10, cluster == "1")
+create_table(dplyr::filter(Markers_top10, cluster == "1"))
 # Checking Cluster 2 -> proliferating cells
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "2")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
-dplyr::filter(Markers_top10, cluster == "2")
+create_table(dplyr::filter(Markers_top10, cluster == "2"))
 # Checking Cluster 3 -> For sure cardiac Fibroblasts
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "3")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
-dplyr::filter(Markers_top10, cluster == "3")
-# Checking Cluster 4 -> TNNC1 high = beating subunit?
+create_table(dplyr::filter(Markers_top10, cluster == "3"))
+# Checking Cluster 4 -> ?
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "4")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
-dplyr::filter(Markers_top10, cluster == "4")
+create_table(dplyr::filter(Markers_top10, cluster == "4"))
 # Checking Cluster 5 -> SPTLC3: Could be the Hypoxic core?
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "5")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
-dplyr::filter(Markers_top10, cluster == "5")
+create_table(dplyr::filter(Markers_top10, cluster == "5"))
 # Checking Cluster 8 -> Dying cells: mitrochondrial gene count is high
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "6")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
-dplyr::filter(Markers_top10, cluster == "6")
+create_table(dplyr::filter(Markers_top10, cluster == "6"))
 # Checking Cluster 7 -> probably doublets
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "7")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
-dplyr::filter(Markers_top10, cluster == "7")
+create_table(dplyr::filter(Markers_top10, cluster == "7"))
 
 ```
 
 
+## Removing the mitochondrial cluster and the left over doubles
 
-
-```{r}
+```{r, warning = FALSE}
 
 # Remove only the clearly mitochondrial cluster and the left over doubles
 Data.clean <- subset(Data, subset = SCT_snn_res.0.2 %in% c("0", "1", "2", "3", "4","5"))
@@ -260,14 +276,14 @@ DimPlot(Data.clean, reduction = "umap", shuffle = T,
         group.by = "Phase", label=T)
 ```
 
-```{r}
+```{r, warning = FALSE}
 DimPlot(Data.clean, reduction = "umap", shuffle = T,
         group.by = c("SCT_snn_res.0.1", "orig.ident"), ncol = 2, label=T)
 Idents(Data.clean) <- "SCT_snn_res.0.1"
 VlnPlot(Data.clean, features = c("nCount_RNA", "nFeature_RNA", "percent.mt", "percent.rp", "scDblFinder.score"), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())
 ```
 
-```{r}
+```{r, warning = FALSE}
 
 ### MArker genes
 
@@ -278,11 +294,12 @@ Markers_top10 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 10, w
 Markers_top3 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 3, wt = avg_log2FC))
 Markers_top5 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC))
 
-Markers_top10
+create_table(Markers_top10)
 ```
 
-```{r}
+## Cheching specific Marker genes
 
+```{r,warning = FALSE}
 
 FeaturePlot_scCustom(Data.clean, features = "CD163", pt.size = 0, reduction = "umap") + 
   theme(axis.title.x = element_blank()) # Macrophage marker
@@ -308,7 +325,7 @@ FeaturePlot_scCustom(Data.clean, features = c("ANKRD45", "KLHL20"), pt.size = 0,
 
 ## Renaming Cluster IDs
 
-```{r}
+```{r, warning = FALSE}
 new_cluster_ids <- c(
   "0" = "Cardiomyocytes",
   "1" = "Macrophages",
@@ -333,9 +350,3 @@ outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_
 # saveRDS(Data.clean, file = file.path(outputdir, "Post_Annotation.rds"))
 
 ```
-
-```{r}
-
-
-```
-

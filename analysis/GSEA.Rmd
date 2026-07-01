@@ -45,6 +45,25 @@ library(UCell)
 
 ```
 
+# Functions
+
+```{r, warning = FALSE}
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover'       
+  )
+}
+```
+
 # Get Hallmark pathways
 
 ```{r,warning = FALSE}
@@ -99,13 +118,14 @@ fgseares.tidy <- fgseares %>%
   arrange(desc(NES))
 
 fgseares.tidy <- fgseares.tidy %>%
-  dplyr::select(-ES, -nMoreExtreme) 
+  dplyr::select(-leadingEdge, -ES, -nMoreExtreme) 
 
 
 fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
 fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
 fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
 
+create_table(fgseares.tidy.top.both)
 
 ```
 
@@ -210,7 +230,12 @@ up.GO <- enrichGO(
 
 simp.up.GO <- clusterProfiler::simplify(up.GO)
 
-head(simp.up.GO)
+simp.up.GO.show <- as.data.frame(simp.up.GO)
+simp.up.GO.show <- simp.up.GO.show %>%
+  dplyr::select(-geneID) 
+
+create_table(simp.up.GO.show)
+
 
 ###################################### downregulated genes
 
@@ -227,8 +252,11 @@ down.GO <- enrichGO(
 )
 
 simp.down.GO <- clusterProfiler::simplify(down.GO)
+simp.down.GO.show <- as.data.frame(simp.down.GO)
+simp.down.GO.show <- simp.down.GO.show %>%
+  dplyr::select(-geneID) 
 
-head(simp.down.GO)
+create_table(simp.down.GO.show)
 
 ```
 
@@ -278,7 +306,7 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
     plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
     axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
     axis.title.x  = element_text(face = "bold"),
-    strip.text    = element_text(face = "bold", size = 10), # Customizes facet header boxes
+    strip.text    = element_text(face = "bold", size = 10), 
     legend.position = "right"
   )
 ```
