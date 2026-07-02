@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Sophie.Alice" />
 
+<meta name="date" content="2026-07-02" />
 
-<title>Home</title>
+<title>Fibroblast_Comparisons</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +31,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
@@ -235,6 +240,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -242,6 +310,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -293,7 +371,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Fibroblast_Comparisons</h1>
+<h4 class="author">Sophie.Alice</h4>
+<h4 class="date">2026-07-02</h4>
 
 </div>
 
@@ -423,10 +503,12 @@ have uncommitted changes.
 <div id="versions" class="tab-pane fade">
 <p>
 These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML
-(<code>docs/index.html</code>) files. If you’ve configured a remote Git
-repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
-in the table below to view the files as they were in that past version.
+made to the R Markdown
+(<code>analysis/Fibroblast_Comparisons.Rmd</code>) and HTML
+(<code>docs/Fibroblast_Comparisons.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -455,7 +537,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/8d974307bf04ae0f91f1589cb7180ea308b4d00a/analysis/index.Rmd" target="_blank">8d97430</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/8d974307bf04ae0f91f1589cb7180ea308b4d00a/analysis/Fibroblast_Comparisons.Rmd" target="_blank">8d97430</a>
 </td>
 <td>
 Sophie.Alice
@@ -467,278 +549,6 @@ Sophie.Alice
 Updated
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/index.html" target="_blank">028e94e</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/b0dece5dc51d4933299994fc123609e62b2ecd61/analysis/index.Rmd" target="_blank">b0dece5</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-01
-</td>
-<td>
-Updating Tables
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/0b1bbf6c119402d4b88ac4aba83cda813ecbb28d/docs/index.html" target="_blank">0b1bbf6</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/b844b3a6456d3ee3935bd82ec699a7df399e1ef8/analysis/index.Rmd" target="_blank">b844b3a</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-30
-</td>
-<td>
-adding CM subtype identification
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/2eaf68c7be72e00de176d396d47fbf9d186bff17/docs/index.html" target="_blank">2eaf68c</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/116d234456b6fb5f08de18200ea2b5b997b2d5d3/docs/index.html" target="_blank">116d234</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/index.html" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/0b82e50c20ee503c415e647485a3ecf6c441eb8c/analysis/index.Rmd" target="_blank">0b82e50</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-<td>
-Adding more
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/index.html" target="_blank">f44fffe</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/3378d5c6fa26c1441c22f22f86a66534c72bfedf/analysis/index.Rmd" target="_blank">3378d5c</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-24
-</td>
-<td>
-Tryinging
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/c7939056fc8beead4120f58a1550b465dd15a125/docs/index.html" target="_blank">c793905</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-17
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/370aabde4d36b5bf1790fe9e536df1be78750fbc/analysis/index.Rmd" target="_blank">370aabd</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-17
-</td>
-<td>
-Updating index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/7cf7cb9c670305e0a58b9f1fe9b2cb24056e2e46/docs/index.html" target="_blank">7cf7cb9</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/c46783846b4965a883c7f4672b78435e8b1f8e54/analysis/index.Rmd" target="_blank">c467838</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-<td>
-Adding Cellbender QC
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/0886fc401a146a209612db096a2f486eeaf2e912/docs/index.html" target="_blank">0886fc4</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/3c61f2d33545e009a6bbeae849f5a3fc61800075/analysis/index.Rmd" target="_blank">3c61f2d</a>
-</td>
-<td>
-Sophie
-</td>
-<td>
-2026-06-12
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -746,31 +556,19 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>Project MT</p>
+<div id="idea-setup" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Idea Setup</h1>
 <ul>
-<li><a href="Checking_Cellbender.html">1. Cellbender vs. Raw Data QC
-Comparison</a></li>
-<li><a href="QC.html">2. QC</a></li>
-<li><a href="Dim_Reduction.html">3. Clustering and Annotation</a></li>
-<li><a href="Proportions.html">4. Celltype Proportions</a></li>
-<li><a href="CM_Subtypes.html">5. CM Subtypes</a></li>
-<li><a href="Macrophage_subset_DGEA.html">6.1 Macrophages Subset
-DGEA</a></li>
-<li><a href="GSEA.html">6.2 Macrophages Subset fGSEA</a></li>
-<li><a href="Fibroblast_Comparisons.html">7.0 Fibroblast
-Comparisons</a></li>
-<li><a href="DGEA.html">7.1 Fibroblast Subset DGEA Overview</a></li>
-<li><a href="Baseline_TGF_Response.html">7.1.1 Fibroblast Subset:
-Baseline TGF-B Response</a></li>
-<li><a href="Modulated_TGF_Response.html">7.1.2 Fibroblast Subset:
-Modulated TGF-B Response</a></li>
-<li><a href="Baseline_Mac_Response.html">7.1.3 Fibroblast Subset:
-Baseline Macrophage Response</a></li>
-<li><a href="Stim_Mac_Response.html">7.1.4 Fibroblast Subset: Stimulated
-Macrophage Response</a></li>
-<li><a href="Fibroblasts_DEG_Overlap.html">7.2 Fibroblast Comparisons
-DEG Ovelap</a></li>
+<li>CMF_TGF vs. CMF_NC = Effect of TGF-Beta on MT without Macrophages
+(Baseline_TGF_Response)</li>
+<li>CMFHM_TGF vs. CMFHM_NC = Effect of TGF-Beta on MT with Macrophages
+(Modulated_TGF_Response)</li>
+<li>CMFHM_NC vs. CMF_NC = Effect of Macrophage Presence on MT without
+TGF-Beta (Baseline_Mac_Response)</li>
+<li>CMFHM_TGF vs CMF_TGF = Effect of Macrophage Presence on MT with
+TGF-Beta Stimulation (Stim_Mac_Response)</li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -793,6 +591,8 @@ footer is added to webpages before the MathJax javascript. -->
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -830,6 +630,35 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
