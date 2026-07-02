@@ -33,8 +33,9 @@ library(EnhancedVolcano)
 library(UpSetR)
 library(grid)
 library(ggvenn)
+library(DT)
 
-#BiocManager::install("MAST")
+
 ```
 
 # Get the Data
@@ -74,7 +75,7 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
   
   EV <- EnhancedVolcano(
     df,
-    lab = NA,
+    lab = df$gene,
     x = 'avg_log2FC',
     y = 'p_val_adj',
     xlab = 'log2 Foldchange',
@@ -90,12 +91,31 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
 
     cutoffLineType = 'dashed',      
     cutoffLineCol = 'black',        
-    cutoffLineWidth = 0.6           
+    cutoffLineWidth = 0.6,
+    labSize = 3.0,
+    drawConnectors = TRUE,
+    widthConnectors = 0.5
   )
   
   return(EV)
 }
 
+##################################### Tables
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover'       
+  )
+}
 
 ```
 
@@ -141,7 +161,7 @@ MAST.Res.sign <- MAST.Res %>%
 
 
 
-fibroblast_deg_list[["Baseline_TGF_Response"]] <- MAST.Res.sign
+fibroblast_deg_list[["Baseline_TGF_Response"]] <- MAST.Res
 
 head(MAST.Res.sign)
 
@@ -182,7 +202,7 @@ MAST.Res.sign <- MAST.Res %>%
 
 head(MAST.Res.sign)
 
-fibroblast_deg_list[["Modulated_TGF_Response"]] <- MAST.Res.sign
+fibroblast_deg_list[["Modulated_TGF_Response"]] <- MAST.Res
 
 
 Volcano_Plots(
@@ -197,6 +217,8 @@ Volcano_Plots(
 #write.csv(MAST.Res.sign, file = file.path(outputdir, "Modulated_TGF_Response_sign.csv"))
 
 ```
+
+
 
 ### Baseline Macrophage response
 
@@ -221,7 +243,7 @@ MAST.Res.sign <- MAST.Res %>%
 
 head(MAST.Res.sign)
 
-fibroblast_deg_list[["Baseline_Mac_Response"]] <- MAST.Res.sign
+fibroblast_deg_list[["Baseline_Mac_Response"]] <- MAST.Res
 
 Volcano_Plots(
   Data = MAST.Res,
@@ -258,7 +280,7 @@ MAST.Res.sign <- MAST.Res %>%
 
 head(MAST.Res.sign)
 
-fibroblast_deg_list[["Stim_Mac_Response"]] <- MAST.Res.sign
+fibroblast_deg_list[["Stim_Mac_Response"]] <- MAST.Res
 
 
 Volcano_Plots(
@@ -278,6 +300,8 @@ Volcano_Plots(
 
 ### Get the DEG
 
+Cutoffs Chosen: FDR <= 0.01, abs(log2FC) > 1
+
 ```{r, warning = FALSE}
 
 upset_up_genes   <- list()
@@ -285,7 +309,7 @@ upset_down_genes <- list()
 
 
 p_cutoff  <- 0.01
-fc_cutoff <- 1 
+fc_cutoff <- 1
 
 for (comp_name in names(fibroblast_deg_list)) {
 
@@ -465,6 +489,16 @@ ggvenn(
     plot.title = element_text(hjust = 0, face = "bold", size = 13, color = "black"),
     plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
   )
+
+```
+
+### Saving the gene lists
+
+```{r, warning = FALSE}
+
+outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
+
+#saveRDS(fibroblast_deg_list, file = file.path(outputdir, "All_Fibro_DEG_Lists.rds"))
 
 ```
 

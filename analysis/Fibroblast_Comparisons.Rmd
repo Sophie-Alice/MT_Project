@@ -1,0 +1,16 @@
+---
+title: "Fibroblast_Comparisons"
+author: "Sophie.Alice"
+date: "2026-07-02"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+# Idea Setup
+
+ - CMF_TGF vs. CMF_NC = Effect of TGF-Beta on MT without Macrophages (Baseline_TGF_Response)
+ - CMFHM_TGF vs. CMFHM_NC = Effect of TGF-Beta on MT with Macrophages (Modulated_TGF_Response)
+ - CMFHM_NC vs. CMF_NC = Effect of Macrophage Presence on MT without TGF-Beta (Baseline_Mac_Response)
+ - CMFHM_TGF vs CMF_TGF = Effect of Macrophage Presence on MT with TGF-Beta Stimulation (Stim_Mac_Response)
+

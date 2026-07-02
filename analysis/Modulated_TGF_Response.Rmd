@@ -1,0 +1,389 @@
+---
+title: "Modulated_TGF_Response"
+author: "Sophie.Alice"
+date: "2026-07-02"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+```
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+path2 <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Fibro_DEG_Lists.rds"
+
+DEG.lists <- read_rds(path2)
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+
+# Functions
+
+```{r, warning = FALSE}
+
+
+Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
+  
+  # Clean extreme values
+  df <- Data
+  df <- df[is.finite(df$avg_log2FC) & is.finite(df$p_val_adj), ]
+  
+  # dynamic axis limits
+  xmax <- max(df$avg_log2FC, na.rm = TRUE)
+  xmin <- min(df$avg_log2FC, na.rm = TRUE)
+  ymax <- max(-log10(df$p_val_adj), na.rm = TRUE)
+  
+  # Add padding
+  xpad <- (xmax - xmin) * 0.1
+  ypad <- ymax * 0.1
+  
+  combined_subtitle <- paste0(Subtitle, " ● Thresholds: FDR < ", pCutoff, ", |Log2FC| > ", FCcutoff)
+  
+  EV <- EnhancedVolcano(
+    df,
+    lab = df$gene,
+    x = 'avg_log2FC',
+    y = 'p_val_adj',
+    xlab = 'log2 Foldchange',
+    ylab = "-log10 FDR",
+    legendLabels = c('NS','log2FC','FDR','FDR & log2FC'),
+    col = c("darkgrey", "#005EA8", "#FFD966", "#9F1C67"),
+    title = Title,
+    subtitle = combined_subtitle,   
+    xlim = c(xmin - xpad, xmax + xpad),
+    ylim = c(0, ymax + ypad),
+    pCutoff = pCutoff,              
+    FCcutoff = FCcutoff,            
+
+    cutoffLineType = 'dashed',      
+    cutoffLineCol = 'black',        
+    cutoffLineWidth = 0.6,
+    labSize = 3.0,
+    drawConnectors = TRUE,
+    widthConnectors = 0.5
+  )
+  
+  return(EV)
+}
+
+##################################### Tables
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover'       
+  )
+}
+
+```
+
+# DEGs of Modulated Fibrotic response to TGF-B with Macrophages
+
+ - CMFHM_TGF vs CMFHM_NC = Effect of TGF-Beta on MT with Macrophages
+
+ - Cutoffs Chosen: FDR <= 0.01, abs(log2FC) > 1
+
+```{r, warning = FALSE}
+
+FDR <- 0.01
+FC <- 1
+
+Degs <- DEG.lists$Modulated_TGF_Response
+
+Degs.sign <- Degs %>%
+  filter(p_val_adj < FDR & abs(avg_log2FC) >= FC)
+
+create_table(Degs.sign)
+
+Volcano_Plots(
+  Data = Degs,
+  Title = "DEG in MT-Fibroblasts with Macrophages",
+  Subtitle = "TGF-\u03b2 vs. Control",
+  pCutoff = FDR,    
+  FCcutoff = FC     
+)
+
+```
+
+## FGSEA
+
+### Get Hallmark pathways
+
+```{r,warning = FALSE}
+Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt")
+```
+
+### Rank the data
+
+```{r,warning = FALSE}
+
+DEG.ranked <- Degs %>%
+  dplyr::select(gene, avg_log2FC) %>%
+  na.omit() %>%
+  distinct() %>%
+  group_by(gene) %>%
+  summarize(LFC = mean(avg_log2FC)) %>%
+  arrange(desc(LFC))
+
+ranked <- deframe(DEG.ranked)
+
+rank <- ranked[names(ranked) != ""]
+
+```
+
+### Functional gene set enrichment Analysis
+
+```{r,warning = FALSE}
+
+############################## Hallmark
+set.seed(42)
+
+fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
+
+fgseares.tidy <- fgseares %>%
+  as_tibble() %>%  
+  arrange(desc(NES))
+
+fgseares.tidy <- fgseares.tidy %>%
+  dplyr::select(-leadingEdge ,-ES, -nMoreExtreme) 
+
+fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
+fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
+fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
+
+create_table(fgseares.tidy.top.both)
+
+```
+
+### Visualization
+
+```{r,warning = FALSE}
+
+plot_df <- fgseares.tidy.top.both %>%
+  mutate(
+    padj_group = case_when(
+      padj <= 0.05 ~ "< 0.05",
+      padj <= 0.2  ~ "0.05 – 0.2",
+      TRUE         ~ "> 0.2"
+    ),
+    padj_group = factor(padj_group, levels = c("< 0.05", "0.05 – 0.2", "> 0.2")),
+    pathway = gsub("HALLMARK_", "", pathway),
+  )
+
+
+ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
+  geom_col(aes(fill = padj_group), color = "black", linewidth = 0.2) +
+  coord_flip() +
+  scale_x_discrete(position = "top", labels = scales::label_wrap(50)) +
+  scale_fill_manual(
+    name = "adj. p-value",
+    values = c(
+      "< 0.05"     = "#9F1C67",   
+      "0.05 – 0.2" = "#FFD966",   
+      "> 0.2"      = "#005EA8"    
+    ),
+    drop = FALSE 
+  ) +
+  labs(
+    x = "", 
+    y = "Normalized Enrichment Score (NES)", 
+    title = "GSEA: Hallmark Pathways",
+    subtitle = "MT: Pathway changes CMFHM_TGF compared to CMFHM_NC"
+  ) +
+  theme_bw() +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic"),
+    legend.position = "left" 
+  )
+
+
+```
+
+## PAH
+
+```{r,warning = FALSE}
+
+df <- Degs
+
+# Upregulated Genes
+up_genes <- df %>%
+  filter(avg_log2FC > FC, p_val_adj <= FDR) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Downregulated Genes
+down_genes <- df %>%
+  filter(avg_log2FC < -FC, p_val_adj <= FDR) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Background Universe Genes 
+universe <- df %>%
+  distinct(gene) %>% 
+  pull(gene) %>%                        
+  na.omit()
+
+```
+
+
+```{r, warning = FALSE}
+
+set.seed(42)
+
+Humanlibrary <- org.Hs.eg.db
+
+###################################### upregulated genes
+
+up.GO <- enrichGO(
+  gene          = up_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.up.GO <- clusterProfiler::simplify(up.GO)
+
+simp.up.GO.show <- as.data.frame(simp.up.GO)
+simp.up.GO.show <- simp.up.GO.show %>%
+  dplyr::select(-geneID) 
+create_table(simp.up.GO.show)
+
+###################################### downregulated genes
+
+down.GO <- enrichGO(
+  gene          = down_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.down.GO <- clusterProfiler::simplify(down.GO)
+
+simp.down.GO.show <- as.data.frame(simp.down.GO)
+simp.down.GO.show <- simp.down.GO.show %>%
+  dplyr::select(-geneID) 
+
+create_table(simp.down.GO.show)
+
+```
+
+```{r, warning = FALSE}
+
+go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
+go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
+
+go_combined <- rbind(go_up_df, go_down_df) %>%
+  group_by(Direction) %>%
+  slice_head(n = 10) %>% # Adjust 'n' to show more or fewer terms per panel
+  ungroup()
+
+
+go_plot_data <- go_combined %>%
+  mutate(
+    GeneRatio_num = sapply(GeneRatio, function(x) {
+      num_den <- as.numeric(strsplit(x, "/")[[1]])
+      return(num_den[1] / num_den[2])})) %>%
+  arrange(Direction, GeneRatio_num) %>%
+  mutate(Description = factor(Description, levels = unique(Description)))
+
+
+ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
+  geom_point(aes(color = p.adjust, size = Count)) +  
+  facet_wrap(~Direction, scales = "free_y", ncol = 1) +
+  
+  scale_color_viridis_c(
+    option = "plasma", 
+    name = "adj. p-value",                          
+    guide = guide_colorbar(reverse = TRUE)
+  ) +
+  scale_size_continuous(range = c(3, 8), name = "Gene Count") +
+  scale_y_discrete(labels = scales::label_wrap(45)) +
+  
+  theme_bw() + 
+  labs(
+    title = "DEG MT CMFHM_TGF vs CMFHM_NC: GO Biological Process Enrichment", 
+    subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
+    x = "Gene Ratio", 
+    y = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
+    axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
+    axis.title.x  = element_text(face = "bold"),
+    strip.text    = element_text(face = "bold", size = 10), 
+    legend.position = "right"
+  )
+```
