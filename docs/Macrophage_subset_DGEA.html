@@ -554,15 +554,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree651d2070683f7b79c284148d6dbfbd9933bc1000targetblank651d207a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreebee068d2b55c37c87c9953cfea253e27eef43363targetblankbee068da">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/651d2070683f7b79c284148d6dbfbd9933bc1000" target="_blank">651d207</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/bee068d2b55c37c87c9953cfea253e27eef43363" target="_blank">bee068d</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree651d2070683f7b79c284148d6dbfbd9933bc1000targetblank651d207a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreebee068d2b55c37c87c9953cfea253e27eef43363targetblankbee068da"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -572,7 +572,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/651d2070683f7b79c284148d6dbfbd9933bc1000" target="_blank">651d207</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/bee068d2b55c37c87c9953cfea253e27eef43363" target="_blank">bee068d</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -591,7 +591,8 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
-    Untracked:  analysis/Fibroblasts_DEG_Overlap.Rmd
+    Untracked:  analysis/omnipathr-log/
+    Untracked:  omnipathr-log/
 
 </code></pre>
 <p>
@@ -637,6 +638,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/bee068d2b55c37c87c9953cfea253e27eef43363/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">bee068d</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+<td>
+Udpades
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/Macrophage_subset_DGEA.html" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -802,8 +837,8 @@ Adding more
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907780 48.5    1752784 93.7         NA  1321095 70.6
-Vcells 1598874 12.2    8388608 64.0      16384  2404089 18.4</code></pre>
+Ncells  908258 48.6    1754162 93.7         NA  1321070 70.6
+Vcells 1601375 12.3    8388608 64.0      16384  2489859 19.0</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -836,7 +871,8 @@ library(UCell)
 library(DT)
 
 library(ggforce) 
-library(enrichplot)</code></pre>
+library(enrichplot)
+library(ggrain)</code></pre>
 </div>
 <div id="get-the-data" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Get the Data</h1>
@@ -851,6 +887,7 @@ Active assay: RNA (38606 features, 0 variable features)
  1 other assay present: SCT
  3 dimensional reductions calculated: pca, harmony, umap</code></pre>
 <pre class="r"><code>custom_palette &lt;- colorRampPalette(c(&quot;#005EA8&quot;, &quot;#6DB335&quot;, &quot;#FFD966&quot;, &quot;#EDAAD2&quot;, &quot;#9F1C67&quot;))
+gradient_colors2 &lt;- custom_palette(2)
 gradient_colors3 &lt;- custom_palette(6)
 gradient_colors4 &lt;- custom_palette(4)</code></pre>
 </div>
@@ -915,6 +952,69 @@ create_table &lt;- function(df) {
     filter = &#39;top&#39;,                         
     class = &#39;cell-border stripe hover&#39;       
   )
+}
+
+#################################################### Raincloud Plots
+
+raincloud.plots &lt;- function(gene_list, 
+                                   plot_title, 
+                                   plot_subtitle, 
+                                   seurat_obj = Data, 
+                                   colors = gradient_colors4) {
+
+  
+  valid_genes &lt;- intersect(gene_list, rownames(seurat_obj))
+  expression_matrix &lt;- FetchData(seurat_obj, vars = c(valid_genes, &quot;ident&quot;)) 
+
+  
+  rain_data &lt;- expression_matrix %&gt;%
+    tibble::rownames_to_column(&quot;Cell_ID&quot;) %&gt;%
+    tidyr::pivot_longer(
+      cols = all_of(valid_genes), 
+      names_to = &quot;Gene&quot;, 
+      values_to = &quot;Expression&quot;
+    ) %&gt;%
+    dplyr::rename(Condition = ident)
+  
+
+  raincloud_plot &lt;- ggplot(rain_data, aes(x = Condition, y = Expression, fill = Condition, color = Condition)) +
+    geom_rain(
+      alpha = 0.6,
+      violin.args = list(color = NA),          
+      boxplot.args = list(outlier.shape = NA), 
+      point.args = list(
+        size = 0.4,                            
+        alpha = 0.4                            
+      ),
+    group = 1
+    ) +
+    
+    facet_wrap(~Gene, scales = &quot;free_y&quot;, ncol = 4) +
+    
+    scale_fill_manual(values = colors) +
+    scale_color_manual(values = colors) +
+    
+    theme_bw() +
+    labs(
+      title    = plot_title,
+      subtitle = plot_subtitle,
+      x        = &quot;Experimental Conditions&quot;,
+      y        = &quot;Normalized Expression Level&quot;
+    ) +
+    
+    theme(
+      plot.title.position = &quot;plot&quot;,
+      plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+      plot.subtitle = element_text(face = &quot;italic&quot;, size = 10, hjust = 0),
+      axis.text.x   = element_text(angle = 45, hjust = 1, face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.text.y   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.title.x  = element_text(face = &quot;bold&quot;),
+      axis.title.y  = element_text(face = &quot;bold&quot;),
+      strip.text    = element_text(face = &quot;bold&quot;, size = 10), 
+      legend.position = &quot;none&quot;
+    )
+  
+  return(raincloud_plot)
 }</code></pre>
 </div>
 <div id="macrophages" class="section level1" number="4">
@@ -980,6 +1080,43 @@ create_table(Macrophages.MAST.sign)</code></pre>
   FCcutoff = FC     
 )</code></pre>
 <p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>outputdir &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/DGEA_output&quot;
 
 #write.csv(Macrophages.MAST, file = file.path(outputdir, &quot;Macrophages_all.csv&quot;))
@@ -1075,6 +1212,43 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
     legend.position = &quot;left&quot; 
   )</code></pre>
 <p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-9-1.png" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="pah" class="section level2" number="4.4">
@@ -1198,6 +1372,43 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
     legend.position = &quot;right&quot;
   )</code></pre>
 <p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-12-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-12-1.png" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div id="emap-plot" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> EMAP Plot</h3>
 <pre class="r"><code>set.seed(42)
@@ -1232,6 +1443,43 @@ emapplot(
     legend.position = &quot;right&quot;
   )</code></pre>
 <p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>################################################### Down Go terms
 
 simp.down.GO &lt;- pairwise_termsim(simp.down.GO)
@@ -1262,6 +1510,219 @@ emapplot(
     legend.position = &quot;right&quot;
   )</code></pre>
 <p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-2">
+Past versions of unnamed-chunk-13-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-2.png" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="deeper-look-into-specific-genesets" class="section level3"
+number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Deeper look into
+specific Genesets</h3>
+<div id="upregulated-in-macrophages-upon-tgf-beta-stimulation"
+class="section level4" number="4.4.2.1">
+<h4><span class="header-section-number">4.4.2.1</span> Upregulated in
+Macrophages upon TGF-Beta stimulation</h4>
+<div id="extracellular-matrix-organization" class="section level5"
+number="4.4.2.1.1">
+<h5><span class="header-section-number">4.4.2.1.1</span> extracellular
+matrix organization</h5>
+<pre class="r"><code>simp.up.GO.df&lt;- as.data.frame(simp.up.GO)
+
+descr &lt;- &quot;extracellular matrix organization&quot;
+
+genes &lt;- simp.up.GO.df %&gt;%
+  filter(Description == descr) %&gt;%
+  pull(geneID) %&gt;%
+  stringr::str_split(&quot;/&quot;) %&gt;%
+  unlist()
+
+SCpubr::do_DotPlot(Macrophages, 
+                   features = genes,
+                   dot.scale = 10,
+                   plot.title = &quot;ECM Gene Set Expression Across Conditions&quot;) </code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>raincloud.plots(
+  gene_list     = genes,
+  plot_title    = &quot;Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions&quot;,
+  plot_subtitle = &quot;Geneset = extracellular matrix organization&quot;,
+  seurat_obj = Macrophages,
+  colors = gradient_colors2
+)</code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cell-adhesion" class="section level5" number="4.4.2.1.2">
+<h5><span class="header-section-number">4.4.2.1.2</span> cell
+adhesion</h5>
+<pre class="r"><code>simp.up.GO.df&lt;- as.data.frame(simp.up.GO)
+
+descr &lt;- &quot;cell adhesion&quot;
+
+genes &lt;- simp.up.GO.df %&gt;%
+  filter(Description == descr) %&gt;%
+  pull(geneID) %&gt;%
+  stringr::str_split(&quot;/&quot;) %&gt;%
+  unlist()
+
+SCpubr::do_DotPlot(Macrophages, 
+                   features = genes,
+                   dot.scale = 10,
+                   plot.title = &quot;Cell Adhesion Gene Set Expression Across Conditions&quot;) </code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-15-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>raincloud.plots(
+  gene_list     = genes,
+  plot_title    = &quot;Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions&quot;,
+  plot_subtitle = &quot;Geneset = Cell Adhesion&quot;,
+  seurat_obj = Macrophages,
+  colors = gradient_colors2
+)</code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-15-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="downregulated-in-macrophages-upon-tgf-beta-stimulation"
+class="section level4" number="4.4.2.2">
+<h4><span class="header-section-number">4.4.2.2</span> Downregulated in
+Macrophages upon TGF-Beta stimulation</h4>
+<div id="adaptive-immune-response" class="section level5"
+number="4.4.2.2.1">
+<h5><span class="header-section-number">4.4.2.2.1</span> Adaptive immune
+response</h5>
+<pre class="r"><code>simp.down.GO.df&lt;- as.data.frame(simp.down.GO)
+
+descr &lt;- &quot;adaptive immune response&quot;
+
+genes &lt;- simp.down.GO.df %&gt;%
+  filter(Description == descr) %&gt;%
+  pull(geneID) %&gt;%
+  stringr::str_split(&quot;/&quot;) %&gt;%
+  unlist()
+
+SCpubr::do_DotPlot(Macrophages, 
+                   features = genes,
+                   dot.scale = 10,
+                   plot.title = &quot;adaptive immune response: Gene Set Expression Across Conditions&quot;) </code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-16-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>raincloud.plots(
+  gene_list     = genes,
+  plot_title    = &quot;Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions&quot;,
+  plot_subtitle = &quot;Geneset = extracellular matrix organization&quot;,
+  seurat_obj = Macrophages,
+  colors = gradient_colors2
+)</code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-16-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="regulation-of-inflammatory-response" class="section level5"
+number="4.4.2.2.2">
+<h5><span class="header-section-number">4.4.2.2.2</span> regulation of
+inflammatory response</h5>
+<pre class="r"><code>simp.down.GO.df&lt;- as.data.frame(simp.down.GO)
+
+descr &lt;- &quot;regulation of inflammatory response&quot;
+
+genes &lt;- simp.down.GO.df %&gt;%
+  filter(Description == descr) %&gt;%
+  pull(geneID) %&gt;%
+  stringr::str_split(&quot;/&quot;) %&gt;%
+  unlist()
+
+SCpubr::do_DotPlot(Macrophages, 
+                   features = genes,
+                   dot.scale = 10,
+                   plot.title = &quot;regulation of inflammatory response: Gene Set Expression Across Conditions&quot;) </code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>raincloud.plots(
+  gene_list     = genes,
+  plot_title    = &quot;Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions&quot;,
+  plot_subtitle = &quot;Geneset = regulation of inflammatory response&quot;,
+  seurat_obj = Macrophages,
+  colors = gradient_colors2
+)</code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="checking-for-specific-marker-genes" class="section level4"
+number="4.4.2.3">
+<h4><span class="header-section-number">4.4.2.3</span> Checking for
+specific Marker genes</h4>
+<div id="metalloproteases" class="section level5" number="4.4.2.3.1">
+<h5><span class="header-section-number">4.4.2.3.1</span>
+Metalloproteases</h5>
+<pre class="r"><code>genes &lt;- c(&quot;MMP1&quot;, &quot;MMP2&quot;, &quot;MMP8&quot;, &quot;MMP9&quot;, &quot;MMP13&quot;, &quot;MMP12&quot;)
+
+SCpubr::do_DotPlot(Macrophages, 
+                   features = genes,
+                   dot.scale = 10,
+                   plot.title = &quot;Metalloproteases: Gene Set Expression Across Conditions&quot;) </code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>raincloud.plots(
+  gene_list     = genes,
+  plot_title    = &quot;Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions&quot;,
+  plot_subtitle = &quot;Geneset = Metalloproteases&quot;,
+  seurat_obj = Macrophages,
+  colors = gradient_colors2
+)</code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="m1m2-markers" class="section level5" number="4.4.2.3.2">
+<h5><span class="header-section-number">4.4.2.3.2</span> M1/M2
+Markers</h5>
+<pre class="r"><code>genes &lt;- c(&quot;CD14&quot;, &quot;CD163&quot;)
+
+SCpubr::do_DotPlot(Macrophages, 
+                   features = genes,
+                   dot.scale = 10,
+                   plot.title = &quot;M1/M2 Markers: Gene Set Expression Across Conditions&quot;) </code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>raincloud.plots(
+  gene_list     = genes,
+  plot_title    = &quot;Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions&quot;,
+  plot_subtitle = &quot;Geneset = M1/M2 Markers&quot;,
+  seurat_obj = Macrophages,
+  colors = gradient_colors2
+)</code></pre>
+<p><img src="figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+<div
+id="decoupler---transcription-factor-activity-inference-from-scrna-seq"
+class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> DecoupleR -
+Transcription factor activity inference from scRNA-seq</h2>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1290,102 +1751,102 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] enrichplot_1.32.0           ggforce_0.5.0              
- [3] DT_0.34.0                   UCell_2.16.0               
- [5] assertthat_0.2.1            SCpubr_3.0.1               
- [7] forcats_1.0.1               fgsea_1.38.0               
- [9] DOSE_4.6.0                  GO.db_3.23.1               
-[11] org.Hs.eg.db_3.23.1         AnnotationDbi_1.74.0       
-[13] clusterProfiler_4.20.0      ggtangle_0.1.2             
-[15] ggarchery_0.4.4             EnhancedVolcano_1.30.0     
-[17] tibble_3.3.1                MAST_1.38.0                
-[19] speckle_1.12.0              harmony_2.0.5              
-[21] Rcpp_1.1.1-1.1              clustree_0.5.1             
-[23] ggraph_2.2.2                scDblFinder_1.26.2         
-[25] SingleCellExperiment_1.34.0 SummarizedExperiment_1.42.0
-[27] Biobase_2.72.0              GenomicRanges_1.64.0       
-[29] Seqinfo_1.2.0               IRanges_2.46.0             
-[31] S4Vectors_0.50.1            BiocGenerics_0.58.1        
-[33] generics_0.1.4              MatrixGenerics_1.24.0      
-[35] matrixStats_1.5.0           ggrepel_0.9.8              
-[37] cowplot_1.2.0               patchwork_1.3.2            
-[39] scCustomize_3.3.0           hdf5r_1.3.12               
-[41] Seurat_5.5.0                SeuratObject_5.4.0         
-[43] sp_2.2-1                    ggplot2_4.0.3              
-[45] dplyr_1.2.1                 readr_2.2.0                
-[47] workflowr_1.7.2            
+ [1] ggrain_0.1.2                enrichplot_1.32.0          
+ [3] ggforce_0.5.0               DT_0.34.0                  
+ [5] UCell_2.16.0                assertthat_0.2.1           
+ [7] SCpubr_3.0.1                forcats_1.0.1              
+ [9] fgsea_1.38.0                DOSE_4.6.0                 
+[11] GO.db_3.23.1                org.Hs.eg.db_3.23.1        
+[13] AnnotationDbi_1.74.0        clusterProfiler_4.20.0     
+[15] ggtangle_0.1.2              ggarchery_0.4.4            
+[17] EnhancedVolcano_1.30.0      tibble_3.3.1               
+[19] MAST_1.38.0                 speckle_1.12.0             
+[21] harmony_2.0.5               Rcpp_1.1.1-1.1             
+[23] clustree_0.5.1              ggraph_2.2.2               
+[25] scDblFinder_1.26.2          SingleCellExperiment_1.34.0
+[27] SummarizedExperiment_1.42.0 Biobase_2.72.0             
+[29] GenomicRanges_1.64.0        Seqinfo_1.2.0              
+[31] IRanges_2.46.0              S4Vectors_0.50.1           
+[33] BiocGenerics_0.58.1         generics_0.1.4             
+[35] MatrixGenerics_1.24.0       matrixStats_1.5.0          
+[37] ggrepel_0.9.8               cowplot_1.2.0              
+[39] patchwork_1.3.2             scCustomize_3.3.0          
+[41] hdf5r_1.3.12                Seurat_5.5.0               
+[43] SeuratObject_5.4.0          sp_2.2-1                   
+[45] ggplot2_4.0.3               dplyr_1.2.1                
+[47] readr_2.2.0                 workflowr_1.7.2            
 
 loaded via a namespace (and not attached):
-  [1] progress_1.2.3           goftest_1.2-3            Biostrings_2.80.1       
-  [4] vctrs_0.7.3              spatstat.random_3.5-0    digest_0.6.39           
-  [7] png_0.1-9                shape_1.4.6.1            git2r_0.36.2            
- [10] deldir_2.0-4             parallelly_1.47.0        fontLiberation_0.1.0    
- [13] MASS_7.3-65              reshape2_1.4.5           qvalue_2.44.0           
- [16] httpuv_1.6.17            withr_3.0.3              ggrastr_1.0.2           
- [19] xfun_0.59                ggfun_0.2.0              survival_3.8-6          
- [22] memoise_2.0.1            ggbeeswarm_0.7.3         gson_0.1.0              
- [25] janitor_2.2.1            systemfonts_1.3.2        tidytree_0.4.7          
- [28] zoo_1.8-15               GlobalOptions_0.1.4      pbapply_1.7-4           
- [31] prettyunits_1.2.0        rematch2_2.1.2           KEGGREST_1.52.2         
- [34] promises_1.5.0           otel_0.2.0               httr_1.4.8              
- [37] restfulr_0.0.17          globals_0.19.1           fitdistrplus_1.2-6      
- [40] rstudioapi_0.19.0        UCSC.utils_1.7.1         miniUI_0.1.2            
- [43] processx_3.9.0           curl_7.1.0               ScaledMatrix_1.20.0     
- [46] polyclip_1.10-7          SparseArray_1.12.2       xtable_1.8-8            
- [49] stringr_1.6.0            evaluate_1.0.5           S4Arrays_1.12.0         
- [52] hms_1.1.4                irlba_2.3.7              colorspace_2.1-2        
- [55] ROCR_1.0-12              reticulate_1.46.0        spatstat.data_3.1-9     
- [58] magrittr_2.0.5           lmtest_0.9-40            snakecase_0.11.1        
- [61] later_1.4.8              viridis_0.6.5            ggtree_4.2.0            
- [64] lattice_0.22-9           spatstat.geom_3.8-1      future.apply_1.20.2     
- [67] getPass_0.2-4            scattermore_1.2          XML_3.99-0.23           
- [70] scuttle_1.22.0           RcppAnnoy_0.0.23         pillar_1.11.1           
- [73] nlme_3.1-169             compiler_4.6.0           beachmat_2.28.0         
- [76] RSpectra_0.16-2          stringi_1.8.7            tensor_1.5.1            
- [79] lubridate_1.9.5          GenomicAlignments_1.48.0 plyr_1.8.9              
- [82] crayon_1.5.3             abind_1.4-8              BiocIO_1.22.0           
- [85] scater_1.40.1            gridGraphics_0.5-1       locfit_1.5-9.12         
- [88] graphlayouts_1.2.4       bit_4.6.0                fastmatch_1.1-8         
- [91] whisker_0.4.1            codetools_0.2-20         BiocSingular_1.28.0     
- [94] crosstalk_1.2.2          bslib_0.11.0             paletteer_1.7.0         
- [97] plotly_4.12.0            mime_0.13                splines_4.6.0           
-[100] circlize_0.4.18          fastDummies_1.7.6        tidydr_0.0.6            
-[103] knitr_1.51               blob_1.3.0               fs_2.1.0                
-[106] listenv_1.0.0            ggplotify_0.1.3          Matrix_1.7-5            
-[109] callr_3.8.0              statmod_1.5.2            tzdb_0.5.0              
-[112] tweenr_2.0.3             pkgconfig_2.0.3          tools_4.6.0             
-[115] cachem_1.1.0             cigarillo_1.2.0          RSQLite_3.53.2          
-[118] viridisLite_0.4.3        DBI_1.3.0                fastmap_1.2.0           
-[121] rmarkdown_2.31           scales_1.4.0             grid_4.6.0              
-[124] ica_1.0-3                Rsamtools_2.28.0         sass_0.4.10             
-[127] ggprism_1.0.7            dotCall64_1.2            RANN_2.6.2              
-[130] farver_2.1.2             scatterpie_0.2.6         tidygraph_1.3.1         
-[133] yaml_2.3.12              rtracklayer_1.72.0       cli_3.6.6               
-[136] purrr_1.2.2              lifecycle_1.0.5          uwot_0.2.4              
-[139] bluster_1.22.0           BiocParallel_1.46.0      timechange_0.4.0        
-[142] gtable_0.3.6             rjson_0.2.23             ggridges_0.5.7          
-[145] progressr_0.19.0         ape_5.8-1                parallel_4.6.0          
-[148] limma_3.68.4             enrichit_0.1.5           jsonlite_2.0.0          
-[151] edgeR_4.10.1             RcppHNSW_0.7.0           bitops_1.0-9            
-[154] bit64_4.8.2              xgboost_3.2.1.1          Rtsne_0.17              
-[157] yulab.utils_0.2.4        spatstat.utils_3.2-3     BiocNeighbors_2.6.0     
-[160] aisdk_1.4.12             jquerylib_0.1.4          metapod_1.20.0          
-[163] GOSemSim_2.38.0          dqrng_0.4.1              spatstat.univar_3.2-0   
-[166] lazyeval_0.2.3           shiny_1.14.0             htmltools_0.5.9         
-[169] sctransform_0.4.3        rappdirs_0.3.4           glue_1.8.1              
-[172] spam_2.11-4              httr2_1.2.3              XVector_0.52.0          
-[175] gdtools_0.5.1            RCurl_1.98-1.19          treeio_1.36.1           
-[178] rprojroot_2.1.1          scran_1.40.0             gridExtra_2.3.1         
-[181] igraph_2.3.2             R6_2.6.1                 ggiraph_0.9.6           
-[184] tidyr_1.3.2              labeling_0.4.3           cluster_2.1.8.2         
-[187] aplot_0.3.0              GenomeInfoDb_1.48.0      mcprogress_0.1.1        
-[190] DelayedArray_0.38.2      tidyselect_1.2.1         vipor_0.4.7             
-[193] fontBitstreamVera_0.1.1  future_1.70.0            rsvd_1.0.5              
-[196] KernSmooth_2.23-26       S7_0.2.2                 fontquiver_0.2.1        
-[199] data.table_1.18.4        htmlwidgets_1.6.4        RColorBrewer_1.1-3      
-[202] rlang_1.2.0              spatstat.sparse_3.2-0    spatstat.explore_3.8-1  
-[205] ggnewscale_0.5.2         beeswarm_0.4.0          </code></pre>
-</div>
+  [1] progress_1.2.3           ggpp_0.6.1               goftest_1.2-3           
+  [4] Biostrings_2.80.1        vctrs_0.7.3              spatstat.random_3.5-0   
+  [7] digest_0.6.39            png_0.1-9                shape_1.4.6.1           
+ [10] git2r_0.36.2             deldir_2.0-4             parallelly_1.47.0       
+ [13] fontLiberation_0.1.0     MASS_7.3-65              reshape2_1.4.5          
+ [16] qvalue_2.44.0            httpuv_1.6.17            withr_3.0.3             
+ [19] ggrastr_1.0.2            xfun_0.59                ggfun_0.2.0             
+ [22] survival_3.8-6           memoise_2.0.1            ggbeeswarm_0.7.3        
+ [25] gson_0.1.0               janitor_2.2.1            systemfonts_1.3.2       
+ [28] tidytree_0.4.7           zoo_1.8-15               GlobalOptions_0.1.4     
+ [31] pbapply_1.7-4            prettyunits_1.2.0        rematch2_2.1.2          
+ [34] KEGGREST_1.52.2          promises_1.5.0           otel_0.2.0              
+ [37] httr_1.4.8               restfulr_0.0.17          globals_0.19.1          
+ [40] fitdistrplus_1.2-6       rstudioapi_0.19.0        UCSC.utils_1.7.1        
+ [43] miniUI_0.1.2             processx_3.9.0           curl_7.1.0              
+ [46] ScaledMatrix_1.20.0      polyclip_1.10-7          SparseArray_1.12.2      
+ [49] xtable_1.8-8             stringr_1.6.0            evaluate_1.0.5          
+ [52] S4Arrays_1.12.0          hms_1.1.4                irlba_2.3.7             
+ [55] colorspace_2.1-2         polynom_1.4-1            ROCR_1.0-12             
+ [58] reticulate_1.46.0        spatstat.data_3.1-9      magrittr_2.0.5          
+ [61] lmtest_0.9-40            snakecase_0.11.1         later_1.4.8             
+ [64] viridis_0.6.5            ggtree_4.2.0             lattice_0.22-9          
+ [67] spatstat.geom_3.8-1      future.apply_1.20.2      getPass_0.2-4           
+ [70] scattermore_1.2          XML_3.99-0.23            scuttle_1.22.0          
+ [73] RcppAnnoy_0.0.23         pillar_1.11.1            nlme_3.1-169            
+ [76] compiler_4.6.0           beachmat_2.28.0          RSpectra_0.16-2         
+ [79] stringi_1.8.7            tensor_1.5.1             lubridate_1.9.5         
+ [82] GenomicAlignments_1.48.0 plyr_1.8.9               crayon_1.5.3            
+ [85] abind_1.4-8              BiocIO_1.22.0            scater_1.40.1           
+ [88] gridGraphics_0.5-1       locfit_1.5-9.12          graphlayouts_1.2.4      
+ [91] bit_4.6.0                fastmatch_1.1-8          whisker_0.4.1           
+ [94] codetools_0.2-20         BiocSingular_1.28.0      crosstalk_1.2.2         
+ [97] bslib_0.11.0             paletteer_1.7.0          plotly_4.12.0           
+[100] mime_0.13                splines_4.6.0            circlize_0.4.18         
+[103] fastDummies_1.7.6        tidydr_0.0.6             knitr_1.51              
+[106] blob_1.3.0               fs_2.1.0                 listenv_1.0.0           
+[109] ggplotify_0.1.3          Matrix_1.7-5             callr_3.8.0             
+[112] statmod_1.5.2            tzdb_0.5.0               tweenr_2.0.3            
+[115] pkgconfig_2.0.3          tools_4.6.0              cachem_1.1.0            
+[118] cigarillo_1.2.0          RSQLite_3.53.2           viridisLite_0.4.3       
+[121] DBI_1.3.0                fastmap_1.2.0            rmarkdown_2.31          
+[124] scales_1.4.0             grid_4.6.0               ica_1.0-3               
+[127] Rsamtools_2.28.0         sass_0.4.10              ggprism_1.0.7           
+[130] dotCall64_1.2            RANN_2.6.2               farver_2.1.2            
+[133] scatterpie_0.2.6         tidygraph_1.3.1          yaml_2.3.12             
+[136] rtracklayer_1.72.0       cli_3.6.6                purrr_1.2.2             
+[139] lifecycle_1.0.5          uwot_0.2.4               bluster_1.22.0          
+[142] BiocParallel_1.46.0      timechange_0.4.0         gtable_0.3.6            
+[145] rjson_0.2.23             ggridges_0.5.7           progressr_0.19.0        
+[148] ape_5.8-1                parallel_4.6.0           limma_3.68.4            
+[151] enrichit_0.1.5           jsonlite_2.0.0           edgeR_4.10.1            
+[154] RcppHNSW_0.7.0           bitops_1.0-9             bit64_4.8.2             
+[157] xgboost_3.2.1.1          Rtsne_0.17               yulab.utils_0.2.4       
+[160] spatstat.utils_3.2-3     BiocNeighbors_2.6.0      aisdk_1.4.12            
+[163] jquerylib_0.1.4          metapod_1.20.0           GOSemSim_2.38.0         
+[166] dqrng_0.4.1              spatstat.univar_3.2-0    lazyeval_0.2.3          
+[169] shiny_1.14.0             htmltools_0.5.9          sctransform_0.4.3       
+[172] rappdirs_0.3.4           glue_1.8.1               spam_2.11-4             
+[175] httr2_1.2.3              XVector_0.52.0           gdtools_0.5.1           
+[178] RCurl_1.98-1.19          treeio_1.36.1            rprojroot_2.1.1         
+[181] scran_1.40.0             gridExtra_2.3.1          igraph_2.3.2            
+[184] R6_2.6.1                 ggiraph_0.9.6            tidyr_1.3.2             
+[187] labeling_0.4.3           cluster_2.1.8.2          aplot_0.3.0             
+[190] GenomeInfoDb_1.48.0      mcprogress_0.1.1         DelayedArray_0.38.2     
+[193] tidyselect_1.2.1         vipor_0.4.7              fontBitstreamVera_0.1.1 
+[196] future_1.70.0            rsvd_1.0.5               KernSmooth_2.23-26      
+[199] S7_0.2.2                 fontquiver_0.2.1         data.table_1.18.4       
+[202] htmlwidgets_1.6.4        RColorBrewer_1.1-3       rlang_1.2.0             
+[205] spatstat.sparse_3.2-0    spatstat.explore_3.8-1   ggnewscale_0.5.2        
+[208] beeswarm_0.4.0          </code></pre>
 </div>
 </div>
 </div>
