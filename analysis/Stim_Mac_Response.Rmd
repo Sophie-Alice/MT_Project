@@ -43,6 +43,9 @@ library(SCpubr)
 library(assertthat)
 library(UCell)
 library(DT)
+
+library(ggforce) 
+library(enrichplot)
 ```
 
 
@@ -199,13 +202,15 @@ fgseares.tidy <- fgseares %>%
   arrange(desc(NES))
 
 fgseares.tidy <- fgseares.tidy %>%
-  dplyr::select(-leadingEdge ,-ES, -nMoreExtreme) 
+  dplyr::select(-ES, -nMoreExtreme) 
 
 fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
 fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
 fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
 
-create_table(fgseares.tidy.top.both)
+fgseares.tidy.show <- fgseares.tidy %>%
+  dplyr::select(-leadingEdge) 
+create_table(fgseares.tidy.show)
 
 ```
 
@@ -386,3 +391,73 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
     legend.position = "right"
   )
 ```
+
+### EMAP Plot
+
+```{r, warning = FALSE}
+
+set.seed(42)
+
+################################################### Upregulated Go terms
+
+simp.up.GO <- pairwise_termsim(simp.up.GO)
+
+emapplot(
+  simp.up.GO,
+  showCategory = 30,          
+  node_label   = "group", 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = "DEG MT CMFHM_TGF vs CMF_TGF: GO Biological Process Enrichment", 
+    subtitle = "Functional clustering map of top 30 enriched terms for Up-regulated genes",
+    x        = "", 
+    y        = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = "right"
+  )
+
+################################################### Down Go terms
+
+simp.down.GO <- pairwise_termsim(simp.down.GO)
+
+emapplot(
+  simp.down.GO,
+  showCategory = 30,          
+  node_label   = "group", 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = "DEG MT CMFHM_TGF vs CMF_TGF: GO Biological Process Enrichment", 
+    subtitle = "Functional clustering map of top 30 enriched terms for Down-regulated genes",
+    x        = "", 
+    y        = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = "right"
+  )
+
+
+```
+

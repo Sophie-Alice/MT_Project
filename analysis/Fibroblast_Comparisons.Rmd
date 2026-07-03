@@ -14,3 +14,21 @@ editor_options:
  - CMFHM_NC vs. CMF_NC = Effect of Macrophage Presence on MT without TGF-Beta (Baseline_Mac_Response)
  - CMFHM_TGF vs CMF_TGF = Effect of Macrophage Presence on MT with TGF-Beta Stimulation (Stim_Mac_Response)
 
+## Next steps
+
+- Use Emapplot to visualize connecting Pathways (PAA) and simplify GO maps
+- VlnPlots of specific go terms (What genes exactly and how are the relevant?)
+ -> UCell scores?
+- Heatmap of specific processes
+
+- Get Lailas Genes of Interest and vlnPlot
+
+- look into DecoupleR
+
+- Heatmap of genes that are upreg in baseline TGF-B and downreg in Stim.Mac
+
+- DGEA for Cardiomyocytes aswell.
+
+
+
+
