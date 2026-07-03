@@ -16,14 +16,14 @@ editor_options:
 
 ## Next steps
 
-- Use Emapplot to visualize connecting Pathways (PAA) and simplify GO maps
-- VlnPlots of specific go terms (What genes exactly and how are the relevant?)
+- Use Emapplot to visualize connecting Pathways (PAA) and simplify GO maps - check
+- VlnPlots of specific go terms (What genes exactly and how are the relevant?) - check for macrophages
  -> UCell scores?
 - Heatmap of specific processes
 
-- Get Lailas Genes of Interest and vlnPlot
+- Get Lailas Genes of Interest and vlnPlot - macrophages check
 
-- look into DecoupleR
+- look into DecoupleR -> Transcription factor activity inference from scRNA-seq
 
 - Heatmap of genes that are upreg in baseline TGF-B and downreg in Stim.Mac
 

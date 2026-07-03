@@ -1,0 +1,343 @@
+---
+title: "Fibroblasts_DEG_Overlap"
+author: "Sophie.Alice"
+date: "2026-07-02"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+library(UpSetR)
+library(grid)
+library(ggvenn)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+```
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+path2 <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Fibro_DEG_Lists.rds"
+
+DEG.lists <- read_rds(path2)
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+gradient_colors3 <- custom_palette(3)
+```
+
+
+# Functions
+
+```{r, warning = FALSE}
+
+
+Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
+  
+  # Clean extreme values
+  df <- Data
+  df <- df[is.finite(df$avg_log2FC) & is.finite(df$p_val_adj), ]
+  
+  # dynamic axis limits
+  xmax <- max(df$avg_log2FC, na.rm = TRUE)
+  xmin <- min(df$avg_log2FC, na.rm = TRUE)
+  ymax <- max(-log10(df$p_val_adj), na.rm = TRUE)
+  
+  # Add padding
+  xpad <- (xmax - xmin) * 0.1
+  ypad <- ymax * 0.1
+  
+  combined_subtitle <- paste0(Subtitle, " ● Thresholds: FDR < ", pCutoff, ", |Log2FC| > ", FCcutoff)
+  
+  EV <- EnhancedVolcano(
+    df,
+    lab = df$gene,
+    x = 'avg_log2FC',
+    y = 'p_val_adj',
+    xlab = 'log2 Foldchange',
+    ylab = "-log10 FDR",
+    legendLabels = c('NS','log2FC','FDR','FDR & log2FC'),
+    col = c("darkgrey", "#005EA8", "#FFD966", "#9F1C67"),
+    title = Title,
+    subtitle = combined_subtitle,   
+    xlim = c(xmin - xpad, xmax + xpad),
+    ylim = c(0, ymax + ypad),
+    pCutoff = pCutoff,              
+    FCcutoff = FCcutoff,            
+
+    cutoffLineType = 'dashed',      
+    cutoffLineCol = 'black',        
+    cutoffLineWidth = 0.6,
+    labSize = 3.0,
+    drawConnectors = TRUE,
+    widthConnectors = 0.5
+  )
+  
+  return(EV)
+}
+
+##################################### Tables
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover'       
+  )
+}
+
+```
+
+# Gene Overlap
+
+## Get all the DEG
+
+Cutoffs Chosen: FDR <= 0.01, abs(log2FC) > 1
+
+```{r, warning = FALSE}
+
+names(DEG.lists)
+
+head(DEG.lists)
+```
+
+
+
+```{r, warning = FALSE}
+
+upset_up_genes   <- list()
+upset_down_genes <- list()
+
+
+p_cutoff  <- 0.01
+fc_cutoff <- 1
+
+for (comp_name in names(DEG.lists)) {
+
+  df <- DEG.lists[[comp_name]]
+  
+  if (!"gene" %in% colnames(df)) {
+    df <- df %>% rownames_to_column(var = "gene")
+  }
+  
+  upset_up_genes[[comp_name]] <- df %>%
+    filter(p_val_adj <= p_cutoff & avg_log2FC >= fc_cutoff) %>%
+    pull(gene) %>%
+    na.omit()
+  
+  upset_down_genes[[comp_name]] <- df %>%
+    filter(p_val_adj <= p_cutoff & avg_log2FC <= -fc_cutoff) %>%
+    pull(gene) %>%
+    na.omit()
+}
+
+# one master object
+upset_final_data <- list(
+  Up_Regulated   = upset_up_genes,
+  Down_Regulated = upset_down_genes
+)
+
+
+```
+
+### UpsetPlot for all Groups
+
+```{r, warning = FALSE}
+
+################################################### Upregulated Intersections
+
+upset(
+  fromList(upset_final_data$Up_Regulated), 
+  nsets = 4,                       
+  order.by = "freq",               
+  main.bar.color = "#9F1C67",      
+  sets.bar.color = "darkgrey",     
+  text.scale = c(1.3, 1.3, 1, 1, 1.2, 1) 
+)
+
+
+################################################### Downregulated Intersections
+
+upset(
+  fromList(upset_final_data$Down_Regulated), 
+  nsets = 4, 
+  order.by = "freq", 
+  main.bar.color = "#005EA8", 
+  sets.bar.color = "darkgrey",
+  text.scale = c(1.3, 1.3, 1, 1, 1.2, 1)
+)
+
+```
+
+### Venn diagram of all ovelapping genes
+
+```{r, warning = FALSE}
+
+################################# upregulated genes
+
+ggvenn(
+  data = upset_final_data$Up_Regulated, 
+  columns = names(upset_final_data$Up_Regulated),                          
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = "Ovelap of sign. Upregulated Genes",
+    subtitle = paste0("Fibroblast Differential Expression ● Cutoffs: FDR < ", p_cutoff, ", |Log2FC| > ", fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = "bold", size = 16, color = "black"),
+    plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
+  )
+
+################################# downregulated genes
+
+ggvenn(
+  data = upset_final_data$Down_Regulated, 
+  columns = names(upset_final_data$Down_Regulated),                          
+  fill_color = gradient_colors4, 
+  stroke_size = 0.5, 
+  set_name_size = 4
+) +
+  labs(
+    title = "Ovelap of sign. Downregulated Genes",
+    subtitle = paste0("Fibroblast Differential Expression ● Cutoffs: FDR < ", p_cutoff, ", |Log2FC| > ", fc_cutoff)
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0, face = "bold", size = 16, color = "black"),
+    plot.subtitle = element_text(hjust = 0, face = "italic", size = 11, color = "dimgray")
+  )
+
+```
+
+
+## Heatmap try
+
+```{r, warning = FALSE}
+
+library(ComplexHeatmap)
+library(tidyverse)
+library(circlize)
+
+
+FDR <- 0.01 
+
+# Extract gene lists and filter only for significance
+processed_lists <- lapply(names(DEG.lists), function(name) {
+  df <- DEG.lists[[name]]
+  df %>%
+    filter(p_val_adj < FDR) %>%
+    dplyr::select(gene, avg_log2FC) %>%
+    rename(!!name := avg_log2FC) 
+})
+
+# Merge all 4 data frames together by gene name
+# Genes not significant in a comparison will temporarily become NA
+merged_df <- purrr::reduce(processed_lists, full_join, by = "gene")
+
+# Convert NAs to 0 (meaning 0 log2FC change when not significant)
+merged_df[is.na(merged_df)] <- 0
+
+# Convert to a matrix and set gene names as row names
+fc_matrix <- as.matrix(merged_df[,-1])
+rownames(fc_matrix) <- merged_df$gene
+
+# Optional: If your matrix is huge (e.g., > 2000 genes), you can subset 
+# to the top most variable or top significant genes for visual clarity.
+# Example: Keep top 200 genes based on variance across the 4 conditions
+if (nrow(fc_matrix) > 200) {
+  top_genes <- head(order(apply(fc_matrix, 1, var), decreasing = TRUE), 200)
+  fc_matrix_subset <- fc_matrix[top_genes, ]
+} else {
+  fc_matrix_subset <- fc_matrix
+}
+
+max_val <- max(abs(fc_matrix_subset))
+col_fun = colorRamp2(c(-max_val, 0, max_val), c("#005EA8", "white", "#9F1C67"))
+
+# --- Step 3: Generate the Heatmap ---
+
+
+Heatmap(
+  fc_matrix_subset, 
+  name = "log2FC", 
+  col = col_fun,
+  
+  # Clustering options
+  cluster_columns = FALSE,        
+  cluster_rows = TRUE,            
+  show_row_dend = TRUE,           
+  
+  # Text adjustments & Axes Rotation
+  column_names_rot = 45,          
+  column_names_side = "bottom",   
+  show_row_names = FALSE,          
+  row_names_gp = gpar(fontsize = 8), 
+  
+  # Segmentation
+  row_km = 4,                     
+  column_title = "Macrophage Modulation of TGF-Beta Response"
+)
+
+```
+
+## Check on genes that are upredulated in Baseline TGF_Beta but not or downregulated in Modulated TGF-Beta
+
+```{r, warning = FALSE}
+
+FDR <- 0.01 
+
+merged_df <- purrr::reduce(processed_lists, full_join, by = "gene")
+
+
+
+```
