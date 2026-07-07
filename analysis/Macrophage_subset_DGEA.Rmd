@@ -166,7 +166,7 @@ raincloud.plots <- function(gene_list,
     group = 1
     ) +
     
-    facet_wrap(~Gene, scales = "free_y", ncol = 4) +
+    facet_wrap(~Gene, scales = "free_y", ncol = 3) +
     
     scale_fill_manual(values = colors) +
     scale_color_manual(values = colors) +
@@ -608,14 +608,22 @@ SCpubr::do_DotPlot(Macrophages,
                    dot.scale = 10,
                    plot.title = "Cell Adhesion Gene Set Expression Across Conditions") 
 
-raincloud.plots(
-  gene_list     = genes,
-  plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-  plot_subtitle = "Geneset = Cell Adhesion",
-  seurat_obj = Macrophages,
-  colors = gradient_colors2
-)
 
+chunk_size <- 9
+total_genes <- length(genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = genes[i:end_idx],
+    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = Cell Adhesion - Slice ", slice_num),
+    seurat_obj    = Macrophages,
+    colors        = gradient_colors2
+  ))
+}
 
 ```
 
@@ -640,14 +648,21 @@ SCpubr::do_DotPlot(Macrophages,
                    dot.scale = 10,
                    plot.title = "adaptive immune response: Gene Set Expression Across Conditions") 
 
-raincloud.plots(
-  gene_list     = genes,
-  plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-  plot_subtitle = "Geneset = extracellular matrix organization",
-  seurat_obj = Macrophages,
-  colors = gradient_colors2
-)
+chunk_size <- 9
+total_genes <- length(genes)
 
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = genes[i:end_idx],
+    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = adaptive immune response - Slice ", slice_num),
+    seurat_obj    = Macrophages,
+    colors        = gradient_colors2
+  ))
+}
 
 ```
 
@@ -670,13 +685,22 @@ SCpubr::do_DotPlot(Macrophages,
                    dot.scale = 10,
                    plot.title = "regulation of inflammatory response: Gene Set Expression Across Conditions") 
 
-raincloud.plots(
-  gene_list     = genes,
-  plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-  plot_subtitle = "Geneset = regulation of inflammatory response",
-  seurat_obj = Macrophages,
-  colors = gradient_colors2
-)
+chunk_size <- 9
+total_genes <- length(genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = genes[i:end_idx],
+    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = regulation of inflammatory response - Slice ", slice_num),
+    seurat_obj    = Macrophages,
+    colors        = gradient_colors2
+  ))
+}
+
 
 ```
 
@@ -725,12 +749,7 @@ raincloud.plots(
 ```
 
 
-## DecoupleR - Transcription factor activity inference from scRNA-seq
 
-
-```{r, warning = FALSE}
-
-```
 
 ```{r, warning = FALSE}
 

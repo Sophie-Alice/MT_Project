@@ -51,6 +51,8 @@ table(Data$orig.ident, Data$cell_type)
 # Proportion visualization no statistics
 
  - We might run into Problems downstream as the Fibroblast proportions are so different. But we'll see
+ 
+ - The Hypoxic core is biggest in CMFHM_NC. -> MT get smaller with TGF-B stim.
 
 ```{r, warning = FALSE}
 

@@ -281,19 +281,16 @@ processed_lists <- lapply(names(DEG.lists), function(name) {
 })
 
 # Merge all 4 data frames together by gene name
-# Genes not significant in a comparison will temporarily become NA
 merged_df <- purrr::reduce(processed_lists, full_join, by = "gene")
 
 # Convert NAs to 0 (meaning 0 log2FC change when not significant)
 merged_df[is.na(merged_df)] <- 0
 
-# Convert to a matrix and set gene names as row names
 fc_matrix <- as.matrix(merged_df[,-1])
 rownames(fc_matrix) <- merged_df$gene
 
-# Optional: If your matrix is huge (e.g., > 2000 genes), you can subset 
-# to the top most variable or top significant genes for visual clarity.
-# Example: Keep top 200 genes based on variance across the 4 conditions
+
+# Keep top 200 genes based on variance across the 4 conditions as it's too big
 if (nrow(fc_matrix) > 200) {
   top_genes <- head(order(apply(fc_matrix, 1, var), decreasing = TRUE), 200)
   fc_matrix_subset <- fc_matrix[top_genes, ]
@@ -304,26 +301,21 @@ if (nrow(fc_matrix) > 200) {
 max_val <- max(abs(fc_matrix_subset))
 col_fun = colorRamp2(c(-max_val, 0, max_val), c("#005EA8", "white", "#9F1C67"))
 
-# --- Step 3: Generate the Heatmap ---
-
 
 Heatmap(
   fc_matrix_subset, 
   name = "log2FC", 
   col = col_fun,
   
-  # Clustering options
   cluster_columns = FALSE,        
   cluster_rows = TRUE,            
   show_row_dend = TRUE,           
   
-  # Text adjustments & Axes Rotation
   column_names_rot = 45,          
   column_names_side = "bottom",   
   show_row_names = FALSE,          
   row_names_gp = gpar(fontsize = 8), 
   
-  # Segmentation
   row_km = 4,                     
   column_title = "Macrophage Modulation of TGF-Beta Response"
 )
@@ -337,7 +329,5 @@ Heatmap(
 FDR <- 0.01 
 
 merged_df <- purrr::reduce(processed_lists, full_join, by = "gene")
-
-
 
 ```
