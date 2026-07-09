@@ -402,7 +402,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-02
+<strong>Last updated:</strong> 2026-07-09
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -533,15 +533,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree8d974307bf04ae0f91f1589cb7180ea308b4d00atargetblank8d97430a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree067775a455329972400495b19640af5d454a094atargetblank067775aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/8d974307bf04ae0f91f1589cb7180ea308b4d00a" target="_blank">8d97430</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/067775a455329972400495b19640af5d454a094a" target="_blank">067775a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree8d974307bf04ae0f91f1589cb7180ea308b4d00atargetblank8d97430a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree067775a455329972400495b19640af5d454a094atargetblank067775aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -551,7 +551,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/8d974307bf04ae0f91f1589cb7180ea308b4d00a" target="_blank">8d97430</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/067775a455329972400495b19640af5d454a094a" target="_blank">067775a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -570,7 +570,7 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
-    Untracked:  analysis/Fibroblasts_DEG_Overlap.Rmd
+    Untracked:  analysis/Subclusters_Fib.Rmd
 
 </code></pre>
 <p>
@@ -614,6 +614,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/067775a455329972400495b19640af5d454a094a/analysis/DGEA.Rmd" target="_blank">067775a</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+<td>
+Adding lenient Thresholds
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/6eaf2a0e5ef6b555752d0f4d10babe2b081a243a/docs/DGEA.html" target="_blank">6eaf2a0</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -779,8 +813,8 @@ Adding more
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907611 48.5    1752314 93.6         NA  1321070 70.6
-Vcells 1598322 12.2    8388608 64.0      16384  2413492 18.5</code></pre>
+Ncells  907410 48.5    1751740 93.6         NA  1321070 70.6
+Vcells 1597025 12.2    8388608 64.0      16384  2393035 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -884,10 +918,16 @@ create_table &lt;- function(df) {
 </div>
 <div id="fibroblasts" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Fibroblasts</h1>
-<div id="dgea-of-the-4-comparisons" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> DGEA of the 4
-Comparisons</h2>
-<pre class="r"><code>table(Data$cell_type)</code></pre>
+</div>
+<div id="dgea-of-the-4-comparisons" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> DGEA of the 4
+Comparisons</h1>
+<pre class="r"><code>################# Setting thresholds
+FDR &lt;- 0.01
+FC &lt;- 1
+#################
+
+table(Data$cell_type)</code></pre>
 <pre><code>
               Cardiomyocytes                  Macrophages 
                         7883                         1503 
@@ -907,9 +947,9 @@ Fibroblasts$cdr &lt;- scale(colSums(GetAssayData(Fibroblasts, assay = &quot;RNA&
 
 fibroblast_deg_list &lt;- list()</code></pre>
 <div id="baseline-fibrotic-response-to-tgf-b-without-macrophages"
-class="section level3" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Baseline Fibrotic
-response to TGF-B without Macrophages</h3>
+class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Baseline Fibrotic
+response to TGF-B without Macrophages</h2>
 <pre class="r"><code>MAST.Res &lt;- FindMarkers(
   object = Fibroblasts,
   ident.1 = &quot;CMF_TGF&quot;,    
@@ -931,7 +971,7 @@ Done!</code></pre>
   rownames_to_column(var = &quot;gene&quot;)
 
 MAST.Res.sign &lt;- MAST.Res %&gt;%
-  filter(p_val_adj &lt; 0.05 &amp; abs(avg_log2FC) &gt;= 0.5)
+  filter(p_val_adj &lt; FDR &amp; abs(avg_log2FC) &gt;= FC)
 
 
 
@@ -949,10 +989,10 @@ head(MAST.Res.sign)</code></pre>
   Data = MAST.Res,
   Title = &quot;DEG in MT-Fibroblasts without Macrophages&quot;,
   Subtitle = &quot;TGF-\u03b2 vs. Control&quot;,
-  pCutoff = 0.01,    
-  FCcutoff = 1     
+  pCutoff = FDR,    
+  FCcutoff = FC     
 )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-5-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-5-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
 Past versions of unnamed-chunk-5-1.png
@@ -977,6 +1017,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/6eaf2a0e5ef6b555752d0f4d10babe2b081a243a/docs/figure/DGEA.Rmd/unnamed-chunk-5-1.png" target="_blank">6eaf2a0</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-5-1.png" target="_blank">4ca3d0f</a>
 </td>
 <td>
@@ -992,10 +1043,9 @@ Sophie.Alice
 </div>
 <pre class="r"><code>#write.csv(MAST.Res, file = file.path(outputdir, &quot;Baseline_TGF_Response_all.csv&quot;))
 #write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Baseline_TGF_Response_sign.csv&quot;))</code></pre>
-</div>
 <div id="modulated-fibrotic-response-to-tgf-b-with-macrophages"
-class="section level3" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Modulated Fibrotic
+class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Modulated Fibrotic
 response to TGF-B with Macrophages</h3>
 <pre class="r"><code>MAST.Res &lt;- FindMarkers(
   object = Fibroblasts,
@@ -1018,7 +1068,7 @@ Done!</code></pre>
   rownames_to_column(var = &quot;gene&quot;)
 
 MAST.Res.sign &lt;- MAST.Res %&gt;%
-  filter(p_val_adj &lt; 0.05 &amp; abs(avg_log2FC) &gt;= 0.5)
+  filter(p_val_adj &lt; FDR &amp; abs(avg_log2FC) &gt;= FC)
 
 head(MAST.Res.sign)</code></pre>
 <pre><code>       gene        p_val avg_log2FC pct.1 pct.2    p_val_adj
@@ -1035,10 +1085,10 @@ Volcano_Plots(
   Data = MAST.Res,
   Title = &quot;DEG in MT-Fibroblasts with Macrophages&quot;,
   Subtitle = &quot;TGF-\u03b2 vs. Control&quot;,
-  pCutoff = 0.01,    
-  FCcutoff = 1     
+  pCutoff = FDR,    
+  FCcutoff = FC     
 )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-6-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-6-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
 Past versions of unnamed-chunk-6-1.png
@@ -1063,6 +1113,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/6eaf2a0e5ef6b555752d0f4d10babe2b081a243a/docs/figure/DGEA.Rmd/unnamed-chunk-6-1.png" target="_blank">6eaf2a0</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-6-1.png" target="_blank">4ca3d0f</a>
 </td>
 <td>
@@ -1080,8 +1141,8 @@ Sophie.Alice
 #write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Modulated_TGF_Response_sign.csv&quot;))</code></pre>
 </div>
 <div id="baseline-macrophage-response" class="section level3"
-number="4.1.3">
-<h3><span class="header-section-number">4.1.3</span> Baseline Macrophage
+number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Baseline Macrophage
 response</h3>
 <pre class="r"><code>MAST.Res &lt;- FindMarkers(
   object = Fibroblasts,
@@ -1104,7 +1165,7 @@ Done!</code></pre>
   rownames_to_column(var = &quot;gene&quot;)
 
 MAST.Res.sign &lt;- MAST.Res %&gt;%
-  filter(p_val_adj &lt; 0.05 &amp; abs(avg_log2FC) &gt;= 0.5)
+  filter(p_val_adj &lt; FDR &amp; abs(avg_log2FC) &gt;= FC)
 
 head(MAST.Res.sign)</code></pre>
 <pre><code>      gene        p_val avg_log2FC pct.1 pct.2    p_val_adj
@@ -1120,10 +1181,10 @@ Volcano_Plots(
   Data = MAST.Res,
   Title = &quot;DEG in MT-Fibroblasts unstimulated&quot;,
   Subtitle = &quot;with Macrophages vs. Control&quot;,
-  pCutoff = 0.01,    
-  FCcutoff = 1     
+  pCutoff = FDR,    
+  FCcutoff = FC     
 )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-7-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-7-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
 Past versions of unnamed-chunk-7-1.png
@@ -1148,6 +1209,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/6eaf2a0e5ef6b555752d0f4d10babe2b081a243a/docs/figure/DGEA.Rmd/unnamed-chunk-7-1.png" target="_blank">6eaf2a0</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-7-1.png" target="_blank">4ca3d0f</a>
 </td>
 <td>
@@ -1165,8 +1237,8 @@ Sophie.Alice
 #write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Baseline_Mac_Response_sign.csv&quot;))</code></pre>
 </div>
 <div id="stimulated-macrophage-effect" class="section level3"
-number="4.1.4">
-<h3><span class="header-section-number">4.1.4</span> Stimulated
+number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Stimulated
 Macrophage Effect</h3>
 <pre class="r"><code>MAST.Res &lt;- FindMarkers(
   object = Fibroblasts,
@@ -1189,7 +1261,7 @@ Done!</code></pre>
   rownames_to_column(var = &quot;gene&quot;)
 
 MAST.Res.sign &lt;- MAST.Res %&gt;%
-  filter(p_val_adj &lt; 0.05 &amp; abs(avg_log2FC) &gt;= 0.5)
+  filter(p_val_adj &lt; FDR &amp; abs(avg_log2FC) &gt;= FC)
 
 head(MAST.Res.sign)</code></pre>
 <pre><code>     gene        p_val avg_log2FC pct.1 pct.2    p_val_adj
@@ -1206,10 +1278,10 @@ Volcano_Plots(
   Data = MAST.Res,
   Title = &quot;DEG in MT-Fibroblasts stimulated with TGF-\u03b2&quot;,
   Subtitle = &quot;with Macrophages vs. Control&quot;,
-  pCutoff = 0.01,    
-  FCcutoff = 1     
+  pCutoff = FDR,    
+  FCcutoff = FC     
 )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-8-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/DGEA.Rmd/unnamed-chunk-8-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
 Past versions of unnamed-chunk-8-1.png
@@ -1234,6 +1306,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/6eaf2a0e5ef6b555752d0f4d10babe2b081a243a/docs/figure/DGEA.Rmd/unnamed-chunk-8-1.png" target="_blank">6eaf2a0</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-8-1.png" target="_blank">4ca3d0f</a>
 </td>
 <td>
@@ -1251,493 +1334,13 @@ Sophie.Alice
 #write.csv(MAST.Res.sign, file = file.path(outputdir, &quot;Stim_Mac_Response_sign.csv&quot;))</code></pre>
 </div>
 </div>
-<div id="gene-crossover" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Gene Crossover</h2>
-<div id="get-the-deg" class="section level3" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Get the DEG</h3>
-<p>Cutoffs Chosen: FDR &lt;= 0.01, abs(log2FC) &gt; 1</p>
-<pre class="r"><code>upset_up_genes   &lt;- list()
-upset_down_genes &lt;- list()
-
-
-p_cutoff  &lt;- 0.01
-fc_cutoff &lt;- 1
-
-for (comp_name in names(fibroblast_deg_list)) {
-
-  df &lt;- fibroblast_deg_list[[comp_name]]
-  
-  if (!&quot;gene&quot; %in% colnames(df)) {
-    df &lt;- df %&gt;% rownames_to_column(var = &quot;gene&quot;)
-  }
-  
-  upset_up_genes[[comp_name]] &lt;- df %&gt;%
-    filter(p_val_adj &lt;= p_cutoff &amp; avg_log2FC &gt;= fc_cutoff) %&gt;%
-    pull(gene) %&gt;%
-    na.omit()
-  
-  upset_down_genes[[comp_name]] &lt;- df %&gt;%
-    filter(p_val_adj &lt;= p_cutoff &amp; avg_log2FC &lt;= -fc_cutoff) %&gt;%
-    pull(gene) %&gt;%
-    na.omit()
-}
-
-# one master object
-upset_final_data &lt;- list(
-  Up_Regulated   = upset_up_genes,
-  Down_Regulated = upset_down_genes
-)</code></pre>
 </div>
-<div id="upsetplot-for-all-groups" class="section level3"
-number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> UpsetPlot for all
-Groups</h3>
-<pre class="r"><code>################################################### Upregulated Intersections
-
-upset(
-  fromList(upset_final_data$Up_Regulated), 
-  nsets = 4,                       
-  order.by = &quot;freq&quot;,               
-  main.bar.color = &quot;#9F1C67&quot;,      
-  sets.bar.color = &quot;darkgrey&quot;,     
-  text.scale = c(1.3, 1.3, 1, 1, 1.2, 1) 
-)</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-10-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
-Past versions of unnamed-chunk-10-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-10-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-10-1.png" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>################################################### Downregulated Intersections
-
-upset(
-  fromList(upset_final_data$Down_Regulated), 
-  nsets = 4, 
-  order.by = &quot;freq&quot;, 
-  main.bar.color = &quot;#005EA8&quot;, 
-  sets.bar.color = &quot;darkgrey&quot;,
-  text.scale = c(1.3, 1.3, 1, 1, 1.2, 1)
-)</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-10-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-2">
-Past versions of unnamed-chunk-10-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-10-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-10-2.png" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="venn-diagram-of-all-ovelapping-genes" class="section level3"
-number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> Venn diagram of all
-ovelapping genes</h3>
-<pre class="r"><code>################################# upregulated genes
-
-ggvenn(
-  data = upset_final_data$Up_Regulated, 
-  columns = names(upset_final_data$Up_Regulated),                          
-  fill_color = gradient_colors4, 
-  stroke_size = 0.5, 
-  set_name_size = 4
-) +
-  labs(
-    title = &quot;Ovelap of sign. Upregulated Genes&quot;,
-    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
-  ) +
-  theme(
-    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 16, color = &quot;black&quot;),
-    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
-  )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-11-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
-Past versions of unnamed-chunk-11-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-11-1.png" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>################################# downregulated genes
-
-ggvenn(
-  data = upset_final_data$Down_Regulated, 
-  columns = names(upset_final_data$Down_Regulated),                          
-  fill_color = gradient_colors4, 
-  stroke_size = 0.5, 
-  set_name_size = 4
-) +
-  labs(
-    title = &quot;Ovelap of sign. Downregulated Genes&quot;,
-    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
-  ) +
-  theme(
-    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 16, color = &quot;black&quot;),
-    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
-  )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-11-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-2">
-Past versions of unnamed-chunk-11-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-11-2.png" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div
-id="venn-diagram-of-deg-upon-tgf-b-stimulation-with-and-without-macrophages"
-class="section level3" number="4.2.4">
-<h3><span class="header-section-number">4.2.4</span> Venn diagram of DEG
-upon TGF-B stimulation with and without Macrophages</h3>
-<pre class="r"><code>################################# upregulated genes
-
-ggvenn(
-  data = upset_final_data$Up_Regulated[c(&quot;Baseline_TGF_Response&quot;, &quot;Modulated_TGF_Response&quot;)], 
-  fill_color = gradient_colors4, 
-  stroke_size = 0.5, 
-  set_name_size = 4
-) +
-  labs(
-    title = &quot;Ovelap of sign. Upregulated Genes upon TGF-\u03b2 stimulation&quot;,
-    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
-  ) +
-  theme(
-    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 13, color = &quot;black&quot;),
-    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
-  )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-12-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
-Past versions of unnamed-chunk-12-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-12-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-12-1.png" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>################################# downregulated genes
-
-ggvenn(
-  data = upset_final_data$Down_Regulated[c(&quot;Baseline_TGF_Response&quot;, &quot;Modulated_TGF_Response&quot;)], 
-  fill_color = gradient_colors4, 
-  stroke_size = 0.5, 
-  set_name_size = 4
-) +
-  labs(
-    title = &quot;Ovelap of sign. Downregulated Genes upon TGF-\u03b2 stimulation&quot;,
-    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
-  ) +
-  theme(
-    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 13, color = &quot;black&quot;),
-    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
-  )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-12-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-2">
-Past versions of unnamed-chunk-12-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-12-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-12-2.png" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div
-id="venn-diagram-of-deg-of-presence-of-macrophages-with-and-without-tgf-b-stimulation"
-class="section level3" number="4.2.5">
-<h3><span class="header-section-number">4.2.5</span> Venn diagram of DEG
-of presence of Macrophages with and without TGF-B stimulation</h3>
-<pre class="r"><code>################################# upregulated genes
-
-ggvenn(
-  data = upset_final_data$Up_Regulated[c(&quot;Baseline_Mac_Response&quot;, &quot;Stim_Mac_Response&quot;)],
-  fill_color = gradient_colors4, 
-  stroke_size = 0.5, 
-  set_name_size = 4
-) +
-  labs(
-    title = &quot;Ovelap of sign. Upregulated Genes upon Macrophage presence&quot;,
-    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
-  ) +
-  theme(
-    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 13, color = &quot;black&quot;),
-    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
-  )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-13-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
-Past versions of unnamed-chunk-13-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-13-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>################################# downregulated genes
-
-ggvenn(
-  data = upset_final_data$Down_Regulated[c(&quot;Baseline_Mac_Response&quot;, &quot;Stim_Mac_Response&quot;)],  
-  fill_color = gradient_colors4, 
-  stroke_size = 0.5, 
-  set_name_size = 4
-) +
-  labs(
-    title = &quot;Ovelap of sign. Downregulated Genes upon Macrophage presence&quot;,
-    subtitle = paste0(&quot;Fibroblast Differential Expression ● Cutoffs: FDR &lt; &quot;, p_cutoff, &quot;, |Log2FC| &gt; &quot;, fc_cutoff)
-  ) +
-  theme(
-    plot.title = element_text(hjust = 0, face = &quot;bold&quot;, size = 13, color = &quot;black&quot;),
-    plot.subtitle = element_text(hjust = 0, face = &quot;italic&quot;, size = 11, color = &quot;dimgray&quot;)
-  )</code></pre>
-<p><img src="figure/DGEA.Rmd/unnamed-chunk-13-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-2">
-Past versions of unnamed-chunk-13-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-13-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/figure/DGEA.Rmd/unnamed-chunk-13-2.png" target="_blank">4ca3d0f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="saving-the-gene-lists" class="section level3" number="4.2.6">
-<h3><span class="header-section-number">4.2.6</span> Saving the gene
-lists</h3>
+<div id="save-the-master-deg-object" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Save the Master DEG
+object</h1>
 <pre class="r"><code>outputdir &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files&quot;
 
-#saveRDS(fibroblast_deg_list, file = file.path(outputdir, &quot;All_Fibro_DEG_Lists.rds&quot;))</code></pre>
+saveRDS(fibroblast_deg_list, file = file.path(outputdir, &quot;All_Fibro_DEG_Lists.rds&quot;))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1845,8 +1448,6 @@ loaded via a namespace (and not attached):
 [169] later_1.4.8              viridisLite_0.4.3        memoise_2.0.1           
 [172] beeswarm_0.4.0           GenomicAlignments_1.48.0 cluster_2.1.8.2         
 [175] timechange_0.4.0         globals_0.19.1          </code></pre>
-</div>
-</div>
 </div>
 </div>
 </div>

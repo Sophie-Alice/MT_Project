@@ -423,7 +423,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-02
+<strong>Last updated:</strong> 2026-07-09
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -554,15 +554,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeb0dece5dc51d4933299994fc123609e62b2ecd61targetblankb0dece5a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree067775a455329972400495b19640af5d454a094atargetblank067775aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/b0dece5dc51d4933299994fc123609e62b2ecd61" target="_blank">b0dece5</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/067775a455329972400495b19640af5d454a094a" target="_blank">067775a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeb0dece5dc51d4933299994fc123609e62b2ecd61targetblankb0dece5a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree067775a455329972400495b19640af5d454a094atargetblank067775aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -572,7 +572,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/b0dece5dc51d4933299994fc123609e62b2ecd61" target="_blank">b0dece5</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/067775a455329972400495b19640af5d454a094a" target="_blank">067775a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -589,6 +589,9 @@ were generated:
 Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  analysis/Subclusters_Fib.Rmd
 
 </code></pre>
 <p>
@@ -633,6 +636,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/067775a455329972400495b19640af5d454a094a/analysis/Dim_Reduction.Rmd" target="_blank">067775a</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+<td>
+Adding lenient Thresholds
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/Dim_Reduction.html" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -764,8 +801,8 @@ Tryinging
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907572 48.5    1752190 93.6         NA  1321095 70.6
-Vcells 1598051 12.2    8388608 64.0      16384  2392626 18.3</code></pre>
+Ncells  907600 48.5    1752282 93.6         NA  1321070 70.6
+Vcells 1598244 12.2    8388608 64.0      16384  2393035 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -861,7 +898,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 22723 genes</code></pre>
 <pre><code>Computing corrected count matrix for 22723 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 17.24301 mins</code></pre>
+<pre><code>Wall clock passed: Time difference of 8.525203 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -878,7 +915,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 24429 genes</code></pre>
 <pre><code>Computing corrected count matrix for 24429 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 14.16181 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 11.73887 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -895,7 +932,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 25640 genes</code></pre>
 <pre><code>Computing corrected count matrix for 25640 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 30.30535 mins</code></pre>
+<pre><code>Wall clock passed: Time difference of 16.34376 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -912,7 +949,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 24767 genes</code></pre>
 <pre><code>Computing corrected count matrix for 24767 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 13.6031 mins</code></pre>
+<pre><code>Wall clock passed: Time difference of 10.99234 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -991,6 +1028,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-6-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-6-1.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1013,21 +1061,21 @@ integration</h2>
 
 
 Data &lt;- RunUMAP(Data, dims = 1:Dims)</code></pre>
-<pre><code>09:17:29 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>09:17:29 Read 13577 rows and found 25 numeric columns</code></pre>
-<pre><code>09:17:29 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>09:17:29 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>09:17:09 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>09:17:09 Read 13577 rows and found 25 numeric columns</code></pre>
+<pre><code>09:17:09 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>09:17:09 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-09:17:30 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmp3iLiYT/file4a6e3abef70b
-09:17:30 Searching Annoy index using 1 thread, search_k = 3000
-09:17:32 Annoy recall = 100%
-09:17:33 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-09:17:34 Initializing from normalized Laplacian + noise (using RSpectra)
-09:17:34 Commencing optimization for 200 epochs, with 557838 positive edges
-09:17:34 Using rng type: pcg
-09:17:40 Optimization finished</code></pre>
+09:17:10 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpNiX78H/file1023d12f12364
+09:17:10 Searching Annoy index using 1 thread, search_k = 3000
+09:17:13 Annoy recall = 100%
+09:17:13 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+09:17:14 Initializing from normalized Laplacian + noise (using RSpectra)
+09:17:15 Commencing optimization for 200 epochs, with 557838 positive edges
+09:17:15 Using rng type: pcg
+09:17:20 Optimization finished</code></pre>
 <pre class="r"><code>Data &lt;- FindNeighbors(Data, dims = 1:Dims)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1096,7 +1144,7 @@ Number of edges: 460495
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.8766
 Number of communities: 17
-Elapsed time: 2 seconds
+Elapsed time: 1 seconds
 Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
 Number of nodes: 13577
@@ -1139,6 +1187,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-7-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-7-1.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1179,6 +1238,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-7-2.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-7-2.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1216,23 +1286,60 @@ Harmony</h2>
 <pre><code>Harmony 5/10</code></pre>
 <pre><code>Harmony converged after 5 iterations</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-8-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-8-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DefaultAssay(Data) &lt;- &quot;SCT&quot;
 Data &lt;- RunUMAP(Data, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>09:18:01 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>09:18:01 Read 13577 rows and found 25 numeric columns</code></pre>
-<pre><code>09:18:01 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>09:18:01 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>09:17:41 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>09:17:41 Read 13577 rows and found 25 numeric columns</code></pre>
+<pre><code>09:17:41 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>09:17:41 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-09:18:01 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmp3iLiYT/file4a6e7f1b51f4
-09:18:01 Searching Annoy index using 1 thread, search_k = 3000
-09:18:04 Annoy recall = 100%
-09:18:05 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-09:18:06 Initializing from normalized Laplacian + noise (using RSpectra)
-09:18:06 Commencing optimization for 200 epochs, with 561634 positive edges
-09:18:06 Using rng type: pcg
-09:18:11 Optimization finished</code></pre>
+09:17:41 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpNiX78H/file1023d6cfa38a3
+09:17:41 Searching Annoy index using 1 thread, search_k = 3000
+09:17:44 Annoy recall = 100%
+09:17:45 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+09:17:46 Initializing from normalized Laplacian + noise (using RSpectra)
+09:17:46 Commencing optimization for 200 epochs, with 561634 positive edges
+09:17:46 Using rng type: pcg
+09:17:52 Optimization finished</code></pre>
 <pre class="r"><code>Data &lt;- FindNeighbors(Data, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1318,9 +1425,83 @@ Elapsed time: 1 seconds</code></pre>
   ylab(&quot;Resolution depth&quot;) +
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-8-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-2">
+Past versions of unnamed-chunk-8-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-8-2.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data, reduction = &quot;umap&quot;, shuffle = T,
         group.by = c(&quot;SCT_snn_res.0.1&quot;, &quot;SCT_snn_res.0.2&quot;, &quot;SCT_snn_res.0.3&quot;, &quot;orig.ident&quot;), ncol = 2, label=T) </code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-8-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-3">
+Past versions of unnamed-chunk-8-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-8-3.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="top-markers-per-cluster" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> Top markers per
@@ -1387,6 +1568,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-1.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1425,6 +1617,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-2.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-10-2.png" target="_blank">f44fffe</a>
@@ -1466,6 +1669,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-1.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1504,6 +1718,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-2.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-2.png" target="_blank">f44fffe</a>
@@ -1549,6 +1774,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-4.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-4.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1568,36 +1804,258 @@ Sophie.Alice
 <pre class="r"><code># Checking Cluster 2 -&gt; proliferating cells
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;2&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-6">
+Past versions of unnamed-chunk-11-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-6.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>create_table(dplyr::filter(Markers_top10, cluster == &quot;2&quot;))</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-5fec1c14b6b3d83b8294" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-5fec1c14b6b3d83b8294">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"4.71759134282474\" data-max=\"5.09781292441875\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.5\" data-max=\"0.785\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.026\" data-max=\"0.07\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10"],[0,0,0,0,0,0,0,0,0,0],[4.827992562716529,4.731475290891578,5.09781292441875,5.057538654451395,4.717591342824737,4.725839018013777,4.732835302891996,4.827853944981292,4.99922218146206,5.027054867528489],[0.785,0.71,0.645,0.598,0.602,0.615,0.581,0.526,0.507,0.5],[0.053,0.07000000000000001,0.035,0.032,0.039,0.063,0.031,0.039,0.027,0.026],[0,0,0,0,0,0,0,0,0,0],["2","2","2","2","2","2","2","2","2","2"],["POLQ","ASPM","KIF15","CIT","XRCC2","TOP2A","NCAPG","SPC25","NDC80","KIF4A"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Checking Cluster 3 -&gt; For sure cardiac Fibroblasts
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;3&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-8.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-8">
+Past versions of unnamed-chunk-11-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-8.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>create_table(dplyr::filter(Markers_top10, cluster == &quot;3&quot;))</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-80970f84c4a5ab609039" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-80970f84c4a5ab609039">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"8.55758244512353\" data-max=\"9.6200538560575\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.594\" data-max=\"0.914\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.003\" data-max=\"0.016\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10"],[0,0,0,0,0,0,0,0,0,0],[8.557582445123536,9.522802360299114,8.663342169989344,9.620053856057494,8.993072050677537,8.628522712021553,8.722863366953138,8.780660853284243,8.714287876991477,9.018380263277411],[0.914,0.879,0.877,0.865,0.805,0.786,0.782,0.644,0.643,0.594],[0.016,0.005,0.008,0.008999999999999999,0.005,0.007,0.005,0.003,0.003,0.003],[0,0,0,0,0,0,0,0,0,0],["3","3","3","3","3","3","3","3","3","3"],["FAP","MEG3","MEG8","MIR31HG","DNM3OS","EBF1","USP9Y","TXLNGY","TTTY14","CCN4"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Checking Cluster 4 -&gt; ?
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;4&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-10.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-10">
+Past versions of unnamed-chunk-11-10.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-10.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>create_table(dplyr::filter(Markers_top10, cluster == &quot;4&quot;))</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-011cfb8a513f756793f1" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-011cfb8a513f756793f1">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1e-15\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.89775723844177\" data-max=\"3.15202111305627\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.541\" data-max=\"0.991\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.086\" data-max=\"0.443\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1e-15\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10"],[0,0,0,0,0,0,0,0,3.568424738474614e-301,1.57777788775907e-300],[3.085112376786129,2.958719873253951,3.152021113056271,2.914569541984609,2.897757238441767,2.959014981635181,3.012227724841428,3.14585272790411,2.952484393324181,2.928592241997631],[0.9340000000000001,0.796,0.718,0.742,0.741,0.706,0.991,0.541,0.59,0.578],[0.26,0.176,0.129,0.174,0.182,0.157,0.443,0.08599999999999999,0.112,0.107],[0,0,0,0,0,0,0,0,1.377626054535509e-296,6.091169313482666e-296],["4","4","4","4","4","4","4","4","4","4"],["MIF","COX8A","UQCR10","PRDX2","NDUFA1","TCAP","TNNC1","COX14","MRPL41","NDUFB3"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Checking Cluster 5 -&gt; SPTLC3: Could be the Hypoxic core?
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;5&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-12.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-12">
+Past versions of unnamed-chunk-11-12.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-12.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>create_table(dplyr::filter(Markers_top10, cluster == &quot;5&quot;))</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-31535b70de8e40c761b8" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-31535b70de8e40c761b8">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1e-15\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.04352928887457\" data-max=\"7.16608246172091\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.518\" data-max=\"0.993\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.024\" data-max=\"0.938\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1e-15\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9"],[0,0,0,0,4.024983754207566e-256,5.500215832171038e-177,5.682769246818614e-100,5.120959224978932e-36,3.673675981824708e-29],[5.762523564592586,6.547051575228963,6.012969231412319,7.166082461720912,3.22756691988999,3.35611393130524,1.840727127769131,1.043529288874571,1.120017999465262],[0.993,0.873,0.846,0.608,0.92,0.526,0.518,0.971,0.825],[0.077,0.036,0.03,0.024,0.491,0.131,0.177,0.9379999999999999,0.6870000000000001],[0,0,0,0,1.553885228149373e-251,2.123413324167951e-172,2.193889895426794e-95,1.976997518395367e-31,1.418259349543247e-24],["5","5","5","5","5","5","5","5","5"],["ENSG00000289426","CLEC2A","ANKRD45","ENSG00000289578","KLHL20","ENSG00000286339","SPTLC3","SBF2","CEP85L"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
-<pre class="r"><code># Checking Cluster 8 -&gt; Dying cells: mitrochondrial gene count is high
+<pre class="r"><code># Checking Cluster 6 -&gt; Dying cells: mitrochondrial gene count is high
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;6&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-14.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-14">
+Past versions of unnamed-chunk-11-14.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-14.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>create_table(dplyr::filter(Markers_top10, cluster == &quot;6&quot;))</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-959261c1b3ca7172ca88" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-959261c1b3ca7172ca88">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1e-15\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"4.30780455555423\" data-max=\"5.27321138990936\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.646\" data-max=\"0.986\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.078\" data-max=\"0.26\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1e-15\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10"],[6.80574679432553e-181,1.483459021170472e-178,2.490328840076802e-177,1.307512491601085e-163,6.473866741750794e-156,1.23169389185608e-152,5.5820270482694e-152,3.821698220637892e-150,4.055758572547686e-146,1.256300145754203e-137],[5.273211389909357,4.814908563390171,4.705614303021544,4.424484326548846,4.62161988752106,4.410373451877235,4.369968426672956,4.33220593621791,4.617550808733683,4.307804555554227],[0.771,0.729,0.896,0.903,0.694,0.986,0.75,0.785,0.646,0.972],[0.095,0.08500000000000001,0.146,0.158,0.08699999999999999,0.234,0.107,0.12,0.078,0.26],[2.627426607417314e-176,5.727041897130725e-174,9.614163520000501e-173,5.04778272507515e-159,2.499300994320312e-151,4.755077438899581e-148,2.154997362254885e-147,1.475404815059465e-145,1.56576615451776e-141,4.850072342698677e-133],["6","6","6","6","6","6","6","6","6","6"],["ENSG00000289474","MT-ND2","MT-ND4","MT-CO2","MT-ND3","MT-CO3","MT-ND5","MT-ATP6","ENSG00000289901","MT-CO1"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Checking Cluster 7 -&gt; probably doublets
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == &quot;7&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-11-16.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-16">
+Past versions of unnamed-chunk-11-16.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-16" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-11-16.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>create_table(dplyr::filter(Markers_top10, cluster == &quot;7&quot;))</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-1006f8d856b0c67d9f38" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-1006f8d856b0c67d9f38">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1e-15\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"4.43433157578742\" data-max=\"7.150568175141\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.511\" data-max=\"0.809\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.013\" data-max=\"0.155\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1e-15\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10"],[5.579230361120765e-175,5.753936959374032e-157,6.677273247861201e-92,3.47901365455811e-78,1.185705807805104e-69,8.270534249450261e-62,1.158301353131887e-49,5.985364571639599e-45,3.125612899244746e-37,4.77387607265876e-28],[7.150568175141,5.194766344392091,6.38256933597023,5.912638608576394,5.695004254151222,4.770915190087327,4.870753889031509,4.541902750702701,7.069173891630331,4.434331575787416],[0.511,0.638,0.702,0.8090000000000001,0.723,0.638,0.511,0.787,0.617,0.681],[0.013,0.024,0.051,0.08400000000000001,0.075,0.06,0.049,0.148,0.103,0.155],[2.153917673214283e-170,2.221364902535939e-152,2.577828110069295e-87,1.343108011478704e-73,4.577535841612385e-65,3.192922452342768e-57,4.471738203900962e-45,2.310709846527184e-40,1.206674115882427e-32,1.843002596610641e-23],["7","7","7","7","7","7","7","7","7","7"],["ITGA8","LRP1B","LINC03051","LSAMP","UNC5C","TMEM108","PRKCB","MECOM","FGF14","ENSG00000254987"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
@@ -1699,6 +2157,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-1.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1714,21 +2183,21 @@ Sophie.Alice
 </div>
 <pre class="r"><code>DefaultAssay(Data.clean) &lt;- &quot;SCT&quot;
 Data.clean &lt;- RunUMAP(Data.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>09:20:33 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>09:20:33 Read 13386 rows and found 25 numeric columns</code></pre>
-<pre><code>09:20:33 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>09:20:33 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>09:20:11 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>09:20:11 Read 13386 rows and found 25 numeric columns</code></pre>
+<pre><code>09:20:11 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>09:20:11 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-09:20:34 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmp3iLiYT/file4a6e612616b8
-09:20:34 Searching Annoy index using 1 thread, search_k = 3000
-09:20:36 Annoy recall = 100%
-09:20:37 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-09:20:38 Initializing from normalized Laplacian + noise (using RSpectra)
-09:20:38 Commencing optimization for 200 epochs, with 554098 positive edges
-09:20:38 Using rng type: pcg
-09:20:44 Optimization finished</code></pre>
+09:20:12 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpNiX78H/file1023d44a2e8fb
+09:20:12 Searching Annoy index using 1 thread, search_k = 3000
+09:20:15 Annoy recall = 100%
+09:20:15 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+09:20:16 Initializing from normalized Laplacian + noise (using RSpectra)
+09:20:16 Commencing optimization for 200 epochs, with 554098 positive edges
+09:20:16 Using rng type: pcg
+09:20:22 Optimization finished</code></pre>
 <pre class="r"><code>Data.clean &lt;- FindNeighbors(Data.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1832,6 +2301,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-2.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-2.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1848,18 +2328,203 @@ Sophie.Alice
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;SCT_snn_res.0.1&quot;, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-12-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-3">
+Past versions of unnamed-chunk-12-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-3.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;orig.ident&quot;, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-12-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-4">
+Past versions of unnamed-chunk-12-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-4.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;Phase&quot;, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-12-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-5">
+Past versions of unnamed-chunk-12-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-12-5.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = c(&quot;SCT_snn_res.0.1&quot;, &quot;orig.ident&quot;), ncol = 2, label=T)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-13-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-13-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>Idents(Data.clean) &lt;- &quot;SCT_snn_res.0.1&quot;
 VlnPlot(Data.clean, features = c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;, &quot;percent.rp&quot;, &quot;scDblFinder.score&quot;), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-13-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-2">
+Past versions of unnamed-chunk-13-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-13-2.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>### MArker genes
 
 DefaultAssay(Data.clean) &lt;- &quot;RNA&quot;
@@ -1919,6 +2584,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/f44fffedecaad12950381678dd2cfcbf2f6171b4/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-1.png" target="_blank">f44fffe</a>
 </td>
 <td>
@@ -1935,21 +2611,243 @@ Sophie.Alice
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = &quot;FAP&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Activated Fibroblast Marker</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-15-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-2">
+Past versions of unnamed-chunk-15-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-2.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = &quot;TTN&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Cardiomyocyte marker</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-15-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-3">
+Past versions of unnamed-chunk-15-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-3.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = c(&quot;CENPE&quot;, &quot;MKI67&quot;), pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Proliferation marker</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-15-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-4">
+Past versions of unnamed-chunk-15-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-4.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;Phase&quot;)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-15-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-5">
+Past versions of unnamed-chunk-15-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-5.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = c(&quot;BNIP3&quot;, &quot;VEGFA&quot;, &quot;HIF1A&quot;), pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) #Hypoxia?</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-15-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-6">
+Past versions of unnamed-chunk-15-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-6.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Data.clean, features = c(&quot;ANKRD45&quot;, &quot;KLHL20&quot;), pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # failing cytokinesis, Binucleation process stuck????</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-15-7.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-7">
+Past versions of unnamed-chunk-15-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-15-7.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="renaming-cluster-ids" class="section level2" number="3.10">
 <h2><span class="header-section-number">3.10</span> Renaming Cluster
@@ -1969,6 +2867,43 @@ Data.clean$cell_type &lt;- Idents(Data.clean)
 DimPlot(Data.clean, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;cell_type&quot;, label=F)</code></pre>
 <p><img src="figure/Dim_Reduction.Rmd/unnamed-chunk-16-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/Dim_Reduction.Rmd/unnamed-chunk-16-1.png" target="_blank">028e94e</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="save-file" class="section level2" number="3.11">
 <h2><span class="header-section-number">3.11</span> Save File</h2>
