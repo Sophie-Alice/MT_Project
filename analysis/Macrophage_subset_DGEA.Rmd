@@ -213,9 +213,9 @@ Macrophages$cdr <- scale(colSums(GetAssayData(Macrophages, assay = "RNA", layer 
 
 ```
 
-## DGEA
+# DGEA
 
-```{r,warning = FALSE}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 
 FDR <- 0.01
 FC <- 1
@@ -254,9 +254,9 @@ outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_
 
 ```
 
-## fGSEA
+# fGSEA
 
-### Get Hallmark pathways
+## Get Hallmark pathways
 
 ```{r,warning = FALSE}
 Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt")
@@ -264,7 +264,7 @@ Reactome.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Pro
 ```
 
 
-### Rank the data
+## Rank the data
 
 ```{r,warning = FALSE}
 
@@ -282,7 +282,7 @@ rank <- ranked[names(ranked) != ""]
 
 ```
 
-### Functional gene set enrichment Analysis
+## Functional gene set enrichment Analysis
 
 ```{r,warning = FALSE}
 
@@ -307,9 +307,9 @@ create_table(fgseares.tidy.show)
 
 ```
 
-### Visualization
+## Visualization
 
-```{r,warning = FALSE}
+```{r,warning = FALSE, fig.width=6, fig.height=5}
 
 plot_df <- fgseares.tidy.top.both %>%
   mutate(
@@ -355,7 +355,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
 ```
 
 
-## PAH
+# PAH
 
 ```{r,warning = FALSE}
 
@@ -436,8 +436,9 @@ create_table(simp.down.GO.show)
 
 ```
 
+## Visualisations
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
 go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
@@ -487,9 +488,9 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
   )
 ```
 
-### EMAP Plot
+## EMAP Plot
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 set.seed(42)
 
@@ -555,13 +556,13 @@ emapplot(
 
 ```
 
-### Deeper look into specific Genesets 
+# Deeper look into specific Genesets 
 
-#### Upregulated in Macrophages upon TGF-Beta stimulation
+# Upregulated in Macrophages upon TGF-Beta stimulation
 
-##### extracellular matrix organization
+## extracellular matrix organization
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 simp.up.GO.df<- as.data.frame(simp.up.GO)
 
@@ -575,7 +576,7 @@ genes <- simp.up.GO.df %>%
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 10,
+                   dot.scale = 15,
                    plot.title = "ECM Gene Set Expression Across Conditions") 
 
 raincloud.plots(
@@ -589,9 +590,9 @@ raincloud.plots(
 
 ```
 
-##### cell adhesion
+## cell adhesion
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 simp.up.GO.df<- as.data.frame(simp.up.GO)
 
@@ -605,7 +606,7 @@ genes <- simp.up.GO.df %>%
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 10,
+                   dot.scale = 15,
                    plot.title = "Cell Adhesion Gene Set Expression Across Conditions") 
 
 
@@ -627,11 +628,11 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ```
 
-#### Downregulated in Macrophages upon TGF-Beta stimulation
+# Downregulated in Macrophages upon TGF-Beta stimulation
 
-##### Adaptive immune response
+## Adaptive immune response
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 simp.down.GO.df<- as.data.frame(simp.down.GO)
 
@@ -645,7 +646,7 @@ genes <- simp.down.GO.df %>%
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 10,
+                   dot.scale = 15,
                    plot.title = "adaptive immune response: Gene Set Expression Across Conditions") 
 
 chunk_size <- 9
@@ -666,9 +667,9 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ```
 
-##### regulation of inflammatory response
+## regulation of inflammatory response
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 simp.down.GO.df<- as.data.frame(simp.down.GO)
 
@@ -682,7 +683,7 @@ genes <- simp.down.GO.df %>%
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 10,
+                   dot.scale = 15,
                    plot.title = "regulation of inflammatory response: Gene Set Expression Across Conditions") 
 
 chunk_size <- 9
@@ -704,17 +705,17 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ```
 
-#### Checking for specific Marker genes 
+# Checking for specific Marker genes 
 
-##### Metalloproteases
+## Metalloproteases
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 genes <- c("MMP1", "MMP2", "MMP8", "MMP9", "MMP13", "MMP12")
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 10,
+                   dot.scale = 15,
                    plot.title = "Metalloproteases: Gene Set Expression Across Conditions") 
 
 raincloud.plots(
@@ -727,15 +728,15 @@ raincloud.plots(
 
 ```
 
-##### M1/M2 Markers
+## M1/M2 Markers
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 genes <- c("CD14", "CD163")
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 10,
+                   dot.scale = 15,
                    plot.title = "M1/M2 Markers: Gene Set Expression Across Conditions") 
 
 raincloud.plots(
@@ -749,34 +750,3 @@ raincloud.plots(
 ```
 
 
-
-
-```{r, warning = FALSE}
-
-
-
-```
-
-```{r, warning = FALSE}
-
-
-
-```
-
-```{r, warning = FALSE}
-
-
-
-```
-
-```{r, warning = FALSE}
-
-
-
-```
-
-```{r, warning = FALSE}
-
-
-
-```

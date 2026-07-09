@@ -1,5 +1,5 @@
 ---
-title: "Baseline_Mac_Response"
+title: "Baseline_Mac_Response Lenient Thresholds"
 author: "Sophie.Alice"
 date: "2026-07-02"
 output: workflowr::wflow_html
@@ -205,12 +205,12 @@ raincloud.plots <- function(gene_list,
 
  - CMFHM_NC vs CMF_NC = Effect of Macrophage Presence on MT without TGF-Beta
 
- - Cutoffs Chosen: FDR <= 0.01, abs(log2FC) > 1
+ - Cutoffs Chosen: FDR <= 0.05, abs(log2FC) > 0.5
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
-FDR <- 0.01
-FC <- 1
+FDR <- 0.05
+FC <- 0.5
 
 Degs <- DEG.lists$Baseline_Mac_Response
 
@@ -618,13 +618,13 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ```
 
-## regulation of cell-cell adhesion
+## regulation of heart contraction
 
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 simp.up.GO.df <- as.data.frame(simp.up.GO)
 
-descr <- "regulation of cell-cell adhesion"
+descr <- "regulation of heart contraction"
 
 genes <- simp.up.GO.df %>%
   filter(Description == descr) %>%
@@ -635,7 +635,7 @@ genes <- simp.up.GO.df %>%
 SCpubr::do_DotPlot(Fibroblasts, 
                    features = genes,
                    dot.scale = 10,
-                   plot.title = "regulation of cell-cell adhesion Gene Set Expression Across Conditions") 
+                   plot.title = "regulation of heart contraction Gene Set Expression Across Conditions") 
 
 ```
 
@@ -652,7 +652,7 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
     plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = regulation of cell-cell adhesion - Slice ", slice_num),
+    plot_subtitle = paste0("Geneset = regulation of heart contraction - Slice ", slice_num),
     seurat_obj    = Fibroblasts,
     colors        = gradient_colors4
   ))
@@ -748,13 +748,13 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ```
 
-## cell migration
+## cell motility
 
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 simp.down.GO.df <- as.data.frame(simp.down.GO)
 
-descr <- "cell migration"
+descr <- "cell motility"
 
 genes <- simp.down.GO.df %>%
   filter(Description == descr) %>%
@@ -765,7 +765,7 @@ genes <- simp.down.GO.df %>%
 SCpubr::do_DotPlot(Fibroblasts, 
                    features = genes,
                    dot.scale = 10,
-                   plot.title = "cell migration Gene Set Expression Across Conditions") 
+                   plot.title = "cell motility Gene Set Expression Across Conditions") 
 
 ```
 
@@ -782,7 +782,7 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
     plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = cell migration - Slice ", slice_num),
+    plot_subtitle = paste0("Geneset = cell motility - Slice ", slice_num),
     seurat_obj    = Fibroblasts,
     colors        = gradient_colors4
   ))

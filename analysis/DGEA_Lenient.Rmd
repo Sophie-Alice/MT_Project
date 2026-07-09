@@ -1,5 +1,5 @@
 ---
-title: "Fibroblasts DGEA"
+title: "Fibroblasts DGEA - Lenient Thresholds"
 author: "Sophie.Alice"
 date: "2026-06-25"
 output: workflowr::wflow_html
@@ -126,8 +126,8 @@ create_table <- function(df) {
 ```{r, warning = FALSE}
 
 ################# Setting thresholds
-FDR <- 0.01
-FC <- 1
+FDR <- 0.05
+FC <- 0.5
 #################
 
 table(Data$cell_type)
@@ -163,7 +163,6 @@ MAST.Res <- MAST.Res %>%
 
 MAST.Res.sign <- MAST.Res %>%
   filter(p_val_adj < FDR & abs(avg_log2FC) >= FC)
-
 
 
 fibroblast_deg_list[["Baseline_TGF_Response"]] <- MAST.Res
@@ -222,8 +221,6 @@ Volcano_Plots(
 #write.csv(MAST.Res.sign, file = file.path(outputdir, "Modulated_TGF_Response_sign.csv"))
 
 ```
-
-
 
 ### Baseline Macrophage response
 
@@ -301,13 +298,15 @@ Volcano_Plots(
 
 ```
 
+
+
 # Save the Master DEG object
 
 ```{r, warning = FALSE}
 
 outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
 
-saveRDS(fibroblast_deg_list, file = file.path(outputdir, "All_Fibro_DEG_Lists.rds"))
+saveRDS(fibroblast_deg_list, file = file.path(outputdir, "All_Fibro_DEG_Lists_Lenient.rds"))
 
 ```
 

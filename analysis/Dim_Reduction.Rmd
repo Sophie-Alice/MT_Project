@@ -223,7 +223,7 @@ create_table(dplyr::filter(Markers_top10, cluster == "4"))
 # Checking Cluster 5 -> SPTLC3: Could be the Hypoxic core?
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "5")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
 create_table(dplyr::filter(Markers_top10, cluster == "5"))
-# Checking Cluster 8 -> Dying cells: mitrochondrial gene count is high
+# Checking Cluster 6 -> Dying cells: mitrochondrial gene count is high
 VlnPlot_scCustom(Data, features = dplyr::filter(Markers_top10, cluster == "6")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
 create_table(dplyr::filter(Markers_top10, cluster == "6"))
 # Checking Cluster 7 -> probably doublets

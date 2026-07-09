@@ -1,5 +1,5 @@
 ---
-title: "Baseline_Mac_Response"
+title: "Baseline_TGF_Response Lenient Thresholds"
 author: "Sophie.Alice"
 date: "2026-07-02"
 output: workflowr::wflow_html
@@ -64,6 +64,7 @@ path2 <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Proj
 DEG.lists <- read_rds(path2)
 
 custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors2 <- custom_palette(2)
 gradient_colors3 <- custom_palette(6)
 gradient_colors4 <- custom_palette(4)
 ```
@@ -198,21 +199,20 @@ raincloud.plots <- function(gene_list,
   return(raincloud_plot)
 }
 
-
 ```
 
-# DEGs of Baseline Macrophage response
+# DEGs of Fibrotic response to TGF-B without Macrophages
 
- - CMFHM_NC vs CMF_NC = Effect of Macrophage Presence on MT without TGF-Beta
+ - CMF_TGF vs CMF_NC = Effect of TGF-Beta on MT without Macrophages
 
- - Cutoffs Chosen: FDR <= 0.01, abs(log2FC) > 1
+ - Cutoffs Chosen: FDR <= 0.05, abs(log2FC) > 0.5
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
-FDR <- 0.01
-FC <- 1
+FDR <- 0.05
+FC <- 0.5
 
-Degs <- DEG.lists$Baseline_Mac_Response
+Degs <- DEG.lists$Baseline_TGF_Response
 
 Degs.sign <- Degs %>%
   filter(p_val_adj < FDR & abs(avg_log2FC) >= FC)
@@ -221,15 +221,15 @@ create_table(Degs.sign)
 
 Volcano_Plots(
   Data = Degs,
-  Title = "DEG in MT-Fibroblasts unstimulated",
-  Subtitle = "with Macrophages vs. Control",
+  Title = "DEG in MT-Fibroblasts without Macrophages",
+  Subtitle = "TGF-\u03b2 vs. Control",
   pCutoff = FDR,    
   FCcutoff = FC     
 )
 
 ```
 
-# FGSEA
+## FGSEA
 
 ## Get Hallmark pathways
 
@@ -257,7 +257,7 @@ rank <- ranked[names(ranked) != ""]
 
 ## Functional gene set enrichment Analysis
 
-```{r,warning = FALSE}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 
 ############################## Hallmark
 set.seed(42)
@@ -314,7 +314,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
     x = "", 
     y = "Normalized Enrichment Score (NES)", 
     title = "GSEA: Hallmark Pathways",
-    subtitle = "MT: Pathway changes CMFHM_NC compared to CMF_NC"
+    subtitle = "MT: Pathway changes CMF_TGF compared to CMF_NC"
   ) +
   theme_bw() +
   theme(
@@ -443,7 +443,7 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
   
   theme_bw() + 
   labs(
-    title = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment", 
+    title = "DEG Fibroblasts CMF_TGF vs CMF_NC: GO Biological Process Enrichment", 
     subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
     x = "Gene Ratio", 
     y = ""
@@ -479,7 +479,7 @@ emapplot(
 ) + 
   theme_bw() + 
   labs(
-    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment", 
+    title    = "DEG Fibroblasts CMF_TGF vs CMF_NC: GO Biological Process Enrichment", 
     subtitle = "Functional clustering map of top 30 enriched terms for Up-regulated genes",
     x        = "", 
     y        = ""
@@ -509,7 +509,7 @@ emapplot(
 ) + 
   theme_bw() + 
   labs(
-    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment", 
+    title    = "DEG Fibroblasts CMF_TGF vs CMF_NC: GO Biological Process Enrichment", 
     subtitle = "Functional clustering map of top 30 enriched terms for Down-regulated genes",
     x        = "", 
     y        = ""
@@ -525,12 +525,13 @@ emapplot(
     legend.position = "right"
   )
 
-
 ```
+
+
 
 # Deeper look into specific Genesets 
 
-# Upregulated in Fibroblasts upon Macrophage addition (No TGF-B stimulation)
+# Upregulated in Fibroblasts upon TGF-Beta stimulation (No Macrophages)
 
 ## extracellular matrix organization
 
@@ -549,9 +550,13 @@ genes <- simp.up.GO.df %>%
   unlist()
 
 SCpubr::do_DotPlot(Fibroblasts, 
-                   features = genes,
+                   features = genes[1:16],
                    dot.scale = 10,
-                   plot.title = "ECM Gene Set Expression Across Conditions") 
+                   plot.title = "ECM Gene Set Expression Across Conditions - Slice 1") 
+SCpubr::do_DotPlot(Fibroblasts, 
+                   features = genes[17:32],
+                   dot.scale = 10,
+                   plot.title = "ECM Gene Set Expression Across Conditions - Slice 2") 
 
 ```
 
@@ -567,7 +572,7 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
-    plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
+    plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
     plot_subtitle = paste0("Geneset = extracellular matrix organization - Slice ", slice_num),
     seurat_obj    = Fibroblasts,
     colors        = gradient_colors4
@@ -578,9 +583,11 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ## cell adhesion
 
+The geneset is quite big so for visualization purposes it will be split in sets of 16
+
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
-simp.up.GO.df <- as.data.frame(simp.up.GO)
+simp.up.GO.df<- as.data.frame(simp.up.GO)
 
 descr <- "cell adhesion"
 
@@ -590,10 +597,15 @@ genes <- simp.up.GO.df %>%
   stringr::str_split("/") %>%
   unlist()
 
+
 SCpubr::do_DotPlot(Fibroblasts, 
-                   features = genes,
+                   features = genes[1:30],
                    dot.scale = 10,
-                   plot.title = "cell adhesion Gene Set Expression Across Conditions") 
+                   plot.title = "Cell Adhesion Gene Set Expression Across Conditions - Slice 1") 
+SCpubr::do_DotPlot(Fibroblasts, 
+                   features = genes[31:60],
+                   dot.scale = 10,
+                   plot.title = "Cell Adhesion Gene Set Expression Across Conditions - Slice 2") 
 
 ```
 
@@ -609,8 +621,8 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
-    plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = cell adhesion - Slice ", slice_num),
+    plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = Cell Adhesion - Slice ", slice_num),
     seurat_obj    = Fibroblasts,
     colors        = gradient_colors4
   ))
@@ -618,58 +630,15 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ```
 
-## regulation of cell-cell adhesion
+# Downregulated in Fibroblasts upon TGF-Beta stimulation (No Macrophages)
+
+## cAMP/PKA signal transduction
 
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
-simp.up.GO.df <- as.data.frame(simp.up.GO)
+simp.down.GO.df<- as.data.frame(simp.down.GO)
 
-descr <- "regulation of cell-cell adhesion"
-
-genes <- simp.up.GO.df %>%
-  filter(Description == descr) %>%
-  pull(geneID) %>%
-  stringr::str_split("/") %>%
-  unlist()
-
-SCpubr::do_DotPlot(Fibroblasts, 
-                   features = genes,
-                   dot.scale = 10,
-                   plot.title = "regulation of cell-cell adhesion Gene Set Expression Across Conditions") 
-
-```
-
-```{r, warning = FALSE, fig.width=8, fig.height=7}
-
-
-chunk_size <- 9
-total_genes <- length(genes)
-
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx <- min(i + chunk_size - 1, total_genes)
-  slice_num <- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = regulation of cell-cell adhesion - Slice ", slice_num),
-    seurat_obj    = Fibroblasts,
-    colors        = gradient_colors4
-  ))
-}
-
-```
-
-
-# Downregulated in Fibroblasts upon Macrophage addition (No TGF-B stimulation)
-
-## cell population proliferation
-
-```{r, warning = FALSE, fig.width=8, fig.height=4}
-
-simp.down.GO.df <- as.data.frame(simp.down.GO)
-
-descr <- "cell population proliferation"
+descr <- "cAMP/PKA signal transduction"
 
 genes <- simp.down.GO.df %>%
   filter(Description == descr) %>%
@@ -680,7 +649,7 @@ genes <- simp.down.GO.df %>%
 SCpubr::do_DotPlot(Fibroblasts, 
                    features = genes,
                    dot.scale = 10,
-                   plot.title = "cell population proliferation Gene Set Expression Across Conditions") 
+                   plot.title = "cAMP/PKA signal transduction: Gene Set Expression Across Conditions") 
 
 ```
 
@@ -696,8 +665,8 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
-    plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = cell population proliferation - Slice ", slice_num),
+    plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = cAMP/PKA signal transduction - Slice ", slice_num),
     seurat_obj    = Fibroblasts,
     colors        = gradient_colors4
   ))
@@ -705,13 +674,13 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ```
 
-## cell adhesion
+## actomyosin structure organization
 
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
-simp.down.GO.df <- as.data.frame(simp.down.GO)
+simp.down.GO.df<- as.data.frame(simp.down.GO)
 
-descr <- "cell adhesion"
+descr <- "actomyosin structure organization"
 
 genes <- simp.down.GO.df %>%
   filter(Description == descr) %>%
@@ -722,7 +691,7 @@ genes <- simp.down.GO.df %>%
 SCpubr::do_DotPlot(Fibroblasts, 
                    features = genes,
                    dot.scale = 10,
-                   plot.title = "cell adhesion Gene Set Expression Across Conditions") 
+                   plot.title = "actomyosin structure organization: Gene Set Expression Across Conditions") 
 
 ```
 
@@ -738,56 +707,12 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
-    plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = cell adhesion - Slice ", slice_num),
+    plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = actomyosin structure organization - Slice ", slice_num),
     seurat_obj    = Fibroblasts,
     colors        = gradient_colors4
   ))
 }
-
-
-```
-
-## cell migration
-
-```{r, warning = FALSE, fig.width=8, fig.height=4}
-
-simp.down.GO.df <- as.data.frame(simp.down.GO)
-
-descr <- "cell migration"
-
-genes <- simp.down.GO.df %>%
-  filter(Description == descr) %>%
-  pull(geneID) %>%
-  stringr::str_split("/") %>%
-  unlist()
-
-SCpubr::do_DotPlot(Fibroblasts, 
-                   features = genes,
-                   dot.scale = 10,
-                   plot.title = "cell migration Gene Set Expression Across Conditions") 
-
-```
-
-```{r, warning = FALSE, fig.width=8, fig.height=7}
-
-
-chunk_size <- 9
-total_genes <- length(genes)
-
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx <- min(i + chunk_size - 1, total_genes)
-  slice_num <- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = cell migration - Slice ", slice_num),
-    seurat_obj    = Fibroblasts,
-    colors        = gradient_colors4
-  ))
-}
-
 
 ```
 
@@ -808,13 +733,13 @@ SCpubr::do_DotPlot(Fibroblasts,
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
-
 raincloud.plots(
   gene_list     = genes,
-  plot_title    = "Fibroblasts CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions",
+  plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
   plot_subtitle = "Geneset = Pro-Fibrotic genes",
   seurat_obj = Fibroblasts,
   colors = gradient_colors4
 )
 
 ```
+

@@ -47,6 +47,10 @@ library(SCpubr)
 library(assertthat)
 library(UCell)
 library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
 ```
 
 
@@ -56,6 +60,8 @@ library(DT)
 path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
 Data <- read_rds(path)
 Data
+Fibroblasts<- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(Fibroblasts) <- "orig.ident" 
 
 path2 <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Fibro_DEG_Lists.rds"
 
@@ -134,6 +140,70 @@ create_table <- function(df) {
   )
 }
 
+#################################################### Raincloud Plots
+
+raincloud.plots <- function(gene_list, 
+                                   plot_title, 
+                                   plot_subtitle, 
+                                   seurat_obj = Data, 
+                                   colors = gradient_colors4) {
+
+  
+  valid_genes <- intersect(gene_list, rownames(seurat_obj))
+  expression_matrix <- FetchData(seurat_obj, vars = c(valid_genes, "ident")) 
+
+  
+  rain_data <- expression_matrix %>%
+    tibble::rownames_to_column("Cell_ID") %>%
+    tidyr::pivot_longer(
+      cols = all_of(valid_genes), 
+      names_to = "Gene", 
+      values_to = "Expression"
+    ) %>%
+    dplyr::rename(Condition = ident)
+  
+
+  raincloud_plot <- ggplot(rain_data, aes(x = Condition, y = Expression, fill = Condition, color = Condition)) +
+    geom_rain(
+      alpha = 0.6,
+      violin.args = list(color = NA),          
+      boxplot.args = list(outlier.shape = NA), 
+      point.args = list(
+        size = 0.4,                            
+        alpha = 0.4                            
+      ),
+    group = 1
+    ) +
+    
+    facet_wrap(~Gene, scales = "free_y", ncol = 3) +
+    
+    scale_fill_manual(values = colors) +
+    scale_color_manual(values = colors) +
+    
+    theme_bw() +
+    labs(
+      title    = plot_title,
+      subtitle = plot_subtitle,
+      x        = "Experimental Conditions",
+      y        = "Normalized Expression Level"
+    ) +
+    
+    theme(
+      plot.title.position = "plot",
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
+      axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+      axis.text.y   = element_text(face = "bold", color = "black"),
+      axis.title.x  = element_text(face = "bold"),
+      axis.title.y  = element_text(face = "bold"),
+      strip.text    = element_text(face = "bold", size = 10), 
+      legend.position = "none"
+    )
+  
+  return(raincloud_plot)
+}
+
+
 ```
 
 # Gene Overlap
@@ -144,9 +214,13 @@ Cutoffs Chosen: FDR <= 0.01, abs(log2FC) > 1
 
 ```{r, warning = FALSE}
 
-names(DEG.lists)
+names(DEG.lists) <- c("Baseline_TGF_Response" = "CMF_TGF vs. CMF_NC",
+                      "Modulated_TGF_Response" = "CMFHM_TGF vs. CMFHM_NC",
+                      "Baseline_Mac_Response" = "CMFHM_NC vs. CMF_NC",
+                      "Stim_Mac_Response" = "CMFHM_TGF vs. CMF_TGF")
 
-head(DEG.lists)
+# head(DEG.lists)
+
 ```
 
 
@@ -260,14 +334,13 @@ ggvenn(
 ```
 
 
-## Heatmap try
+## Log2FC differences across Codnitions
 
 ```{r, warning = FALSE}
 
 library(ComplexHeatmap)
 library(tidyverse)
 library(circlize)
-
 
 FDR <- 0.01 
 
@@ -280,7 +353,6 @@ processed_lists <- lapply(names(DEG.lists), function(name) {
     rename(!!name := avg_log2FC) 
 })
 
-# Merge all 4 data frames together by gene name
 merged_df <- purrr::reduce(processed_lists, full_join, by = "gene")
 
 # Convert NAs to 0 (meaning 0 log2FC change when not significant)
@@ -290,7 +362,6 @@ fc_matrix <- as.matrix(merged_df[,-1])
 rownames(fc_matrix) <- merged_df$gene
 
 
-# Keep top 200 genes based on variance across the 4 conditions as it's too big
 if (nrow(fc_matrix) > 200) {
   top_genes <- head(order(apply(fc_matrix, 1, var), decreasing = TRUE), 200)
   fc_matrix_subset <- fc_matrix[top_genes, ]
@@ -317,17 +388,144 @@ Heatmap(
   row_names_gp = gpar(fontsize = 8), 
   
   row_km = 4,                     
-  column_title = "Macrophage Modulation of TGF-Beta Response"
+  column_title = "log2FC Differences across Conditions"
 )
 
 ```
 
-## Check on genes that are upredulated in Baseline TGF_Beta but not or downregulated in Modulated TGF-Beta
+## Check on genes that are up regulated in CMF_TGF vs. CMF_NC AND down regulated in CMFHM_TGF vs. CMF_TGF 
 
+ - Display of the log2FC across Contitions
+ 
 ```{r, warning = FALSE}
 
 FDR <- 0.01 
 
-merged_df <- purrr::reduce(processed_lists, full_join, by = "gene")
+filtered_df <- merged_df[merged_df$`CMF_TGF vs. CMF_NC` > 0.5 & merged_df$`CMFHM_TGF vs. CMF_TGF` < -0.5, ]
+
+filtered_df.genes <- filtered_df$gene
+
+length(filtered_df.genes)
+
+
+fc_matrix <- as.matrix(filtered_df[,-1])
+rownames(fc_matrix) <- filtered_df$gene
+
+
+max_val <- max(abs(fc_matrix))
+col_fun = colorRamp2(c(-max_val,0, max_val), c("#005EA8","white", "#9F1C67"))
+
+
+Heatmap(
+  fc_matrix, 
+  name = "log2FC", 
+  col = col_fun,
+    column_title = "log2FC Changes of Genes of Interest\nlog2FC CMF_TGF vs. CMF_NC > 0.5 & CMFHM_TGF vs. CMF_TGF < -0.5", 
+  column_title_gp = gpar(
+    fontsize = 13, 
+    col = "black"
+  ),
+  cluster_columns = FALSE,        
+  cluster_rows = TRUE,            
+  show_row_dend = TRUE,           
+  
+  column_names_rot = 45,          
+  column_names_side = "bottom",   
+  show_row_names = FALSE,          
+  row_names_gp = gpar(fontsize = 8), 
+  
+  row_km = 4
+)
+```
+
+## Check on genes that are up regulated in CMF_TGF vs. CMF_NC AND down regulated in CMFHM_TGF vs. CMF_TGF 
+
+ - Display of the scaled relative gene expressions of the Genes of Interest
+
+```{r, warning = FALSE, fig.width=8, fig.height=12}
+
+Idents(Fibroblasts) <- "orig.ident"
+avg_matrix <- AverageExpression(Fibroblasts, assays = "SCT", features = filtered_df.genes)$SCT
+
+
+scaled_matrix <- t(scale(t(avg_matrix)))
+scaled_matrix.df <- as.data.frame(scaled_matrix)
+create_table(scaled_matrix.df)
+
+
+col_fun = colorRamp2(c(-2, 0, 2), c("#005EA8","white", "#9F1C67")) 
+
+H1 <- Heatmap(
+  scaled_matrix, 
+  name = "Z-score", 
+  col = col_fun,
+  
+  column_title = "Relative Gene Expression of Genes of Interest\nlog2FC CMF_TGF vs. CMF_NC > 0.5 & CMFHM_TGF vs. CMF_TGF < -0.5", 
+  column_title_gp = gpar(
+    fontsize = 13, 
+    col = "black"
+  ),
+  
+  cluster_columns = FALSE,         
+  cluster_rows = TRUE,             
+  show_row_dend = TRUE,            
+  
+  column_names_rot = 45,          
+  column_names_side = "bottom",   
+  show_row_names = TRUE,          
+  row_names_gp = gpar(fontsize = 6), 
+  row_km = 4
+)
+
+print(H1)
+```
+
+
+## Checking on the 4 Blocks
+
+```{r, warning = FALSE, fig.width=8, fig.height=12}
+
+ht_shifted <- draw(H1)
+
+m_blocks <- row_order(ht_shifted)
+
+# get gene namese per block
+
+block1_genes <- rownames(scaled_matrix)[m_blocks[[1]]]
+block2_genes <- rownames(scaled_matrix)[m_blocks[[2]]]
+block3_genes <- rownames(scaled_matrix)[m_blocks[[3]]]
+block4_genes <- rownames(scaled_matrix)[m_blocks[[4]]]
+
+```
+
+
+
+
+### Block 1
+
+```{r, warning = FALSE, fig.width=8, fig.height=5}
+
+block1_genes 
+
+SCpubr::do_DotPlot(Fibroblasts, 
+                   features = block1_genes,
+                   dot.scale = 10,
+                   plot.title = "avg. Gene Expression of G.o.I - Block 1") 
+
+chunk_size <- 9
+total_genes <- length(block1_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = block1_genes[i:end_idx],
+    plot_title    = "Fibroblasts CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = positive regulation of cell migration - Slice ", slice_num),
+    seurat_obj    = Fibroblasts,
+    colors        = gradient_colors4
+  ))
+}
 
 ```
