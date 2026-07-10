@@ -124,10 +124,15 @@ create_table <- function(df) {
       dom = 'Blfrtip',                       
       buttons = c('copy', 'csv', 'excel', 'pdf'),
       pageLength = 10,                      
-      lengthMenu = c(10, 25, 50, 100)     
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = '_all',
+        className = 'dt-nowrap'
+      ))
     ),
     filter = 'top',                         
-    class = 'cell-border stripe hover'       
+    class = 'cell-border stripe hover nowrap'       
   )
 }
 
@@ -301,9 +306,8 @@ fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
 fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
 fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
 
-fgseares.tidy.show <- fgseares.tidy %>%
-  dplyr::select(-leadingEdge) 
-create_table(fgseares.tidy.show)
+
+create_table(fgseares.tidy)
 
 ```
 
@@ -407,8 +411,6 @@ up.GO <- enrichGO(
 simp.up.GO <- clusterProfiler::simplify(up.GO)
 
 simp.up.GO.show <- as.data.frame(simp.up.GO)
-simp.up.GO.show <- simp.up.GO.show %>%
-  dplyr::select(-geneID) 
 
 create_table(simp.up.GO.show)
 
@@ -429,8 +431,6 @@ down.GO <- enrichGO(
 
 simp.down.GO <- clusterProfiler::simplify(down.GO)
 simp.down.GO.show <- as.data.frame(simp.down.GO)
-simp.down.GO.show <- simp.down.GO.show %>%
-  dplyr::select(-geneID) 
 
 create_table(simp.down.GO.show)
 

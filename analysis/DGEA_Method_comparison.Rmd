@@ -1,0 +1,548 @@
+---
+title: "DGEA_Method_comparison"
+author: "Sophie.Alice"
+date: "2026-07-09"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+library(edgeR)
+library(limma)
+```
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+Fibroblasts <- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(Fibroblasts) <- "orig.ident" 
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+## THIS is the exact same code. 
+
+*SOPHIE CHANGES*:
+
+Changing Variable names 
+
+```{r, warning = FALSE}
+
+metformin_cellranger <- Data
+
+metformin_cellranger$Sample <- metformin_cellranger$orig.ident
+metformin_cellranger$condition <- metformin_cellranger$orig.ident
+table(metformin_cellranger$condition)
+metformin_cellranger$condition <- dplyr::recode(metformin_cellranger$condition,
+                                      "CMF_NC"       = "NC",
+                                      "CMFHM_NC"      = "MET",
+                                      "CMF_TGF"      = "TGF",
+                                      "CMFHM_TGF"  = "MET_TGF")
+
+
+```
+
+*Cellranger*:
+
+```{r}
+
+Fibro_cellranger <- subset(metformin_cellranger, cell_type == "Cardiac Fibroblasts")
+
+Idents(Fibro_cellranger) <- Fibro_cellranger$condition
+```
+
+
+# Fibro - 1 metoda - cellranger
+
+```{r}
+
+counts_fibro_cellranger <- GetAssayData(Fibro_cellranger, assay = "SCT", layer = "data")
+
+# podział na grupy
+cells_group1_fibro_cellranger <- WhichCells(Fibro_cellranger, idents = "NC")
+cells_group2_fibro_cellranger <- WhichCells(Fibro_cellranger, idents = "MET")
+cells_group3_fibro_cellranger <- WhichCells(Fibro_cellranger, idents = "TGF")
+cells_group4_fibro_cellranger <- WhichCells(Fibro_cellranger, idents = "MET_TGF")
+
+# procent ekspresji w każdej grupie
+pct_group1_fibro_cellranger <- rowSums(counts_fibro_cellranger[, cells_group1_fibro_cellranger] > 0) / length(cells_group1_fibro_cellranger)
+pct_group2_fibro_cellranger <- rowSums(counts_fibro_cellranger[, cells_group2_fibro_cellranger] > 0) / length(cells_group2_fibro_cellranger)
+pct_group3_fibro_cellranger <- rowSums(counts_fibro_cellranger[, cells_group3_fibro_cellranger] > 0) / length(cells_group3_fibro_cellranger)
+pct_group4_fibro_cellranger <- rowSums(counts_fibro_cellranger[, cells_group4_fibro_cellranger] > 0) / length(cells_group4_fibro_cellranger)
+
+# filtr: ≥5% w jednej lub drugiej grupie
+
+# Porównanie NC vs MET
+
+genes_to_test_1_fibro_cellranger <- names(pct_group1_fibro_cellranger)[(pct_group1_fibro_cellranger >= 0.1) | (pct_group2_fibro_cellranger >= 0.1)]
+
+
+# Porównanie TGF vs MET+TGF
+
+genes_to_test_2_fibro_cellranger <- names(pct_group2_fibro_cellranger)[(pct_group2_fibro_cellranger >= 0.1) | (pct_group4_fibro_cellranger >= 0.1)]
+
+
+# Porównanie NC vs TGF
+
+genes_to_test_3_fibro_cellranger <- names(pct_group1_fibro_cellranger)[(pct_group1_fibro_cellranger >= 0.1) | (pct_group3_fibro_cellranger >= 0.1)]
+
+
+```
+
+
+## Now we create contrast and design matrix and estimate dispersion. After estimation we use these three outputs to fit them to general linear model
+
+```{r, warning = FALSE}
+# ----------------------------
+# 1. Przygotowanie danych
+# ----------------------------
+# Załóżmy, że masz counts_matrix (raw counts) fibroblastów
+# i metadata z kolumną 'condition' (np. NC, MET, TGF, MET_TGF)
+counts_fibro_disp_cellranger <- as.matrix(GetAssayData(Fibro_cellranger, assay = "RNA", layer = "counts"))
+
+
+
+# wektor grup (musisz mieć dokładnie tyle elementów, ile kolumn w counts)
+group_fibro_cellranger <- factor(Fibro_cellranger$condition)
+
+# stwórz DGEList
+dge_fibro_cellranger <- DGEList(counts = counts_fibro_disp_cellranger, group = group_fibro_cellranger)
+
+# projekt modelu
+design_fibro_cellranger <- model.matrix(~0 + group_fibro_cellranger)
+colnames(design_fibro_cellranger) <- levels(group_fibro_cellranger)
+
+
+contrast_met_nc_fibro_cellranger <- makeContrasts(NC_vs_MET = MET - NC, levels = design_fibro_cellranger) 
+contrast_met_tgf_fibro_cellranger <- makeContrasts(TGF_vs_MET_TGF = `MET_TGF` - TGF, levels = design_fibro_cellranger) 
+contrast_tgf_nc_fibro_cellranger <- makeContrasts(NC_vs_TGF = TGF - NC, levels = design_fibro_cellranger)
+
+
+# MET vs NC
+
+
+dge_met_nc_fibro_cellranger <- dge_fibro_cellranger[rownames(dge_fibro_cellranger) %in% genes_to_test_1_fibro_cellranger, , keep.lib.sizes = FALSE]
+
+dge_met_nc_fibro_cellranger <- estimateDisp(dge_met_nc_fibro_cellranger, design_fibro_cellranger)
+fit_met_nc_fibro_cellranger <- glmQLFit(dge_met_nc_fibro_cellranger, design_fibro_cellranger)
+
+qlf_met_nc_fibro_cellranger <- glmQLFTest(fit_met_nc_fibro_cellranger, contrast = contrast_met_nc_fibro_cellranger)
+
+# MET_TGF vs TGF
+
+dge_met_tgf_fibro_cellranger <- dge_fibro_cellranger[rownames(dge_fibro_cellranger) %in% genes_to_test_2_fibro_cellranger, , keep.lib.sizes = FALSE]
+dge_met_tgf_fibro_cellranger <- estimateDisp(dge_met_tgf_fibro_cellranger, design_fibro_cellranger)
+fit_met_tgf_fibro_cellranger <- glmQLFit(dge_met_tgf_fibro_cellranger, design_fibro_cellranger)
+
+qlf_met_tgf_fibro_cellranger <- glmQLFTest(fit_met_tgf_fibro_cellranger, contrast = contrast_met_tgf_fibro_cellranger)
+
+# TGF vs NC
+
+dge_tgf_nc_fibro_cellranger <- dge_fibro_cellranger[rownames(dge_fibro_cellranger) %in% genes_to_test_3_fibro_cellranger, , keep.lib.sizes = FALSE]
+dge_tgf_nc_fibro_cellranger <- estimateDisp(dge_tgf_nc_fibro_cellranger, design_fibro_cellranger)
+fit_tgf_nc_fibro_cellranger <- glmQLFit(dge_tgf_nc_fibro_cellranger, design_fibro_cellranger)
+
+qlf_tgf_nc_fibro_cellranger <- glmQLFTest(fit_tgf_nc_fibro_cellranger, contrast = contrast_tgf_nc_fibro_cellranger)
+
+```
+
+## We convert `glmLRT` function output to simple dataframes for each experiment:
+
+```{r, warning = FALSE}
+
+deg_met_nc_fibro_cellranger_method1 <- topTags(
+    qlf_met_nc_fibro_cellranger,
+    n = Inf
+)$table %>%
+  mutate(
+    gene = rownames(.),
+    avg_log2FC = logFC,
+    t_like = sign(logFC) * sqrt(F)
+  )
+
+deg_met_tgf_fibro_cellranger_method1 <- topTags(
+    qlf_met_tgf_fibro_cellranger,
+    n = Inf
+)$table %>%
+  mutate(
+    gene = rownames(.),
+    avg_log2FC = logFC,
+    t_like = sign(logFC) * sqrt(F)
+  )
+
+
+
+deg_tgf_nc_fibro_cellranger_method1 <- topTags(
+    qlf_tgf_nc_fibro_cellranger,
+    n = Inf
+)$table %>%
+  mutate(
+    gene = rownames(.),
+    avg_log2FC = logFC,
+    t_like = sign(logFC) * sqrt(F)
+  )
+
+
+```
+
+
+## Now we define schema how we will show volcano plot function and genes on it
+
+```{r, warning = FALSE}
+# ----------------------------
+# 4. Volcano plot
+# ----------------------------
+volcano_plot <- function(df, title, logfc_cut = 0.5, fdr_cut = 0.05, top_n = 20) {
+  
+  df <- df %>%
+    mutate(Significant = ifelse(FDR < fdr_cut & abs(avg_log2FC) > logfc_cut,
+                                ifelse(avg_log2FC > 0, "Up", "Down"), "ns"))
+  
+  top_genes <- df %>%
+    filter(Significant != "ns") %>%
+    arrange(desc(abs(avg_log2FC))) %>%
+    slice_head(n = top_n)
+  
+  ggplot(df, aes(x = avg_log2FC, y = -log10(FDR), customdata = gene)) +
+    geom_point(aes(color = Significant), alpha = 0.5) +
+    scale_color_manual(values = c("Up" = "red", "Down" = "blue", "ns" = "grey")) +
+    geom_hline(yintercept = -log10(fdr_cut), linetype = "dashed", color = "black") +
+    geom_vline(xintercept = c(-logfc_cut, logfc_cut), linetype = "dashed", color = "black") +
+    geom_text_repel(data = top_genes, aes(label = gene), size = 3, max.overlaps = 20) +
+    theme_classic() +
+    labs(title = title, x = "log2 Fold Change", y = "-log10(FDR)")
+}
+```
+
+## Lastly we run volcano function and save the csv
+
+
+```{r, warning = FALSE}
+# Wyświetlenie
+p1_fibro_cellranger <- volcano_plot(deg_met_nc_fibro_cellranger_method1, "NC vs MAC")
+p2_fibro_cellranger <- volcano_plot(deg_met_tgf_fibro_cellranger_method1, "TGF vs MAC+TGF")
+p3_fibro_cellranger <- volcano_plot(deg_tgf_nc_fibro_cellranger_method1, "NC vs TGF")
+
+library(patchwork)
+
+p1_fibro_cellranger | p2_fibro_cellranger | p3_fibro_cellranger
+
+
+fibroblast_deg_list <- list()
+
+fibroblast_deg_list[["NC vs MAC"]] <- deg_met_nc_fibro_cellranger_method1
+fibroblast_deg_list[["TGF vs MAC+TGF"]] <- deg_met_tgf_fibro_cellranger_method1
+fibroblast_deg_list[["NC vs TGF"]] <- deg_tgf_nc_fibro_cellranger_method1
+
+
+outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
+
+saveRDS(fibroblast_deg_list, file = file.path(outputdir, "Fibro_DEG_Lists_method1.rds"))
+
+
+```
+
+
+################################################################# Method 2 exact same code
+
+
+*Cellranger*:
+
+```{r, warning = FALSE}
+metformin_cellranger <- Data
+
+metformin_cellranger$Sample <- metformin_cellranger$orig.ident
+
+metformin_cellranger$condition <- metformin_cellranger$Sample
+
+metformin_cellranger$condition <- dplyr::recode(metformin_cellranger$condition,
+                                      "CMF_NC"       = "NC",
+                                      "CMFHM_NC"      = "MET",
+                                      "CMF_TGF"      = "TGF",
+                                      "CMFHM_TGF"  = "MET_TGF")
+
+# Check
+table(metformin_cellranger$Sample, metformin_cellranger$condition)
+
+
+Fibro_cellranger <- subset(metformin_cellranger, cell_type == "Cardiac Fibroblasts")
+
+
+```
+
+
+*Cellranger*:
+
+```{r, warning = FALSE}
+Idents(Fibro_cellranger) <- Fibro_cellranger$condition
+
+
+set.seed(123)
+
+Fibro_cellranger_pseudo <- Fibro_cellranger
+
+
+Fibro_cellranger_pseudo@meta.data <- Fibro_cellranger_pseudo@meta.data %>%
+  group_by(condition) %>%
+  dplyr::mutate(pseudo_rep = sample(c("rep1", "rep2", "rep3"), dplyr::n(), replace = TRUE)) %>%
+  ungroup()
+
+# 2. Stworzenie nowej kolumny grupującej
+Fibro_cellranger_pseudo$pseudobulk_id <- paste(Fibro_cellranger_pseudo$condition, Fibro_cellranger_pseudo$pseudo_rep, sep = "_")
+
+
+# 1. Pobierz surowe zliczenia (raw counts)
+counts_mat <- GetAssayData(Fibro_cellranger_pseudo, assay = "RNA", layer = "counts")
+
+# 2. Pobierz informację o przypisaniu komórek do pseudo-replikatów
+groups <- Fibro_cellranger_pseudo$pseudobulk_id
+
+# 3. Agregacja (suma) przy użyciu wydajnej macierzy modelowej
+# Tworzymy macierz binarną (komórka x pseudo_rep)
+mm <- model.matrix(~ 0 + groups)
+colnames(mm) <- levels(as.factor(groups))
+
+# Mnożenie macierzy: zliczenia * macierz grup = sumy na grupę
+# To jest matematyczny odpowiednik AggregateExpression
+pb_counts_fibro_cellranger_pseudo <- counts_mat %*% mm
+
+# 4. Naprawa nazw kolumn (usuwamy przedrostek "groups")
+colnames(pb_counts_fibro_cellranger_pseudo) <- gsub("groups", "", colnames(pb_counts_fibro_cellranger_pseudo))
+
+# Zamień na zwykłą macierz, jeśli edgeR tego wymaga
+pb_counts_fibro_cellranger_pseudo <- as.matrix(pb_counts_fibro_cellranger_pseudo)
+
+# Sprawdź podgląd
+head(pb_counts_fibro_cellranger_pseudo)
+
+
+```
+
+
+## dla Fibro:
+
+```{r, warning = FALSE}
+# Przygotowanie metadanych dla nowej macierzy
+pb_meta_fibro_cellranger_pseudo <- data.frame(
+  sample_id = colnames(pb_counts_fibro_cellranger_pseudo)
+) %>%
+  mutate(condition = gsub("_rep.*", "", sample_id)) # Wyciąga NC, TGF, TNF
+```
+
+# to tylko jak chcesz edgeR:
+```{r, warning = FALSE}
+# Teraz możesz stworzyć DGEList dla edgeR
+library(edgeR)
+dge_pb_fibro_cellranger <- DGEList(counts = pb_counts_fibro_cellranger_pseudo, group = pb_meta_fibro_cellranger_pseudo$condition)
+```
+
+
+
+## dla Fibro:
+
+```{r, warning = FALSE}
+
+# Filtrowanie genów o niskiej ekspresji (bardzo ważne!)
+# Funkcja filterByExpr automatycznie bierze pod uwagę wielkość grup
+keep_fibro_cellranger <- filterByExpr(dge_pb_fibro_cellranger)
+dge_pb_fibro_cellranger <- dge_pb_fibro_cellranger[keep_fibro_cellranger, , keep.lib.sizes = FALSE]
+
+# Obliczanie czynników normalizacyjnych (TMM)
+dge_pb_fibro_cellranger <- calcNormFactors(dge_pb_fibro_cellranger)
+
+
+```
+
+
+
+## Dla Fibro:
+
+```{r, warning = FALSE}
+
+# Tworzymy design matrix
+design_pb_fibro_cellranger <- model.matrix(~ 0 + condition, data = pb_meta_fibro_cellranger_pseudo)
+colnames(design_pb_fibro_cellranger) <- levels(as.factor(pb_meta_fibro_cellranger_pseudo$condition))
+
+# Estymacja dyspersji (teraz zadziała, bo masz n=3 na grupę!)
+dge_pb_fibro_cellranger <- estimateDisp(dge_pb_fibro_cellranger, design_pb_fibro_cellranger)
+# Dopasowanie modelu QLF (Quasi-Likelihood - najbardziej rygorystyczny i polECSub1any dla pseudobulk)
+fit_pb_fibro_cellranger <- glmQLFit(dge_pb_fibro_cellranger, design_pb_fibro_cellranger)
+
+
+```
+
+
+
+## Dla Fibro:
+
+```{r, warning = FALSE}
+colnames(design_pb_fibro_cellranger)
+# Definicja kontrastów
+contrasts_pb_fibro_cellranger <- makeContrasts(
+  NC_vs_TGF = TGF - NC,
+  TGF_vs_MET_TGF = MET_TGF - TGF,
+  NC_vs_MET = MET - NC,
+  levels = design_pb_fibro_cellranger
+)
+
+# --- 1. TGF vs NC ---
+qlf_TGF_NC_fibro_cellranger <- glmQLFTest(fit_pb_fibro_cellranger, contrast = contrasts_pb_fibro_cellranger[,"NC_vs_TGF"])
+dge_TGF_NC_fibro_cellranger <- topTags(qlf_TGF_NC_fibro_cellranger, n = Inf)$table %>% 
+  mutate(gene = rownames(.), avg_log2FC = logFC)
+
+# --- 2. MET_TGF vs TGF ---
+qlf_MET_TGF_TGF_fibro_cellranger <- glmQLFTest(fit_pb_fibro_cellranger, contrast = contrasts_pb_fibro_cellranger[,"TGF_vs_MET_TGF"])
+dge_MET_TGF_TGF_fibro_cellranger <- topTags(qlf_MET_TGF_TGF_fibro_cellranger, n = Inf)$table %>% 
+  mutate(gene = rownames(.), avg_log2FC = logFC)
+
+# --- 3. MET vs NC ---
+qlf_MET_NC_fibro_cellranger <- glmQLFTest(fit_pb_fibro_cellranger, contrast = contrasts_pb_fibro_cellranger[,"NC_vs_MET"])
+dge_MET_NC_fibro_cellranger <- topTags(qlf_MET_NC_fibro_cellranger, n = Inf)$table %>% 
+  mutate(gene = rownames(.), avg_log2FC = logFC)
+
+```
+
+# Dodajemy wszędzie t-like
+
+```{r, warning = FALSE}
+
+
+
+# Dla Fibro
+
+dge_MET_NC_fibro_cellranger$t_like <- sign(dge_MET_NC_fibro_cellranger$logFC) * sqrt(qlf_MET_NC_fibro_cellranger$table$F)
+
+
+dge_MET_NC_fibro_cellranger$z_score <-
+    zscoreT(
+        dge_MET_NC_fibro_cellranger$t_like,
+        df = qlf_MET_NC_fibro_cellranger$df.total
+    )
+
+
+dge_MET_TGF_TGF_fibro_cellranger$t_like <- sign(dge_MET_TGF_TGF_fibro_cellranger$logFC) * sqrt(qlf_MET_TGF_TGF_fibro_cellranger$table$F)
+
+
+dge_MET_TGF_TGF_fibro_cellranger$z_score <-
+    zscoreT(
+        dge_MET_TGF_TGF_fibro_cellranger$t_like,
+        df = qlf_MET_TGF_TGF_fibro_cellranger$df.total
+    )
+
+
+dge_TGF_NC_fibro_cellranger$t_like <- sign(dge_TGF_NC_fibro_cellranger$logFC) * sqrt(qlf_TGF_NC_fibro_cellranger$table$F)
+
+
+dge_TGF_NC_fibro_cellranger$z_score <-
+    zscoreT(
+        dge_TGF_NC_fibro_cellranger$t_like,
+        df = qlf_TGF_NC_fibro_cellranger$df.total
+    )
+
+
+
+
+```
+
+
+## Now we define schema how we will show volcano plot function and genes on it
+
+```{r, warning = FALSE}
+# ----------------------------
+# 4. Volcano plot
+# ----------------------------
+volcano_plot <- function(df, title, logfc_cut = 0.5, fdr_cut = 0.05, top_n = 20) {
+  
+  df <- df %>%
+    mutate(Significant = ifelse(FDR < fdr_cut & abs(avg_log2FC) > logfc_cut,
+                                ifelse(avg_log2FC > 0, "Up", "Down"), "ns"))
+  
+  top_genes <- df %>%
+    filter(Significant != "ns") %>%
+    arrange(desc(abs(avg_log2FC))) %>%
+    slice_head(n = top_n)
+  
+  ggplot(df, aes(x = avg_log2FC, y = -log10(FDR), customdata = gene)) +
+    geom_point(aes(color = Significant), alpha = 0.5) +
+    scale_color_manual(values = c("Up" = "red", "Down" = "blue", "ns" = "grey")) +
+    geom_hline(yintercept = -log10(fdr_cut), linetype = "dashed", color = "black") +
+    geom_vline(xintercept = c(-logfc_cut, logfc_cut), linetype = "dashed", color = "black") +
+    geom_text_repel(data = top_genes, aes(label = gene), size = 3, max.overlaps = 20) +
+    theme_classic() +
+    labs(title = title, x = "log2 Fold Change", y = "-log10(FDR)")
+}
+```
+
+# Also volcano plots and save the DGE csv
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+# Wyświetlenie
+p1_fibro_cellranger <- volcano_plot(dge_MET_NC_fibro_cellranger, "NC vs MET")
+p2_fibro_cellranger <- volcano_plot(dge_MET_TGF_TGF_fibro_cellranger, "TGF vs MET+TGF")
+p3_fibro_cellranger <- volcano_plot(dge_TGF_NC_fibro_cellranger, "NC vs TGF")
+
+library(patchwork)
+#p1 | 
+p1_fibro_cellranger | p2_fibro_cellranger | p3_fibro_cellranger
+
+
+fibroblast_deg_list <- list()
+
+fibroblast_deg_list[["NC vs MAC"]] <- dge_MET_NC_fibro_cellranger
+fibroblast_deg_list[["TGF vs MAC+TGF"]] <- dge_MET_TGF_TGF_fibro_cellranger
+fibroblast_deg_list[["NC vs TGF"]] <- dge_TGF_NC_fibro_cellranger
+
+
+outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
+
+saveRDS(fibroblast_deg_list, file = file.path(outputdir, "Fibro_DEG_Lists_method2.rds"))
+
+```
+

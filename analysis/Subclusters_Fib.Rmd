@@ -1,0 +1,397 @@
+---
+title: "Subclusters Fibroblasts"
+author: "Sophie.Alice"
+date: "2026-07-08"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+```
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+Fibroblasts.raw <- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(Data) <- "orig.ident" 
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+
+MArker genes for subclusters
+
+take
+
+APOD and APOE CCL2 TGFB COL always 
+
+CFD
+
+COL1A1, COL3A1, 
+
+
+Take out from Gabi:
+
+CCL19, PROM1, APOO, MK167, TOP2A, BIRC5, CENPF, 
+
+# Functions
+
+```{r, warning = FALSE}
+
+
+##################################### Tables
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover'       
+  )
+}
+
+```
+
+## Inspecting Data
+
+```{r, warning = FALSE}
+
+Data 
+DefaultAssay(Data)
+
+table(Data$orig.ident)
+table(Data$TGF_status)
+table(Data$Macrophage_status)
+
+```
+
+## Isolating and Sub-clustering Cardiac Fibroblasts
+
+PC = 20 
+
+```{r, warning = FALSE}
+
+set.seed(42)
+# 2. Split by sample to prepare for fresh subset normalization
+Fibroblasts.list <- SplitObject(Fibroblasts.raw, split.by = "orig.ident")
+
+# 3. Re-run SCTransform on the fibroblast subsets to find fibroblast-specific variance
+for (i in 1:length(Fibroblasts.list)) {
+  DefaultAssay(Fibroblasts.list[[i]]) <- "RNA"
+  Fibroblasts.list[[i]] <- SCTransform(Fibroblasts.list[[i]], 
+                                       vst.flavor = "v2", 
+                                       vars.to.regress = "percent.mt", 
+                                       return.only.var.genes = TRUE,
+                                       method = "glmGamPoi",
+                                       verbose = FALSE)
+}
+
+
+fib_features <- SelectIntegrationFeatures(object.list = Fibroblasts.list, nfeatures = 3000)
+Fibroblasts <- merge(x = Fibroblasts.list[[1]], y = Fibroblasts.list[2:length(Fibroblasts.list)], merge.data = TRUE)
+VariableFeatures(Fibroblasts) <- fib_features
+
+Fibroblasts <- RunPCA(Fibroblasts, npcs = 50, verbose = FALSE)
+
+
+##################################### Elbowplot
+
+ElbowPlot(Fibroblasts, ndims = 50)+
+  labs(
+    title = "Principal Component (PC) Variance Elbow Plot"
+  ) +
+  geom_vline(xintercept = 20, linetype = "dashed", color = "darkred", size = 0.8)+
+  theme_minimal(base_size = 11)
+
+##################################### Clustering without integrations
+
+
+Dims <- 20
+Fibroblasts <- RunUMAP(Fibroblasts, dims = 1:Dims)
+Fibroblasts <- FindNeighbors(Fibroblasts, dims = 1:Dims)
+Graphs(Fibroblasts)
+Fibroblasts <- FindClusters(Fibroblasts, graph.name = "SCT_snn", resolution = seq(0.1, 0.8, by=0.1))
+
+clustree::clustree(Fibroblasts@meta.data[,grep("SCT_snn_res", colnames(Fibroblasts@meta.data))],
+                   prefix = "SCT_snn_res.")+
+  labs(
+    title = "Clustree - Before integration"
+  ) +
+  xlab("Cluster") +
+  ylab("Resolution depth") +
+  theme_minimal(base_size = 11)
+
+
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.1")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.2")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.3")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.4")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.5")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "orig.ident")
+
+##################################### integration
+
+# 6. Run Harmony to integrate fibroblasts across your conditions/samples
+Fibroblasts <- RunHarmony(Fibroblasts, 
+                          group.by.vars = "orig.ident", 
+                          dims.use = 1:Dims,
+                          plot_convergence = TRUE,
+                          .options = harmony_options(max.iter.cluster = 100))
+
+
+##################################### Clustering with integration
+
+# 7. UMAP and Clustering using the Harmony reduction
+DefaultAssay(Fibroblasts) <- "SCT"
+Fibroblasts <- RunUMAP(Fibroblasts, dims = 1:Dims, reduction = "harmony")
+Fibroblasts <- FindNeighbors(Fibroblasts, dims = 1:Dims, reduction = "harmony")
+
+# Using a slightly lower resolution range since sub-clustering is more sensitive
+Fibroblasts <- FindClusters(Fibroblasts, graph.name = "SCT_snn", resolution = seq(0.1, 0.8, by=0.1))
+
+
+clustree::clustree(Fibroblasts@meta.data[,grep("SCT_snn_res", colnames(Fibroblasts@meta.data))],
+                   prefix = "SCT_snn_res.")+
+  labs(
+    title = "Clustree - After integration"
+  ) +
+  xlab("Cluster") +
+  ylab("Resolution depth") +
+  theme_minimal(base_size = 11)
+
+
+
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.1")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.2")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.3")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.4")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.5")
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "orig.ident")
+
+```
+
+
+
+
+
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+DefaultAssay(Fibroblasts) <- "RNA"
+Idents(Fibroblasts) <- "SCT_snn_res.0.5"
+Markers <- FindAllMarkers(Fibroblasts, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.5)
+Markers_top10 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC))
+Markers_top3 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 3, wt = avg_log2FC))
+Markers_top5 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC))
+
+create_table(Markers_top10)
+
+
+```
+
+## Heatmap vis
+
+```{r, warning = FALSE}
+
+
+heatmap_cols <- colorRampPalette(RColorBrewer::brewer.pal(9,"RdBu"))(256)
+heatmap_cols <- rev(heatmap_cols[1:256])
+Heatmap <- DoHeatmap(Fibroblasts, cells = colnames(Fibroblasts), label = FALSE, draw.line = F, features = Markers_top10$gene, assay = "SCT") +
+  scale_fill_gradientn(colours = heatmap_cols) +
+  theme(axis.text.y = element_text(size = 5)) +
+  theme(plot.margin = unit(c(0.1, 0, 0, 0), 
+                           "inches"))
+Heatmap
+
+```
+
+## VLN vis
+
+```{r, warning = FALSE}
+table(Fibroblasts$SCT_snn_res.0.5)
+
+VlnPlot(Fibroblasts, features = c("nCount_RNA", "nFeature_RNA", "percent.mt", "percent.rp", "scDblFinder.score"), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())
+
+
+FeaturePlot_scCustom(Fibroblasts, features = "TTN", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Cardiomyocyte marker
+## --> assumption = Cluster 3 is Cardiomyocyte and Fibroblast doublets?
+
+VlnPlot_scCustom(Fibroblasts, features = dplyr::filter(Markers_top10, cluster == "6")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
+## --> assumption = Cluster 6 is MT-Cells
+```
+
+# Feature Plots
+
+```{r, warning = FALSE}
+
+
+FeaturePlot_scCustom(Fibroblasts, features = "CD163", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Macrophage marker
+
+
+FeaturePlot_scCustom(Fibroblasts, features = "FAP", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Activated Fibroblast Marker
+
+FeaturePlot_scCustom(Fibroblasts, features = "TTN", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Cardiomyocyte marker
+## --> assumption = Cluster 3 is Cardiomyocyte and Fibroblast doublets?
+
+DimPlot(Fibroblasts, reduction = "umap", shuffle = T,
+        group.by = "Phase")
+
+
+```
+
+
+```{r, warning = FALSE}
+
+
+# Remove only the clearly mitochondrial cluster and the left over doubles
+Fibroblasts.clean <- subset(Fibroblasts, subset = SCT_snn_res.0.5 %in% c("0", "1", "2", "4", "5","7"))
+
+
+DefaultAssay(Fibroblasts.clean) <- "SCT"
+Fibroblasts.clean <- SplitObject(Fibroblasts.clean, split.by = "orig.ident")
+features <- SelectIntegrationFeatures(object.list = Fibroblasts.clean, nfeatures = 3000)
+Fibroblasts.clean <- merge(x = Fibroblasts.clean[[1]], y = Fibroblasts.clean[2:length(Fibroblasts.clean)], merge.data=TRUE)
+VariableFeatures(Fibroblasts.clean) <- features
+Fibroblasts.clean <- RunPCA(Fibroblasts.clean, npcs = 50)
+
+Fibroblasts.clean <- RunHarmony(Fibroblasts.clean, 
+                 group.by.vars = c("orig.ident"), 
+                 dims.use = 1:Dims, 
+                 plot_convergence=TRUE, 
+                 .options = harmony_options(
+                   max.iter.cluster = 100,
+                   )
+                 )
+
+DefaultAssay(Fibroblasts.clean) <- "SCT"
+Fibroblasts.clean <- RunUMAP(Fibroblasts.clean, dims = 1:Dims, reduction = "harmony")
+Fibroblasts.clean <- FindNeighbors(Fibroblasts.clean, dims = 1:Dims, reduction = "harmony")
+Fibroblasts.clean <- FindClusters(Fibroblasts.clean, resolution = seq(0.1, 0.8, by=0.1))
+
+clustree::clustree(Fibroblasts.clean@meta.data[,grep("SCT_snn_res", colnames(Fibroblasts.clean@meta.data))],
+                   prefix = "SCT_snn_res.")
+
+DimPlot(Fibroblasts.clean, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.1")
+DimPlot(Fibroblasts.clean, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.2")
+DimPlot(Fibroblasts.clean, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.3")
+
+DimPlot(Fibroblasts.clean, reduction = "umap", shuffle = T, group.by = "orig.ident")
+DimPlot(Fibroblasts.clean, reduction = "umap", shuffle = T, group.by = "Phase")
+
+
+DefaultAssay(Fibroblasts.clean) <- "RNA"
+Idents(Fibroblasts.clean) <- "SCT_snn_res.0.3"
+Markers.2 <- FindAllMarkers(Fibroblasts.clean, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.5)
+Markers_top10.2 <- as.data.frame(Markers.2 %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC))
+Markers_top3.2 <- as.data.frame(Markers.2 %>% group_by(cluster) %>% top_n(n = 3, wt = avg_log2FC))
+
+Markers_top5.2 <- as.data.frame(Markers.2 %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC))
+
+
+SCpubr::do_DotPlot(Fibroblasts.clean, 
+                   features = Markers_top10.2$gene,
+                   dot.scale = 10,
+                   plot.title = "Top 10 markers per cluster") 
+
+
+create_table(Markers_top10.2)
+
+VlnPlot(Fibroblasts.clean, 
+        features = c("nCount_RNA", "nFeature_RNA", "percent.mt"), 
+        group.by = "SCT_snn_res.0.3", 
+        pt.size = 0.1)
+
+
+
+```
+
+
+```{r, warning = FALSE}
+gradient_colors <- custom_palette(4)
+
+cellCounts1 <- as.data.frame(table(Celltype = Fibroblasts.clean$SCT_snn_res.0.2, sample = Fibroblasts.clean$orig.ident))
+
+ggplot(data = cellCounts1, aes(x = sample, fill = Celltype, y = Freq)) +
+  geom_bar(stat = "identity") +
+  theme_bw() + 
+  scale_fill_manual(values = gradient_colors) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  labs(title = "Proportions across Identities", x = "", y = "fraction of cells")
+
+
+############ Fibro sub
+
+quiescent <- c( "DCN", "GSN", "PDGFRA")
+FeaturePlot_scCustom(Fibroblasts.clean, features = quiescent, pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank())
+
+inflammatory <- c("IL6", "CCL2", "CXCL1", "CXCL12")
+FeaturePlot_scCustom(Fibroblasts.clean, features = inflammatory, pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank())
+
+active <- c("ACTA2", "POSTN", "COL1A1", "FN1")
+FeaturePlot_scCustom(Fibroblasts.clean, features = active, pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank())
+
+table(Fibroblasts.clean$orig.ident)  # --> Proportions too different to sinvoll subsets machen. 
+
+
+```
