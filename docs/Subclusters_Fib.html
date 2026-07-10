@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Sophie.Alice" />
+
+<meta name="date" content="2026-07-08" />
+
+<title>Subclusters Fibroblasts</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.34.0/datatables.js"></script>
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="site_libs/jszip-1.13.6/jszip.min.js"></script>
+<script src="site_libs/pdfmake-1.13.6/pdfmake.js"></script>
+<script src="site_libs/pdfmake-1.13.6/vfs_fonts.js"></script>
+<link href="site_libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="site_libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MT_Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Sophie-Alice/MT_Project">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Subclusters Fibroblasts</h1>
+<h4 class="author">Sophie.Alice</h4>
+<h4 class="date">2026-07-08</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2026-07-10
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>MT_Project/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20260612code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20260612)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20260612code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20260612)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree32a97231e0473ddb2618840d69991ea678c3433etargetblank32a9723a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/32a97231e0473ddb2618840d69991ea678c3433e" target="_blank">32a9723</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree32a97231e0473ddb2618840d69991ea678c3433etargetblank32a9723a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/32a97231e0473ddb2618840d69991ea678c3433e" target="_blank">32a9723</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/Subclusters_Fib.Rmd</code>) and
+HTML (<code>docs/Subclusters_Fib.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/32a97231e0473ddb2618840d69991ea678c3433e/analysis/Subclusters_Fib.Rmd" target="_blank">32a9723</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+<td>
+Update viewing of tables
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="setup" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Setup</h1>
+<pre class="r"><code>rm(list=ls())
+gc()</code></pre>
+<pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
+Ncells  859148 45.9    1336727 71.4         NA  1336727 71.4
+Vcells 1535411 11.8    8388608 64.0      16384  2312998 17.7</code></pre>
+<pre class="r"><code>library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)</code></pre>
+</div>
+<div id="get-the-data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Get the Data</h1>
+<pre class="r"><code>path &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds&quot;
+Data &lt;- read_rds(path)
+Data</code></pre>
+<pre><code>An object of class Seurat 
+65557 features across 13386 samples within 2 assays 
+Active assay: RNA (38606 features, 0 variable features)
+ 2 layers present: counts, data
+ 1 other assay present: SCT
+ 3 dimensional reductions calculated: pca, harmony, umap</code></pre>
+<pre class="r"><code>Fibroblasts.raw &lt;- subset(Data, cell_type == &quot;Cardiac Fibroblasts&quot;)
+Idents(Data) &lt;- &quot;orig.ident&quot; 
+
+custom_palette &lt;- colorRampPalette(c(&quot;#005EA8&quot;, &quot;#6DB335&quot;, &quot;#FFD966&quot;, &quot;#EDAAD2&quot;, &quot;#9F1C67&quot;))
+gradient_colors3 &lt;- custom_palette(6)
+gradient_colors4 &lt;- custom_palette(4)</code></pre>
+<p>MArker genes for subclusters</p>
+<p>take</p>
+<p>APOD and APOE CCL2 TGFB COL always</p>
+<p>CFD</p>
+<p>COL1A1, COL3A1,</p>
+<p>Take out from Gabi:</p>
+<p>CCL19, PROM1, APOO, MK167, TOP2A, BIRC5, CENPF,</p>
+</div>
+<div id="functions" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Functions</h1>
+<pre class="r"><code>##################################### Tables
+
+create_table &lt;- function(df) {
+  DT::datatable(
+    df,
+    extensions = &#39;Buttons&#39;, 
+    options = list(
+      dom = &#39;Blfrtip&#39;,                       
+      buttons = c(&#39;copy&#39;, &#39;csv&#39;, &#39;excel&#39;, &#39;pdf&#39;),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = &#39;top&#39;,                         
+    class = &#39;cell-border stripe hover&#39;       
+  )
+}</code></pre>
+<div id="inspecting-data" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Inspecting Data</h2>
+<pre class="r"><code>Data </code></pre>
+<pre><code>An object of class Seurat 
+65557 features across 13386 samples within 2 assays 
+Active assay: RNA (38606 features, 0 variable features)
+ 2 layers present: counts, data
+ 1 other assay present: SCT
+ 3 dimensional reductions calculated: pca, harmony, umap</code></pre>
+<pre class="r"><code>DefaultAssay(Data)</code></pre>
+<pre><code>[1] &quot;RNA&quot;</code></pre>
+<pre class="r"><code>table(Data$orig.ident)</code></pre>
+<pre><code>
+   CMF_NC   CMF_TGF  CMFHM_NC CMFHM_TGF 
+     2389      3388      4316      3293 </code></pre>
+<pre class="r"><code>table(Data$TGF_status)</code></pre>
+<pre><code>
+   NC TGF_B 
+ 6705  6681 </code></pre>
+<pre class="r"><code>table(Data$Macrophage_status)</code></pre>
+<pre><code>
+  No_Macrophages With_Macrophages 
+            5777             7609 </code></pre>
+</div>
+<div id="isolating-and-sub-clustering-cardiac-fibroblasts"
+class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Isolating and
+Sub-clustering Cardiac Fibroblasts</h2>
+<p>PC = 20</p>
+<pre class="r"><code>set.seed(42)
+# 2. Split by sample to prepare for fresh subset normalization
+Fibroblasts.list &lt;- SplitObject(Fibroblasts.raw, split.by = &quot;orig.ident&quot;)
+
+# 3. Re-run SCTransform on the fibroblast subsets to find fibroblast-specific variance
+for (i in 1:length(Fibroblasts.list)) {
+  DefaultAssay(Fibroblasts.list[[i]]) &lt;- &quot;RNA&quot;
+  Fibroblasts.list[[i]] &lt;- SCTransform(Fibroblasts.list[[i]], 
+                                       vst.flavor = &quot;v2&quot;, 
+                                       vars.to.regress = &quot;percent.mt&quot;, 
+                                       return.only.var.genes = TRUE,
+                                       method = &quot;glmGamPoi&quot;,
+                                       verbose = FALSE)
+}
+
+
+fib_features &lt;- SelectIntegrationFeatures(object.list = Fibroblasts.list, nfeatures = 3000)
+Fibroblasts &lt;- merge(x = Fibroblasts.list[[1]], y = Fibroblasts.list[2:length(Fibroblasts.list)], merge.data = TRUE)
+VariableFeatures(Fibroblasts) &lt;- fib_features
+
+Fibroblasts &lt;- RunPCA(Fibroblasts, npcs = 50, verbose = FALSE)
+
+
+##################################### Elbowplot
+
+ElbowPlot(Fibroblasts, ndims = 50)+
+  labs(
+    title = &quot;Principal Component (PC) Variance Elbow Plot&quot;
+  ) +
+  geom_vline(xintercept = 20, linetype = &quot;dashed&quot;, color = &quot;darkred&quot;, size = 0.8)+
+  theme_minimal(base_size = 11)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>##################################### Clustering without integrations
+
+
+Dims &lt;- 20
+Fibroblasts &lt;- RunUMAP(Fibroblasts, dims = 1:Dims)</code></pre>
+<pre><code>23:35:08 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>23:35:08 Read 1354 rows and found 20 numeric columns</code></pre>
+<pre><code>23:35:08 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>23:35:08 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
+<pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
+<pre><code>**************************************************|
+23:35:08 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpchLWXQ/file16b452cd52a4a
+23:35:08 Searching Annoy index using 1 thread, search_k = 3000
+23:35:09 Annoy recall = 100%
+23:35:09 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+23:35:10 Initializing from normalized Laplacian + noise (using RSpectra)
+23:35:10 Commencing optimization for 500 epochs, with 53180 positive edges
+23:35:10 Using rng type: pcg
+23:35:12 Optimization finished</code></pre>
+<pre class="r"><code>Fibroblasts &lt;- FindNeighbors(Fibroblasts, dims = 1:Dims)</code></pre>
+<pre><code>Computing nearest neighbor graph
+Computing SNN</code></pre>
+<pre class="r"><code>Graphs(Fibroblasts)</code></pre>
+<pre><code>[1] &quot;SCT_nn&quot;  &quot;SCT_snn&quot;</code></pre>
+<pre class="r"><code>Fibroblasts &lt;- FindClusters(Fibroblasts, graph.name = &quot;SCT_snn&quot;, resolution = seq(0.1, 0.8, by=0.1))</code></pre>
+<pre><code>Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 53302
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.9134
+Number of communities: 2
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 53302
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.8618
+Number of communities: 5
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 53302
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.8290
+Number of communities: 7
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 53302
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7983
+Number of communities: 7
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 53302
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7709
+Number of communities: 8
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 53302
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7482
+Number of communities: 8
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 53302
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7298
+Number of communities: 8
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 53302
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7128
+Number of communities: 9
+Elapsed time: 0 seconds</code></pre>
+<pre class="r"><code>clustree::clustree(Fibroblasts@meta.data[,grep(&quot;SCT_snn_res&quot;, colnames(Fibroblasts@meta.data))],
+                   prefix = &quot;SCT_snn_res.&quot;)+
+  labs(
+    title = &quot;Clustree - Before integration&quot;
+  ) +
+  xlab(&quot;Cluster&quot;) +
+  ylab(&quot;Resolution depth&quot;) +
+  theme_minimal(base_size = 11)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.1&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.2&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.3&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.4&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.5&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-7.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;orig.ident&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-8.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>##################################### integration
+
+# 6. Run Harmony to integrate fibroblasts across your conditions/samples
+Fibroblasts &lt;- RunHarmony(Fibroblasts, 
+                          group.by.vars = &quot;orig.ident&quot;, 
+                          dims.use = 1:Dims,
+                          plot_convergence = TRUE,
+                          .options = harmony_options(max.iter.cluster = 100))</code></pre>
+<pre><code>Transposing data matrix
+Using automatic lambda estimation
+Thetas: 2
+Initializing state using k-means centroids initialization</code></pre>
+<pre><code>Initializing centroids</code></pre>
+<pre><code>Harmony 1/10
+Harmony 2/10
+Harmony 3/10
+Harmony 4/10
+Harmony 5/10
+Harmony 6/10
+Harmony converged after 6 iterations</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-9.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>##################################### Clustering with integration
+
+# 7. UMAP and Clustering using the Harmony reduction
+DefaultAssay(Fibroblasts) &lt;- &quot;SCT&quot;
+Fibroblasts &lt;- RunUMAP(Fibroblasts, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
+<pre><code>23:35:14 UMAP embedding parameters a = 0.9922 b = 1.112
+23:35:14 Read 1354 rows and found 20 numeric columns
+23:35:14 Using Annoy for neighbor search, n_neighbors = 30
+23:35:14 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+23:35:15 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpchLWXQ/file16b455ecb7744
+23:35:15 Searching Annoy index using 1 thread, search_k = 3000
+23:35:15 Annoy recall = 100%
+23:35:15 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+23:35:16 Initializing from normalized Laplacian + noise (using RSpectra)
+23:35:16 Commencing optimization for 500 epochs, with 53146 positive edges
+23:35:16 Using rng type: pcg
+23:35:18 Optimization finished</code></pre>
+<pre class="r"><code>Fibroblasts &lt;- FindNeighbors(Fibroblasts, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
+<pre><code>Computing nearest neighbor graph
+Computing SNN</code></pre>
+<pre class="r"><code># Using a slightly lower resolution range since sub-clustering is more sensitive
+Fibroblasts &lt;- FindClusters(Fibroblasts, graph.name = &quot;SCT_snn&quot;, resolution = seq(0.1, 0.8, by=0.1))</code></pre>
+<pre><code>Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 52573
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.9247
+Number of communities: 4
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 52573
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.8694
+Number of communities: 5
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 52573
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.8353
+Number of communities: 5
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 52573
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.8143
+Number of communities: 7
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 52573
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7949
+Number of communities: 8
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 52573
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7756
+Number of communities: 8
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 52573
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7587
+Number of communities: 9
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1354
+Number of edges: 52573
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7432
+Number of communities: 9
+Elapsed time: 0 seconds</code></pre>
+<pre class="r"><code>clustree::clustree(Fibroblasts@meta.data[,grep(&quot;SCT_snn_res&quot;, colnames(Fibroblasts@meta.data))],
+                   prefix = &quot;SCT_snn_res.&quot;)+
+  labs(
+    title = &quot;Clustree - After integration&quot;
+  ) +
+  xlab(&quot;Cluster&quot;) +
+  ylab(&quot;Resolution depth&quot;) +
+  theme_minimal(base_size = 11)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-10.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.1&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-11.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.2&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-12.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.3&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-13.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.4&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-14.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.5&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-15.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;orig.ident&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-16.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DefaultAssay(Fibroblasts) &lt;- &quot;RNA&quot;
+Idents(Fibroblasts) &lt;- &quot;SCT_snn_res.0.5&quot;
+Markers &lt;- FindAllMarkers(Fibroblasts, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.5)</code></pre>
+<pre><code>Calculating cluster 0</code></pre>
+<pre><code>For a (much!) faster implementation of the Wilcoxon Rank Sum Test,
+(default method for FindMarkers) please install the presto package
+--------------------------------------------
+install.packages(&#39;devtools&#39;)
+devtools::install_github(&#39;immunogenomics/presto&#39;)
+--------------------------------------------
+After installation of presto, Seurat will automatically use the more 
+efficient implementation (no further action necessary).
+This message will be shown once per session</code></pre>
+<pre><code>Calculating cluster 1</code></pre>
+<pre><code>Calculating cluster 2</code></pre>
+<pre><code>Calculating cluster 3</code></pre>
+<pre><code>Calculating cluster 4</code></pre>
+<pre><code>Calculating cluster 5</code></pre>
+<pre><code>Calculating cluster 6</code></pre>
+<pre><code>Calculating cluster 7</code></pre>
+<pre class="r"><code>Markers_top10 &lt;- as.data.frame(Markers %&gt;% group_by(cluster) %&gt;% top_n(n = 10, wt = avg_log2FC))
+Markers_top3 &lt;- as.data.frame(Markers %&gt;% group_by(cluster) %&gt;% top_n(n = 3, wt = avg_log2FC))
+Markers_top5 &lt;- as.data.frame(Markers %&gt;% group_by(cluster) %&gt;% top_n(n = 5, wt = avg_log2FC))
+
+create_table(Markers_top10)</code></pre>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f843a680a1fcd62a0dd1" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f843a680a1fcd62a0dd1">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.005793857794589\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.1573612790602\" data-max=\"7.84617823172173\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.509\" data-max=\"1\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.008\" data-max=\"0.709\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80"],[3.519193656672238e-30,1.104607910484985e-29,2.167493944028652e-18,3.199879618715598e-18,2.027071065976472e-17,4.795588304906576e-16,4.581512844956564e-15,1.376062204567053e-14,3.266033559334327e-12,3.631534208321021e-10,1.764117431713006e-84,1.275752586937249e-67,5.022978506859882e-49,5.036029361672745e-39,3.492449696266651e-37,8.655405134778453e-37,1.017801138850015e-36,4.800139059918855e-35,3.621270039441108e-32,6.237676501904263e-24,3.555836237855029e-51,4.917419591352095e-43,1.140301343700746e-39,8.00956071426549e-34,1.106741826018705e-29,1.369756098058974e-28,7.796940470220261e-24,9.290973143505851e-23,3.321006744479447e-20,6.545905759987804e-19,4.848820760801559e-170,2.750439011273064e-169,4.649747413797293e-159,1.04839717426809e-154,9.300944360942728e-154,3.218408230038697e-150,7.040176886693477e-150,5.943731448950676e-130,1.168837102546131e-128,5.25570961962689e-126,2.195709257060721e-136,8.755781153508414e-120,1.898294500575776e-109,1.948572584482143e-105,3.676888515544386e-102,2.073936809884302e-98,1.996958510440799e-93,2.161062202260224e-91,3.84106283293669e-91,1.60860893505018e-86,3.415280893581506e-25,1.45461676968852e-18,1.540553494595025e-18,1.629784054808448e-16,8.085164528939877e-16,4.083126186726497e-11,7.459250594181543e-11,1.558601102139311e-10,3.625518282111126e-09,2.008508962118098e-08,2.133459883074814e-08,7.568113792174096e-08,3.418402661270873e-07,1.027838596162884e-06,2.471999883778192e-06,6.727488815707568e-06,1.324607478487187e-05,0.0002158067324608063,0.001518046771306878,0.005793857794588707,2.628409814539567e-30,1.064760088984583e-26,8.076938022277375e-26,6.460427900125849e-24,7.709154704314142e-23,1.239983880467748e-22,3.042925473342304e-22,7.601616992586945e-21,2.542635058682991e-20,5.694281663549532e-19],[1.261538516116142,1.858869111634603,1.17169775514552,1.19593981826899,1.247899707507083,1.175839054900414,1.282609729125047,1.417338630466571,1.178944880345218,1.157361279060197,1.961265237143184,1.962261718038693,2.396044369056743,2.167655515017949,2.02792565773202,2.002477840367992,2.06417497312126,1.931625875626217,1.91007965757923,1.914128348573568,1.862019571954264,1.97724907743498,1.515773633994921,1.73098331791993,1.658123328829868,1.735886445093094,1.528414303724527,1.948807151723803,1.709705920891956,1.612355425236234,7.282792401322435,6.792934196965445,6.880914604663457,6.864262950116608,7.846178231721733,7.696148696229096,7.334076058740897,6.866756374077542,6.798869408069976,6.84297121032329,6.538786092901907,6.077961339759923,5.808101867227215,5.615033835712956,5.434615852639204,5.437990295750007,5.372097502060335,5.254099156033419,5.331999251785586,5.404216756888037,3.540242418996659,3.108908676616391,3.346281165685948,3.219153120463613,3.819532372949589,2.838907457717504,2.765178940728438,3.633626472188211,2.898520196195044,2.651530681897191,1.914989256056823,1.881810000219331,1.949533188258398,1.942126704817347,1.677079717119888,2.03875628430462,1.953465775320656,1.668045284413968,1.805608818280392,1.408338160479131,3.744058916579318,3.577413958479276,3.325252234450996,3.488963047740082,3.31696922267842,3.401632275318064,3.306549194654131,3.313060766786191,3.265855605936782,3.513122856438436],[0.881,0.676,0.6899999999999999,0.759,0.759,0.552,0.698,0.57,0.5600000000000001,0.676,0.965,0.931,0.6820000000000001,0.585,0.5600000000000001,0.623,0.648,0.695,0.528,0.5570000000000001,0.735,0.639,0.869,0.698,0.515,0.667,0.649,0.529,0.57,0.701,0.6820000000000001,0.694,0.656,0.631,0.605,0.599,0.599,0.5610000000000001,0.522,0.529,0.6879999999999999,0.65,0.625,0.675,0.713,0.625,0.662,0.675,0.625,0.575,0.623,0.528,0.868,0.547,0.5659999999999999,0.5659999999999999,0.547,0.509,0.679,0.547,0.74,0.78,0.64,0.5600000000000001,0.64,0.58,0.52,0.76,0.52,0.76,0.679,0.786,0.929,0.964,1,0.714,0.643,0.929,1,0.643],[0.6899999999999999,0.435,0.466,0.636,0.632,0.344,0.528,0.38,0.388,0.556,0.5659999999999999,0.661,0.294,0.24,0.224,0.278,0.348,0.375,0.222,0.312,0.32,0.266,0.593,0.393,0.203,0.397,0.375,0.27,0.341,0.468,0.012,0.014,0.013,0.012,0.008,0.008999999999999999,0.008999999999999999,0.014,0.008,0.011,0.02,0.023,0.024,0.035,0.046,0.031,0.042,0.047,0.036,0.031,0.141,0.125,0.482,0.158,0.174,0.242,0.218,0.186,0.412,0.254,0.503,0.5610000000000001,0.366,0.323,0.39,0.339,0.292,0.617,0.411,0.709,0.075,0.128,0.202,0.249,0.336,0.12,0.094,0.25,0.377,0.118],[1.358619903094884e-25,4.264449299218333e-25,8.367827120317015e-14,1.235345525601344e-13,7.825710557308767e-13,1.851384820992233e-11,1.768738848923931e-10,5.312425746951566e-10,1.26088491591661e-07,1.401990096464413e-05,6.81055175687123e-80,4.925170437129945e-63,1.939171082358326e-44,1.94420949536738e-34,1.348295129740703e-32,3.34150570633257e-32,3.929323076644369e-32,1.853141685472273e-30,1.398027511426634e-27,2.40811739032516e-19,1.372766137986312e-46,1.89841900743739e-38,4.402247367491101e-35,3.092171009349335e-29,4.272687493527812e-25,5.288080392166473e-24,3.010086837933234e-19,3.586873091781869e-18,1.282107863773735e-15,2.527112377700892e-14,1.87193574291505e-165,1.061834484692079e-164,1.795081486570583e-154,4.047442130979388e-150,3.59072257998555e-149,1.242498681288739e-145,2.717930688876884e-145,2.294636963181898e-125,4.512412518089594e-124,2.029019255753157e-121,8.476755157808618e-132,3.380256872123458e-115,7.328555748922841e-105,7.522659319651761e-101,1.419499580311066e-97,8.006640448239335e-94,7.70945802540775e-89,8.342996738045821e-87,1.482880717283539e-86,6.210195654654723e-82,1.318503341776076e-20,5.6156935010595e-14,5.947460821233553e-14,6.291944321993493e-12,3.121358618042529e-11,1.576331695647631e-06,2.879718284389726e-06,6.017135414919024e-06,0.0001399667587991821,0.0007754049699153131,0.0008236435224598628,0.002921746010606731,0.01319708531410233,0.03968073684346429,0.09543402751314088,0.2597214332192064,0.5113779631447636,1,1,1,1.014723893001145e-25,4.11061279953388e-22,3.118182692880403e-21,2.494112795122585e-19,2.976196265147517e-18,4.787081768933786e-18,1.17475180823853e-17,2.934680256158116e-16,9.816096907551557e-16,2.198334379029932e-14],["0","0","0","0","0","0","0","0","0","0","1","1","1","1","1","1","1","1","1","1","2","2","2","2","2","2","2","2","2","2","3","3","3","3","3","3","3","3","3","3","4","4","4","4","4","4","4","4","4","4","5","5","5","5","5","5","5","5","5","5","6","6","6","6","6","6","6","6","6","6","7","7","7","7","7","7","7","7","7","7"],["TIMP1","COMP","CKAP4","GCLM","MXRA5","PPIC","ID3","LOX","SCD","ELN","ADAMTSL1","NAV3","NRG1","ADAMTS12","MET","FMN2","SLC4A4","SYT14","ENSG00000287134","HAS2","TSPAN15","PLXDC1","EDNRA","ABCA1","LSP1","MAMDC2","CASC15","NALF1","INSIG2","MGP","LRRTM3","FRAS1","SORCS3","ENSG00000289013","LINC02552","ENSG00000234352","KCNJ3","SV2C","MIR133A1HG","JPH1","HJURP","IQGAP3","KIF18B","KIF4A","TTK","KIFC1","KIF14","BUB1B","NDC80","CKAP2L","SLC6A15","KYNU","KAZN","ENSG00000289201","GPC5","LRFN5","GNA14","TBX2","SLC12A2","OLFM2","MT-CO3","MT-CO1","MT-CO2","MT-ATP6","SPATA13","MT-ND4","MT-ND5","RUNX2","MT-CYB","FRY","ALDOC","ENO3","SLC25A4","MYL2","TNNI1","TCAP","NKX2-5","IGF2","MYH7","TNNI3"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="heatmap-vis" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Heatmap vis</h2>
+<pre class="r"><code>heatmap_cols &lt;- colorRampPalette(RColorBrewer::brewer.pal(9,&quot;RdBu&quot;))(256)
+heatmap_cols &lt;- rev(heatmap_cols[1:256])
+Heatmap &lt;- DoHeatmap(Fibroblasts, cells = colnames(Fibroblasts), label = FALSE, draw.line = F, features = Markers_top10$gene, assay = &quot;SCT&quot;) +
+  scale_fill_gradientn(colours = heatmap_cols) +
+  theme(axis.text.y = element_text(size = 5)) +
+  theme(plot.margin = unit(c(0.1, 0, 0, 0), 
+                           &quot;inches&quot;))</code></pre>
+<pre><code>Scale for fill is already present.
+Adding another scale for fill, which will replace the existing scale.</code></pre>
+<pre class="r"><code>Heatmap</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-7-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="vln-vis" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> VLN vis</h2>
+<pre class="r"><code>table(Fibroblasts$SCT_snn_res.0.5)</code></pre>
+<pre><code>
+  0   1   2   3   4   5   6   7 
+377 318 291 157  80  53  50  28 </code></pre>
+<pre class="r"><code>VlnPlot(Fibroblasts, features = c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;, &quot;percent.rp&quot;, &quot;scDblFinder.score&quot;), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-8-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot_scCustom(Fibroblasts, features = &quot;TTN&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
+  theme(axis.title.x = element_blank()) # Cardiomyocyte marker</code></pre>
+<pre><code>
+NOTE: FeaturePlot_scCustom uses a specified `na_cutoff` when plotting to
+color cells with no expression as background color separate from color scale.
+Please ensure `na_cutoff` value is appropriate for feature being plotted.
+Default setting is appropriate for use when plotting from &#39;RNA&#39; assay.
+When `na_cutoff` not appropriate (e.g., module scores) set to NULL to
+plot all cells in gradient color palette.
+
+-----This message will be shown once per session.-----</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-8-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## --&gt; assumption = Cluster 3 is Cardiomyocyte and Fibroblast doublets?
+
+VlnPlot_scCustom(Fibroblasts, features = dplyr::filter(Markers_top10, cluster == &quot;6&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-8-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## --&gt; assumption = Cluster 6 is MT-Cells</code></pre>
+</div>
+</div>
+<div id="feature-plots" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Feature Plots</h1>
+<pre class="r"><code>FeaturePlot_scCustom(Fibroblasts, features = &quot;CD163&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
+  theme(axis.title.x = element_blank()) # Macrophage marker</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot_scCustom(Fibroblasts, features = &quot;FAP&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
+  theme(axis.title.x = element_blank()) # Activated Fibroblast Marker</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-9-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot_scCustom(Fibroblasts, features = &quot;TTN&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
+  theme(axis.title.x = element_blank()) # Cardiomyocyte marker</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-9-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## --&gt; assumption = Cluster 3 is Cardiomyocyte and Fibroblast doublets?
+
+DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T,
+        group.by = &quot;Phase&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-9-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Remove only the clearly mitochondrial cluster and the left over doubles
+Fibroblasts.clean &lt;- subset(Fibroblasts, subset = SCT_snn_res.0.5 %in% c(&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;4&quot;, &quot;5&quot;,&quot;7&quot;))
+
+
+DefaultAssay(Fibroblasts.clean) &lt;- &quot;SCT&quot;
+Fibroblasts.clean &lt;- SplitObject(Fibroblasts.clean, split.by = &quot;orig.ident&quot;)
+features &lt;- SelectIntegrationFeatures(object.list = Fibroblasts.clean, nfeatures = 3000)
+Fibroblasts.clean &lt;- merge(x = Fibroblasts.clean[[1]], y = Fibroblasts.clean[2:length(Fibroblasts.clean)], merge.data=TRUE)
+VariableFeatures(Fibroblasts.clean) &lt;- features
+Fibroblasts.clean &lt;- RunPCA(Fibroblasts.clean, npcs = 50)</code></pre>
+<pre><code>PC_ 1 
+Positive:  ADAMTSL1, FRMD5, NAV3, NTM, NRG1, DDAH1, COL11A1, TENM3, ROBO2, ITGBL1 
+       AFF3, SLC4A4, CRIM1, HS3ST3A1, DCBLD2, SEMA3C, LMO7, CDH2, PDGFC, PRICKLE1 
+       SLC8A1, TPM1, TSPAN5, HAPLN1, TNC, SLC1A3, DIAPH3, ADAMTS12, RNF150, KIRREL3 
+Negative:  SOX5, MGP, IGFBP5, SMOC1, LUM, EDNRA, S100A4, IGFBP3, CSGALNACT1, LAMA4 
+       MMP14, B2M, COL3A1, FRY, COL1A1, CYP1B1, AEBP1, CEMIP, DCN, ABCA1 
+       PDE3A, ANKH, SDC2, IL1R1, TSPAN15, LINC00511, SESN3, ITPR1, BGN, FTH1 
+PC_ 2 
+Positive:  THBS1, ITGBL1, COMP, COL12A1, COL11A1, CALD1, TIMP1, TIMP3, ITGA11, ACTA2 
+       ENSG00000286458, VGLL3, SERPINE1, GLS, COL8A1, LMO7, IGFBP7, FN1, STK38L, LIMA1 
+       DDAH1, ATP10A, INHBA, TAGLN, EDIL3, SPARC, CACNB4, COL4A1, GCLM, CCN2 
+Negative:  MIR924HG, CEP128, SMC4, BRIP1, ANLN, ASPM, CENPF, ATAD2, POLQ, NSD2 
+       TPX2, KIF20B, TTN, MKI67, DIAPH3, CIT, LINC01572, NCAPG, TOP2A, SOX5 
+       BARD1, HELLS, BUB1B, RFX8, CENPE, NUF2, NCAPG2, MELK, KIF4A, CENPK 
+PC_ 3 
+Positive:  KIF26B, GPC6, RNF144A, MCC, ROBO2, CASC15, NAV3, DOCK4, SEMA3A, ZNF521 
+       SOX5, ZEB1, ARL15, BICC1, AFF3, TRPS1, MSR1, NEAT1, PTPRG, PRKG1 
+       ADAMTS14, ABCA1, ANKH, FMNL2, ANTXR1, FOXP2, EDNRA, PTPRK, SETBP1, MIR31HG 
+Negative:  VIM, COL1A1, DIAPH3, ACTB, SPARC, ACTG1, S100A6, LGALS1, S100A4, TIMP1 
+       GAPDH, CD63, B2M, CENPF, EEF1A1, TPX2, PDIA3, PFN1, PPIB, TOP2A 
+       FSTL1, MKI67, HSP90B1, ANLN, TMSB4X, CCN2, HSPA5, COL3A1, COL1A2, BGN 
+PC_ 4 
+Positive:  TNC, HMGA2, RFX8, VEGFC, WNT5A, XYLT1, MYO10, ENSG00000253496, SNED1, ARHGAP22 
+       SYT14, MIR222HG, CLMP, APCDD1L, DELEC1, COL6A2, DOCK10, CD44, COL6A1, PDGFRB 
+       NTNG1, NT5E, BNC2, TSPAN5, SPRED1, ABI3BP, CSGALNACT1, APCDD1L-DT, EXT1, TWIST2 
+Negative:  TTN, TNNT2, NEBL, ACTC1, MYL7, PLN, RYR2, MYH7, MYL3, CTNNA3 
+       CSRP3, MYH6, MYL4, FHOD3, TNNI1, ACTN2, TECRL, FHL2, DMD, ZFPM2 
+       CMYA5, LDB3, MYOM1, FILIP1, COL11A1, NCAM1, SLC8A1, MYL2, MYOCD, TNNC1 
+PC_ 5 
+Positive:  HMGA2, SQSTM1, DCBLD2, LINC01050, S100A6, MAP4K4, CNIH3, FRMD5, RFX8, PHLDA1 
+       ROBO2, BAALC, JARID2, FTH1, SEMA5A, CHI3L1, SLC7A11, ENOX1, CTSB, PVT1 
+       DPP4, CA12, TXNRD1, CLSTN2, ARHGAP22, PSAP, TBX3, DOCK10, GDF15, HMOX1 
+Negative:  CEMIP, KCNQ5, ERG, COL12A1, NALF1, CHSY3, DDAH1, COL4A2, ABI3BP, LDLRAD4 
+       ADAMTS6, COL8A1, HMCN1, PIEZO2, CENPP, ITGBL1, SULF1, FRY, COL4A1, PDE3A 
+       ATP10A, EFNA5, NEGR1, UACA, NAV2, RBMS3, LMO7, ELN, GLS, FBN1 </code></pre>
+<pre class="r"><code>Fibroblasts.clean &lt;- RunHarmony(Fibroblasts.clean, 
+                 group.by.vars = c(&quot;orig.ident&quot;), 
+                 dims.use = 1:Dims, 
+                 plot_convergence=TRUE, 
+                 .options = harmony_options(
+                   max.iter.cluster = 100,
+                   )
+                 )</code></pre>
+<pre><code>Transposing data matrix</code></pre>
+<pre><code>Using automatic lambda estimation</code></pre>
+<pre><code>Thetas: 2</code></pre>
+<pre><code>Initializing state using k-means centroids initialization</code></pre>
+<pre><code>Initializing centroids</code></pre>
+<pre><code>Harmony 1/10</code></pre>
+<pre><code>Harmony 2/10</code></pre>
+<pre><code>Harmony 3/10</code></pre>
+<pre><code>Harmony 4/10</code></pre>
+<pre><code>Harmony 5/10</code></pre>
+<pre><code>Harmony 6/10</code></pre>
+<pre><code>Harmony converged after 6 iterations</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DefaultAssay(Fibroblasts.clean) &lt;- &quot;SCT&quot;
+Fibroblasts.clean &lt;- RunUMAP(Fibroblasts.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
+<pre><code>23:35:41 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>23:35:41 Read 1147 rows and found 20 numeric columns</code></pre>
+<pre><code>23:35:41 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>23:35:41 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
+<pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
+<pre><code>**************************************************|
+23:35:41 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpchLWXQ/file16b457fd1d002
+23:35:41 Searching Annoy index using 1 thread, search_k = 3000
+23:35:41 Annoy recall = 100%
+23:35:42 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+23:35:43 Initializing from normalized Laplacian + noise (using RSpectra)
+23:35:43 Commencing optimization for 500 epochs, with 44318 positive edges
+23:35:43 Using rng type: pcg
+23:35:44 Optimization finished</code></pre>
+<pre class="r"><code>Fibroblasts.clean &lt;- FindNeighbors(Fibroblasts.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
+<pre><code>Computing nearest neighbor graph
+Computing SNN</code></pre>
+<pre class="r"><code>Fibroblasts.clean &lt;- FindClusters(Fibroblasts.clean, resolution = seq(0.1, 0.8, by=0.1))</code></pre>
+<pre><code>Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1147
+Number of edges: 46845
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.9051
+Number of communities: 2
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1147
+Number of edges: 46845
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.8501
+Number of communities: 4
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1147
+Number of edges: 46845
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.8172
+Number of communities: 5
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1147
+Number of edges: 46845
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7901
+Number of communities: 5
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1147
+Number of edges: 46845
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7649
+Number of communities: 7
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1147
+Number of edges: 46845
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7429
+Number of communities: 7
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1147
+Number of edges: 46845
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7248
+Number of communities: 8
+Elapsed time: 0 seconds
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 1147
+Number of edges: 46845
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.7090
+Number of communities: 10
+Elapsed time: 0 seconds</code></pre>
+<pre class="r"><code>clustree::clustree(Fibroblasts.clean@meta.data[,grep(&quot;SCT_snn_res&quot;, colnames(Fibroblasts.clean@meta.data))],
+                   prefix = &quot;SCT_snn_res.&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.1&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.2&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.3&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;orig.ident&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;Phase&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-7.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DefaultAssay(Fibroblasts.clean) &lt;- &quot;RNA&quot;
+Idents(Fibroblasts.clean) &lt;- &quot;SCT_snn_res.0.3&quot;
+Markers.2 &lt;- FindAllMarkers(Fibroblasts.clean, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.5)</code></pre>
+<pre><code>Calculating cluster 0
+Calculating cluster 1
+Calculating cluster 2
+Calculating cluster 3
+Calculating cluster 4</code></pre>
+<pre class="r"><code>Markers_top10.2 &lt;- as.data.frame(Markers.2 %&gt;% group_by(cluster) %&gt;% top_n(n = 10, wt = avg_log2FC))
+Markers_top3.2 &lt;- as.data.frame(Markers.2 %&gt;% group_by(cluster) %&gt;% top_n(n = 3, wt = avg_log2FC))
+
+Markers_top5.2 &lt;- as.data.frame(Markers.2 %&gt;% group_by(cluster) %&gt;% top_n(n = 5, wt = avg_log2FC))
+
+
+SCpubr::do_DotPlot(Fibroblasts.clean, 
+                   features = Markers_top10.2$gene,
+                   dot.scale = 10,
+                   plot.title = &quot;Top 10 markers per cluster&quot;) </code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-8.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>create_table(Markers_top10.2)</code></pre>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ba32e0541469b5ed4906" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ba32e0541469b5ed4906">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"6.4361973e-08\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.43940464165708\" data-max=\"6.58773129866373\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.5\" data-max=\"0.934\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.006\" data-max=\"0.679\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.002484758305441\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[4.188222052231292e-70,6.897247359177431e-54,4.091774611869336e-46,2.539425603874477e-43,1.640203817913199e-34,2.647374793702109e-33,1.41945307693955e-32,1.784994508917665e-30,3.372354755404968e-27,1.058514579681231e-25,2.004382654607961e-45,3.903597137174457e-36,1.070056625302381e-28,1.478969895988039e-28,1.145660773372672e-24,3.289338568117076e-22,5.896206075212322e-21,3.693894231343102e-20,3.494915856975935e-15,8.211601777089835e-14,9.757562586987536e-50,7.417440207473798e-42,1.267710190392788e-40,3.040176388629282e-35,2.007901316540285e-33,5.815442463842226e-29,6.336072433345299e-26,6.70054991057385e-26,1.922427348263015e-25,2.320360783513725e-21,6.055373387692385e-153,2.007506865318767e-121,1.053484635984216e-119,9.499288402602014e-119,3.188347978612405e-118,3.653522760915978e-118,1.50866095886819e-112,2.908189356054057e-111,8.570325331395882e-108,1.86082797771247e-93,5.912510680830502e-16,8.166838468994101e-14,2.552140080703456e-13,4.896911749262765e-13,2.812893058257477e-12,3.140753318938571e-12,1.951885967109319e-11,1.130344445462982e-10,8.55757811133866e-09,6.436197237322088e-08],[1.815858940204218,1.814267256916851,2.450856005337867,2.021335290223063,2.159672889401524,1.865419762010799,2.061579085787112,1.929677851795063,1.878934002421447,2.058097912846749,1.6933657673693,1.440309887859492,1.64595135487605,1.490651486640326,1.881473808061144,1.460159421356457,1.481517976742211,1.517412305987121,1.439404641657085,1.521494197382407,1.747157911380458,1.994538874948777,1.757506568680434,1.796646580856316,1.887085686610717,1.819087067519151,1.769198953381209,1.739003753978837,1.875100590386793,1.757092087544319,6.128503061877526,6.587731298663733,6.326060295934563,6.106282144867215,5.770246480707399,6.037019212780453,6.277989346147056,6.531728381717592,5.928708818736744,6.012586796082726,3.030917810302846,3.199198026443257,3.332164821493101,2.982345155932909,3.085145435578886,4.116843145504284,2.984886440185944,2.995842337258299,3.067917615696424,3.622050392093033],[0.9340000000000001,0.904,0.661,0.754,0.582,0.727,0.544,0.536,0.585,0.5570000000000001,0.901,0.851,0.539,0.735,0.662,0.577,0.787,0.612,0.638,0.583,0.867,0.6929999999999999,0.672,0.641,0.579,0.616,0.706,0.529,0.576,0.632,0.6909999999999999,0.6909999999999999,0.753,0.654,0.79,0.728,0.6909999999999999,0.617,0.605,0.5679999999999999,0.647,0.676,0.588,0.588,0.676,0.588,0.5,0.824,0.588,0.529],[0.5629999999999999,0.679,0.275,0.438,0.28,0.466,0.224,0.225,0.293,0.28,0.648,0.601,0.208,0.434,0.433,0.303,0.6,0.343,0.414,0.382,0.516,0.329,0.294,0.309,0.256,0.323,0.43,0.244,0.313,0.424,0.006,0.021,0.032,0.017,0.038,0.028,0.026,0.016,0.016,0.02,0.15,0.189,0.16,0.159,0.241,0.175,0.119,0.461,0.228,0.185],[1.616905005484413e-65,2.662751315484039e-49,1.579670506658276e-41,9.803706486317807e-39,6.332170859435697e-30,1.022045512856636e-28,5.479940548832826e-28,6.89114980112754e-26,1.301931276871642e-22,4.086501386317361e-21,7.738119676379492e-41,1.507022710777571e-31,4.131060607642371e-24,5.709711180451421e-24,4.422937981682536e-20,1.269882047607278e-17,2.276289317396469e-16,1.426064806952318e-15,1.349247215744129e-10,3.170170982063302e-09,3.767004612332408e-45,2.863576966497335e-37,4.894121961030399e-36,1.173690496594221e-30,7.751703822635426e-29,2.24510971759093e-24,2.446104123617286e-21,2.586814298476141e-21,7.421723020704196e-21,8.957984840833087e-17,2.337737450052522e-148,7.750181004249634e-117,4.067082785680664e-115,3.667295280708534e-114,1.230893620623105e-113,1.410478997079223e-113,5.824336497806534e-108,1.12273558279823e-106,3.308659797438694e-103,7.18391249075676e-89,2.282583873441424e-11,3.152889659339863e-09,9.852791995563763e-09,1.890501749920383e-08,1.085945494070882e-07,1.212519226309425e-07,7.535450964622235e-07,4.363807766154388e-06,0.0003303738605663403,0.002484758305440565],["0","0","0","0","0","0","0","0","0","0","1","1","1","1","1","1","1","1","1","1","2","2","2","2","2","2","2","2","2","2","3","3","3","3","3","3","3","3","3","3","4","4","4","4","4","4","4","4","4","4"],["ADAMTSL1","NAV3","NRG1","AFF3","SLC4A4","DCLK2","ADAMTS12","MET","FMN2","SLC1A3","TIMP1","HSPB1","CRYAB","CKAP4","COMP","PPIC","MXRA5","SCD","ACTC1","LOX","EDNRA","ABCA1","TSPAN15","B4GALNT3","PLXDC1","COL18A1","MGP","ARHGAP44","INSIG2","MAMDC2","HJURP","KIF4A","KNL1","SPC25","NCAPG","TTK","BUB1B","NDC80","NEIL3","CKAP2L","ARHGAP6","PAMR1","SLC6A15","PPARGC1A","LRFN5","GPC5","KYNU","KAZN","GNA14","TBX2"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>VlnPlot(Fibroblasts.clean, 
+        features = c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;), 
+        group.by = &quot;SCT_snn_res.0.3&quot;, 
+        pt.size = 0.1)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-10.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>gradient_colors &lt;- custom_palette(4)
+
+cellCounts1 &lt;- as.data.frame(table(Celltype = Fibroblasts.clean$SCT_snn_res.0.2, sample = Fibroblasts.clean$orig.ident))
+
+ggplot(data = cellCounts1, aes(x = sample, fill = Celltype, y = Freq)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  theme_bw() + 
+  scale_fill_manual(values = gradient_colors) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  labs(title = &quot;Proportions across Identities&quot;, x = &quot;&quot;, y = &quot;fraction of cells&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-11-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>############ Fibro sub
+
+quiescent &lt;- c( &quot;DCN&quot;, &quot;GSN&quot;, &quot;PDGFRA&quot;)
+FeaturePlot_scCustom(Fibroblasts.clean, features = quiescent, pt.size = 0, reduction = &quot;umap&quot;) + 
+  theme(axis.title.x = element_blank())</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-11-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>inflammatory &lt;- c(&quot;IL6&quot;, &quot;CCL2&quot;, &quot;CXCL1&quot;, &quot;CXCL12&quot;)
+FeaturePlot_scCustom(Fibroblasts.clean, features = inflammatory, pt.size = 0, reduction = &quot;umap&quot;) + 
+  theme(axis.title.x = element_blank())</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-11-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>active &lt;- c(&quot;ACTA2&quot;, &quot;POSTN&quot;, &quot;COL1A1&quot;, &quot;FN1&quot;)
+FeaturePlot_scCustom(Fibroblasts.clean, features = active, pt.size = 0, reduction = &quot;umap&quot;) + 
+  theme(axis.title.x = element_blank())</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-11-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>table(Fibroblasts.clean$orig.ident)  # --&gt; Proportions too different to sinvoll subsets machen. </code></pre>
+<pre><code>
+   CMF_NC   CMF_TGF  CMFHM_NC CMFHM_TGF 
+      174       804        64       105 </code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.6.0 (2026-04-24)
+Platform: aarch64-apple-darwin23
+Running under: macOS Sequoia 15.7.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/Zurich
+tzcode source: internal
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] future_1.70.0               ggrain_0.1.2               
+ [3] enrichplot_1.32.0           ggforce_0.5.0              
+ [5] DT_0.34.0                   UCell_2.16.0               
+ [7] assertthat_0.2.1            SCpubr_3.0.1               
+ [9] forcats_1.0.1               fgsea_1.38.0               
+[11] DOSE_4.6.0                  GO.db_3.23.1               
+[13] org.Hs.eg.db_3.23.1         AnnotationDbi_1.74.0       
+[15] clusterProfiler_4.20.0      ggtangle_0.1.2             
+[17] ggarchery_0.4.4             EnhancedVolcano_1.30.0     
+[19] tibble_3.3.1                MAST_1.38.0                
+[21] speckle_1.12.0              harmony_2.0.5              
+[23] Rcpp_1.1.1-1.1              clustree_0.5.1             
+[25] ggraph_2.2.2                scDblFinder_1.26.2         
+[27] SingleCellExperiment_1.34.0 SummarizedExperiment_1.42.0
+[29] Biobase_2.72.0              GenomicRanges_1.64.0       
+[31] Seqinfo_1.2.0               IRanges_2.46.0             
+[33] S4Vectors_0.50.1            BiocGenerics_0.58.1        
+[35] generics_0.1.4              MatrixGenerics_1.24.0      
+[37] matrixStats_1.5.0           workflowr_1.7.2            
+[39] ggrepel_0.9.8               cowplot_1.2.0              
+[41] patchwork_1.3.2             scCustomize_3.3.0          
+[43] hdf5r_1.3.12                Seurat_5.5.0               
+[45] SeuratObject_5.4.0          sp_2.2-1                   
+[47] ggplot2_4.0.3               dplyr_1.2.1                
+[49] readr_2.2.0                
+
+loaded via a namespace (and not attached):
+  [1] ggpp_0.6.1                goftest_1.2-3            
+  [3] Biostrings_2.80.1         vctrs_0.7.3              
+  [5] spatstat.random_3.5-0     digest_0.6.39            
+  [7] png_0.1-9                 shape_1.4.6.1            
+  [9] git2r_0.36.2              deldir_2.0-4             
+ [11] parallelly_1.47.0         fontLiberation_0.1.0     
+ [13] MASS_7.3-65               reshape2_1.4.5           
+ [15] qvalue_2.44.0             httpuv_1.6.17            
+ [17] withr_3.0.3               ggrastr_1.0.2            
+ [19] xfun_0.59                 ggfun_0.2.0              
+ [21] survival_3.8-6            memoise_2.0.1            
+ [23] ggbeeswarm_0.7.3          gson_0.1.0               
+ [25] janitor_2.2.1             systemfonts_1.3.2        
+ [27] tidytree_0.4.7            zoo_1.8-15               
+ [29] GlobalOptions_0.1.4       pbapply_1.7-4            
+ [31] rematch2_2.1.2            KEGGREST_1.52.2          
+ [33] promises_1.5.0            otel_0.2.0               
+ [35] httr_1.4.8                restfulr_0.0.17          
+ [37] globals_0.19.1            fitdistrplus_1.2-6       
+ [39] rstudioapi_0.19.0         UCSC.utils_1.7.1         
+ [41] miniUI_0.1.2              processx_3.9.0           
+ [43] curl_7.1.0                ScaledMatrix_1.20.0      
+ [45] polyclip_1.10-7           SparseArray_1.12.2       
+ [47] xtable_1.8-8              stringr_1.6.0            
+ [49] evaluate_1.0.5            S4Arrays_1.12.0          
+ [51] hms_1.1.4                 irlba_2.3.7              
+ [53] colorspace_2.1-2          polynom_1.4-1            
+ [55] ROCR_1.0-12               reticulate_1.46.0        
+ [57] spatstat.data_3.1-9       magrittr_2.0.5           
+ [59] lmtest_0.9-40             snakecase_0.11.1         
+ [61] glmGamPoi_1.24.0          later_1.4.8              
+ [63] viridis_0.6.5             ggtree_4.2.0             
+ [65] lattice_0.22-9            spatstat.geom_3.8-1      
+ [67] future.apply_1.20.2       getPass_0.2-4            
+ [69] scattermore_1.2           XML_3.99-0.23            
+ [71] scuttle_1.22.0            RcppAnnoy_0.0.23         
+ [73] pillar_1.11.1             nlme_3.1-169             
+ [75] compiler_4.6.0            beachmat_2.28.0          
+ [77] RSpectra_0.16-2           stringi_1.8.7            
+ [79] tensor_1.5.1              lubridate_1.9.5          
+ [81] GenomicAlignments_1.48.0  plyr_1.8.9               
+ [83] crayon_1.5.3              abind_1.4-8              
+ [85] BiocIO_1.22.0             scater_1.40.1            
+ [87] gridGraphics_0.5-1        locfit_1.5-9.12          
+ [89] graphlayouts_1.2.4        bit_4.6.0                
+ [91] fastmatch_1.1-8           whisker_0.4.1            
+ [93] codetools_0.2-20          BiocSingular_1.28.0      
+ [95] crosstalk_1.2.2           bslib_0.11.0             
+ [97] paletteer_1.7.0           plotly_4.12.0            
+ [99] mime_0.13                 splines_4.6.0            
+[101] circlize_0.4.18           fastDummies_1.7.6        
+[103] sparseMatrixStats_1.24.0  tidydr_0.0.6             
+[105] prismatic_1.1.2           knitr_1.51               
+[107] blob_1.3.0                fs_2.1.0                 
+[109] checkmate_2.3.4           listenv_1.0.0            
+[111] DelayedMatrixStats_1.34.0 ggplotify_0.1.3          
+[113] Matrix_1.7-5              callr_3.8.0              
+[115] statmod_1.5.2             tzdb_0.5.0               
+[117] tweenr_2.0.3              pkgconfig_2.0.3          
+[119] tools_4.6.0               cachem_1.1.0             
+[121] RhpcBLASctl_0.23-42       cigarillo_1.2.0          
+[123] RSQLite_3.53.2            viridisLite_0.4.3        
+[125] DBI_1.3.0                 fastmap_1.2.0            
+[127] rmarkdown_2.31            scales_1.4.0             
+[129] grid_4.6.0                ica_1.0-3                
+[131] Rsamtools_2.28.0          sass_0.4.10              
+[133] ggprism_1.0.7             dotCall64_1.2            
+[135] RANN_2.6.2                farver_2.1.2             
+[137] scatterpie_0.2.6          tidygraph_1.3.1          
+[139] yaml_2.3.12               rtracklayer_1.72.0       
+[141] cli_3.6.6                 purrr_1.2.2              
+[143] lifecycle_1.0.5           uwot_0.2.4               
+[145] backports_1.5.1           bluster_1.22.0           
+[147] BiocParallel_1.46.0       timechange_0.4.0         
+[149] gtable_0.3.6              rjson_0.2.23             
+[151] ggridges_0.5.7            progressr_0.19.0         
+[153] ape_5.8-1                 parallel_4.6.0           
+[155] limma_3.68.4              enrichit_0.1.5           
+[157] jsonlite_2.0.0            edgeR_4.10.1             
+[159] RcppHNSW_0.7.0            bitops_1.0-9             
+[161] bit64_4.8.2               xgboost_3.2.1.1          
+[163] Rtsne_0.17                yulab.utils_0.2.4        
+[165] spatstat.utils_3.2-3      BiocNeighbors_2.6.0      
+[167] aisdk_1.4.12              jquerylib_0.1.4          
+[169] metapod_1.20.0            GOSemSim_2.38.0          
+[171] dqrng_0.4.1               spatstat.univar_3.2-0    
+[173] lazyeval_0.2.3            shiny_1.14.0             
+[175] htmltools_0.5.9           sctransform_0.4.3        
+[177] rappdirs_0.3.4            glue_1.8.1               
+[179] spam_2.11-4               httr2_1.2.3              
+[181] XVector_0.52.0            gdtools_0.5.1            
+[183] RCurl_1.98-1.19           treeio_1.36.1            
+[185] rprojroot_2.1.1           scran_1.40.0             
+[187] gridExtra_2.3.1           igraph_2.3.2             
+[189] R6_2.6.1                  ggiraph_0.9.6            
+[191] tidyr_1.3.2               labeling_0.4.3           
+[193] cluster_2.1.8.2           aplot_0.3.0              
+[195] GenomeInfoDb_1.48.0       mcprogress_0.1.1         
+[197] DelayedArray_0.38.2       tidyselect_1.2.1         
+[199] vipor_0.4.7               fontBitstreamVera_0.1.1  
+[201] rsvd_1.0.5                KernSmooth_2.23-26       
+[203] S7_0.2.2                  fontquiver_0.2.1         
+[205] data.table_1.18.4         htmlwidgets_1.6.4        
+[207] RColorBrewer_1.1-3        rlang_1.2.0              
+[209] spatstat.sparse_3.2-0     spatstat.explore_3.8-1   
+[211] ggnewscale_0.5.2          beeswarm_0.4.0           </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
