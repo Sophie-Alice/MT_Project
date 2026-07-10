@@ -1,0 +1,1276 @@
+---
+title: "Baseline Mac Response Lenient Thresholds Method comparisons"
+author: "Sophie.Alice"
+date: "2026-07-02"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+
+library(edgeR)
+library(limma)
+
+```
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+
+# Functions
+
+```{r, warning = FALSE}
+
+
+Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
+  
+  # Clean extreme values
+  df <- Data
+  df <- df[is.finite(df$avg_log2FC) & is.finite(df$FDR), ]
+  
+  # dynamic axis limits
+  xmax <- max(df$avg_log2FC, na.rm = TRUE)
+  xmin <- min(df$avg_log2FC, na.rm = TRUE)
+  ymax <- max(-log10(df$FDR), na.rm = TRUE)
+  
+  # Add padding
+  xpad <- (xmax - xmin) * 0.1
+  ypad <- ymax * 0.1
+  
+  combined_subtitle <- paste0(Subtitle, " ● Thresholds: FDR < ", pCutoff, ", |Log2FC| > ", FCcutoff)
+  
+  EV <- EnhancedVolcano(
+    df,
+    lab = df$gene,
+    x = 'avg_log2FC',
+    y = 'FDR',
+    xlab = 'log2 Foldchange',
+    ylab = "-log10 FDR",
+    legendLabels = c('NS','log2FC','FDR','FDR & log2FC'),
+    col = c("darkgrey", "darkgrey", "#FFD966", "#9F1C67"),
+    title = Title,
+    subtitle = combined_subtitle,   
+    xlim = c(xmin - xpad, xmax + xpad),
+    ylim = c(0, ymax + ypad),
+    pCutoff = pCutoff,              
+    FCcutoff = FCcutoff,            
+
+    cutoffLineType = 'dashed',      
+    cutoffLineCol = 'black',        
+    cutoffLineWidth = 0.6,
+    labSize = 2.0,
+    drawConnectors = TRUE,
+    widthConnectors = 0.5
+  )
+  
+  return(EV)
+}
+
+##################################### Tables
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100)     
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover'       
+  )
+}
+
+#################################################### Raincloud Plots
+
+raincloud.plots <- function(gene_list, 
+                                   plot_title, 
+                                   plot_subtitle, 
+                                   seurat_obj = Data, 
+                                   colors = gradient_colors4) {
+
+  
+  valid_genes <- intersect(gene_list, rownames(seurat_obj))
+  expression_matrix <- FetchData(seurat_obj, vars = c(valid_genes, "ident")) 
+
+  
+  rain_data <- expression_matrix %>%
+    tibble::rownames_to_column("Cell_ID") %>%
+    tidyr::pivot_longer(
+      cols = all_of(valid_genes), 
+      names_to = "Gene", 
+      values_to = "Expression"
+    ) %>%
+    dplyr::rename(Condition = ident)
+  
+
+  raincloud_plot <- ggplot(rain_data, aes(x = Condition, y = Expression, fill = Condition, color = Condition)) +
+    geom_rain(
+      alpha = 0.6,
+      violin.args = list(color = NA),          
+      boxplot.args = list(outlier.shape = NA), 
+      point.args = list(
+        size = 0.4,                            
+        alpha = 0.4                            
+      ),
+    group = 1
+    ) +
+    
+    facet_wrap(~Gene, scales = "free_y", ncol = 3) +
+    
+    scale_fill_manual(values = colors) +
+    scale_color_manual(values = colors) +
+    
+    theme_bw() +
+    labs(
+      title    = plot_title,
+      subtitle = plot_subtitle,
+      x        = "Experimental Conditions",
+      y        = "Normalized Expression Level"
+    ) +
+    
+    theme(
+      plot.title.position = "plot",
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
+      axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+      axis.text.y   = element_text(face = "bold", color = "black"),
+      axis.title.x  = element_text(face = "bold"),
+      axis.title.y  = element_text(face = "bold"),
+      strip.text    = element_text(face = "bold", size = 10), 
+      legend.position = "none"
+    )
+  
+  return(raincloud_plot)
+}
+
+
+###################################### 2nd Volcano Viz
+
+
+generate_volcano <- function(df, title_text) {
+  df <- df %>%
+    mutate(Significant = ifelse(FDR < 0.05 & abs(avg_log2FC) > 0.5,
+                                ifelse(avg_log2FC > 0, "Up", "Down"), "ns"))
+  
+  top_hits <- df %>%
+    filter(Significant != "ns") %>%
+    arrange(desc(abs(avg_log2FC))) %>%
+    slice_head(n = 30)
+  
+  ggplot(df, aes(x = avg_log2FC, y = -log10(FDR))) +
+    geom_point(aes(color = Significant), alpha = 0.5, size = 1.2) +
+    scale_color_manual(values = c("Up" = "#de2d26", "Down" = "#3182bd", "ns" = "#969696")) +
+    geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+    geom_vline(xintercept = c(-0.25, 0.25), linetype = "dashed", color = "black") +
+    geom_text_repel(data = top_hits, aes(label = gene), size = 2.5, max.overlaps = 15) +
+    theme_classic() +
+    theme(legend.position = "none") +
+    labs(title = title_text, x = "log2 Fold Change", y = "-log10(FDR)")
+}
+
+
+
+```
+
+
+
+# DEGs of Baseline Macrophage response Method 
+
+ - CMFHM_NC vs CMF_NC = Effect of Macrophage Presence on MT without TGF-Beta
+
+ - Cutoffs Chosen: FDR <= 0.05, abs(log2FC) > 0.5
+ 
+ - We are comparing the DGEA of the 3 different Methods here
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+
+Data.mast.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Fibro_DEG_Lists.rds")
+Data.method1.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Fibro_DEG_Lists_method1.rds")
+Data.method2.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Fibro_DEG_Lists_method2.rds")
+
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+# Check data
+
+Here we are only comparing the NC vs. Mac 
+
+```{r,warning = FALSE}
+names(Data.mast.list)
+names(Data.method1.list)
+names(Data.method2.list)
+```
+
+# VolcanoPlots to compare
+
+```{r,warning = FALSE}
+
+FDR <- 0.05
+FC <- 0.5
+
+Degs.Mast <- Data.mast.list$Baseline_Mac_Response
+Degs.M1 <- Data.method1.list$`NC vs MAC`
+Degs.M2 <- Data.method2.list$`NC vs MAC`
+
+colnames(Degs.M2)
+colnames(Degs.Mast)
+Degs.Mast <- Degs.Mast %>%
+  rename(
+      FDR = p_val_adj)
+
+generate_volcano(Degs.M1, "NC vs MAC: Method 1")
+Volcano_Plots(Degs.M1, "NC vs MAC", "Method 1")
+generate_volcano(Degs.M2, "NC vs MAC: Method 2")
+Volcano_Plots(Degs.M2, "NC vs MAC", "Method 2")
+generate_volcano(Degs.Mast, "NC vs MAC: MAST")
+Volcano_Plots(Degs.Mast, "NC vs MAC", "Mast")
+```
+
+
+# FGSEA - MAST
+
+# Get Hallmark pathways
+
+```{r,warning = FALSE}
+Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt")
+```
+
+## Method 1
+
+### Rank the data
+
+```{r,warning = FALSE}
+
+Degs <- Degs.M1
+
+DEG.ranked <- Degs %>%
+  dplyr::select(gene, avg_log2FC) %>%
+  na.omit() %>%
+  distinct() %>%
+  group_by(gene) %>%
+  summarize(LFC = mean(avg_log2FC)) %>%
+  arrange(desc(LFC))
+
+ranked <- deframe(DEG.ranked)
+
+rank <- ranked[names(ranked) != ""]
+
+```
+
+### Functional gene set enrichment Analysis
+
+```{r,warning = FALSE}
+
+############################## Hallmark
+set.seed(42)
+
+fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
+
+fgseares.tidy <- fgseares %>%
+  as_tibble() %>%  
+  arrange(desc(NES))
+
+fgseares.tidy <- fgseares.tidy %>%
+  dplyr::select(-ES, -nMoreExtreme) 
+
+fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
+fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
+fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
+
+fgseares.tidy.show <- fgseares.tidy %>%
+  dplyr::select(-leadingEdge) 
+create_table(fgseares.tidy.show)
+
+```
+
+### Visualization
+
+```{r,warning = FALSE, fig.width=6, fig.height=5}
+
+plot_df <- fgseares.tidy.top.both %>%
+  mutate(
+    padj_group = case_when(
+      padj <= 0.05 ~ "< 0.05",
+      padj <= 0.2  ~ "0.05 – 0.2",
+      TRUE         ~ "> 0.2"
+    ),
+    padj_group = factor(padj_group, levels = c("< 0.05", "0.05 – 0.2", "> 0.2")),
+    pathway = gsub("HALLMARK_", "", pathway),
+  )
+
+
+plot.M1 <- ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
+  geom_col(aes(fill = padj_group), color = "black", linewidth = 0.2) +
+  coord_flip() +
+  scale_x_discrete(position = "top", labels = scales::label_wrap(50)) +
+  scale_fill_manual(
+    name = "adj. p-value",
+    values = c(
+      "< 0.05"     = "#9F1C67",   
+      "0.05 – 0.2" = "#FFD966",   
+      "> 0.2"      = "#005EA8"    
+    ),
+    drop = FALSE 
+  ) +
+  labs(
+    x = "", 
+    y = "Normalized Enrichment Score (NES)", 
+    title = "GSEA: Hallmark Pathways - DEGs from Method 1",
+    subtitle = "MT: Pathway changes CMFHM_NC compared to CMF_NC"
+  ) +
+  theme_bw() +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic"),
+    legend.position = "left" 
+  )
+
+
+```
+
+## Method 2
+
+### Rank the data
+
+```{r,warning = FALSE}
+
+Degs <- Degs.M2
+
+DEG.ranked <- Degs %>%
+  dplyr::select(gene, avg_log2FC) %>%
+  na.omit() %>%
+  distinct() %>%
+  group_by(gene) %>%
+  summarize(LFC = mean(avg_log2FC)) %>%
+  arrange(desc(LFC))
+
+ranked <- deframe(DEG.ranked)
+
+rank <- ranked[names(ranked) != ""]
+
+```
+
+### Functional gene set enrichment Analysis
+
+```{r,warning = FALSE}
+
+############################## Hallmark
+set.seed(42)
+
+fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
+
+fgseares.tidy <- fgseares %>%
+  as_tibble() %>%  
+  arrange(desc(NES))
+
+fgseares.tidy <- fgseares.tidy %>%
+  dplyr::select(-ES, -nMoreExtreme) 
+
+fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
+fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
+fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
+
+fgseares.tidy.show <- fgseares.tidy %>%
+  dplyr::select(-leadingEdge) 
+create_table(fgseares.tidy.show)
+
+```
+
+### Visualization
+
+```{r,warning = FALSE, fig.width=6, fig.height=5}
+
+plot_df <- fgseares.tidy.top.both %>%
+  mutate(
+    padj_group = case_when(
+      padj <= 0.05 ~ "< 0.05",
+      padj <= 0.2  ~ "0.05 – 0.2",
+      TRUE         ~ "> 0.2"
+    ),
+    padj_group = factor(padj_group, levels = c("< 0.05", "0.05 – 0.2", "> 0.2")),
+    pathway = gsub("HALLMARK_", "", pathway),
+  )
+
+
+plot.M2 <- ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
+  geom_col(aes(fill = padj_group), color = "black", linewidth = 0.2) +
+  coord_flip() +
+  scale_x_discrete(position = "top", labels = scales::label_wrap(50)) +
+  scale_fill_manual(
+    name = "adj. p-value",
+    values = c(
+      "< 0.05"     = "#9F1C67",   
+      "0.05 – 0.2" = "#FFD966",   
+      "> 0.2"      = "#005EA8"    
+    ),
+    drop = FALSE 
+  ) +
+  labs(
+    x = "", 
+    y = "Normalized Enrichment Score (NES)", 
+    title = "GSEA: Hallmark Pathways - DEGs from Method 2",
+    subtitle = "MT: Pathway changes CMFHM_NC compared to CMF_NC"
+  ) +
+  theme_bw() +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic"),
+    legend.position = "left" 
+  )
+
+
+```
+
+
+## Method MAST
+
+### Rank the data
+
+```{r,warning = FALSE}
+
+Degs <- Degs.Mast
+
+DEG.ranked <- Degs %>%
+  dplyr::select(gene, avg_log2FC) %>%
+  na.omit() %>%
+  distinct() %>%
+  group_by(gene) %>%
+  summarize(LFC = mean(avg_log2FC)) %>%
+  arrange(desc(LFC))
+
+ranked <- deframe(DEG.ranked)
+
+rank <- ranked[names(ranked) != ""]
+
+```
+
+### Functional gene set enrichment Analysis
+
+```{r,warning = FALSE}
+
+############################## Hallmark
+set.seed(42)
+
+fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
+
+fgseares.tidy <- fgseares %>%
+  as_tibble() %>%  
+  arrange(desc(NES))
+
+fgseares.tidy <- fgseares.tidy %>%
+  dplyr::select(-ES, -nMoreExtreme) 
+
+fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
+fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
+fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
+
+fgseares.tidy.show <- fgseares.tidy %>%
+  dplyr::select(-leadingEdge) 
+create_table(fgseares.tidy.show)
+
+```
+
+### Visualization
+
+```{r,warning = FALSE, fig.width=6, fig.height=5}
+
+plot_df <- fgseares.tidy.top.both %>%
+  mutate(
+    padj_group = case_when(
+      padj <= 0.05 ~ "< 0.05",
+      padj <= 0.2  ~ "0.05 – 0.2",
+      TRUE         ~ "> 0.2"
+    ),
+    padj_group = factor(padj_group, levels = c("< 0.05", "0.05 – 0.2", "> 0.2")),
+    pathway = gsub("HALLMARK_", "", pathway),
+  )
+
+
+plot.Mast <- ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
+  geom_col(aes(fill = padj_group), color = "black", linewidth = 0.2) +
+  coord_flip() +
+  scale_x_discrete(position = "top", labels = scales::label_wrap(50)) +
+  scale_fill_manual(
+    name = "adj. p-value",
+    values = c(
+      "< 0.05"     = "#9F1C67",   
+      "0.05 – 0.2" = "#FFD966",   
+      "> 0.2"      = "#005EA8"    
+    ),
+    drop = FALSE 
+  ) +
+  labs(
+    x = "", 
+    y = "Normalized Enrichment Score (NES)", 
+    title = "GSEA: Hallmark Pathways - DEGs from Method Mast",
+    subtitle = "MT: Pathway changes CMFHM_NC compared to CMF_NC"
+  ) +
+  theme_bw() +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic"),
+    legend.position = "left" 
+  )
+
+
+```
+
+
+# Visualizations of fGSEA differences
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+plot.Mast 
+plot.M1 
+plot.M2
+
+```
+
+
+# PAH
+
+## PAH - Method 1
+
+```{r,warning = FALSE}
+
+df <- Degs.M1
+
+# Upregulated Genes
+up_genes <- df %>%
+  filter(avg_log2FC > FC, FDR <= !!FDR) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Downregulated Genes
+down_genes <- df %>%
+  filter(avg_log2FC < -FC, FDR <= !!FDR) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Background Universe Genes 
+universe <- df %>%
+  distinct(gene) %>% 
+  pull(gene) %>%                        
+  na.omit()
+
+```
+
+
+```{r, warning = FALSE}
+
+set.seed(42)
+
+Humanlibrary <- org.Hs.eg.db
+
+###################################### upregulated genes
+
+up.GO <- enrichGO(
+  gene          = up_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.up.GO <- clusterProfiler::simplify(up.GO)
+
+simp.up.GO.show <- as.data.frame(simp.up.GO)
+simp.up.GO.show <- simp.up.GO.show %>%
+  dplyr::select(-geneID) 
+create_table(simp.up.GO.show)
+
+###################################### downregulated genes
+
+down.GO <- enrichGO(
+  gene          = down_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.down.GO <- clusterProfiler::simplify(down.GO)
+
+simp.down.GO.show <- as.data.frame(simp.down.GO)
+simp.down.GO.show <- simp.down.GO.show %>%
+  dplyr::select(-geneID) 
+
+create_table(simp.down.GO.show)
+
+
+###################### get a list of the simp.results
+
+go.results <- list()
+
+go.results[["GO.M1.up"]] <- as.data.frame(simp.up.GO)
+go.results[["GO.M1.down"]] <- as.data.frame(simp.down.GO)
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
+go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
+
+go_combined <- rbind(go_up_df, go_down_df) %>%
+  group_by(Direction) %>%
+  slice_head(n = 10) %>% # Adjust 'n' to show more or fewer terms per panel
+  ungroup()
+
+
+go_plot_data <- go_combined %>%
+  mutate(
+    GeneRatio_num = sapply(GeneRatio, function(x) {
+      num_den <- as.numeric(strsplit(x, "/")[[1]])
+      return(num_den[1] / num_den[2])})) %>%
+  arrange(Direction, GeneRatio_num) %>%
+  mutate(Description = factor(Description, levels = unique(Description)))
+
+
+PAH.plot.M1 <- ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
+  geom_point(aes(color = p.adjust, size = Count)) +  
+  facet_wrap(~Direction, scales = "free_y", ncol = 1) +
+  
+  scale_color_viridis_c(
+    option = "plasma", 
+    name = "adj. p-value",                          
+    guide = guide_colorbar(reverse = TRUE)
+  ) +
+  scale_size_continuous(range = c(3, 8), name = "Gene Count") +
+  scale_y_discrete(labels = scales::label_wrap(45)) +
+  
+  theme_bw() + 
+  labs(
+    title = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Method 1", 
+    subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
+    x = "Gene Ratio", 
+    y = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
+    axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
+    axis.title.x  = element_text(face = "bold"),
+    strip.text    = element_text(face = "bold", size = 10), 
+    legend.position = "right"
+  )
+```
+
+## EMAP Plot
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+set.seed(42)
+
+################################################### Upregulated Go terms
+
+simp.up.GO <- pairwise_termsim(simp.up.GO)
+
+E.Up.M1 <- emapplot(
+  simp.up.GO,
+  showCategory = 30,          
+  node_label   = "group", 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Method 1", 
+    subtitle = "Functional clustering map of top 30 enriched terms for Up-regulated genes",
+    x        = "", 
+    y        = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = "right"
+  )
+
+################################################### Down Go terms
+
+simp.down.GO <- pairwise_termsim(simp.down.GO)
+
+E.down.M1 <- emapplot(
+  simp.down.GO,
+  showCategory = 30,          
+  node_label   = "group", 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Method 1", 
+    subtitle = "Functional clustering map of top 30 enriched terms for Down-regulated genes",
+    x        = "", 
+    y        = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = "right"
+  )
+
+
+```
+
+
+## PAH - Method 2
+
+```{r,warning = FALSE}
+
+df <- Degs.M2
+
+# Upregulated Genes
+up_genes <- df %>%
+  filter(avg_log2FC > FC, FDR <= !!FDR) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Downregulated Genes
+down_genes <- df %>%
+  filter(avg_log2FC < -FC, FDR <= !!FDR) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Background Universe Genes 
+universe <- df %>%
+  distinct(gene) %>% 
+  pull(gene) %>%                        
+  na.omit()
+
+```
+
+
+```{r, warning = FALSE}
+
+set.seed(42)
+
+Humanlibrary <- org.Hs.eg.db
+
+###################################### upregulated genes
+
+up.GO <- enrichGO(
+  gene          = up_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.up.GO <- clusterProfiler::simplify(up.GO)
+
+simp.up.GO.show <- as.data.frame(simp.up.GO)
+simp.up.GO.show <- simp.up.GO.show %>%
+  dplyr::select(-geneID) 
+create_table(simp.up.GO.show)
+
+###################################### downregulated genes
+
+down.GO <- enrichGO(
+  gene          = down_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.down.GO <- clusterProfiler::simplify(down.GO)
+
+simp.down.GO.show <- as.data.frame(simp.down.GO)
+simp.down.GO.show <- simp.down.GO.show %>%
+  dplyr::select(-geneID) 
+
+create_table(simp.down.GO.show)
+
+###################### get a list of the simp.results
+
+go.results[["GO.M2.up"]] <- as.data.frame(simp.up.GO)
+go.results[["GO.M2.down"]] <- as.data.frame(simp.down.GO)
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
+go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
+
+go_combined <- rbind(go_up_df, go_down_df) %>%
+  group_by(Direction) %>%
+  slice_head(n = 10) %>% # Adjust 'n' to show more or fewer terms per panel
+  ungroup()
+
+
+go_plot_data <- go_combined %>%
+  mutate(
+    GeneRatio_num = sapply(GeneRatio, function(x) {
+      num_den <- as.numeric(strsplit(x, "/")[[1]])
+      return(num_den[1] / num_den[2])})) %>%
+  arrange(Direction, GeneRatio_num) %>%
+  mutate(Description = factor(Description, levels = unique(Description)))
+
+
+PAH.plot.M2 <- ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
+  geom_point(aes(color = p.adjust, size = Count)) +  
+  facet_wrap(~Direction, scales = "free_y", ncol = 1) +
+  
+  scale_color_viridis_c(
+    option = "plasma", 
+    name = "adj. p-value",                          
+    guide = guide_colorbar(reverse = TRUE)
+  ) +
+  scale_size_continuous(range = c(3, 8), name = "Gene Count") +
+  scale_y_discrete(labels = scales::label_wrap(45)) +
+  
+  theme_bw() + 
+  labs(
+    title = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Method 2", 
+    subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
+    x = "Gene Ratio", 
+    y = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
+    axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
+    axis.title.x  = element_text(face = "bold"),
+    strip.text    = element_text(face = "bold", size = 10), 
+    legend.position = "right"
+  )
+```
+
+## EMAP Plot
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+set.seed(42)
+
+################################################### Upregulated Go terms
+
+simp.up.GO <- pairwise_termsim(simp.up.GO)
+
+E.Up.M2 <- emapplot(
+  simp.up.GO,
+  showCategory = 30,          
+  node_label   = "group", 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment- Method 2", 
+    subtitle = "Functional clustering map of top 30 enriched terms for Up-regulated genes",
+    x        = "", 
+    y        = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = "right"
+  )
+
+################################################### Down Go terms
+
+simp.down.GO <- pairwise_termsim(simp.down.GO)
+
+E.down.M2 <- emapplot(
+  simp.down.GO,
+  showCategory = 30,          
+  node_label   = "group", 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment- Method 2", 
+    subtitle = "Functional clustering map of top 30 enriched terms for Down-regulated genes",
+    x        = "", 
+    y        = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = "right"
+  )
+
+
+```
+
+
+
+## PAH - Method Mast
+
+```{r,warning = FALSE}
+
+df <- Degs.Mast
+
+# Upregulated Genes
+up_genes <- df %>%
+  filter(avg_log2FC > FC, FDR <= !!FDR) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Downregulated Genes
+down_genes <- df %>%
+  filter(avg_log2FC < -FC, FDR <= !!FDR) %>%
+  distinct(gene) %>%   
+  pull(gene) %>%                        
+  na.omit()
+
+# Background Universe Genes 
+universe <- df %>%
+  distinct(gene) %>% 
+  pull(gene) %>%                        
+  na.omit()
+
+```
+
+
+```{r, warning = FALSE}
+
+set.seed(42)
+
+Humanlibrary <- org.Hs.eg.db
+
+###################################### upregulated genes
+
+up.GO <- enrichGO(
+  gene          = up_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.up.GO <- clusterProfiler::simplify(up.GO)
+
+simp.up.GO.show <- as.data.frame(simp.up.GO)
+simp.up.GO.show <- simp.up.GO.show %>%
+  dplyr::select(-geneID) 
+create_table(simp.up.GO.show)
+
+###################################### downregulated genes
+
+down.GO <- enrichGO(
+  gene          = down_genes,
+  universe      = universe,         
+  OrgDb         = Humanlibrary,
+  keyType       = "SYMBOL",
+  ont           = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.1,       
+  minGSSize     = 15,
+  maxGSSize     = 800
+)
+
+simp.down.GO <- clusterProfiler::simplify(down.GO)
+
+simp.down.GO.show <- as.data.frame(simp.down.GO)
+simp.down.GO.show <- simp.down.GO.show %>%
+  dplyr::select(-geneID) 
+
+create_table(simp.down.GO.show)
+
+###################### get a list of the simp.results
+
+go.results[["GO.Mast.up"]] <- as.data.frame(simp.up.GO)
+go.results[["GO.Mast.down"]] <- as.data.frame(simp.down.GO)
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
+go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
+
+go_combined <- rbind(go_up_df, go_down_df) %>%
+  group_by(Direction) %>%
+  slice_head(n = 10) %>% # Adjust 'n' to show more or fewer terms per panel
+  ungroup()
+
+
+go_plot_data <- go_combined %>%
+  mutate(
+    GeneRatio_num = sapply(GeneRatio, function(x) {
+      num_den <- as.numeric(strsplit(x, "/")[[1]])
+      return(num_den[1] / num_den[2])})) %>%
+  arrange(Direction, GeneRatio_num) %>%
+  mutate(Description = factor(Description, levels = unique(Description)))
+
+
+PAH.plot.Mast <- ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
+  geom_point(aes(color = p.adjust, size = Count)) +  
+  facet_wrap(~Direction, scales = "free_y", ncol = 1) +
+  
+  scale_color_viridis_c(
+    option = "plasma", 
+    name = "adj. p-value",                          
+    guide = guide_colorbar(reverse = TRUE)
+  ) +
+  scale_size_continuous(range = c(3, 8), name = "Gene Count") +
+  scale_y_discrete(labels = scales::label_wrap(45)) +
+  
+  theme_bw() + 
+  labs(
+    title = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Method Mast", 
+    subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
+    x = "Gene Ratio", 
+    y = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
+    axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
+    axis.title.x  = element_text(face = "bold"),
+    strip.text    = element_text(face = "bold", size = 10), 
+    legend.position = "right"
+  )
+```
+
+## EMAP Plot
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+set.seed(42)
+
+################################################### Upregulated Go terms
+
+simp.up.GO <- pairwise_termsim(simp.up.GO)
+
+E.Up.Mast <- emapplot(
+  simp.up.GO,
+  showCategory = 30,          
+  node_label   = "group", 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - MAST", 
+    subtitle = "Functional clustering map of top 30 enriched terms for Up-regulated genes",
+    x        = "", 
+    y        = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = "right"
+  )
+
+################################################### Down Go terms
+
+simp.down.GO <- pairwise_termsim(simp.down.GO)
+
+E.down.Mast <- emapplot(
+  simp.down.GO,
+  showCategory = 30,          
+  node_label   = "group", 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Mast", 
+    subtitle = "Functional clustering map of top 30 enriched terms for Down-regulated genes",
+    x        = "", 
+    y        = ""
+  ) +
+  theme(
+    plot.title.position = "plot", 
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = "right"
+  )
+
+
+```
+
+
+# Visualizations of PAH differences
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+PAH.plot.M1
+PAH.plot.M2
+PAH.plot.Mast
+
+E.Up.M1
+E.down.M1
+
+E.Up.M2
+E.down.M2
+
+E.Up.Mast
+E.down.Mast
+
+```
+
+
+# Checking out cell adhesion
+
+ - Interestingly the Pathway cell adhesion is downregulated in Method 1 and Method 2 BUT upregulated in MAST. 
+ - So we look at the specific genes
+ 
+```{r, warning = FALSE, fig.width=8, fig.height=5}
+
+library(purrr)
+library(tidyr)
+
+Fibroblasts<- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(Fibroblasts) <- "orig.ident" 
+
+descr <- "cell adhesion"
+
+cell_adhesion_df <- go.results %>%
+  map(~ filter(.x, Description == descr)) %>%
+  bind_rows(.id = "Analysis")
+
+create_table(cell_adhesion_df)
+
+
+## MAST filters more stringent.
+## Shows how essential it is to look at the specific genes found in the geneset!
+
+gene_table <- go.results %>%
+  map(~ filter(.x, Description == descr)) %>%
+  bind_rows(.id = "Analysis") %>%
+  dplyr::select(Analysis, Description, p.adjust, geneID) %>%
+  tidyr::separate_rows(geneID, sep = "/") %>%
+  rename(Gene = geneID)
+
+create_table(gene_table)
+```
