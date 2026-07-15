@@ -424,7 +424,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-10
+<strong>Last updated:</strong> 2026-07-15
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -555,15 +555,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree3a64a82ed15e2ef6be2008923115365f986b8a91targetblank3a64a82a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree9590efc031912c0d3a676a9025f4e39dfe4e2992targetblank9590efca">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/3a64a82ed15e2ef6be2008923115365f986b8a91" target="_blank">3a64a82</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/9590efc031912c0d3a676a9025f4e39dfe4e2992" target="_blank">9590efc</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree3a64a82ed15e2ef6be2008923115365f986b8a91targetblank3a64a82a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree9590efc031912c0d3a676a9025f4e39dfe4e2992targetblank9590efca"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -573,7 +573,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/3a64a82ed15e2ef6be2008923115365f986b8a91" target="_blank">3a64a82</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/9590efc031912c0d3a676a9025f4e39dfe4e2992" target="_blank">9590efc</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -589,12 +589,20 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
 
-Untracked files:
-    Untracked:  analysis/DGEA_Method_comparison.Rmd
-    Untracked:  analysis/Subclusters_Fib.Rmd
+Unstaged changes:
+    Deleted:    analysis/Baseline_Mac_Response.Rmd
+    Deleted:    analysis/Baseline_Mac_Response_Lenient.Rmd
+    Deleted:    analysis/Baseline_TGF_Response.Rmd
+    Deleted:    analysis/Baseline_TGF_Response_Lenient.Rmd
+    Deleted:    analysis/Modulated_TGF_Response.Rmd
+    Deleted:    analysis/Modulated_TGF_Response_Lenient.Rmd
+    Deleted:    analysis/Stim_Mac_Response.Rmd
+    Deleted:    analysis/Stim_Mac_Response_Lenient.Rmd
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -645,6 +653,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/9590efc031912c0d3a676a9025f4e39dfe4e2992/analysis/Methods_Stim_Mac_Response_Lenient.Rmd" target="_blank">9590efc</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+<td>
+GSEA
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/Methods_Stim_Mac_Response_Lenient.html" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/3a64a82ed15e2ef6be2008923115365f986b8a91/analysis/Methods_Stim_Mac_Response_Lenient.Rmd" target="_blank">3a64a82</a>
 </td>
 <td>
@@ -669,8 +711,8 @@ adding Methodds comparisons
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  859899 46.0    1336727 71.4         NA  1336727 71.4
-Vcells 1539867 11.8    8388608 64.0      16384  2540001 19.4</code></pre>
+Ncells  908932 48.6    1756088 93.8         NA  1321070 70.6
+Vcells 1604761 12.3    8388608 64.0      16384  2393424 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -707,7 +749,8 @@ library(enrichplot)
 library(ggrain)
 
 library(edgeR)
-library(limma)</code></pre>
+library(limma)
+library(aPEAR)</code></pre>
 </div>
 <div id="get-the-data" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Get the Data</h1>
@@ -932,16 +975,238 @@ colnames(Degs.M2)</code></pre>
 
 generate_volcano(Degs.M1, &quot;TGF vs MAC+TGF: Method 1&quot;)</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-1.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>Volcano_Plots(Degs.M1, &quot;TGF vs MAC+TGF&quot;, &quot;Method 1&quot;)</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-2">
+Past versions of unnamed-chunk-6-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-2.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>generate_volcano(Degs.M2, &quot;TGF vs MAC+TGF: Method 2&quot;)</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-3">
+Past versions of unnamed-chunk-6-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-3.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>Volcano_Plots(Degs.M2, &quot;TGF vs MAC+TGF&quot;, &quot;Method 2&quot;)</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-4">
+Past versions of unnamed-chunk-6-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-4.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>generate_volcano(Degs.Mast, &quot;TGF vs MAC+TGF: MAST&quot;)</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-5">
+Past versions of unnamed-chunk-6-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-5.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>Volcano_Plots(Degs.Mast, &quot;TGF vs MAC+TGF&quot;, &quot;Mast&quot;)</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-6">
+Past versions of unnamed-chunk-6-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-6.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="fgsea---mast" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> FGSEA - MAST</h1>
@@ -1221,10 +1486,121 @@ number="9">
 differences</h1>
 <pre class="r"><code>plot.Mast </code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-17-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
+Past versions of unnamed-chunk-17-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-17-1.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot.M1 </code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-17-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-2">
+Past versions of unnamed-chunk-17-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-17-2.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot.M2</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-17-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-3">
+Past versions of unnamed-chunk-17-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-17-3.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="pah" class="section level1" number="10">
 <h1><span class="header-section-number">10</span> PAH</h1>
@@ -1797,22 +2173,582 @@ number="13">
 differences</h1>
 <pre class="r"><code>PAH.plot.M1</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-1">
+Past versions of unnamed-chunk-30-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-1.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>PAH.plot.M2</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-2">
+Past versions of unnamed-chunk-30-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-2.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>PAH.plot.Mast</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-3">
+Past versions of unnamed-chunk-30-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-3.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>E.Up.M1</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-4">
+Past versions of unnamed-chunk-30-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-4.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>E.down.M1</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-5.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-5">
+Past versions of unnamed-chunk-30-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-5.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>E.Up.M2</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-6.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-6">
+Past versions of unnamed-chunk-30-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-6.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>E.down.M2</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-7.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-7">
+Past versions of unnamed-chunk-30-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-7.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>E.Up.Mast</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-8.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-8">
+Past versions of unnamed-chunk-30-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-8.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>E.down.Mast</code></pre>
 <p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-9.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-9">
+Past versions of unnamed-chunk-30-9.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-30-9.png" target="_blank">7bb8771</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="gsea-using-methods-closely" class="section level1" number="14">
+<h1><span class="header-section-number">14</span> GSEA using Methods
+closely</h1>
+<ul>
+<li>Method 1: cell based method</li>
+<li>Method 2: Pseudobulk based method</li>
+</ul>
+<div id="method-1-1" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Method 1</h2>
+<ul>
+<li>dispersion estimation method combines with t-like stat and GO
+Terms</li>
+</ul>
+<pre class="r"><code>Data.method1.list &lt;- read_rds(&quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Fibro_DEG_Lists_method1.rds&quot;)
+
+Degs.M1 &lt;- Data.method1.list$`TGF vs MAC+TGF`
+
+generate_volcano(Degs.M1, &quot;TGF vs MAC+TGF: Method 1&quot;)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-31-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Volcano_Plots(Degs.M1, &quot;NTGF vs MAC+TGF&quot;, &quot;Method 1&quot;)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-31-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ranked_vector &lt;- Degs.M1$t_like
+
+names(ranked_vector) &lt;- Degs.M1$gene
+
+ranked_vector &lt;- sort(ranked_vector, decreasing = TRUE)</code></pre>
+<pre class="r"><code>Humanlibrary &lt;- org.Hs.eg.db
+
+gsea_results &lt;- gseGO(
+  geneList     = ranked_vector,
+  OrgDb        = Humanlibrary,      
+  ont          = &quot;BP&quot;,              
+  keyType      = &quot;SYMBOL&quot;,          
+  minGSSize    = 15,
+  maxGSSize    = 800,
+  pvalueCutoff = 0.1,
+  pAdjustMethod = &quot;BH&quot;              
+)
+
+global_dotplot &lt;- dotplot(
+  gsea_results, 
+  showCategory = 10, 
+  split = &quot;.sign&quot;
+) + 
+facet_grid(. ~ .sign) +
+theme(axis.text.y = element_text(size = 8))
+
+print(global_dotplot)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-33-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="emap-plot-3" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> EMAP plot</h2>
+<pre class="r"><code>gsea_sig_df &lt;- gsea_results@result %&gt;%
+  dplyr::filter(p.adjust &lt; 0.05)  
+
+set.seed(42)
+p_apear &lt;- enrichmentNetwork(
+  enrichment = gsea_sig_df,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  fontSize     = 3,
+  colorBy      = &quot;NES&quot;,        
+  colorType    = &quot;nes&quot;  
+)
+
+p_apear &lt;- p_apear + labs(
+  title    = &quot;Enrichment Network of sign. GO Terms found by GSEA&quot;,
+  subtitle = &quot;Method 1, t-like statistic&quot;,
+  color    = &quot;NES&quot;,       
+) +
+theme(
+  plot.title.position = &quot;plot&quot;,
+  plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+  plot.subtitle = element_text(face = &quot;italic&quot;, size = 10, hjust = 0)
+)
+
+print(p_apear)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-34-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="method-2-1" class="section level2" number="14.3">
+<h2><span class="header-section-number">14.3</span> Method 2</h2>
+<ul>
+<li>Sampled Pseudobulk method combines with t-like stat and GO
+Terms</li>
+</ul>
+<pre class="r"><code>Data.method2.list &lt;- read_rds(&quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Fibro_DEG_Lists_method2.rds&quot;)
+
+Degs.M2 &lt;- Data.method2.list$`TGF vs MAC+TGF`
+
+
+generate_volcano(Degs.M2, &quot;TGF vs MAC+TGF: Method 2&quot;)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-35-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Volcano_Plots(Degs.M2, &quot;TGF vs MAC+TGF&quot;, &quot;Method 2&quot;)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-35-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ranked_vector &lt;- Degs.M2$t_like
+
+names(ranked_vector) &lt;- Degs.M2$gene
+
+ranked_vector &lt;- sort(ranked_vector, decreasing = TRUE)</code></pre>
+<pre class="r"><code>Humanlibrary &lt;- org.Hs.eg.db
+
+gsea_results &lt;- gseGO(
+  geneList     = ranked_vector,
+  OrgDb        = Humanlibrary,      
+  ont          = &quot;BP&quot;,              
+  keyType      = &quot;SYMBOL&quot;,          
+  minGSSize    = 15,
+  maxGSSize    = 800,
+  pvalueCutoff = 0.1,
+  pAdjustMethod = &quot;BH&quot;              
+)
+
+global_dotplot &lt;- dotplot(
+  gsea_results, 
+  showCategory = 10, 
+  split = &quot;.sign&quot;
+) + 
+facet_grid(. ~ .sign) +
+theme(axis.text.y = element_text(size = 8))
+
+print(global_dotplot)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-37-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="emap-plot-4" class="section level2" number="14.4">
+<h2><span class="header-section-number">14.4</span> EMAP plot</h2>
+<pre class="r"><code>gsea_sig_df &lt;- gsea_results@result %&gt;%
+  dplyr::filter(p.adjust &lt; 0.05)  
+
+set.seed(42)
+p_apear &lt;- enrichmentNetwork(
+  enrichment = gsea_sig_df,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  fontSize     = 3,
+  colorBy      = &quot;NES&quot;,        
+  colorType    = &quot;nes&quot;  
+)
+
+p_apear &lt;- p_apear + labs(
+  title    = &quot;Enrichment Network of sign. GO Terms found by GSEA&quot;,
+  subtitle = &quot;Method 2, t-like statistic&quot;,
+  color    = &quot;NES&quot;,       
+) +
+theme(
+  plot.title.position = &quot;plot&quot;,
+  plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+  plot.subtitle = element_text(face = &quot;italic&quot;, size = 10, hjust = 0)
+)
+
+print(p_apear)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-38-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="method-mast-1" class="section level2" number="14.5">
+<h2><span class="header-section-number">14.5</span> Method MAST</h2>
+<ul>
+<li>Cell based approach MAST combined with l2FC stat and GO Terms</li>
+</ul>
+<pre class="r"><code>Data.mast.list &lt;- read_rds(&quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Fibro_DEG_Lists.rds&quot;)
+
+Degs.Mast &lt;- Data.mast.list$Stim_Mac_Response
+
+Degs.Mast &lt;- Degs.Mast %&gt;%
+  rename(
+      FDR = p_val_adj)
+
+generate_volcano(Degs.Mast, &quot;TGF vs MAC+TGF: Method Mast&quot;)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-39-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Volcano_Plots(Degs.Mast, &quot;TGF vs MAC+TGF&quot;, &quot;Method Mast&quot;)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-39-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ranked_vector &lt;- Degs.Mast$avg_log2FC
+
+names(ranked_vector) &lt;- Degs.Mast$gene
+
+ranked_vector &lt;- sort(ranked_vector, decreasing = TRUE)</code></pre>
+<pre class="r"><code>Humanlibrary &lt;- org.Hs.eg.db
+
+gsea_results &lt;- gseGO(
+  geneList     = ranked_vector,
+  OrgDb        = Humanlibrary,      
+  ont          = &quot;BP&quot;,              
+  keyType      = &quot;SYMBOL&quot;,          
+  minGSSize    = 15,
+  maxGSSize    = 800,
+  pvalueCutoff = 0.1,
+  pAdjustMethod = &quot;BH&quot;              
+)
+
+global_dotplot &lt;- dotplot(
+  gsea_results, 
+  showCategory = 10, 
+  split = &quot;.sign&quot;
+) + 
+facet_grid(. ~ .sign) +
+theme(axis.text.y = element_text(size = 8))
+
+print(global_dotplot)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-41-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="emap-plot-5" class="section level2" number="14.6">
+<h2><span class="header-section-number">14.6</span> EMAP plot</h2>
+<pre class="r"><code>gsea_sig_df &lt;- gsea_results@result %&gt;%
+  dplyr::filter(p.adjust &lt; 0.05)  
+
+set.seed(42)
+p_apear &lt;- enrichmentNetwork(
+  enrichment = gsea_sig_df,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  fontSize     = 3,
+  colorBy      = &quot;NES&quot;,        
+  colorType    = &quot;nes&quot;  
+)
+
+p_apear &lt;- p_apear + labs(
+  title    = &quot;Enrichment Network of sign. GO Terms found by GSEA&quot;,
+  subtitle = &quot;Method MAST, l2FC statistic&quot;,
+  color    = &quot;NES&quot;,       
+) +
+theme(
+  plot.title.position = &quot;plot&quot;,
+  plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+  plot.subtitle = element_text(face = &quot;italic&quot;, size = 10, hjust = 0)
+)
+
+print(p_apear)</code></pre>
+<p><img src="figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-42-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1841,101 +2777,106 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] edgeR_4.10.1                limma_3.68.4               
- [3] ggrain_0.1.2                enrichplot_1.32.0          
- [5] ggforce_0.5.0               DT_0.34.0                  
- [7] UCell_2.16.0                assertthat_0.2.1           
- [9] SCpubr_3.0.1                forcats_1.0.1              
-[11] fgsea_1.38.0                DOSE_4.6.0                 
-[13] GO.db_3.23.1                org.Hs.eg.db_3.23.1        
-[15] AnnotationDbi_1.74.0        clusterProfiler_4.20.0     
-[17] ggtangle_0.1.2              ggarchery_0.4.4            
-[19] EnhancedVolcano_1.30.0      tibble_3.3.1               
-[21] MAST_1.38.0                 speckle_1.12.0             
-[23] harmony_2.0.5               Rcpp_1.1.1-1.1             
-[25] clustree_0.5.1              ggraph_2.2.2               
-[27] scDblFinder_1.26.2          SingleCellExperiment_1.34.0
-[29] SummarizedExperiment_1.42.0 Biobase_2.72.0             
-[31] GenomicRanges_1.64.0        Seqinfo_1.2.0              
-[33] IRanges_2.46.0              S4Vectors_0.50.1           
-[35] BiocGenerics_0.58.1         generics_0.1.4             
-[37] MatrixGenerics_1.24.0       matrixStats_1.5.0          
-[39] workflowr_1.7.2             ggrepel_0.9.8              
+ [1] aPEAR_1.0                   edgeR_4.10.1               
+ [3] limma_3.68.4                ggrain_0.1.2               
+ [5] enrichplot_1.32.0           ggforce_0.5.0              
+ [7] DT_0.34.0                   UCell_2.16.0               
+ [9] assertthat_0.2.1            SCpubr_3.0.1               
+[11] forcats_1.0.1               fgsea_1.38.0               
+[13] DOSE_4.6.0                  GO.db_3.23.1               
+[15] org.Hs.eg.db_3.23.1         AnnotationDbi_1.74.0       
+[17] clusterProfiler_4.20.0      ggtangle_0.1.2             
+[19] ggarchery_0.4.4             EnhancedVolcano_1.30.0     
+[21] tibble_3.3.1                MAST_1.38.0                
+[23] speckle_1.12.0              harmony_2.0.5              
+[25] Rcpp_1.1.1-1.1              clustree_0.5.1             
+[27] ggraph_2.2.2                scDblFinder_1.26.2         
+[29] SingleCellExperiment_1.34.0 SummarizedExperiment_1.42.0
+[31] Biobase_2.72.0              GenomicRanges_1.64.0       
+[33] Seqinfo_1.2.0               IRanges_2.46.0             
+[35] S4Vectors_0.50.1            BiocGenerics_0.58.1        
+[37] generics_0.1.4              MatrixGenerics_1.24.0      
+[39] matrixStats_1.5.0           ggrepel_0.9.8              
 [41] cowplot_1.2.0               patchwork_1.3.2            
 [43] scCustomize_3.3.0           hdf5r_1.3.12               
 [45] Seurat_5.5.0                SeuratObject_5.4.0         
 [47] sp_2.2-1                    ggplot2_4.0.3              
 [49] dplyr_1.2.1                 readr_2.2.0                
+[51] workflowr_1.7.2            
 
 loaded via a namespace (and not attached):
-  [1] ggpp_0.6.1               goftest_1.2-3            Biostrings_2.80.1       
-  [4] vctrs_0.7.3              spatstat.random_3.5-0    digest_0.6.39           
-  [7] png_0.1-9                shape_1.4.6.1            git2r_0.36.2            
- [10] deldir_2.0-4             parallelly_1.47.0        fontLiberation_0.1.0    
- [13] MASS_7.3-65              reshape2_1.4.5           qvalue_2.44.0           
- [16] httpuv_1.6.17            withr_3.0.3              ggrastr_1.0.2           
- [19] xfun_0.59                ggfun_0.2.0              survival_3.8-6          
- [22] memoise_2.0.1            ggbeeswarm_0.7.3         gson_0.1.0              
- [25] janitor_2.2.1            systemfonts_1.3.2        tidytree_0.4.7          
- [28] zoo_1.8-15               GlobalOptions_0.1.4      pbapply_1.7-4           
- [31] rematch2_2.1.2           KEGGREST_1.52.2          promises_1.5.0          
- [34] otel_0.2.0               httr_1.4.8               restfulr_0.0.17         
- [37] globals_0.19.1           fitdistrplus_1.2-6       rstudioapi_0.19.0       
- [40] UCSC.utils_1.7.1         miniUI_0.1.2             processx_3.9.0          
- [43] curl_7.1.0               ScaledMatrix_1.20.0      polyclip_1.10-7         
- [46] SparseArray_1.12.2       xtable_1.8-8             stringr_1.6.0           
- [49] evaluate_1.0.5           S4Arrays_1.12.0          hms_1.1.4               
- [52] irlba_2.3.7              colorspace_2.1-2         polynom_1.4-1           
- [55] ROCR_1.0-12              reticulate_1.46.0        spatstat.data_3.1-9     
- [58] magrittr_2.0.5           lmtest_0.9-40            snakecase_0.11.1        
- [61] later_1.4.8              viridis_0.6.5            ggtree_4.2.0            
- [64] lattice_0.22-9           spatstat.geom_3.8-1      future.apply_1.20.2     
- [67] getPass_0.2-4            scattermore_1.2          XML_3.99-0.23           
- [70] scuttle_1.22.0           RcppAnnoy_0.0.23         pillar_1.11.1           
- [73] nlme_3.1-169             compiler_4.6.0           beachmat_2.28.0         
- [76] RSpectra_0.16-2          stringi_1.8.7            tensor_1.5.1            
- [79] lubridate_1.9.5          GenomicAlignments_1.48.0 plyr_1.8.9              
- [82] crayon_1.5.3             abind_1.4-8              BiocIO_1.22.0           
- [85] scater_1.40.1            gridGraphics_0.5-1       locfit_1.5-9.12         
- [88] graphlayouts_1.2.4       bit_4.6.0                fastmatch_1.1-8         
- [91] whisker_0.4.1            codetools_0.2-20         BiocSingular_1.28.0     
- [94] crosstalk_1.2.2          bslib_0.11.0             paletteer_1.7.0         
- [97] plotly_4.12.0            mime_0.13                splines_4.6.0           
-[100] circlize_0.4.18          fastDummies_1.7.6        tidydr_0.0.6            
-[103] knitr_1.51               blob_1.3.0               fs_2.1.0                
-[106] listenv_1.0.0            ggplotify_0.1.3          Matrix_1.7-5            
-[109] callr_3.8.0              statmod_1.5.2            tzdb_0.5.0              
-[112] tweenr_2.0.3             pkgconfig_2.0.3          tools_4.6.0             
-[115] cachem_1.1.0             cigarillo_1.2.0          RSQLite_3.53.2          
-[118] viridisLite_0.4.3        DBI_1.3.0                fastmap_1.2.0           
-[121] rmarkdown_2.31           scales_1.4.0             grid_4.6.0              
-[124] ica_1.0-3                Rsamtools_2.28.0         sass_0.4.10             
-[127] ggprism_1.0.7            dotCall64_1.2            RANN_2.6.2              
-[130] farver_2.1.2             scatterpie_0.2.6         tidygraph_1.3.1         
-[133] yaml_2.3.12              rtracklayer_1.72.0       cli_3.6.6               
-[136] purrr_1.2.2              lifecycle_1.0.5          uwot_0.2.4              
-[139] bluster_1.22.0           BiocParallel_1.46.0      timechange_0.4.0        
-[142] gtable_0.3.6             rjson_0.2.23             ggridges_0.5.7          
-[145] progressr_0.19.0         ape_5.8-1                parallel_4.6.0          
-[148] enrichit_0.1.5           jsonlite_2.0.0           RcppHNSW_0.7.0          
-[151] bitops_1.0-9             bit64_4.8.2              xgboost_3.2.1.1         
-[154] Rtsne_0.17               yulab.utils_0.2.4        spatstat.utils_3.2-3    
-[157] BiocNeighbors_2.6.0      aisdk_1.4.12             jquerylib_0.1.4         
-[160] metapod_1.20.0           GOSemSim_2.38.0          dqrng_0.4.1             
-[163] spatstat.univar_3.2-0    lazyeval_0.2.3           shiny_1.14.0            
-[166] htmltools_0.5.9          sctransform_0.4.3        rappdirs_0.3.4          
-[169] glue_1.8.1               spam_2.11-4              httr2_1.2.3             
-[172] XVector_0.52.0           gdtools_0.5.1            RCurl_1.98-1.19         
-[175] treeio_1.36.1            rprojroot_2.1.1          scran_1.40.0            
-[178] gridExtra_2.3.1          igraph_2.3.2             R6_2.6.1                
-[181] ggiraph_0.9.6            tidyr_1.3.2              labeling_0.4.3          
-[184] cluster_2.1.8.2          aplot_0.3.0              GenomeInfoDb_1.48.0     
-[187] mcprogress_0.1.1         DelayedArray_0.38.2      tidyselect_1.2.1        
-[190] vipor_0.4.7              fontBitstreamVera_0.1.1  future_1.70.0           
-[193] rsvd_1.0.5               KernSmooth_2.23-26       S7_0.2.2                
-[196] fontquiver_0.2.1         data.table_1.18.4        htmlwidgets_1.6.4       
-[199] RColorBrewer_1.1-3       rlang_1.2.0              spatstat.sparse_3.2-0   
-[202] spatstat.explore_3.8-1   ggnewscale_0.5.2         beeswarm_0.4.0          </code></pre>
+  [1] ggpp_0.6.1               bayesbio_1.0.0           goftest_1.2-3           
+  [4] Biostrings_2.80.1        vctrs_0.7.3              spatstat.random_3.5-0   
+  [7] digest_0.6.39            png_0.1-9                shape_1.4.6.1           
+ [10] git2r_0.36.2             deldir_2.0-4             parallelly_1.47.0       
+ [13] fontLiberation_0.1.0     MASS_7.3-65              reshape2_1.4.5          
+ [16] foreach_1.5.2            qvalue_2.44.0            httpuv_1.6.17           
+ [19] withr_3.0.3              ggrastr_1.0.2            xfun_0.59               
+ [22] ggfun_0.2.0              survival_3.8-6           memoise_2.0.1           
+ [25] ggbeeswarm_0.7.3         gson_0.1.0               janitor_2.2.1           
+ [28] systemfonts_1.3.2        tidytree_0.4.7           zoo_1.8-15              
+ [31] GlobalOptions_0.1.4      pbapply_1.7-4            rematch2_2.1.2          
+ [34] KEGGREST_1.52.2          promises_1.5.0           otel_0.2.0              
+ [37] httr_1.4.8               restfulr_0.0.17          globals_0.19.1          
+ [40] fitdistrplus_1.2-6       rstudioapi_0.19.0        UCSC.utils_1.7.1        
+ [43] miniUI_0.1.2             processx_3.9.0           curl_7.1.0              
+ [46] ScaledMatrix_1.20.0      polyclip_1.10-7          SparseArray_1.12.2      
+ [49] xtable_1.8-8             stringr_1.6.0            evaluate_1.0.5          
+ [52] S4Arrays_1.12.0          hms_1.1.4                irlba_2.3.7             
+ [55] colorspace_2.1-2         polynom_1.4-1            ROCR_1.0-12             
+ [58] reticulate_1.46.0        spatstat.data_3.1-9      magrittr_2.0.5          
+ [61] lmtest_0.9-40            snakecase_0.11.1         later_1.4.8             
+ [64] viridis_0.6.5            ggtree_4.2.0             lattice_0.22-9          
+ [67] spatstat.geom_3.8-1      future.apply_1.20.2      getPass_0.2-4           
+ [70] scattermore_1.2          XML_3.99-0.23            scuttle_1.22.0          
+ [73] RcppAnnoy_0.0.23         pillar_1.11.1            nlme_3.1-169            
+ [76] iterators_1.0.14         compiler_4.6.0           beachmat_2.28.0         
+ [79] RSpectra_0.16-2          stringi_1.8.7            arules_1.7.14           
+ [82] tensor_1.5.1             lubridate_1.9.5          GenomicAlignments_1.48.0
+ [85] plyr_1.8.9               crayon_1.5.3             abind_1.4-8             
+ [88] BiocIO_1.22.0            scater_1.40.1            gridGraphics_0.5-1      
+ [91] locfit_1.5-9.12          graphlayouts_1.2.4       bit_4.6.0               
+ [94] fastmatch_1.1-8          whisker_0.4.1            codetools_0.2-20        
+ [97] BiocSingular_1.28.0      crosstalk_1.2.2          bslib_0.11.0            
+[100] paletteer_1.7.0          plotly_4.12.0            mime_0.13               
+[103] splines_4.6.0            circlize_0.4.18          fastDummies_1.7.6       
+[106] tidydr_0.0.6             knitr_1.51               blob_1.3.0              
+[109] fs_2.1.0                 listenv_1.0.0            expm_1.0-0              
+[112] MCL_1.0                  ggplotify_0.1.3          Matrix_1.7-5            
+[115] callr_3.8.0              statmod_1.5.2            tzdb_0.5.0              
+[118] tweenr_2.0.3             pkgconfig_2.0.3          tools_4.6.0             
+[121] cachem_1.1.0             cigarillo_1.2.0          RSQLite_3.53.2          
+[124] viridisLite_0.4.3        DBI_1.3.0                fastmap_1.2.0           
+[127] rmarkdown_2.31           scales_1.4.0             grid_4.6.0              
+[130] ica_1.0-3                Rsamtools_2.28.0         sass_0.4.10             
+[133] ggprism_1.0.7            dotCall64_1.2            RANN_2.6.2              
+[136] farver_2.1.2             scatterpie_0.2.6         tidygraph_1.3.1         
+[139] yaml_2.3.12              rtracklayer_1.72.0       cli_3.6.6               
+[142] purrr_1.2.2              lifecycle_1.0.5          uwot_0.2.4              
+[145] bluster_1.22.0           BiocParallel_1.46.0      timechange_0.4.0        
+[148] gtable_0.3.6             rjson_0.2.23             ggridges_0.5.7          
+[151] progressr_0.19.0         SnowballC_0.7.1          ape_5.8-1               
+[154] parallel_4.6.0           enrichit_0.1.5           jsonlite_2.0.0          
+[157] RcppHNSW_0.7.0           bitops_1.0-9             bit64_4.8.2             
+[160] xgboost_3.2.1.1          Rtsne_0.17               yulab.utils_0.2.4       
+[163] spatstat.utils_3.2-3     BiocNeighbors_2.6.0      aisdk_1.4.12            
+[166] jquerylib_0.1.4          metapod_1.20.0           GOSemSim_2.38.0         
+[169] dqrng_0.4.1              spatstat.univar_3.2-0    lazyeval_0.2.3          
+[172] shiny_1.14.0             htmltools_0.5.9          sctransform_0.4.3       
+[175] rappdirs_0.3.4           glue_1.8.1               spam_2.11-4             
+[178] httr2_1.2.3              XVector_0.52.0           gdtools_0.5.1           
+[181] RCurl_1.98-1.19          treeio_1.36.1            rprojroot_2.1.1         
+[184] scran_1.40.0             gridExtra_2.3.1          igraph_2.3.2            
+[187] R6_2.6.1                 ggiraph_0.9.6            tidyr_1.3.2             
+[190] labeling_0.4.3           cluster_2.1.8.2          aplot_0.3.0             
+[193] GenomeInfoDb_1.48.0      mcprogress_0.1.1         DelayedArray_0.38.2     
+[196] tidyselect_1.2.1         vipor_0.4.7              fontBitstreamVera_0.1.1 
+[199] future_1.70.0            rsvd_1.0.5               KernSmooth_2.23-26      
+[202] S7_0.2.2                 fontquiver_0.2.1         data.table_1.18.4       
+[205] htmlwidgets_1.6.4        RColorBrewer_1.1-3       rlang_1.2.0             
+[208] spatstat.sparse_3.2-0    lsa_0.73.4               spatstat.explore_3.8-1  
+[211] ggnewscale_0.5.2         beeswarm_0.4.0          </code></pre>
+</div>
 </div>
 </div>
 </div>
