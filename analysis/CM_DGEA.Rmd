@@ -1,0 +1,322 @@
+---
+title: "Cardiomyocytes DGEA - Lenient Thresholds"
+author: "Sophie.Alice"
+date: "2026-06-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+library(UpSetR)
+library(grid)
+library(ggvenn)
+library(DT)
+
+
+```
+
+# Get the Data
+
+```{r, warning = FALSE}
+# path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+# Functions
+
+```{r, warning = FALSE}
+
+
+Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5) {
+  
+  # Clean extreme values
+  df <- Data
+  df <- df[is.finite(df$avg_log2FC) & is.finite(df$p_val_adj) &!is.na(df$p_val_adj), ]
+  
+  if (any(df$p_val_adj == 0)) {
+    min_nonzero <- min(df$p_val_adj[df$p_val_adj > 0], na.rm = TRUE)
+    surrogate_p <- min(c(min_nonzero * 0.1, 1e-300))
+    df$p_val_adj[df$p_val_adj == 0] <- surrogate_p
+  }
+  
+  # dynamic axis limits
+  xmax <- max(df$avg_log2FC, na.rm = TRUE)
+  xmin <- min(df$avg_log2FC, na.rm = TRUE)
+  ymax <- max(-log10(df$p_val_adj), na.rm = TRUE)
+  
+  # Add padding
+  xpad <- (xmax - xmin) * 0.1
+  ypad <- ymax * 0.1
+  
+  combined_subtitle <- paste0(Subtitle, " ● Thresholds: FDR < ", pCutoff, ", |Log2FC| > ", FCcutoff)
+  
+  EV <- EnhancedVolcano(
+    df,
+    lab = df$gene,
+    x = 'avg_log2FC',
+    y = 'p_val_adj',
+    xlab = 'log2 Foldchange',
+    ylab = "-log10 FDR",
+    legendLabels = c('NS','log2FC','FDR','FDR & log2FC'),
+    col = c("darkgrey", "#005EA8", "#FFD966", "#9F1C67"),
+    title = Title,
+    subtitle = combined_subtitle,   
+    xlim = c(xmin - xpad, xmax + xpad),
+    ylim = c(0, ymax + ypad),
+    pCutoff = pCutoff,              
+    FCcutoff = FCcutoff,            
+
+    cutoffLineType = 'dashed',      
+    cutoffLineCol = 'black',        
+    cutoffLineWidth = 0.6,
+    labSize = 3.0,
+    drawConnectors = TRUE,
+    widthConnectors = 0.5
+  )
+  
+  return(EV)
+}
+
+##################################### Tables
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = '_all',
+        className = 'dt-nowrap'
+      ))
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover nowrap'       
+  )
+}
+```
+
+# Cardiomyocytes
+
+# DGEA of the 4 Comparisons 
+
+```{r, warning = FALSE}
+
+################# Setting thresholds
+FDR <- 0.01
+FC <- 1
+#################
+
+table(Data$cell_type)
+table(Data$orig.ident)
+
+Idents(Data) <- "orig.ident" 
+Cardiomyocytes <- subset(Data, cell_type == "Cardiomyocytes")
+
+Cardiomyocytes$cdr <- scale(colSums(GetAssayData(Cardiomyocytes, assay = "RNA", layer = "counts") > 0))
+
+
+Cardiomyocytes_deg_list <- list()
+
+```
+
+## Baseline Fibrotic response to TGF-B without Macrophages
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+MAST.Res <- FindMarkers(
+  object = Cardiomyocytes,
+  ident.1 = "CMF_TGF",    
+  ident.2 = "CMF_NC",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < FDR & abs(avg_log2FC) >= FC)
+
+
+Cardiomyocytes_deg_list[["Baseline_TGF_Response"]] <- MAST.Res
+
+head(MAST.Res.sign)
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG in MT-Cardiomyocytes without Macrophages",
+  Subtitle = "TGF-\u03b2 vs. Control",
+  pCutoff = FDR,    
+  FCcutoff = FC     
+)
+
+#write.csv(MAST.Res, file = file.path(outputdir, "Baseline_TGF_Response_all.csv"))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, "Baseline_TGF_Response_sign.csv"))
+
+```
+
+### Modulated Fibrotic response to TGF-B with Macrophages
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+MAST.Res <- FindMarkers(
+  object = Cardiomyocytes,
+  ident.1 = "CMFHM_TGF",    
+  ident.2 = "CMFHM_NC",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < FDR & abs(avg_log2FC) >= FC)
+
+head(MAST.Res.sign)
+
+Cardiomyocytes_deg_list[["Modulated_TGF_Response"]] <- MAST.Res
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG in MT-Cardiomyocytes with Macrophages",
+  Subtitle = "TGF-\u03b2 vs. Control",
+  pCutoff = FDR,    
+  FCcutoff = FC     
+)
+
+#write.csv(MAST.Res, file = file.path(outputdir, "Modulated_TGF_Response_all.csv"))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, "Modulated_TGF_Response_sign.csv"))
+
+```
+
+### Baseline Macrophage response
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+MAST.Res <- FindMarkers(
+  object = Cardiomyocytes,
+  ident.1 = "CMFHM_NC",    
+  ident.2 = "CMF_NC",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < FDR & abs(avg_log2FC) >= FC)
+
+head(MAST.Res.sign)
+
+Cardiomyocytes_deg_list[["Baseline_Mac_Response"]] <- MAST.Res
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG in MT-Cardiomyocytes unstimulated",
+  Subtitle = "with Macrophages vs. Control",
+  pCutoff = FDR,    
+  FCcutoff = FC     
+)
+
+#write.csv(MAST.Res, file = file.path(outputdir, "Baseline_Mac_Response_all.csv"))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, "Baseline_Mac_Response_sign.csv"))
+
+```
+
+### Stimulated Macrophage Effect
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+MAST.Res <- FindMarkers(
+  object = Cardiomyocytes,
+  ident.1 = "CMFHM_TGF",    
+  ident.2 = "CMF_TGF",     
+  test.use = "MAST",
+  latent.vars = "cdr",      
+  logfc.threshold = 0.1,      
+  min.pct = 0.2             
+)
+
+MAST.Res <- MAST.Res %>%
+  rownames_to_column(var = "gene")
+
+MAST.Res.sign <- MAST.Res %>%
+  filter(p_val_adj < FDR & abs(avg_log2FC) >= FC)
+
+head(MAST.Res.sign)
+
+Cardiomyocytes_deg_list[["Stim_Mac_Response"]] <- MAST.Res
+
+
+Volcano_Plots(
+  Data = MAST.Res,
+  Title = "DEG in MT-Cardiomyocytes stimulated with TGF-\u03b2",
+  Subtitle = "with Macrophages vs. Control",
+  pCutoff = FDR,    
+  FCcutoff = FC     
+)
+
+#write.csv(MAST.Res, file = file.path(outputdir, "Stim_Mac_Response_all.csv"))
+#write.csv(MAST.Res.sign, file = file.path(outputdir, "Stim_Mac_Response_sign.csv"))
+
+```
+
+
+
+# Save the Master DEG object
+
+```{r, warning = FALSE}
+
+outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files"
+
+saveRDS(Cardiomyocytes_deg_list, file = file.path(outputdir, "All_Cardiomyocytes_DEG_Lists_Lenient.rds"))
+
+```
+

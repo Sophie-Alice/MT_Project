@@ -65,21 +65,6 @@ gradient_colors4 <- custom_palette(4)
 ```
 
 
-MArker genes for subclusters
-
-take
-
-APOD and APOE CCL2 TGFB COL always 
-
-CFD
-
-COL1A1, COL3A1, 
-
-
-Take out from Gabi:
-
-CCL19, PROM1, APOO, MK167, TOP2A, BIRC5, CENPF, 
-
 # Functions
 
 ```{r, warning = FALSE}
@@ -95,11 +80,34 @@ create_table <- function(df) {
       dom = 'Blfrtip',                       
       buttons = c('copy', 'csv', 'excel', 'pdf'),
       pageLength = 10,                      
-      lengthMenu = c(10, 25, 50, 100)     
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = '_all',
+        className = 'dt-nowrap'
+      ))
     ),
     filter = 'top',                         
-    class = 'cell-border stripe hover'       
+    class = 'cell-border stripe hover nowrap'       
   )
+}
+
+###################################### Feature Plots
+
+plot_features <- function(seurat_obj, features, title = NULL, subtitle = NULL, num_columns = 2) {
+  p <- FeaturePlot_scCustom(seurat_obj, features = features, num_columns = num_columns, pt.size = 0.1)
+
+  p <- p + patchwork::plot_annotation(
+    title = title,
+    subtitle = subtitle,
+    theme = ggplot2::theme(
+      plot.title.position = "plot",
+      plot.title    = ggplot2::element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = ggplot2::element_text(face = "italic", size = 10, hjust = 0)
+    )
+  )
+  
+  return(p)
 }
 
 ```
@@ -223,11 +231,6 @@ DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "orig.ident")
 ```
 
 
-
-
-
-
-
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 
@@ -300,7 +303,6 @@ DimPlot(Fibroblasts, reduction = "umap", shuffle = T,
 
 ```{r, warning = FALSE}
 
-
 # Remove only the clearly mitochondrial cluster and the left over doubles
 Fibroblasts.clean <- subset(Fibroblasts, subset = SCT_snn_res.0.5 %in% c("0", "1", "2", "4", "5","7"))
 
@@ -347,9 +349,9 @@ Markers_top5.2 <- as.data.frame(Markers.2 %>% group_by(cluster) %>% top_n(n = 5,
 
 
 SCpubr::do_DotPlot(Fibroblasts.clean, 
-                   features = Markers_top10.2$gene,
+                   features = Markers_top5.2$gene,
                    dot.scale = 10,
-                   plot.title = "Top 10 markers per cluster") 
+                   plot.title = "Top 5 markers per cluster") 
 
 
 create_table(Markers_top10.2)
@@ -377,21 +379,98 @@ ggplot(data = cellCounts1, aes(x = sample, fill = Celltype, y = Freq)) +
   labs(title = "Proportions across Identities", x = "", y = "fraction of cells")
 
 
-############ Fibro sub
-
-quiescent <- c( "DCN", "GSN", "PDGFRA")
-FeaturePlot_scCustom(Fibroblasts.clean, features = quiescent, pt.size = 0, reduction = "umap") + 
-  theme(axis.title.x = element_blank())
-
-inflammatory <- c("IL6", "CCL2", "CXCL1", "CXCL12")
-FeaturePlot_scCustom(Fibroblasts.clean, features = inflammatory, pt.size = 0, reduction = "umap") + 
-  theme(axis.title.x = element_blank())
-
-active <- c("ACTA2", "POSTN", "COL1A1", "FN1")
-FeaturePlot_scCustom(Fibroblasts.clean, features = active, pt.size = 0, reduction = "umap") + 
-  theme(axis.title.x = element_blank())
-
 table(Fibroblasts.clean$orig.ident)  # --> Proportions too different to sinvoll subsets machen. 
 
 
 ```
+
+
+## Biomarkers from Gino DCM subclustering analysis
+
+```{r, warning = FALSE, fig.width=8, fig.height=12}
+
+gino.markers <- c("ACSM3", "PDZRN4", "FGF14", "KAZN", "NFATC2", 
+"POSTN", "ACTA2", "FAP", "VIM", "COL1A1", "FN1", "SHISA6", "CNTNAP2", "NFATC2")
+                                              
+plot_features(Fibroblasts.clean, features = gino.markers, 
+              title = "Modified Fibroblast Subset", subtitle = "Gino Markers")
+
+```
+
+
+## Biomarkers obtained through small talk with chatgpt (Maks and Magda):
+
+```{r, warning = FALSE, fig.width=8, fig.height=12}
+
+
+chat.markers <- c("COL1A1", "TNC", "COL3A1", "FN1", # fibroblasty produkujące ECM
+                    "FOS", "JUN", "EGR1", "HSPA1A", # fibroblasty stresowe
+                          "COL15A1", "CD34", "PI16") # fibroblasty związane zremodellingiem naczyń
+
+chat.markers2 <- c("ACTA2", "TAGLN", "MYH11", "CCN2", # miofibroblasty
+                    "POSTN", "FAP", "CTHRC1", "COMP", # fibroblasty związane z włóknieniem
+                        "DCN", "LUM", "DPT", "SHISA6") # fibroblasty rezydentne
+                                              
+plot_features(Fibroblasts.clean, features = chat.markers, 
+              title = "Modified Fibroblast Subset", subtitle = "Chat Markers")
+
+plot_features(Fibroblasts.clean, features = chat.markers2, 
+              title = "Modified Fibroblast Subset", subtitle = "Chat Markers")
+
+
+```
+
+## Biomarkers from Reichart paper:
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+# lipogenic markers
+Reichard.lipo <- c("APOD", "APOE", "CST3")
+plot_features(Fibroblasts.clean, features = Reichard.lipo, 
+              title = "Modified Fibroblast Subset", subtitle = "Reichart lipogenic Markers")
+
+# Cytoskeletal markers 
+Reichard.cytosk <- c("DAAM1", "GPC6")
+plot_features(Fibroblasts.clean, features = Reichard.cytosk, 
+              title = "Modified Fibroblast Subset", subtitle = "Reichart Cytoskeletal Markers")
+
+# biomarkers_inflammatory
+Reichard.inflm <- c("CCL2", "IL6ST", "OSMR")
+plot_features(Fibroblasts.clean, features = Reichard.inflm, 
+              title = "Modified Fibroblast Subset", subtitle = "Reichart inflammatory Markers")
+
+# biomarkers_fibrosis
+Reichard.fibrosis <- c("TGFB2", "PCOLCE2", "COL4A1", "COL4A2")
+plot_features(Fibroblasts.clean, features = Reichard.fibrosis, 
+              title = "Modified Fibroblast Subset", subtitle = "Reichart fibrosis Markers")
+
+
+```
+
+
+## Biomarkers from Maatz publication:
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+maatz.markers <- c("MGP", "APOD", "CFD", "GSN", "SERPINF1")
+
+plot_features(Fibroblasts.clean, features = maatz.markers, 
+              title = "Modified Fibroblast Subset", subtitle = "Maatz Markers")
+
+```
+
+## Biomarkers Gabi
+
+```{r, warning = FALSE, fig.width=8, fig.height=12}
+
+gabi.markers <- c("COMP", "CLIP1", "CHAD", "THBS4",
+                  "PDPN", "DYSF", "POSTN",
+                  "FAP", "ACTA2", "MXRA5",
+                  "FOSL2")
+
+plot_features(Fibroblasts.clean, features = gabi.markers, 
+              title = "Modified Fibroblast Subset", subtitle = "Gabi Markers")
+
+```
+
+
+

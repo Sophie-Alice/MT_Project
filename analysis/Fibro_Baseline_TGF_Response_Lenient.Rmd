@@ -1,17 +1,15 @@
 ---
-title: "Macrophages DGEA - Lenient Thresholds"
+title: "Baseline_TGF_Response Lenient Thresholds"
 author: "Sophie.Alice"
-date: "2026-06-26"
+date: "2026-07-02"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: inline
 ---
 
-
 # Setup
 
 ```{r, message=FALSE, warning = FALSE}
-
 rm(list=ls())
 gc()
 
@@ -49,23 +47,29 @@ library(DT)
 library(ggforce) 
 library(enrichplot)
 library(ggrain)
-
 library(aPEAR)
 ```
+
 
 # Get the Data
 
 ```{r, warning = FALSE}
-# path <- "/shares/rheumatologie.usz/Sophie/Gabi_Projects/Laila_MT_Project/RDS_Files/Post_QC.rds"
 path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
 Data <- read_rds(path)
 Data
+Fibroblasts<- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(Fibroblasts) <- "orig.ident" 
+
+path2 <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Fibro_DEG_Lists.rds"
+
+DEG.lists <- read_rds(path2)
 
 custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
 gradient_colors2 <- custom_palette(2)
 gradient_colors3 <- custom_palette(6)
 gradient_colors4 <- custom_palette(4)
 ```
+
 
 # Functions
 
@@ -122,8 +126,7 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
   return(EV)
 }
 
-
-#################################################### Table
+##################################### Tables
 
 create_table <- function(df) {
   DT::datatable(
@@ -210,78 +213,47 @@ raincloud.plots <- function(gene_list,
 
 ```
 
-# Macrophages
+# DEGs of Fibrotic response to TGF-B without Macrophages
 
-## Prep Data
+ - CMF_TGF vs CMF_NC = Effect of TGF-Beta on MT without Macrophages
 
-```{r, warning = FALSE}
+ - Cutoffs Chosen: FDR <= 0.05, abs(log2FC) > 0.5
 
-table(Data$cell_type)
-table(Data$orig.ident)
-
-Idents(Data) <- "orig.ident" 
-Macrophages <- subset(Data, cell_type == "Macrophages" & orig.ident %in% c("CMFHM_NC", "CMFHM_TGF"))
-table(Macrophages$orig.ident)
-
-Macrophages$cdr <- scale(colSums(GetAssayData(Macrophages, assay = "RNA", layer = "counts") > 0))
-
-```
-
-# DGEA - Lenient Thresholds
-
-```{r,warning = FALSE, fig.width=8, fig.height=7}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 FDR <- 0.05
 FC <- 0.5
 
-Macrophages.MAST <- FindMarkers(
-  object = Macrophages,
-  ident.1 = "CMFHM_TGF",    
-  ident.2 = "CMFHM_NC",     
-  test.use = "MAST",
-  latent.vars = "cdr",      
-  logfc.threshold = 0.1,      
-  min.pct = 0.2             
-)
+Degs <- DEG.lists$Baseline_TGF_Response
 
-Macrophages.MAST <- Macrophages.MAST %>%
-  rownames_to_column(var = "gene")
-
-Macrophages.MAST.sign <- Macrophages.MAST %>%
+Degs.sign <- Degs %>%
   filter(p_val_adj < FDR & abs(avg_log2FC) >= FC)
 
-create_table(Macrophages.MAST.sign)
+create_table(Degs.sign)
 
 Volcano_Plots(
-  Data = Macrophages.MAST,
-  Title = "DEG in Macrophages",
+  Data = Degs,
+  Title = "DEG in MT-Fibroblasts without Macrophages",
   Subtitle = "TGF-\u03b2 vs. Control",
   pCutoff = FDR,    
   FCcutoff = FC     
 )
 
-outputdir <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/DGEA_output"
-
-#write.csv(Macrophages.MAST, file = file.path(outputdir, "Macrophages_all.csv"))
-#write.csv(Macrophages.MAST.sign, file = file.path(outputdir, "Macrophages_sign.csv"))
-
 ```
 
-# fGSEA
+## FGSEA
 
 ## Get Hallmark pathways
 
 ```{r,warning = FALSE}
 Hallmark.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/h.all.v2026.1.Hs.symbols.gmt")
-Reactome.pathways <- gmtPathways("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/Hallmark/c2.cp.reactome.v2026.1.Hs.symbols.gmt")
 ```
-
 
 ## Rank the data
 
 ```{r,warning = FALSE}
 
-Macrophages.ranked <- Macrophages.MAST %>%
+DEG.ranked <- Degs %>%
   dplyr::select(gene, avg_log2FC) %>%
   na.omit() %>%
   distinct() %>%
@@ -289,7 +261,7 @@ Macrophages.ranked <- Macrophages.MAST %>%
   summarize(LFC = mean(avg_log2FC)) %>%
   arrange(desc(LFC))
 
-ranked <- deframe(Macrophages.ranked)
+ranked <- deframe(DEG.ranked)
 
 rank <- ranked[names(ranked) != ""]
 
@@ -297,10 +269,11 @@ rank <- ranked[names(ranked) != ""]
 
 ## Functional gene set enrichment Analysis
 
-```{r,warning = FALSE}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 
 ############################## Hallmark
 set.seed(42)
+
 fgseares <- fgsea(pathways = Hallmark.pathways, stats = rank, nperm = 1000)
 
 fgseares.tidy <- fgseares %>%
@@ -313,7 +286,6 @@ fgseares.tidy <- fgseares.tidy %>%
 fgseares.tidy.top.up   <- head(fgseares.tidy, 15)
 fgseares.tidy.top.down <- tail(fgseares.tidy, 15)
 fgseares.tidy.top.both <- rbind(fgseares.tidy.top.up, fgseares.tidy.top.down)
-
 
 create_table(fgseares.tidy)
 
@@ -352,7 +324,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
     x = "", 
     y = "Normalized Enrichment Score (NES)", 
     title = "GSEA: Hallmark Pathways",
-    subtitle = "MT: Pathway changes in Macrophages upon TGF-\u03b2 stimulation"
+    subtitle = "MT: Pathway changes CMF_TGF compared to CMF_NC"
   ) +
   theme_bw() +
   theme(
@@ -364,14 +336,14 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
     legend.position = "left" 
   )
 
-```
 
+```
 
 # PAH
 
 ```{r,warning = FALSE}
 
-df <- Macrophages.MAST
+df <- Degs
 
 # Upregulated Genes
 up_genes <- df %>%
@@ -447,7 +419,6 @@ simp.down.GO.sign <- as.data.frame(simp.down.GO.show) %>%
 create_table(simp.down.GO.show)
 
 ```
-## Visualizations
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
@@ -483,7 +454,7 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
   
   theme_bw() + 
   labs(
-    title = "DEG MT Macrophages: GO Biological Process Enrichment", 
+    title = "DEG Fibroblasts CMF_TGF vs CMF_NC: GO BP Enrichment", 
     subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
     x = "Gene Ratio", 
     y = ""
@@ -521,15 +492,15 @@ emapplot(
 ) + 
   theme_bw() + 
   labs(
-    title    = "DEG MT Macrophages: GO Biological Process Enrichment", 
+    title    = "DEG MT-Fibroblasts CMF_TGF vs CMF_NC: GO BP Enrichment", 
     subtitle = "Functional clustering map of top 30 enriched terms for Up-regulated genes",
     x        = "", 
     y        = ""
   ) +
   theme(
     plot.title.position = "plot", 
-    plot.title      = element_text(face = "bold", size = 12, hjust = 0, vjust = 7),
-    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0, vjust = 9),
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
     axis.text.y     = element_blank(), 
     axis.text.x     = element_blank(),  
     axis.ticks      = element_blank(),  
@@ -550,7 +521,7 @@ p_apear <- enrichmentNetwork(
 )
 
 p_apear <- p_apear + labs(
-  title    = "DEG MT Macrophages: GO Biological Process Enrichment",
+  title    = "DEG MT-Fibroblasts CMF_TGF vs CMF_NC: GO BP Enrichment",
   subtitle = "Functional clustering map of all sign. enriched terms for Up-regulated genes",
   color    = "z-Score",       
 ) +
@@ -562,8 +533,9 @@ theme(
 
 print(p_apear)
 
-
 ################################################### Down Go terms
+
+############################ top 30
 
 simp.down.GO <- pairwise_termsim(simp.down.GO)
 
@@ -577,22 +549,21 @@ emapplot(
 ) + 
   theme_bw() + 
   labs(
-    title    = "DEG MT Macrophages: GO Biological Process Enrichment", 
+    title    = "DEG MT-Fibroblasts CMF_TGF vs CMF_NC: GO BP Enrichment", 
     subtitle = "Functional clustering map of top 30 enriched terms for Down-regulated genes",
     x        = "", 
     y        = ""
   ) +
   theme(
     plot.title.position = "plot", 
-    plot.title      = element_text(face = "bold", size = 12, hjust = 0, vjust = 7),
-    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0, vjust = 9),
+    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
     axis.text.y     = element_blank(), 
     axis.text.x     = element_blank(),  
     axis.ticks      = element_blank(),  
     panel.grid      = element_blank(),  
     legend.position = "right"
   )
-
 
 ############################ All signif. Pathways
 
@@ -608,7 +579,7 @@ p_apear <- enrichmentNetwork(
 )
 
 p_apear <- p_apear + labs(
-  title    = "DEG MT Macrophages: GO Biological Process Enrichment",
+  title    = "DEG MT-Fibroblasts CMF_TGF vs CMF_NC: GO BP Enrichment",
   subtitle = "Functional clustering map of all sign. enriched terms for Down-regulated genes",
   color    = "z-Score",       
 ) +
@@ -651,7 +622,7 @@ p_combined <- enrichmentNetwork(
 )
 
 p_combined <- p_combined + labs(
-  title    = "DEG MT Macrophages: Combined GO Biological Process Enrichment",
+  title    = "DEG MT-Fibroblasts CMF_TGF vs CMF_NC: Combined GO BP Enrichment",
   subtitle = "Network map between Up-regulated (Red) and Down-regulated (Blue) processes",
   color    = "Directional z-Score"
 ) +
@@ -663,17 +634,22 @@ theme(
 
 print(p_combined)
 
+
 ```
+
+
 
 # Deeper look into specific Genesets 
 
-# Upregulated in Macrophages upon TGF-Beta stimulation
+# Upregulated in Fibroblasts upon TGF-Beta stimulation (No Macrophages)
 
 ## extracellular matrix organization
 
+The geneset is quite big so for visualization purposes it will be split in sets of 9
+
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
-simp.up.GO.df<- as.data.frame(simp.up.GO)
+simp.up.GO.df <- as.data.frame(simp.up.GO)
 
 descr <- "extracellular matrix organization"
 
@@ -693,7 +669,7 @@ if (total_genes > 0) {
     slice_num <- ((i - 1) / chunk_size) + 1
 
     print(SCpubr::do_DotPlot(
-      sample = Macrophages, 
+      sample = Fibroblasts, 
       features = genes[i:end_idx],
       dot.scale = 10,
       plot.title = "ECM: Gene Set Expression Across Conditions",
@@ -705,6 +681,7 @@ if (total_genes > 0) {
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
+
 chunk_size <- 9
 total_genes <- length(genes)
 
@@ -714,17 +691,18 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
-    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+    plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
     plot_subtitle = paste0("Geneset = extracellular matrix organization - Slice ", slice_num),
-    seurat_obj    = Macrophages,
-    colors        = gradient_colors2
+    seurat_obj    = Fibroblasts,
+    colors        = gradient_colors4
   ))
 }
-
 
 ```
 
 ## cell adhesion
+
+The geneset is quite big so for visualization purposes it will be split in sets of 16
 
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
@@ -741,7 +719,6 @@ genes <- simp.up.GO.df %>%
 chunk_size <- 25
 total_genes <- length(genes)
 
-
 if (total_genes > 0) {
   for (i in seq(1, total_genes, by = chunk_size)) {
     
@@ -749,7 +726,7 @@ if (total_genes > 0) {
     slice_num <- ((i - 1) / chunk_size) + 1
 
     print(SCpubr::do_DotPlot(
-      sample = Macrophages, 
+      sample = Fibroblasts, 
       features = genes[i:end_idx],
       dot.scale = 10,
       plot.title = "cell adhesion: Gene Set Expression Across Conditions",
@@ -757,9 +734,11 @@ if (total_genes > 0) {
     ))
   }
 }
+
 ```
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
+
 
 chunk_size <- 9
 total_genes <- length(genes)
@@ -770,24 +749,24 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
-    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+    plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
     plot_subtitle = paste0("Geneset = Cell Adhesion - Slice ", slice_num),
-    seurat_obj    = Macrophages,
-    colors        = gradient_colors2
+    seurat_obj    = Fibroblasts,
+    colors        = gradient_colors4
   ))
 }
 
 ```
 
-# Downregulated in Macrophages upon TGF-Beta stimulation
+# Downregulated in Fibroblasts upon TGF-Beta stimulation (No Macrophages)
 
-## immune response
+## cAMP/PKA signal transduction
 
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 simp.down.GO.df<- as.data.frame(simp.down.GO)
 
-descr <- "immune response"
+descr <- "cAMP/PKA signal transduction"
 
 genes <- simp.down.GO.df %>%
   filter(Description == descr) %>%
@@ -795,9 +774,9 @@ genes <- simp.down.GO.df %>%
   stringr::str_split("/") %>%
   unlist()
 
+
 chunk_size <- 25
 total_genes <- length(genes)
-
 
 if (total_genes > 0) {
   for (i in seq(1, total_genes, by = chunk_size)) {
@@ -806,10 +785,10 @@ if (total_genes > 0) {
     slice_num <- ((i - 1) / chunk_size) + 1
 
     print(SCpubr::do_DotPlot(
-      sample = Macrophages, 
+      sample = Fibroblasts, 
       features = genes[i:end_idx],
       dot.scale = 10,
-      plot.title = "immune response: Gene Set Expression Across Conditions",
+      plot.title = "cAMP/PKA signal transduction: Gene Set Expression Across Conditions",
       plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
     ))
   }
@@ -818,6 +797,7 @@ if (total_genes > 0) {
 ```
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
+
 
 chunk_size <- 9
 total_genes <- length(genes)
@@ -828,22 +808,22 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
-    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = immune response - Slice ", slice_num),
-    seurat_obj    = Macrophages,
-    colors        = gradient_colors2
+    plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = cAMP/PKA signal transduction - Slice ", slice_num),
+    seurat_obj    = Fibroblasts,
+    colors        = gradient_colors4
   ))
 }
 
 ```
 
-## positive regulation of cell adhesion
+## actomyosin structure organization
 
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 simp.down.GO.df<- as.data.frame(simp.down.GO)
 
-descr <- "positive regulation of cell adhesion"
+descr <- "actomyosin structure organization"
 
 genes <- simp.down.GO.df %>%
   filter(Description == descr) %>%
@@ -854,7 +834,6 @@ genes <- simp.down.GO.df %>%
 chunk_size <- 25
 total_genes <- length(genes)
 
-
 if (total_genes > 0) {
   for (i in seq(1, total_genes, by = chunk_size)) {
     
@@ -862,18 +841,18 @@ if (total_genes > 0) {
     slice_num <- ((i - 1) / chunk_size) + 1
 
     print(SCpubr::do_DotPlot(
-      sample = Macrophages, 
+      sample = Fibroblasts, 
       features = genes[i:end_idx],
       dot.scale = 10,
-      plot.title = "positive regulation of cell adhesion: Gene Set Expression Across Conditions",
+      plot.title = "actomyosin structure organization: Gene Set Expression Across Conditions",
       plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
     ))
   }
 }
-
 ```
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
+
 
 chunk_size <- 9
 total_genes <- length(genes)
@@ -884,28 +863,27 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = genes[i:end_idx],
-    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = positive regulation of cell adhesion - Slice ", slice_num),
-    seurat_obj    = Macrophages,
-    colors        = gradient_colors2
+    plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = actomyosin structure organization - Slice ", slice_num),
+    seurat_obj    = Fibroblasts,
+    colors        = gradient_colors4
   ))
 }
-
 
 ```
 
 # Checking for specific Marker genes 
 
-## Metalloproteases
+## Pro-Fibrotic Genes
 
 ```{r, warning = FALSE, fig.width=8, fig.height=4}
 
-genes <- c("MMP1", "MMP2", "MMP8", "MMP9", "MMP13", "MMP12")
+genes <- c("ACTA2", "FN1", "COL1A1")
 
-SCpubr::do_DotPlot(Macrophages, 
+SCpubr::do_DotPlot(Fibroblasts, 
                    features = genes,
                    dot.scale = 10,
-                   plot.title = "Metalloproteases: Gene Set Expression Across Conditions") 
+                   plot.title = "Pro-Fibrotic Genes: Gene Set Expression Across Conditions") 
 
 ```
 
@@ -913,37 +891,11 @@ SCpubr::do_DotPlot(Macrophages,
 
 raincloud.plots(
   gene_list     = genes,
-  plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-  plot_subtitle = "Geneset = Metalloproteases",
-  seurat_obj = Macrophages,
-  colors = gradient_colors2
+  plot_title    = "Fibroblasts CMF_TGF vs. CMF_NC: Gene distribution profiles across MT conditions",
+  plot_subtitle = "Geneset = Pro-Fibrotic genes",
+  seurat_obj = Fibroblasts,
+  colors = gradient_colors4
 )
 
 ```
-
-## M1/M2 Markers
-
-```{r, warning = FALSE, fig.width=8, fig.height=4}
-
-genes <- c("CD14", "CD163")
-
-SCpubr::do_DotPlot(Macrophages, 
-                   features = genes,
-                   dot.scale = 10,
-                   plot.title = "M1/M2 Markers: Gene Set Expression Across Conditions") 
-
-```
-
-```{r, warning = FALSE, fig.width=8, fig.height=7}
-
-raincloud.plots(
-  gene_list     = genes,
-  plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-  plot_subtitle = "Geneset = M1/M2 Markers",
-  seurat_obj = Macrophages,
-  colors = gradient_colors2
-)
-
-```
-
 

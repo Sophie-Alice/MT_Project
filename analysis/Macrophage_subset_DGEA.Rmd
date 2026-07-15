@@ -49,6 +49,8 @@ library(DT)
 library(ggforce) 
 library(enrichplot)
 library(ggrain)
+
+library(aPEAR)
 ```
 
 # Get the Data
@@ -74,7 +76,13 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
   
   # Clean extreme values
   df <- Data
-  df <- df[is.finite(df$avg_log2FC) & is.finite(df$p_val_adj), ]
+  df <- df[is.finite(df$avg_log2FC) & is.finite(df$p_val_adj) &!is.na(df$p_val_adj), ]
+  
+  if (any(df$p_val_adj == 0)) {
+    min_nonzero <- min(df$p_val_adj[df$p_val_adj > 0], na.rm = TRUE)
+    surrogate_p <- min(c(min_nonzero * 0.1, 1e-300))
+    df$p_val_adj[df$p_val_adj == 0] <- surrogate_p
+  }
   
   # dynamic axis limits
   xmax <- max(df$avg_log2FC, na.rm = TRUE)
@@ -113,6 +121,7 @@ Volcano_Plots <- function(Data, Title, Subtitle, pCutoff = 0.05, FCcutoff = 0.5)
   
   return(EV)
 }
+
 
 #################################################### Table
 
@@ -356,10 +365,12 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
     legend.position = "left" 
   )
 
+
+
 ```
 
 
-# PAH
+# ORA
 
 ```{r,warning = FALSE}
 
@@ -411,6 +422,8 @@ up.GO <- enrichGO(
 simp.up.GO <- clusterProfiler::simplify(up.GO)
 
 simp.up.GO.show <- as.data.frame(simp.up.GO)
+simp.up.GO.sign <- as.data.frame(simp.up.GO.show) %>% 
+  dplyr::filter(p.adjust < 0.05)
 
 create_table(simp.up.GO.show)
 
@@ -431,6 +444,8 @@ down.GO <- enrichGO(
 
 simp.down.GO <- clusterProfiler::simplify(down.GO)
 simp.down.GO.show <- as.data.frame(simp.down.GO)
+simp.down.GO.sign <- as.data.frame(simp.down.GO.show) %>% 
+  dplyr::filter(p.adjust < 0.05)
 
 create_table(simp.down.GO.show)
 
@@ -496,6 +511,8 @@ set.seed(42)
 
 ################################################### Upregulated Go terms
 
+############################ top 30
+
 simp.up.GO <- pairwise_termsim(simp.up.GO)
 
 emapplot(
@@ -523,6 +540,33 @@ emapplot(
     panel.grid      = element_blank(),  
     legend.position = "right"
   )
+
+############################ All signif. Pathways
+
+simp.up.GO.sign$NES <- simp.up.GO.sign$zScore
+
+
+p_apear <- enrichmentNetwork(
+  enrichment = simp.up.GO.sign,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  colorBy      = "NES",        
+  colorType    = "nes"  
+)
+
+p_apear <- p_apear + labs(
+  title    = "DEG MT Macrophages: GO Biological Process Enrichment",
+  subtitle = "Functional clustering map of all sign. enriched terms for Up-regulated genes",
+  color    = "z-Score",       
+) +
+theme(
+  plot.title.position = "plot",
+  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+)
+
+print(p_apear)
+
 
 ################################################### Down Go terms
 
@@ -554,6 +598,75 @@ emapplot(
     legend.position = "right"
   )
 
+
+############################ All signif. Pathways
+
+simp.down.GO.sign$NES <- simp.down.GO.sign$zScore
+
+
+p_apear <- enrichmentNetwork(
+  enrichment = simp.down.GO.sign,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  colorBy      = "NES",        
+  colorType    = "nes"  
+)
+
+p_apear <- p_apear + labs(
+  title    = "DEG MT Macrophages: GO Biological Process Enrichment",
+  subtitle = "Functional clustering map of all sign. enriched terms for Down-regulated genes",
+  color    = "z-Score",       
+) +
+theme(
+  plot.title.position = "plot",
+  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+)
+
+print(p_apear)
+
+##################### combining the 2 lists 
+
+simp.up.GO.sign$NES   <- simp.up.GO.sign$zScore      
+simp.down.GO.sign$NES <- -simp.down.GO.sign$zScore   
+
+combined.enrichment <- rbind(simp.up.GO.sign, simp.down.GO.sign)
+
+duplicate_Descriptions <- combined.enrichment %>%
+  dplyr::group_by(Description) %>%
+  dplyr::filter(n() > 1) %>%
+  dplyr::pull(Description) %>%
+  unique()
+
+combined.enrichment$Description <- ifelse(
+  combined.enrichment$Description %in% duplicate_Descriptions,
+  paste0(combined.enrichment$Description, " (", ifelse(combined.enrichment$NES > 0, "Up", "Down"), ")"),
+  combined.enrichment$Description 
+)
+
+combined.enrichment$ID <- paste0(combined.enrichment$ID, ifelse(combined.enrichment$NES > 0, "_Up", "_Down"))
+
+p_combined <- enrichmentNetwork(
+  enrichment   = combined.enrichment,
+  repelLabels  = TRUE,
+  drawEllipses = TRUE,
+  colorBy      = "NES",          
+  colorType    = "nes"
+)
+
+p_combined <- p_combined + labs(
+  title    = "DEG MT Macrophages: Combined GO Biological Process Enrichment",
+  subtitle = "Network map between Up-regulated (Red) and Down-regulated (Blue) processes",
+  color    = "Directional z-Score"
+) +
+theme(
+  plot.title.position = "plot",
+  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+)
+
+print(p_combined)
+
 ```
 
 # Deeper look into specific Genesets 
@@ -562,7 +675,7 @@ emapplot(
 
 ## extracellular matrix organization
 
-```{r, warning = FALSE, fig.width=8, fig.height=7}
+```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 simp.up.GO.df<- as.data.frame(simp.up.GO)
 
@@ -574,25 +687,51 @@ genes <- simp.up.GO.df %>%
   stringr::str_split("/") %>%
   unlist()
 
-SCpubr::do_DotPlot(Macrophages, 
-                   features = genes,
-                   dot.scale = 15,
-                   plot.title = "ECM Gene Set Expression Across Conditions") 
+chunk_size <- 25
+total_genes <- length(genes)
 
-raincloud.plots(
-  gene_list     = genes,
-  plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-  plot_subtitle = "Geneset = extracellular matrix organization",
-  seurat_obj = Macrophages,
-  colors = gradient_colors2
-)
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Macrophages, 
+      features = genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = "ECM: Gene Set Expression Across Conditions",
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+```
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+chunk_size <- 9
+total_genes <- length(genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = genes[i:end_idx],
+    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("Geneset = extracellular matrix organization - Slice ", slice_num),
+    seurat_obj    = Macrophages,
+    colors        = gradient_colors2
+  ))
+}
 
 
 ```
 
 ## cell adhesion
 
-```{r, warning = FALSE, fig.width=8, fig.height=7}
+```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 simp.up.GO.df<- as.data.frame(simp.up.GO)
 
@@ -604,11 +743,28 @@ genes <- simp.up.GO.df %>%
   stringr::str_split("/") %>%
   unlist()
 
-SCpubr::do_DotPlot(Macrophages, 
-                   features = genes,
-                   dot.scale = 15,
-                   plot.title = "Cell Adhesion Gene Set Expression Across Conditions") 
+chunk_size <- 25
+total_genes <- length(genes)
 
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Macrophages, 
+      features = genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = "cell adhesion: Gene Set Expression Across Conditions",
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 chunk_size <- 9
 total_genes <- length(genes)
@@ -632,7 +788,7 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ## Adaptive immune response
 
-```{r, warning = FALSE, fig.width=8, fig.height=7}
+```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 simp.down.GO.df<- as.data.frame(simp.down.GO)
 
@@ -646,9 +802,11 @@ genes <- simp.down.GO.df %>%
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 15,
+                   dot.scale = 10,
                    plot.title = "adaptive immune response: Gene Set Expression Across Conditions") 
+```
 
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 chunk_size <- 9
 total_genes <- length(genes)
 
@@ -669,7 +827,7 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ## regulation of inflammatory response
 
-```{r, warning = FALSE, fig.width=8, fig.height=7}
+```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 simp.down.GO.df<- as.data.frame(simp.down.GO)
 
@@ -681,11 +839,30 @@ genes <- simp.down.GO.df %>%
   stringr::str_split("/") %>%
   unlist()
 
-SCpubr::do_DotPlot(Macrophages, 
-                   features = genes,
-                   dot.scale = 15,
-                   plot.title = "regulation of inflammatory response: Gene Set Expression Across Conditions") 
+chunk_size <- 25
+total_genes <- length(genes)
 
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Macrophages, 
+      features = genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = "regulation of inflammatory response: Gene Set Expression Across Conditions",
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 chunk_size <- 9
 total_genes <- length(genes)
 
@@ -709,15 +886,17 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ## Metalloproteases
 
-```{r, warning = FALSE, fig.width=8, fig.height=7}
+```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 genes <- c("MMP1", "MMP2", "MMP8", "MMP9", "MMP13", "MMP12")
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 15,
+                   dot.scale = 10,
                    plot.title = "Metalloproteases: Gene Set Expression Across Conditions") 
+```
 
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 raincloud.plots(
   gene_list     = genes,
   plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
@@ -730,15 +909,17 @@ raincloud.plots(
 
 ## M1/M2 Markers
 
-```{r, warning = FALSE, fig.width=8, fig.height=7}
+```{r, warning = FALSE, fig.width=8, fig.height=4}
 
 genes <- c("CD14", "CD163")
 
 SCpubr::do_DotPlot(Macrophages, 
                    features = genes,
-                   dot.scale = 15,
+                   dot.scale = 10,
                    plot.title = "M1/M2 Markers: Gene Set Expression Across Conditions") 
+```
 
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 raincloud.plots(
   gene_list     = genes,
   plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
