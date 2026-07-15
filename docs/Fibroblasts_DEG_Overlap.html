@@ -554,15 +554,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeaaec6d04a7fa71647fd1f477da0b06b5612b7f74targetblankaaec6d0a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree2b16d694b54695ec2a1e5d7987d673329b11f213targetblank2b16d69a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/aaec6d04a7fa71647fd1f477da0b06b5612b7f74" target="_blank">aaec6d0</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/2b16d694b54695ec2a1e5d7987d673329b11f213" target="_blank">2b16d69</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeaaec6d04a7fa71647fd1f477da0b06b5612b7f74targetblankaaec6d0a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree2b16d694b54695ec2a1e5d7987d673329b11f213targetblank2b16d69a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -572,7 +572,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/aaec6d04a7fa71647fd1f477da0b06b5612b7f74" target="_blank">aaec6d0</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/2b16d694b54695ec2a1e5d7987d673329b11f213" target="_blank">2b16d69</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -645,6 +645,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2b16d694b54695ec2a1e5d7987d673329b11f213/analysis/Fibroblasts_DEG_Overlap.Rmd" target="_blank">2b16d69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+<td>
+update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/Fibroblasts_DEG_Overlap.html" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -776,8 +810,8 @@ Udpades
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907845 48.5    1752985 93.7         NA  1321067 70.6
-Vcells 1599235 12.3    8388608 64.0      16384  2405776 18.4</code></pre>
+Ncells  907895 48.5    1753142 93.7         NA  1321031 70.6
+Vcells 1599426 12.3    8388608 64.0      16384  2408394 18.4</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -814,7 +848,11 @@ library(DT)
 
 library(ggforce) 
 library(enrichplot)
-library(ggrain)</code></pre>
+library(ggrain)
+
+library(ComplexHeatmap)
+library(tidyverse)
+library(circlize)</code></pre>
 </div>
 <div id="get-the-data" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Get the Data</h1>
@@ -1277,65 +1315,6 @@ Sophie.Alice
 number="4.2">
 <h2><span class="header-section-number">4.2</span> Log2FC differences
 across Codnitions</h2>
-<pre class="r"><code>library(ComplexHeatmap)</code></pre>
-<pre><code>========================================
-ComplexHeatmap version 2.28.0
-Bioconductor page: http://bioconductor.org/packages/ComplexHeatmap/
-Github page: https://github.com/jokergoo/ComplexHeatmap
-Documentation: http://jokergoo.github.io/ComplexHeatmap-reference
-
-If you use it in published research, please cite either one:
-- Gu, Z. Complex Heatmap Visualization. iMeta 2022.
-- Gu, Z. Complex heatmaps reveal patterns and correlations in multidimensional 
-    genomic data. Bioinformatics 2016.
-
-
-The new InteractiveComplexHeatmap package can directly export static 
-complex heatmaps into an interactive Shiny app with zero effort. Have a try!
-
-This message can be suppressed by:
-  suppressPackageStartupMessages(library(ComplexHeatmap))
-========================================</code></pre>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ lubridate 1.9.5     ✔ stringr   1.6.0
-✔ purrr     1.2.2     ✔ tidyr     1.3.2</code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ lubridate::%within%()     masks IRanges::%within%()
-✖ IRanges::collapse()       masks dplyr::collapse()
-✖ Biobase::combine()        masks BiocGenerics::combine(), dplyr::combine()
-✖ matrixStats::count()      masks dplyr::count()
-✖ IRanges::desc()           masks dplyr::desc()
-✖ tidyr::expand()           masks S4Vectors::expand()
-✖ clusterProfiler::filter() masks dplyr::filter(), stats::filter()
-✖ S4Vectors::first()        masks dplyr::first()
-✖ purrr::flatten_df()       masks hdf5r::flatten_df()
-✖ assertthat::has_name()    masks tibble::has_name()
-✖ dplyr::lag()              masks stats::lag()
-✖ BiocGenerics::Position()  masks ggplot2::Position(), base::Position()
-✖ purrr::reduce()           masks GenomicRanges::reduce(), IRanges::reduce()
-✖ clusterProfiler::rename() masks S4Vectors::rename(), dplyr::rename()
-✖ lubridate::second()       masks S4Vectors::second()
-✖ lubridate::second&lt;-()     masks S4Vectors::second&lt;-()
-✖ AnnotationDbi::select()   masks clusterProfiler::select(), dplyr::select()
-✖ purrr::simplify()         masks clusterProfiler::simplify()
-✖ clusterProfiler::slice()  masks IRanges::slice(), dplyr::slice()
-✖ lubridate::stamp()        masks cowplot::stamp()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(circlize)</code></pre>
-<pre><code>========================================
-circlize version 0.4.18
-CRAN page: https://cran.r-project.org/package=circlize
-Github page: https://github.com/jokergoo/circlize
-Documentation: https://jokergoo.github.io/circlize_book/book/
-
-If you use it in published research, please cite:
-Gu, Z. circlize implements and enhances circular visualization
-  in R. Bioinformatics 2014.
-
-This message can be suppressed by:
-  suppressPackageStartupMessages(library(circlize))
-========================================</code></pre>
 <pre class="r"><code>FDR &lt;- 0.01 
 
 # Extract gene lists and filter only for significance
