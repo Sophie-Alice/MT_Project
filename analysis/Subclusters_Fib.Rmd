@@ -132,10 +132,10 @@ PC = 20
 ```{r, warning = FALSE}
 
 set.seed(42)
-# 2. Split by sample to prepare for fresh subset normalization
+
 Fibroblasts.list <- SplitObject(Fibroblasts.raw, split.by = "orig.ident")
 
-# 3. Re-run SCTransform on the fibroblast subsets to find fibroblast-specific variance
+#  Re-run SCTransform on the fibroblast subsets to find fibroblast-specific variance
 for (i in 1:length(Fibroblasts.list)) {
   DefaultAssay(Fibroblasts.list[[i]]) <- "RNA"
   Fibroblasts.list[[i]] <- SCTransform(Fibroblasts.list[[i]], 
@@ -191,7 +191,7 @@ DimPlot(Fibroblasts, reduction = "umap", shuffle = T, group.by = "orig.ident")
 
 ##################################### integration
 
-# 6. Run Harmony to integrate fibroblasts across your conditions/samples
+# Run Harmony to integrate 
 Fibroblasts <- RunHarmony(Fibroblasts, 
                           group.by.vars = "orig.ident", 
                           dims.use = 1:Dims,
@@ -201,12 +201,12 @@ Fibroblasts <- RunHarmony(Fibroblasts,
 
 ##################################### Clustering with integration
 
-# 7. UMAP and Clustering using the Harmony reduction
+
 DefaultAssay(Fibroblasts) <- "SCT"
 Fibroblasts <- RunUMAP(Fibroblasts, dims = 1:Dims, reduction = "harmony")
 Fibroblasts <- FindNeighbors(Fibroblasts, dims = 1:Dims, reduction = "harmony")
 
-# Using a slightly lower resolution range since sub-clustering is more sensitive
+
 Fibroblasts <- FindClusters(Fibroblasts, graph.name = "SCT_snn", resolution = seq(0.1, 0.8, by=0.1))
 
 
