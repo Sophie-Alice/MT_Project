@@ -423,7 +423,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-09
+<strong>Last updated:</strong> 2026-07-15
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -554,15 +554,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree067775a455329972400495b19640af5d454a094atargetblank067775aa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeaaec6d04a7fa71647fd1f477da0b06b5612b7f74targetblankaaec6d0a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/067775a455329972400495b19640af5d454a094a" target="_blank">067775a</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/aaec6d04a7fa71647fd1f477da0b06b5612b7f74" target="_blank">aaec6d0</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree067775a455329972400495b19640af5d454a094atargetblank067775aa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeaaec6d04a7fa71647fd1f477da0b06b5612b7f74targetblankaaec6d0a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -572,7 +572,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/067775a455329972400495b19640af5d454a094a" target="_blank">067775a</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/aaec6d04a7fa71647fd1f477da0b06b5612b7f74" target="_blank">aaec6d0</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -589,9 +589,17 @@ were generated:
 Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
 
-Untracked files:
-    Untracked:  analysis/Subclusters_Fib.Rmd
+Unstaged changes:
+    Deleted:    analysis/Baseline_Mac_Response.Rmd
+    Deleted:    analysis/Baseline_Mac_Response_Lenient.Rmd
+    Deleted:    analysis/Baseline_TGF_Response.Rmd
+    Deleted:    analysis/Baseline_TGF_Response_Lenient.Rmd
+    Deleted:    analysis/Modulated_TGF_Response.Rmd
+    Deleted:    analysis/Modulated_TGF_Response_Lenient.Rmd
+    Deleted:    analysis/Stim_Mac_Response.Rmd
+    Deleted:    analysis/Stim_Mac_Response_Lenient.Rmd
 
 </code></pre>
 <p>
@@ -637,6 +645,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aaec6d04a7fa71647fd1f477da0b06b5612b7f74/analysis/Fibroblasts_DEG_Overlap.Rmd" target="_blank">aaec6d0</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+<td>
+CM DGEA
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/Fibroblasts_DEG_Overlap.html" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -734,8 +776,8 @@ Udpades
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907846 48.5    1752985 93.7         NA  1321070 70.6
-Vcells 1598983 12.2    8388608 64.0      16384  2393039 18.3</code></pre>
+Ncells  907845 48.5    1752985 93.7         NA  1321067 70.6
+Vcells 1599235 12.3    8388608 64.0      16384  2405776 18.4</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -853,10 +895,15 @@ create_table &lt;- function(df) {
       dom = &#39;Blfrtip&#39;,                       
       buttons = c(&#39;copy&#39;, &#39;csv&#39;, &#39;excel&#39;, &#39;pdf&#39;),
       pageLength = 10,                      
-      lengthMenu = c(10, 25, 50, 100)     
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = &#39;_all&#39;,
+        className = &#39;dt-nowrap&#39;
+      ))
     ),
     filter = &#39;top&#39;,                         
-    class = &#39;cell-border stripe hover&#39;       
+    class = &#39;cell-border stripe hover nowrap&#39;       
   )
 }
 
@@ -1004,6 +1051,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-6-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-6-1.png" target="_blank">dc39c88</a>
 </td>
 <td>
@@ -1050,6 +1108,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-6-2.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-6-2.png" target="_blank">dc39c88</a>
@@ -1112,6 +1181,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-7-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-7-1.png" target="_blank">dc39c88</a>
 </td>
 <td>
@@ -1165,6 +1245,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-7-2.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-7-2.png" target="_blank">dc39c88</a>
@@ -1318,6 +1409,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-8-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-8-1.png" target="_blank">dc39c88</a>
 </td>
 <td>
@@ -1378,6 +1480,43 @@ Heatmap(
   row_km = 4
 )</code></pre>
 <p><img src="figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-9-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div
 id="check-on-genes-that-are-up-regulated-in-cmf_tgf-vs.-cmf_nc-and-down-regulated-in-cmfhm_tgf-vs.-cmf_tgf-1"
@@ -1398,7 +1537,7 @@ This message is displayed once per session.</code></pre>
 scaled_matrix.df &lt;- as.data.frame(scaled_matrix)
 create_table(scaled_matrix.df)</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-76aec03006fcdb57d9b6" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-76aec03006fcdb57d9b6">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-1.33602582960717\" data-max=\"0.467930634941196\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.213313150453064\" data-max=\"1.49944193695055\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-1.14603455157775\" data-max=\"1.00408564740555\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-1.38499818032864\" data-max=\"0.381448175794907\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["POSTN","ST6GAL2","CDH11","LTBP2","ITGBL1","CALD1","ADAM12","NAV3","ZEB1","NOX4","GLS","PDGFC","ENSG00000286458","CTHRC1","CYTOR","GALNT10","AMIGO2","DNM3","ENSG00000290876","TNFRSF12A","STAT1","COL8A1","SLC20A1","GADD45B","MT2A","ENSG00000286153","SEMA3C","SSR3","MORF4L2","UCHL1","APBB2","CSGALNACT2","ENSG00000256947","MIR4435-2HG","DNM3OS","ITGB1","APCDD1L-DT","VEPH1","IFITM10","MAP3K4","ADAMTS6","DDX5","CCN2","SPOCK1","ZNF365","ANXA5","THBS1","VEGFC","TAF1D","LINC02256","FRMD6","ENSG00000258425","ORMDL1","ANKLE2","HNRNPDL","TPM2","ARF4","SEMA7A","LINC01239","NTM","FBXL14","MYO10","MIR31HG","APCDD1L","DDAH1","RTKN2","SLC15A1","FIBIN","JCAD","COL12A1","CCN1","PLK2","EPHA3","ENSG00000248388","ANXA1","LINC00513","BCL10-AS1","MT1E","EIF1","HAPLN1","CDKN2B","ENSG00000256083","DELEC1","HNRNPA2B1","NEDD4","PXDN","RBMS3-AS2","GDNF","SYT14","TLE4","SAP30L-AS1","LINC02256.1","OLFML2B","CCNL2","GRAMD2B","CDC37","HMGA2-AS1","ENSG00000290383","MIR222HG","SHOC1","OSBPL10","HERPUD1","DOCK10","TXLNGY","ENSG00000290399","FRMD5","CREBZF","STARD13-AS","FNDC1","ARHGAP22","THBS1-IT1","FAT1","SRPX2","FAM50A","TMEM200A","TMEM263","DCBLD2"],[-0.9418452269905798,-1.035076640774126,-1.33602582960717,-0.9029383589973164,-0.7328818906636781,-0.9132472896426826,-1.083162830638634,-1.041815182500508,-0.5632130701603709,-1.03943612819546,-0.7480208577419885,-0.7418479344999243,-0.8291730611586722,-0.9097442475901374,-1.190128235939466,-0.7152969643242366,-0.8038237649313803,-0.9260646175598976,-0.8450210861252496,-0.8979372867860933,-0.6723427022785858,-0.3242124628020971,-1.261689669919966,-0.9670335668490928,-0.9005112929846907,-1.151520382071322,-0.5041801079432902,-0.91271281511152,-1.164988158321966,-0.7840394705178655,-0.752582782812684,-1.000640892538639,-0.7430155514815532,-0.8059143473615865,-0.6930394430084408,-0.1533700318549201,-0.5437361529414843,-0.9308948590501327,-1.185935869420516,-0.8021658394383749,-0.1143260290756691,0.1659251584255381,-0.06831542956797536,-0.09630390216205159,-0.8500664308349839,-0.5687959638699585,-0.189566349505651,-0.6385485933669214,-0.838734440791703,-0.484045871705292,-0.3838785323352894,-0.5390872427997357,-0.6699484947603843,-0.8358186521852428,-0.3165318402064351,-0.5555741272734369,-0.6668024900235786,-0.8917432084547331,-0.9179766730805444,-0.3769324940384441,-0.7867221598683477,-0.9409996267063325,0.009552619911966381,-0.7679519383881628,-0.5006392136124428,-0.8770297524084013,-0.5382676121826361,-0.7820204591011103,-0.7053439964061005,-0.8530116646450868,0.07945316361167652,-0.9460703055388221,-0.6185266048207647,-0.8058748759365488,-0.3164879146125865,-0.8505993661771031,-0.9380451398568351,-0.9075280707588496,-1.064524984310149,-0.7805073393294608,-0.9446689576472536,-0.6348612712419229,-0.7941361709047923,0.1675993824700207,-0.7101997548191997,0.228334134596296,-0.519699630977127,-0.5833232633002036,-0.4752637706902679,-0.5875240148733851,-0.6418387288892908,-0.6390909883743748,-1.274777270706007,0.4153132920464906,-0.8839459226797617,-0.548953195955004,-0.4788362228068756,-0.7457788030864202,-0.2778260858207416,-1.107317905340314,0.2919722909455336,-0.7027187724792505,-0.916969788698107,-0.9373708742187844,-0.8114260714187558,0.2986808401525054,-0.02890971114722588,-0.6123174174705022,-0.1593405301012041,-0.5915846801367081,-0.5567015089773242,0.4679306349411959,-0.8090051206428652,-0.9657688135841547,-1.143881711562655,0.1412783786254627,-0.3730829038323714],[1.342854796575954,1.280889826033201,1.047851070109921,1.410425322141482,1.470758811685054,1.302077547118181,1.336793841008585,1.345542474608776,1.482364225475743,1.211489231664189,1.387081317695094,1.452940671999366,1.407067449586461,1.427315027344877,1.254600997423658,1.307969078865712,1.39624952072194,1.411283141123135,1.445891840176273,1.34398140669522,1.488204849923892,1.470386291888689,1.155529276121894,1.287380467946896,1.356795462185381,1.223763765623161,1.477673560756171,1.368898333558108,1.275560131855121,1.382523750084152,1.31040130537701,1.320968639752776,1.466218571334361,1.443402585566386,1.484901519084476,1.384142542455638,1.482517774649911,1.402086795582592,1.258280302794522,1.460270339076107,1.29323382098365,1.216230608313794,1.433382000625891,1.43207732770472,1.446380030781059,1.395871217948216,1.141603402556539,1.492481875080391,1.445645179290964,1.487892279060459,1.494105881593839,1.499417648692551,1.425442915517604,1.410513532458408,1.216738582734224,1.265394184045824,1.448427334638391,1.411312832182801,1.283913762320471,1.486155666190917,1.445463285725753,1.326348731966419,1.399803284762791,1.414221781332199,1.397794184227082,1.438564956263865,1.499441936950552,1.319416205305843,1.475992811943396,1.204650861830792,1.375787755128515,1.407149336907003,1.13429511643619,1.452882347981846,1.475593058454984,1.444131112802807,1.404554658241903,1.340210821657897,1.307488733253039,1.40582705153542,1.278062358534756,1.492911648013445,1.370022429101559,0.2133131504530644,1.403352239731725,1.30852663131045,1.495252105691556,1.497064933748908,1.496637730046314,1.439927330723625,1.487500090888601,1.486408781274824,0.8578165746665395,1.186985748667025,1.365330864738006,1.167820823749545,1.493944229904216,1.464002315497817,1.478583684181927,1.291082360853299,1.249359749034287,1.469075418037881,0.7251882698609599,1.406631877815745,1.421736618619057,1.286257010952334,1.414263208445167,1.468425167276466,1.369918357234608,1.485766031236009,1.433216920725616,0.9301436169040095,1.296162102817348,0.9716321504358313,0.8526359021642917,1.340290865097951,1.087336369593422],[-0.5390784298527341,-0.4818812019438865,0.3384076971196069,-0.4362691258425344,-0.4862446344743987,-0.6388130161577747,-0.1883629025863909,-0.3221743041901036,-0.6370127742533198,-0.5535012792636353,-0.7146701284596366,-0.5626678368137544,-0.5767424902793834,-0.283254356592203,0.02897126092329315,-0.8449420287485285,-0.6344956684369258,-0.1142236864999445,-0.3864973284862199,-0.6024590962359545,-0.4218251980399035,-0.7680140911351226,0.2364599316528792,-0.5821844354855913,-0.5774899509661044,-0.3309042407748606,-0.6970304814396064,-0.5355175922254826,0.01412532472452723,-0.6831812447720267,-0.8084783416778286,0.1579986038722311,-0.4969153809239478,-0.1400049043616354,-0.3710208464345875,-1.004761761122224,-0.6508247894837941,-0.4037870181475605,0.02575489652292152,-0.2674497473089659,-1.146034551577747,-0.1723897943235026,-0.7497853139547088,-0.82237743046899,-0.359707246701426,-0.8528484261521831,0.301033272010382,-0.4182338962516007,-0.1974736935463169,-0.6568786089034118,-0.5104902308022373,-0.4828499002059118,-0.7197235246690331,-0.5581994778849195,0.2619951913575959,0.2924664816870361,-0.6664607460018533,-0.4572865117814739,-0.6530373172284891,-0.4240834129361246,-0.5226762759108227,0.1822066133994339,-0.8584919282942407,-0.6404629997931699,-0.005244497765684818,-0.2378211968657059,-0.4832152883939698,-0.7702892330280271,-0.5014822042800715,0.4403631415788622,-0.5826511835861571,-0.1341424616934436,0.5159990846160599,-0.4467701807993744,-0.738766513683047,-0.210666860055565,-0.09454289555065026,-0.5949048264276939,0.1312473072089126,-0.6435270675242711,-0.624179808479753,-0.4245111567070497,0.1161384187539054,1.00408564740555,-0.7247221242429718,-0.9337347556084111,-0.5833851243042059,-0.4799861383262445,-0.5900515525230947,-0.09595242798964015,-0.517210117623635,-0.5313109341571681,0.7339161306315819,-0.5414394955452771,0.1047387843252423,0.446656902188339,-0.3988701118549728,-0.2131859356773646,-0.6889608230270332,0.1203307624811694,-1.058763373395684,-0.54803051237069,0.9944669399361954,-0.1069205575293451,-0.046298908131181,-0.8050915554160143,-0.5522815037117766,-0.2018518979748153,-1.03259732221623,-0.3008943651894717,-0.08341051726191326,-0.01399407399813193,0.2793046485113979,0.7464695504109663,0.8246422665538053,-0.5332549797688746,0.4865052246553329],[0.13806886026736,0.2360680166848113,-0.05023293762235733,-0.07121783730163071,-0.2516322865469767,0.2499827586822769,-0.06526810778356042,0.01844701208183444,-0.2821383810620533,0.3814481757949069,0.07560966850653213,-0.1484249006856879,-0.001151898148405513,-0.234316423162536,-0.09344402240748534,0.2522699142070535,0.04206991264636682,-0.3709948370632927,-0.2143734255648041,0.1564149763268279,-0.3940369496054026,-0.3781597379514685,-0.1302995378548067,0.2618375343877879,0.1212057817654144,0.2586608572230222,-0.276462971373275,0.07933207377889465,-0.1246972982576804,0.08469696520573985,0.2506598191135014,-0.4783263510863694,-0.2262876389288594,-0.4974833338431635,-0.4208412296414482,-0.2260107494784933,-0.2879568322246327,-0.06740491838489855,-0.09809932989692774,-0.3906547523287651,-0.03287324033023347,-1.20976597241583,-0.6152812571032058,-0.5133959950736773,-0.2366063532446499,0.02577317207392424,-1.25307032506127,-0.4356993854618698,-0.4094370449529455,-0.3469677984517546,-0.5997371184563118,-0.4774805056869035,-0.03577089608818592,-0.01649540238824537,-1.162201933885388,-1.002286538459421,-0.115164098612959,-0.06228311194659407,0.2871002279885621,-0.6851397592163495,-0.1360648499465821,-0.5675557186595196,-0.5508639763805172,-0.005806843150866432,-0.8919104728489549,-0.3237140069897583,-0.4779590363739464,0.2328934868232938,-0.2691666112572242,-0.7920023387645668,-0.8725897351540337,-0.3269365696747373,-1.031767596231485,-0.2002372912459225,-0.4203386301593495,-0.3828648865701385,-0.3719666228344165,0.1622220755286475,-0.3742110561518068,0.01820735531831238,0.290786407592251,-0.4335392200644723,-0.6920246769506717,-1.384998180328637,0.03156963933044572,-0.6031260102983339,-0.3921673504102222,-0.4337555321224598,-0.4313224068329518,-0.7564508878605989,-0.3284512443756754,-0.3160068587432803,-0.3169554345921142,-1.06085954516824,-0.5861237263834862,-1.06552452998288,-0.6162378952423682,-0.5050375767340322,-0.5117967753341538,-0.3040952179941557,-0.4825686665841361,-0.2183261331879424,-0.8026854210990478,-0.3623404460676143,-0.5640116390691199,-0.7798462956888256,-0.833071993586163,-0.6542558518311488,-0.1779805049171731,-0.5932869859098312,-0.79310489448638,-1.384080177847075,-0.7664616306858801,-0.7523328872626441,-0.5333964571554412,-0.9483142639545409,-1.200758690416383]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>CMF-NC<\/th>\n      <th>CMF-TGF<\/th>\n      <th>CMFHM-NC<\/th>\n      <th>CMFHM-TGF<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"CMF-NC","targets":1},{"name":"CMF-TGF","targets":2},{"name":"CMFHM-NC","targets":3},{"name":"CMFHM-TGF","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-76aec03006fcdb57d9b6">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-1.33602582960717\" data-max=\"0.467930634941196\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.213313150453064\" data-max=\"1.49944193695055\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-1.14603455157775\" data-max=\"1.00408564740555\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-1.38499818032864\" data-max=\"0.381448175794907\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["POSTN","ST6GAL2","CDH11","LTBP2","ITGBL1","CALD1","ADAM12","NAV3","ZEB1","NOX4","GLS","PDGFC","ENSG00000286458","CTHRC1","CYTOR","GALNT10","AMIGO2","DNM3","ENSG00000290876","TNFRSF12A","STAT1","COL8A1","SLC20A1","GADD45B","MT2A","ENSG00000286153","SEMA3C","SSR3","MORF4L2","UCHL1","APBB2","CSGALNACT2","ENSG00000256947","MIR4435-2HG","DNM3OS","ITGB1","APCDD1L-DT","VEPH1","IFITM10","MAP3K4","ADAMTS6","DDX5","CCN2","SPOCK1","ZNF365","ANXA5","THBS1","VEGFC","TAF1D","LINC02256","FRMD6","ENSG00000258425","ORMDL1","ANKLE2","HNRNPDL","TPM2","ARF4","SEMA7A","LINC01239","NTM","FBXL14","MYO10","MIR31HG","APCDD1L","DDAH1","RTKN2","SLC15A1","FIBIN","JCAD","COL12A1","CCN1","PLK2","EPHA3","ENSG00000248388","ANXA1","LINC00513","BCL10-AS1","MT1E","EIF1","HAPLN1","CDKN2B","ENSG00000256083","DELEC1","HNRNPA2B1","NEDD4","PXDN","RBMS3-AS2","GDNF","SYT14","TLE4","SAP30L-AS1","LINC02256.1","OLFML2B","CCNL2","GRAMD2B","CDC37","HMGA2-AS1","ENSG00000290383","MIR222HG","SHOC1","OSBPL10","HERPUD1","DOCK10","TXLNGY","ENSG00000290399","FRMD5","CREBZF","STARD13-AS","FNDC1","ARHGAP22","THBS1-IT1","FAT1","SRPX2","FAM50A","TMEM200A","TMEM263","DCBLD2"],[-0.9418452269905798,-1.035076640774126,-1.33602582960717,-0.9029383589973164,-0.7328818906636781,-0.9132472896426826,-1.083162830638634,-1.041815182500508,-0.5632130701603709,-1.03943612819546,-0.7480208577419885,-0.7418479344999243,-0.8291730611586722,-0.9097442475901374,-1.190128235939466,-0.7152969643242366,-0.8038237649313803,-0.9260646175598976,-0.8450210861252496,-0.8979372867860933,-0.6723427022785858,-0.3242124628020971,-1.261689669919966,-0.9670335668490928,-0.9005112929846907,-1.151520382071322,-0.5041801079432902,-0.91271281511152,-1.164988158321966,-0.7840394705178655,-0.752582782812684,-1.000640892538639,-0.7430155514815532,-0.8059143473615865,-0.6930394430084408,-0.1533700318549201,-0.5437361529414843,-0.9308948590501327,-1.185935869420516,-0.8021658394383749,-0.1143260290756691,0.1659251584255381,-0.06831542956797536,-0.09630390216205159,-0.8500664308349839,-0.5687959638699585,-0.189566349505651,-0.6385485933669214,-0.838734440791703,-0.484045871705292,-0.3838785323352894,-0.5390872427997357,-0.6699484947603843,-0.8358186521852428,-0.3165318402064351,-0.5555741272734369,-0.6668024900235786,-0.8917432084547331,-0.9179766730805444,-0.3769324940384441,-0.7867221598683477,-0.9409996267063325,0.009552619911966381,-0.7679519383881628,-0.5006392136124428,-0.8770297524084013,-0.5382676121826361,-0.7820204591011103,-0.7053439964061005,-0.8530116646450868,0.07945316361167652,-0.9460703055388221,-0.6185266048207647,-0.8058748759365488,-0.3164879146125865,-0.8505993661771031,-0.9380451398568351,-0.9075280707588496,-1.064524984310149,-0.7805073393294608,-0.9446689576472536,-0.6348612712419229,-0.7941361709047923,0.1675993824700207,-0.7101997548191997,0.228334134596296,-0.519699630977127,-0.5833232633002036,-0.4752637706902679,-0.5875240148733851,-0.6418387288892908,-0.6390909883743748,-1.274777270706007,0.4153132920464906,-0.8839459226797617,-0.548953195955004,-0.4788362228068756,-0.7457788030864202,-0.2778260858207416,-1.107317905340314,0.2919722909455336,-0.7027187724792505,-0.916969788698107,-0.9373708742187844,-0.8114260714187558,0.2986808401525054,-0.02890971114722588,-0.6123174174705022,-0.1593405301012041,-0.5915846801367081,-0.5567015089773242,0.4679306349411959,-0.8090051206428652,-0.9657688135841547,-1.143881711562655,0.1412783786254627,-0.3730829038323714],[1.342854796575954,1.280889826033201,1.047851070109921,1.410425322141482,1.470758811685054,1.302077547118181,1.336793841008585,1.345542474608776,1.482364225475743,1.211489231664189,1.387081317695094,1.452940671999366,1.407067449586461,1.427315027344877,1.254600997423658,1.307969078865712,1.39624952072194,1.411283141123135,1.445891840176273,1.34398140669522,1.488204849923892,1.470386291888689,1.155529276121894,1.287380467946896,1.356795462185381,1.223763765623161,1.477673560756171,1.368898333558108,1.275560131855121,1.382523750084152,1.31040130537701,1.320968639752776,1.466218571334361,1.443402585566386,1.484901519084476,1.384142542455638,1.482517774649911,1.402086795582592,1.258280302794522,1.460270339076107,1.29323382098365,1.216230608313794,1.433382000625891,1.43207732770472,1.446380030781059,1.395871217948216,1.141603402556539,1.492481875080391,1.445645179290964,1.487892279060459,1.494105881593839,1.499417648692551,1.425442915517604,1.410513532458408,1.216738582734224,1.265394184045824,1.448427334638391,1.411312832182801,1.283913762320471,1.486155666190917,1.445463285725753,1.326348731966419,1.399803284762791,1.414221781332199,1.397794184227082,1.438564956263865,1.499441936950552,1.319416205305843,1.475992811943396,1.204650861830792,1.375787755128515,1.407149336907003,1.13429511643619,1.452882347981846,1.475593058454984,1.444131112802807,1.404554658241903,1.340210821657897,1.307488733253039,1.40582705153542,1.278062358534756,1.492911648013445,1.370022429101559,0.2133131504530644,1.403352239731725,1.30852663131045,1.495252105691556,1.497064933748908,1.496637730046314,1.439927330723625,1.487500090888601,1.486408781274824,0.8578165746665395,1.186985748667025,1.365330864738006,1.167820823749545,1.493944229904216,1.464002315497817,1.478583684181927,1.291082360853299,1.249359749034287,1.469075418037881,0.7251882698609599,1.406631877815745,1.421736618619057,1.286257010952334,1.414263208445167,1.468425167276466,1.369918357234608,1.485766031236009,1.433216920725616,0.9301436169040095,1.296162102817348,0.9716321504358313,0.8526359021642917,1.340290865097951,1.087336369593422],[-0.5390784298527341,-0.4818812019438865,0.3384076971196069,-0.4362691258425344,-0.4862446344743987,-0.6388130161577747,-0.1883629025863909,-0.3221743041901036,-0.6370127742533198,-0.5535012792636353,-0.7146701284596366,-0.5626678368137544,-0.5767424902793834,-0.283254356592203,0.02897126092329315,-0.8449420287485285,-0.6344956684369258,-0.1142236864999445,-0.3864973284862199,-0.6024590962359545,-0.4218251980399035,-0.7680140911351226,0.2364599316528792,-0.5821844354855913,-0.5774899509661044,-0.3309042407748606,-0.6970304814396064,-0.5355175922254826,0.01412532472452723,-0.6831812447720267,-0.8084783416778286,0.1579986038722311,-0.4969153809239478,-0.1400049043616354,-0.3710208464345875,-1.004761761122224,-0.6508247894837941,-0.4037870181475605,0.02575489652292152,-0.2674497473089659,-1.146034551577747,-0.1723897943235026,-0.7497853139547088,-0.82237743046899,-0.359707246701426,-0.8528484261521831,0.301033272010382,-0.4182338962516007,-0.1974736935463169,-0.6568786089034118,-0.5104902308022373,-0.4828499002059118,-0.7197235246690331,-0.5581994778849195,0.2619951913575959,0.2924664816870361,-0.6664607460018533,-0.4572865117814739,-0.6530373172284891,-0.4240834129361246,-0.5226762759108227,0.1822066133994339,-0.8584919282942407,-0.6404629997931699,-0.005244497765684818,-0.2378211968657059,-0.4832152883939698,-0.7702892330280271,-0.5014822042800715,0.4403631415788622,-0.5826511835861571,-0.1341424616934436,0.5159990846160599,-0.4467701807993744,-0.738766513683047,-0.210666860055565,-0.09454289555065026,-0.5949048264276939,0.1312473072089126,-0.6435270675242711,-0.624179808479753,-0.4245111567070497,0.1161384187539054,1.00408564740555,-0.7247221242429718,-0.9337347556084111,-0.5833851243042059,-0.4799861383262445,-0.5900515525230947,-0.09595242798964015,-0.517210117623635,-0.5313109341571681,0.7339161306315819,-0.5414394955452771,0.1047387843252423,0.446656902188339,-0.3988701118549728,-0.2131859356773646,-0.6889608230270332,0.1203307624811694,-1.058763373395684,-0.54803051237069,0.9944669399361954,-0.1069205575293451,-0.046298908131181,-0.8050915554160143,-0.5522815037117766,-0.2018518979748153,-1.03259732221623,-0.3008943651894717,-0.08341051726191326,-0.01399407399813193,0.2793046485113979,0.7464695504109663,0.8246422665538053,-0.5332549797688746,0.4865052246553329],[0.13806886026736,0.2360680166848113,-0.05023293762235733,-0.07121783730163071,-0.2516322865469767,0.2499827586822769,-0.06526810778356042,0.01844701208183444,-0.2821383810620533,0.3814481757949069,0.07560966850653213,-0.1484249006856879,-0.001151898148405513,-0.234316423162536,-0.09344402240748534,0.2522699142070535,0.04206991264636682,-0.3709948370632927,-0.2143734255648041,0.1564149763268279,-0.3940369496054026,-0.3781597379514685,-0.1302995378548067,0.2618375343877879,0.1212057817654144,0.2586608572230222,-0.276462971373275,0.07933207377889465,-0.1246972982576804,0.08469696520573985,0.2506598191135014,-0.4783263510863694,-0.2262876389288594,-0.4974833338431635,-0.4208412296414482,-0.2260107494784933,-0.2879568322246327,-0.06740491838489855,-0.09809932989692774,-0.3906547523287651,-0.03287324033023347,-1.20976597241583,-0.6152812571032058,-0.5133959950736773,-0.2366063532446499,0.02577317207392424,-1.25307032506127,-0.4356993854618698,-0.4094370449529455,-0.3469677984517546,-0.5997371184563118,-0.4774805056869035,-0.03577089608818592,-0.01649540238824537,-1.162201933885388,-1.002286538459421,-0.115164098612959,-0.06228311194659407,0.2871002279885621,-0.6851397592163495,-0.1360648499465821,-0.5675557186595196,-0.5508639763805172,-0.005806843150866432,-0.8919104728489549,-0.3237140069897583,-0.4779590363739464,0.2328934868232938,-0.2691666112572242,-0.7920023387645668,-0.8725897351540337,-0.3269365696747373,-1.031767596231485,-0.2002372912459225,-0.4203386301593495,-0.3828648865701385,-0.3719666228344165,0.1622220755286475,-0.3742110561518068,0.01820735531831238,0.290786407592251,-0.4335392200644723,-0.6920246769506717,-1.384998180328637,0.03156963933044572,-0.6031260102983339,-0.3921673504102222,-0.4337555321224598,-0.4313224068329518,-0.7564508878605989,-0.3284512443756754,-0.3160068587432803,-0.3169554345921142,-1.06085954516824,-0.5861237263834862,-1.06552452998288,-0.6162378952423682,-0.5050375767340322,-0.5117967753341538,-0.3040952179941557,-0.4825686665841361,-0.2183261331879424,-0.8026854210990478,-0.3623404460676143,-0.5640116390691199,-0.7798462956888256,-0.833071993586163,-0.6542558518311488,-0.1779805049171731,-0.5932869859098312,-0.79310489448638,-1.384080177847075,-0.7664616306858801,-0.7523328872626441,-0.5333964571554412,-0.9483142639545409,-1.200758690416383]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>CMF-NC<\/th>\n      <th>CMF-TGF<\/th>\n      <th>CMFHM-NC<\/th>\n      <th>CMFHM-TGF<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"CMF-NC","targets":1},{"name":"CMF-TGF","targets":2},{"name":"CMFHM-NC","targets":3},{"name":"CMFHM-TGF","targets":4}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>col_fun = colorRamp2(c(-2, 0, 2), c(&quot;#005EA8&quot;,&quot;white&quot;, &quot;#9F1C67&quot;)) 
 
 H1 &lt;- Heatmap(
@@ -1425,12 +1564,86 @@ H1 &lt;- Heatmap(
 
 print(H1)</code></pre>
 <p><img src="figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-10-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-2">
+Past versions of unnamed-chunk-10-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-10-2.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="checking-on-the-4-blocks" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Checking on the 4
 Blocks</h2>
 <pre class="r"><code>ht_shifted &lt;- draw(H1)</code></pre>
 <p><img src="figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-11-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-11-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>m_blocks &lt;- row_order(ht_shifted)
 
 # get gene namese per block
@@ -1450,6 +1663,43 @@ block4_genes &lt;- rownames(scaled_matrix)[m_blocks[[4]]]</code></pre>
                    dot.scale = 10,
                    plot.title = &quot;avg. Gene Expression of G.o.I - Block 1&quot;) </code></pre>
 <p><img src="figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-12-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-12-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>chunk_size &lt;- 9
 total_genes &lt;- length(block1_genes)
 
@@ -1465,7 +1715,82 @@ for (i in seq(1, total_genes, by = chunk_size)) {
     colors        = gradient_colors4
   ))
 }</code></pre>
-<p><img src="figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-12-2.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-12-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-12-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-2">
+Past versions of unnamed-chunk-12-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-12-2.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-12-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-3">
+Past versions of unnamed-chunk-12-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Fibroblasts_DEG_Overlap.Rmd/unnamed-chunk-12-3.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

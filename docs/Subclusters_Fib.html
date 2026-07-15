@@ -423,7 +423,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-10
+<strong>Last updated:</strong> 2026-07-15
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -554,15 +554,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree32a97231e0473ddb2618840d69991ea678c3433etargetblank32a9723a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeaaec6d04a7fa71647fd1f477da0b06b5612b7f74targetblankaaec6d0a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/32a97231e0473ddb2618840d69991ea678c3433e" target="_blank">32a9723</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/aaec6d04a7fa71647fd1f477da0b06b5612b7f74" target="_blank">aaec6d0</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree32a97231e0473ddb2618840d69991ea678c3433etargetblank32a9723a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeaaec6d04a7fa71647fd1f477da0b06b5612b7f74targetblankaaec6d0a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -572,7 +572,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/32a97231e0473ddb2618840d69991ea678c3433e" target="_blank">32a9723</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/aaec6d04a7fa71647fd1f477da0b06b5612b7f74" target="_blank">aaec6d0</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -590,6 +590,16 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
+
+Unstaged changes:
+    Deleted:    analysis/Baseline_Mac_Response.Rmd
+    Deleted:    analysis/Baseline_Mac_Response_Lenient.Rmd
+    Deleted:    analysis/Baseline_TGF_Response.Rmd
+    Deleted:    analysis/Baseline_TGF_Response_Lenient.Rmd
+    Deleted:    analysis/Modulated_TGF_Response.Rmd
+    Deleted:    analysis/Modulated_TGF_Response_Lenient.Rmd
+    Deleted:    analysis/Stim_Mac_Response.Rmd
+    Deleted:    analysis/Stim_Mac_Response_Lenient.Rmd
 
 </code></pre>
 <p>
@@ -639,6 +649,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aaec6d04a7fa71647fd1f477da0b06b5612b7f74/analysis/Subclusters_Fib.Rmd" target="_blank">aaec6d0</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+<td>
+CM DGEA
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/fc83bf14929a13908fe10691d377db35b54f50e6/docs/Subclusters_Fib.html" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/32a97231e0473ddb2618840d69991ea678c3433e/analysis/Subclusters_Fib.Rmd" target="_blank">32a9723</a>
 </td>
 <td>
@@ -663,8 +707,8 @@ Update viewing of tables
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  859148 45.9    1336727 71.4         NA  1336727 71.4
-Vcells 1535411 11.8    8388608 64.0      16384  2312998 17.7</code></pre>
+Ncells  907874 48.5    1753068 93.7         NA  1321067 70.6
+Vcells 1599252 12.3    8388608 64.0      16384  2442348 18.7</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -717,13 +761,6 @@ Idents(Data) &lt;- &quot;orig.ident&quot;
 custom_palette &lt;- colorRampPalette(c(&quot;#005EA8&quot;, &quot;#6DB335&quot;, &quot;#FFD966&quot;, &quot;#EDAAD2&quot;, &quot;#9F1C67&quot;))
 gradient_colors3 &lt;- custom_palette(6)
 gradient_colors4 &lt;- custom_palette(4)</code></pre>
-<p>MArker genes for subclusters</p>
-<p>take</p>
-<p>APOD and APOE CCL2 TGFB COL always</p>
-<p>CFD</p>
-<p>COL1A1, COL3A1,</p>
-<p>Take out from Gabi:</p>
-<p>CCL19, PROM1, APOO, MK167, TOP2A, BIRC5, CENPF,</p>
 </div>
 <div id="functions" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Functions</h1>
@@ -737,11 +774,34 @@ create_table &lt;- function(df) {
       dom = &#39;Blfrtip&#39;,                       
       buttons = c(&#39;copy&#39;, &#39;csv&#39;, &#39;excel&#39;, &#39;pdf&#39;),
       pageLength = 10,                      
-      lengthMenu = c(10, 25, 50, 100)     
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = &#39;_all&#39;,
+        className = &#39;dt-nowrap&#39;
+      ))
     ),
     filter = &#39;top&#39;,                         
-    class = &#39;cell-border stripe hover&#39;       
+    class = &#39;cell-border stripe hover nowrap&#39;       
   )
+}
+
+###################################### Feature Plots
+
+plot_features &lt;- function(seurat_obj, features, title = NULL, subtitle = NULL, num_columns = 2) {
+  p &lt;- FeaturePlot_scCustom(seurat_obj, features = features, num_columns = num_columns, pt.size = 0.1)
+
+  p &lt;- p + patchwork::plot_annotation(
+    title = title,
+    subtitle = subtitle,
+    theme = ggplot2::theme(
+      plot.title.position = &quot;plot&quot;,
+      plot.title    = ggplot2::element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+      plot.subtitle = ggplot2::element_text(face = &quot;italic&quot;, size = 10, hjust = 0)
+    )
+  )
+  
+  return(p)
 }</code></pre>
 <div id="inspecting-data" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Inspecting Data</h2>
@@ -804,26 +864,63 @@ ElbowPlot(Fibroblasts, ndims = 50)+
   geom_vline(xintercept = 20, linetype = &quot;dashed&quot;, color = &quot;darkred&quot;, size = 0.8)+
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-1.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>##################################### Clustering without integrations
 
 
 Dims &lt;- 20
 Fibroblasts &lt;- RunUMAP(Fibroblasts, dims = 1:Dims)</code></pre>
-<pre><code>23:35:08 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>23:35:08 Read 1354 rows and found 20 numeric columns</code></pre>
-<pre><code>23:35:08 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>23:35:08 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>12:54:21 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>12:54:21 Read 1354 rows and found 20 numeric columns</code></pre>
+<pre><code>12:54:21 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>12:54:21 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-23:35:08 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpchLWXQ/file16b452cd52a4a
-23:35:08 Searching Annoy index using 1 thread, search_k = 3000
-23:35:09 Annoy recall = 100%
-23:35:09 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-23:35:10 Initializing from normalized Laplacian + noise (using RSpectra)
-23:35:10 Commencing optimization for 500 epochs, with 53180 positive edges
-23:35:10 Using rng type: pcg
-23:35:12 Optimization finished</code></pre>
+12:54:21 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmpe6RvuE/file3b16128df467
+12:54:21 Searching Annoy index using 1 thread, search_k = 3000
+12:54:21 Annoy recall = 100%
+12:54:22 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+12:54:23 Initializing from normalized Laplacian + noise (using RSpectra)
+12:54:23 Commencing optimization for 500 epochs, with 53180 positive edges
+12:54:23 Using rng type: pcg
+12:54:25 Optimization finished</code></pre>
 <pre class="r"><code>Fibroblasts &lt;- FindNeighbors(Fibroblasts, dims = 1:Dims)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -911,18 +1008,277 @@ Elapsed time: 0 seconds</code></pre>
   ylab(&quot;Resolution depth&quot;) +
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-2.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.1&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-3">
+Past versions of unnamed-chunk-5-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-3.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.2&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-4">
+Past versions of unnamed-chunk-5-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-4.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.3&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-5">
+Past versions of unnamed-chunk-5-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-5.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.4&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-6">
+Past versions of unnamed-chunk-5-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-6.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.5&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-7.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-7">
+Past versions of unnamed-chunk-5-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-7.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;orig.ident&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-8.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-8">
+Past versions of unnamed-chunk-5-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-8.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>##################################### integration
 
 # 6. Run Harmony to integrate fibroblasts across your conditions/samples
@@ -944,26 +1300,63 @@ Harmony 5/10
 Harmony 6/10
 Harmony converged after 6 iterations</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-9.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-9">
+Past versions of unnamed-chunk-5-9.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-9.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>##################################### Clustering with integration
 
 # 7. UMAP and Clustering using the Harmony reduction
 DefaultAssay(Fibroblasts) &lt;- &quot;SCT&quot;
 Fibroblasts &lt;- RunUMAP(Fibroblasts, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>23:35:14 UMAP embedding parameters a = 0.9922 b = 1.112
-23:35:14 Read 1354 rows and found 20 numeric columns
-23:35:14 Using Annoy for neighbor search, n_neighbors = 30
-23:35:14 Building Annoy index with metric = cosine, n_trees = 50
+<pre><code>12:54:27 UMAP embedding parameters a = 0.9922 b = 1.112
+12:54:27 Read 1354 rows and found 20 numeric columns
+12:54:27 Using Annoy for neighbor search, n_neighbors = 30
+12:54:27 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-23:35:15 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpchLWXQ/file16b455ecb7744
-23:35:15 Searching Annoy index using 1 thread, search_k = 3000
-23:35:15 Annoy recall = 100%
-23:35:15 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-23:35:16 Initializing from normalized Laplacian + noise (using RSpectra)
-23:35:16 Commencing optimization for 500 epochs, with 53146 positive edges
-23:35:16 Using rng type: pcg
-23:35:18 Optimization finished</code></pre>
+12:54:27 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmpe6RvuE/file3b1625a89fb5
+12:54:27 Searching Annoy index using 1 thread, search_k = 3000
+12:54:27 Annoy recall = 100%
+12:54:28 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+12:54:29 Initializing from normalized Laplacian + noise (using RSpectra)
+12:54:29 Commencing optimization for 500 epochs, with 53146 positive edges
+12:54:29 Using rng type: pcg
+12:54:31 Optimization finished</code></pre>
 <pre class="r"><code>Fibroblasts &lt;- FindNeighbors(Fibroblasts, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1050,18 +1443,277 @@ Elapsed time: 0 seconds</code></pre>
   ylab(&quot;Resolution depth&quot;) +
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-10.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-10">
+Past versions of unnamed-chunk-5-10.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-10.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.1&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-11.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-11">
+Past versions of unnamed-chunk-5-11.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-11.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.2&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-12.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-12">
+Past versions of unnamed-chunk-5-12.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-12.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.3&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-13.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-13">
+Past versions of unnamed-chunk-5-13.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-13.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.4&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-14.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-14">
+Past versions of unnamed-chunk-5-14.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-14.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.5&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-15.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-15">
+Past versions of unnamed-chunk-5-15.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-15" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-15.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;orig.ident&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-5-16.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-16">
+Past versions of unnamed-chunk-5-16.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-16" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-5-16.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DefaultAssay(Fibroblasts) &lt;- &quot;RNA&quot;
 Idents(Fibroblasts) &lt;- &quot;SCT_snn_res.0.5&quot;
 Markers &lt;- FindAllMarkers(Fibroblasts, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.5)</code></pre>
@@ -1088,7 +1740,7 @@ Markers_top5 &lt;- as.data.frame(Markers %&gt;% group_by(cluster) %&gt;% top_n(n
 
 create_table(Markers_top10)</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-f843a680a1fcd62a0dd1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f843a680a1fcd62a0dd1">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.005793857794589\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.1573612790602\" data-max=\"7.84617823172173\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.509\" data-max=\"1\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.008\" data-max=\"0.709\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80"],[3.519193656672238e-30,1.104607910484985e-29,2.167493944028652e-18,3.199879618715598e-18,2.027071065976472e-17,4.795588304906576e-16,4.581512844956564e-15,1.376062204567053e-14,3.266033559334327e-12,3.631534208321021e-10,1.764117431713006e-84,1.275752586937249e-67,5.022978506859882e-49,5.036029361672745e-39,3.492449696266651e-37,8.655405134778453e-37,1.017801138850015e-36,4.800139059918855e-35,3.621270039441108e-32,6.237676501904263e-24,3.555836237855029e-51,4.917419591352095e-43,1.140301343700746e-39,8.00956071426549e-34,1.106741826018705e-29,1.369756098058974e-28,7.796940470220261e-24,9.290973143505851e-23,3.321006744479447e-20,6.545905759987804e-19,4.848820760801559e-170,2.750439011273064e-169,4.649747413797293e-159,1.04839717426809e-154,9.300944360942728e-154,3.218408230038697e-150,7.040176886693477e-150,5.943731448950676e-130,1.168837102546131e-128,5.25570961962689e-126,2.195709257060721e-136,8.755781153508414e-120,1.898294500575776e-109,1.948572584482143e-105,3.676888515544386e-102,2.073936809884302e-98,1.996958510440799e-93,2.161062202260224e-91,3.84106283293669e-91,1.60860893505018e-86,3.415280893581506e-25,1.45461676968852e-18,1.540553494595025e-18,1.629784054808448e-16,8.085164528939877e-16,4.083126186726497e-11,7.459250594181543e-11,1.558601102139311e-10,3.625518282111126e-09,2.008508962118098e-08,2.133459883074814e-08,7.568113792174096e-08,3.418402661270873e-07,1.027838596162884e-06,2.471999883778192e-06,6.727488815707568e-06,1.324607478487187e-05,0.0002158067324608063,0.001518046771306878,0.005793857794588707,2.628409814539567e-30,1.064760088984583e-26,8.076938022277375e-26,6.460427900125849e-24,7.709154704314142e-23,1.239983880467748e-22,3.042925473342304e-22,7.601616992586945e-21,2.542635058682991e-20,5.694281663549532e-19],[1.261538516116142,1.858869111634603,1.17169775514552,1.19593981826899,1.247899707507083,1.175839054900414,1.282609729125047,1.417338630466571,1.178944880345218,1.157361279060197,1.961265237143184,1.962261718038693,2.396044369056743,2.167655515017949,2.02792565773202,2.002477840367992,2.06417497312126,1.931625875626217,1.91007965757923,1.914128348573568,1.862019571954264,1.97724907743498,1.515773633994921,1.73098331791993,1.658123328829868,1.735886445093094,1.528414303724527,1.948807151723803,1.709705920891956,1.612355425236234,7.282792401322435,6.792934196965445,6.880914604663457,6.864262950116608,7.846178231721733,7.696148696229096,7.334076058740897,6.866756374077542,6.798869408069976,6.84297121032329,6.538786092901907,6.077961339759923,5.808101867227215,5.615033835712956,5.434615852639204,5.437990295750007,5.372097502060335,5.254099156033419,5.331999251785586,5.404216756888037,3.540242418996659,3.108908676616391,3.346281165685948,3.219153120463613,3.819532372949589,2.838907457717504,2.765178940728438,3.633626472188211,2.898520196195044,2.651530681897191,1.914989256056823,1.881810000219331,1.949533188258398,1.942126704817347,1.677079717119888,2.03875628430462,1.953465775320656,1.668045284413968,1.805608818280392,1.408338160479131,3.744058916579318,3.577413958479276,3.325252234450996,3.488963047740082,3.31696922267842,3.401632275318064,3.306549194654131,3.313060766786191,3.265855605936782,3.513122856438436],[0.881,0.676,0.6899999999999999,0.759,0.759,0.552,0.698,0.57,0.5600000000000001,0.676,0.965,0.931,0.6820000000000001,0.585,0.5600000000000001,0.623,0.648,0.695,0.528,0.5570000000000001,0.735,0.639,0.869,0.698,0.515,0.667,0.649,0.529,0.57,0.701,0.6820000000000001,0.694,0.656,0.631,0.605,0.599,0.599,0.5610000000000001,0.522,0.529,0.6879999999999999,0.65,0.625,0.675,0.713,0.625,0.662,0.675,0.625,0.575,0.623,0.528,0.868,0.547,0.5659999999999999,0.5659999999999999,0.547,0.509,0.679,0.547,0.74,0.78,0.64,0.5600000000000001,0.64,0.58,0.52,0.76,0.52,0.76,0.679,0.786,0.929,0.964,1,0.714,0.643,0.929,1,0.643],[0.6899999999999999,0.435,0.466,0.636,0.632,0.344,0.528,0.38,0.388,0.556,0.5659999999999999,0.661,0.294,0.24,0.224,0.278,0.348,0.375,0.222,0.312,0.32,0.266,0.593,0.393,0.203,0.397,0.375,0.27,0.341,0.468,0.012,0.014,0.013,0.012,0.008,0.008999999999999999,0.008999999999999999,0.014,0.008,0.011,0.02,0.023,0.024,0.035,0.046,0.031,0.042,0.047,0.036,0.031,0.141,0.125,0.482,0.158,0.174,0.242,0.218,0.186,0.412,0.254,0.503,0.5610000000000001,0.366,0.323,0.39,0.339,0.292,0.617,0.411,0.709,0.075,0.128,0.202,0.249,0.336,0.12,0.094,0.25,0.377,0.118],[1.358619903094884e-25,4.264449299218333e-25,8.367827120317015e-14,1.235345525601344e-13,7.825710557308767e-13,1.851384820992233e-11,1.768738848923931e-10,5.312425746951566e-10,1.26088491591661e-07,1.401990096464413e-05,6.81055175687123e-80,4.925170437129945e-63,1.939171082358326e-44,1.94420949536738e-34,1.348295129740703e-32,3.34150570633257e-32,3.929323076644369e-32,1.853141685472273e-30,1.398027511426634e-27,2.40811739032516e-19,1.372766137986312e-46,1.89841900743739e-38,4.402247367491101e-35,3.092171009349335e-29,4.272687493527812e-25,5.288080392166473e-24,3.010086837933234e-19,3.586873091781869e-18,1.282107863773735e-15,2.527112377700892e-14,1.87193574291505e-165,1.061834484692079e-164,1.795081486570583e-154,4.047442130979388e-150,3.59072257998555e-149,1.242498681288739e-145,2.717930688876884e-145,2.294636963181898e-125,4.512412518089594e-124,2.029019255753157e-121,8.476755157808618e-132,3.380256872123458e-115,7.328555748922841e-105,7.522659319651761e-101,1.419499580311066e-97,8.006640448239335e-94,7.70945802540775e-89,8.342996738045821e-87,1.482880717283539e-86,6.210195654654723e-82,1.318503341776076e-20,5.6156935010595e-14,5.947460821233553e-14,6.291944321993493e-12,3.121358618042529e-11,1.576331695647631e-06,2.879718284389726e-06,6.017135414919024e-06,0.0001399667587991821,0.0007754049699153131,0.0008236435224598628,0.002921746010606731,0.01319708531410233,0.03968073684346429,0.09543402751314088,0.2597214332192064,0.5113779631447636,1,1,1,1.014723893001145e-25,4.11061279953388e-22,3.118182692880403e-21,2.494112795122585e-19,2.976196265147517e-18,4.787081768933786e-18,1.17475180823853e-17,2.934680256158116e-16,9.816096907551557e-16,2.198334379029932e-14],["0","0","0","0","0","0","0","0","0","0","1","1","1","1","1","1","1","1","1","1","2","2","2","2","2","2","2","2","2","2","3","3","3","3","3","3","3","3","3","3","4","4","4","4","4","4","4","4","4","4","5","5","5","5","5","5","5","5","5","5","6","6","6","6","6","6","6","6","6","6","7","7","7","7","7","7","7","7","7","7"],["TIMP1","COMP","CKAP4","GCLM","MXRA5","PPIC","ID3","LOX","SCD","ELN","ADAMTSL1","NAV3","NRG1","ADAMTS12","MET","FMN2","SLC4A4","SYT14","ENSG00000287134","HAS2","TSPAN15","PLXDC1","EDNRA","ABCA1","LSP1","MAMDC2","CASC15","NALF1","INSIG2","MGP","LRRTM3","FRAS1","SORCS3","ENSG00000289013","LINC02552","ENSG00000234352","KCNJ3","SV2C","MIR133A1HG","JPH1","HJURP","IQGAP3","KIF18B","KIF4A","TTK","KIFC1","KIF14","BUB1B","NDC80","CKAP2L","SLC6A15","KYNU","KAZN","ENSG00000289201","GPC5","LRFN5","GNA14","TBX2","SLC12A2","OLFM2","MT-CO3","MT-CO1","MT-CO2","MT-ATP6","SPATA13","MT-ND4","MT-ND5","RUNX2","MT-CYB","FRY","ALDOC","ENO3","SLC25A4","MYL2","TNNI1","TCAP","NKX2-5","IGF2","MYH7","TNNI3"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-f843a680a1fcd62a0dd1">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.005793857794589\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.1573612790602\" data-max=\"7.84617823172173\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.509\" data-max=\"1\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.008\" data-max=\"0.709\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80"],[3.519193656672238e-30,1.104607910484985e-29,2.167493944028652e-18,3.199879618715598e-18,2.027071065976472e-17,4.795588304906576e-16,4.581512844956564e-15,1.376062204567053e-14,3.266033559334327e-12,3.631534208321021e-10,1.764117431713006e-84,1.275752586937249e-67,5.022978506859882e-49,5.036029361672745e-39,3.492449696266651e-37,8.655405134778453e-37,1.017801138850015e-36,4.800139059918855e-35,3.621270039441108e-32,6.237676501904263e-24,3.555836237855029e-51,4.917419591352095e-43,1.140301343700746e-39,8.00956071426549e-34,1.106741826018705e-29,1.369756098058974e-28,7.796940470220261e-24,9.290973143505851e-23,3.321006744479447e-20,6.545905759987804e-19,4.848820760801559e-170,2.750439011273064e-169,4.649747413797293e-159,1.04839717426809e-154,9.300944360942728e-154,3.218408230038697e-150,7.040176886693477e-150,5.943731448950676e-130,1.168837102546131e-128,5.25570961962689e-126,2.195709257060721e-136,8.755781153508414e-120,1.898294500575776e-109,1.948572584482143e-105,3.676888515544386e-102,2.073936809884302e-98,1.996958510440799e-93,2.161062202260224e-91,3.84106283293669e-91,1.60860893505018e-86,3.415280893581506e-25,1.45461676968852e-18,1.540553494595025e-18,1.629784054808448e-16,8.085164528939877e-16,4.083126186726497e-11,7.459250594181543e-11,1.558601102139311e-10,3.625518282111126e-09,2.008508962118098e-08,2.133459883074814e-08,7.568113792174096e-08,3.418402661270873e-07,1.027838596162884e-06,2.471999883778192e-06,6.727488815707568e-06,1.324607478487187e-05,0.0002158067324608063,0.001518046771306878,0.005793857794588707,2.628409814539567e-30,1.064760088984583e-26,8.076938022277375e-26,6.460427900125849e-24,7.709154704314142e-23,1.239983880467748e-22,3.042925473342304e-22,7.601616992586945e-21,2.542635058682991e-20,5.694281663549532e-19],[1.261538516116142,1.858869111634603,1.17169775514552,1.19593981826899,1.247899707507083,1.175839054900414,1.282609729125047,1.417338630466571,1.178944880345218,1.157361279060197,1.961265237143184,1.962261718038693,2.396044369056743,2.167655515017949,2.02792565773202,2.002477840367992,2.06417497312126,1.931625875626217,1.91007965757923,1.914128348573568,1.862019571954264,1.97724907743498,1.515773633994921,1.73098331791993,1.658123328829868,1.735886445093094,1.528414303724527,1.948807151723803,1.709705920891956,1.612355425236234,7.282792401322435,6.792934196965445,6.880914604663457,6.864262950116608,7.846178231721733,7.696148696229096,7.334076058740897,6.866756374077542,6.798869408069976,6.84297121032329,6.538786092901907,6.077961339759923,5.808101867227215,5.615033835712956,5.434615852639204,5.437990295750007,5.372097502060335,5.254099156033419,5.331999251785586,5.404216756888037,3.540242418996659,3.108908676616391,3.346281165685948,3.219153120463613,3.819532372949589,2.838907457717504,2.765178940728438,3.633626472188211,2.898520196195044,2.651530681897191,1.914989256056823,1.881810000219331,1.949533188258398,1.942126704817347,1.677079717119888,2.03875628430462,1.953465775320656,1.668045284413968,1.805608818280392,1.408338160479131,3.744058916579318,3.577413958479276,3.325252234450996,3.488963047740082,3.31696922267842,3.401632275318064,3.306549194654131,3.313060766786191,3.265855605936782,3.513122856438436],[0.881,0.676,0.6899999999999999,0.759,0.759,0.552,0.698,0.57,0.5600000000000001,0.676,0.965,0.931,0.6820000000000001,0.585,0.5600000000000001,0.623,0.648,0.695,0.528,0.5570000000000001,0.735,0.639,0.869,0.698,0.515,0.667,0.649,0.529,0.57,0.701,0.6820000000000001,0.694,0.656,0.631,0.605,0.599,0.599,0.5610000000000001,0.522,0.529,0.6879999999999999,0.65,0.625,0.675,0.713,0.625,0.662,0.675,0.625,0.575,0.623,0.528,0.868,0.547,0.5659999999999999,0.5659999999999999,0.547,0.509,0.679,0.547,0.74,0.78,0.64,0.5600000000000001,0.64,0.58,0.52,0.76,0.52,0.76,0.679,0.786,0.929,0.964,1,0.714,0.643,0.929,1,0.643],[0.6899999999999999,0.435,0.466,0.636,0.632,0.344,0.528,0.38,0.388,0.556,0.5659999999999999,0.661,0.294,0.24,0.224,0.278,0.348,0.375,0.222,0.312,0.32,0.266,0.593,0.393,0.203,0.397,0.375,0.27,0.341,0.468,0.012,0.014,0.013,0.012,0.008,0.008999999999999999,0.008999999999999999,0.014,0.008,0.011,0.02,0.023,0.024,0.035,0.046,0.031,0.042,0.047,0.036,0.031,0.141,0.125,0.482,0.158,0.174,0.242,0.218,0.186,0.412,0.254,0.503,0.5610000000000001,0.366,0.323,0.39,0.339,0.292,0.617,0.411,0.709,0.075,0.128,0.202,0.249,0.336,0.12,0.094,0.25,0.377,0.118],[1.358619903094884e-25,4.264449299218333e-25,8.367827120317015e-14,1.235345525601344e-13,7.825710557308767e-13,1.851384820992233e-11,1.768738848923931e-10,5.312425746951566e-10,1.26088491591661e-07,1.401990096464413e-05,6.81055175687123e-80,4.925170437129945e-63,1.939171082358326e-44,1.94420949536738e-34,1.348295129740703e-32,3.34150570633257e-32,3.929323076644369e-32,1.853141685472273e-30,1.398027511426634e-27,2.40811739032516e-19,1.372766137986312e-46,1.89841900743739e-38,4.402247367491101e-35,3.092171009349335e-29,4.272687493527812e-25,5.288080392166473e-24,3.010086837933234e-19,3.586873091781869e-18,1.282107863773735e-15,2.527112377700892e-14,1.87193574291505e-165,1.061834484692079e-164,1.795081486570583e-154,4.047442130979388e-150,3.59072257998555e-149,1.242498681288739e-145,2.717930688876884e-145,2.294636963181898e-125,4.512412518089594e-124,2.029019255753157e-121,8.476755157808618e-132,3.380256872123458e-115,7.328555748922841e-105,7.522659319651761e-101,1.419499580311066e-97,8.006640448239335e-94,7.70945802540775e-89,8.342996738045821e-87,1.482880717283539e-86,6.210195654654723e-82,1.318503341776076e-20,5.6156935010595e-14,5.947460821233553e-14,6.291944321993493e-12,3.121358618042529e-11,1.576331695647631e-06,2.879718284389726e-06,6.017135414919024e-06,0.0001399667587991821,0.0007754049699153131,0.0008236435224598628,0.002921746010606731,0.01319708531410233,0.03968073684346429,0.09543402751314088,0.2597214332192064,0.5113779631447636,1,1,1,1.014723893001145e-25,4.11061279953388e-22,3.118182692880403e-21,2.494112795122585e-19,2.976196265147517e-18,4.787081768933786e-18,1.17475180823853e-17,2.934680256158116e-16,9.816096907551557e-16,2.198334379029932e-14],["0","0","0","0","0","0","0","0","0","0","1","1","1","1","1","1","1","1","1","1","2","2","2","2","2","2","2","2","2","2","3","3","3","3","3","3","3","3","3","3","4","4","4","4","4","4","4","4","4","4","5","5","5","5","5","5","5","5","5","5","6","6","6","6","6","6","6","6","6","6","7","7","7","7","7","7","7","7","7","7"],["TIMP1","COMP","CKAP4","GCLM","MXRA5","PPIC","ID3","LOX","SCD","ELN","ADAMTSL1","NAV3","NRG1","ADAMTS12","MET","FMN2","SLC4A4","SYT14","ENSG00000287134","HAS2","TSPAN15","PLXDC1","EDNRA","ABCA1","LSP1","MAMDC2","CASC15","NALF1","INSIG2","MGP","LRRTM3","FRAS1","SORCS3","ENSG00000289013","LINC02552","ENSG00000234352","KCNJ3","SV2C","MIR133A1HG","JPH1","HJURP","IQGAP3","KIF18B","KIF4A","TTK","KIFC1","KIF14","BUB1B","NDC80","CKAP2L","SLC6A15","KYNU","KAZN","ENSG00000289201","GPC5","LRFN5","GNA14","TBX2","SLC12A2","OLFM2","MT-CO3","MT-CO1","MT-CO2","MT-ATP6","SPATA13","MT-ND4","MT-ND5","RUNX2","MT-CYB","FRY","ALDOC","ENO3","SLC25A4","MYL2","TNNI1","TCAP","NKX2-5","IGF2","MYH7","TNNI3"]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="heatmap-vis" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Heatmap vis</h2>
@@ -1103,6 +1755,43 @@ Heatmap &lt;- DoHeatmap(Fibroblasts, cells = colnames(Fibroblasts), label = FALS
 Adding another scale for fill, which will replace the existing scale.</code></pre>
 <pre class="r"><code>Heatmap</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-7-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-7-1.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="vln-vis" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> VLN vis</h2>
@@ -1112,6 +1801,43 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 377 318 291 157  80  53  50  28 </code></pre>
 <pre class="r"><code>VlnPlot(Fibroblasts, features = c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;, &quot;percent.rp&quot;, &quot;scDblFinder.score&quot;), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-8-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-8-1.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Fibroblasts, features = &quot;TTN&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Cardiomyocyte marker</code></pre>
 <pre><code>
@@ -1124,10 +1850,84 @@ plot all cells in gradient color palette.
 
 -----This message will be shown once per session.-----</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-8-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-2">
+Past versions of unnamed-chunk-8-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-8-2.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## --&gt; assumption = Cluster 3 is Cardiomyocyte and Fibroblast doublets?
 
 VlnPlot_scCustom(Fibroblasts, features = dplyr::filter(Markers_top10, cluster == &quot;6&quot;)$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-8-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-3">
+Past versions of unnamed-chunk-8-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-8-3.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## --&gt; assumption = Cluster 6 is MT-Cells</code></pre>
 </div>
 </div>
@@ -1136,17 +1936,165 @@ VlnPlot_scCustom(Fibroblasts, features = dplyr::filter(Markers_top10, cluster ==
 <pre class="r"><code>FeaturePlot_scCustom(Fibroblasts, features = &quot;CD163&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Macrophage marker</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-9-1.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Fibroblasts, features = &quot;FAP&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Activated Fibroblast Marker</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-9-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-2">
+Past versions of unnamed-chunk-9-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-9-2.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Fibroblasts, features = &quot;TTN&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Cardiomyocyte marker</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-9-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-3">
+Past versions of unnamed-chunk-9-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-9-3.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## --&gt; assumption = Cluster 3 is Cardiomyocyte and Fibroblast doublets?
 
 DimPlot(Fibroblasts, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;Phase&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-9-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-4">
+Past versions of unnamed-chunk-9-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-9-4.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Remove only the clearly mitochondrial cluster and the left over doubles
 Fibroblasts.clean &lt;- subset(Fibroblasts, subset = SCT_snn_res.0.5 %in% c(&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;4&quot;, &quot;5&quot;,&quot;7&quot;))
 
@@ -1213,23 +2161,60 @@ Negative:  CEMIP, KCNQ5, ERG, COL12A1, NALF1, CHSY3, DDAH1, COL4A2, ABI3BP, LDLR
 <pre><code>Harmony 6/10</code></pre>
 <pre><code>Harmony converged after 6 iterations</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-1.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DefaultAssay(Fibroblasts.clean) &lt;- &quot;SCT&quot;
 Fibroblasts.clean &lt;- RunUMAP(Fibroblasts.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>23:35:41 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>23:35:41 Read 1147 rows and found 20 numeric columns</code></pre>
-<pre><code>23:35:41 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>23:35:41 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>12:54:56 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>12:54:56 Read 1147 rows and found 20 numeric columns</code></pre>
+<pre><code>12:54:56 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>12:54:56 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-23:35:41 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpchLWXQ/file16b457fd1d002
-23:35:41 Searching Annoy index using 1 thread, search_k = 3000
-23:35:41 Annoy recall = 100%
-23:35:42 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-23:35:43 Initializing from normalized Laplacian + noise (using RSpectra)
-23:35:43 Commencing optimization for 500 epochs, with 44318 positive edges
-23:35:43 Using rng type: pcg
-23:35:44 Optimization finished</code></pre>
+12:54:56 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmpe6RvuE/file3b1667f17e7b
+12:54:56 Searching Annoy index using 1 thread, search_k = 3000
+12:54:57 Annoy recall = 100%
+12:54:57 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+12:54:58 Initializing from normalized Laplacian + noise (using RSpectra)
+12:54:58 Commencing optimization for 500 epochs, with 44318 positive edges
+12:54:58 Using rng type: pcg
+12:55:00 Optimization finished</code></pre>
 <pre class="r"><code>Fibroblasts.clean &lt;- FindNeighbors(Fibroblasts.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1309,16 +2294,238 @@ Elapsed time: 0 seconds</code></pre>
 <pre class="r"><code>clustree::clustree(Fibroblasts.clean@meta.data[,grep(&quot;SCT_snn_res&quot;, colnames(Fibroblasts.clean@meta.data))],
                    prefix = &quot;SCT_snn_res.&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-2">
+Past versions of unnamed-chunk-10-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-2.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.1&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-3">
+Past versions of unnamed-chunk-10-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-3.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.2&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-4">
+Past versions of unnamed-chunk-10-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-4.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.3&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-5">
+Past versions of unnamed-chunk-10-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-5.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;orig.ident&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-6">
+Past versions of unnamed-chunk-10-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-6.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Fibroblasts.clean, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;Phase&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-7.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-7">
+Past versions of unnamed-chunk-10-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-7.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DefaultAssay(Fibroblasts.clean) &lt;- &quot;RNA&quot;
 Idents(Fibroblasts.clean) &lt;- &quot;SCT_snn_res.0.3&quot;
 Markers.2 &lt;- FindAllMarkers(Fibroblasts.clean, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.5)</code></pre>
@@ -1334,18 +2541,92 @@ Markers_top5.2 &lt;- as.data.frame(Markers.2 %&gt;% group_by(cluster) %&gt;% top
 
 
 SCpubr::do_DotPlot(Fibroblasts.clean, 
-                   features = Markers_top10.2$gene,
+                   features = Markers_top5.2$gene,
                    dot.scale = 10,
-                   plot.title = &quot;Top 10 markers per cluster&quot;) </code></pre>
+                   plot.title = &quot;Top 5 markers per cluster&quot;) </code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-8.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-8">
+Past versions of unnamed-chunk-10-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-8.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>create_table(Markers_top10.2)</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-ba32e0541469b5ed4906" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ba32e0541469b5ed4906">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"6.4361973e-08\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.43940464165708\" data-max=\"6.58773129866373\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.5\" data-max=\"0.934\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.006\" data-max=\"0.679\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.002484758305441\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[4.188222052231292e-70,6.897247359177431e-54,4.091774611869336e-46,2.539425603874477e-43,1.640203817913199e-34,2.647374793702109e-33,1.41945307693955e-32,1.784994508917665e-30,3.372354755404968e-27,1.058514579681231e-25,2.004382654607961e-45,3.903597137174457e-36,1.070056625302381e-28,1.478969895988039e-28,1.145660773372672e-24,3.289338568117076e-22,5.896206075212322e-21,3.693894231343102e-20,3.494915856975935e-15,8.211601777089835e-14,9.757562586987536e-50,7.417440207473798e-42,1.267710190392788e-40,3.040176388629282e-35,2.007901316540285e-33,5.815442463842226e-29,6.336072433345299e-26,6.70054991057385e-26,1.922427348263015e-25,2.320360783513725e-21,6.055373387692385e-153,2.007506865318767e-121,1.053484635984216e-119,9.499288402602014e-119,3.188347978612405e-118,3.653522760915978e-118,1.50866095886819e-112,2.908189356054057e-111,8.570325331395882e-108,1.86082797771247e-93,5.912510680830502e-16,8.166838468994101e-14,2.552140080703456e-13,4.896911749262765e-13,2.812893058257477e-12,3.140753318938571e-12,1.951885967109319e-11,1.130344445462982e-10,8.55757811133866e-09,6.436197237322088e-08],[1.815858940204218,1.814267256916851,2.450856005337867,2.021335290223063,2.159672889401524,1.865419762010799,2.061579085787112,1.929677851795063,1.878934002421447,2.058097912846749,1.6933657673693,1.440309887859492,1.64595135487605,1.490651486640326,1.881473808061144,1.460159421356457,1.481517976742211,1.517412305987121,1.439404641657085,1.521494197382407,1.747157911380458,1.994538874948777,1.757506568680434,1.796646580856316,1.887085686610717,1.819087067519151,1.769198953381209,1.739003753978837,1.875100590386793,1.757092087544319,6.128503061877526,6.587731298663733,6.326060295934563,6.106282144867215,5.770246480707399,6.037019212780453,6.277989346147056,6.531728381717592,5.928708818736744,6.012586796082726,3.030917810302846,3.199198026443257,3.332164821493101,2.982345155932909,3.085145435578886,4.116843145504284,2.984886440185944,2.995842337258299,3.067917615696424,3.622050392093033],[0.9340000000000001,0.904,0.661,0.754,0.582,0.727,0.544,0.536,0.585,0.5570000000000001,0.901,0.851,0.539,0.735,0.662,0.577,0.787,0.612,0.638,0.583,0.867,0.6929999999999999,0.672,0.641,0.579,0.616,0.706,0.529,0.576,0.632,0.6909999999999999,0.6909999999999999,0.753,0.654,0.79,0.728,0.6909999999999999,0.617,0.605,0.5679999999999999,0.647,0.676,0.588,0.588,0.676,0.588,0.5,0.824,0.588,0.529],[0.5629999999999999,0.679,0.275,0.438,0.28,0.466,0.224,0.225,0.293,0.28,0.648,0.601,0.208,0.434,0.433,0.303,0.6,0.343,0.414,0.382,0.516,0.329,0.294,0.309,0.256,0.323,0.43,0.244,0.313,0.424,0.006,0.021,0.032,0.017,0.038,0.028,0.026,0.016,0.016,0.02,0.15,0.189,0.16,0.159,0.241,0.175,0.119,0.461,0.228,0.185],[1.616905005484413e-65,2.662751315484039e-49,1.579670506658276e-41,9.803706486317807e-39,6.332170859435697e-30,1.022045512856636e-28,5.479940548832826e-28,6.89114980112754e-26,1.301931276871642e-22,4.086501386317361e-21,7.738119676379492e-41,1.507022710777571e-31,4.131060607642371e-24,5.709711180451421e-24,4.422937981682536e-20,1.269882047607278e-17,2.276289317396469e-16,1.426064806952318e-15,1.349247215744129e-10,3.170170982063302e-09,3.767004612332408e-45,2.863576966497335e-37,4.894121961030399e-36,1.173690496594221e-30,7.751703822635426e-29,2.24510971759093e-24,2.446104123617286e-21,2.586814298476141e-21,7.421723020704196e-21,8.957984840833087e-17,2.337737450052522e-148,7.750181004249634e-117,4.067082785680664e-115,3.667295280708534e-114,1.230893620623105e-113,1.410478997079223e-113,5.824336497806534e-108,1.12273558279823e-106,3.308659797438694e-103,7.18391249075676e-89,2.282583873441424e-11,3.152889659339863e-09,9.852791995563763e-09,1.890501749920383e-08,1.085945494070882e-07,1.212519226309425e-07,7.535450964622235e-07,4.363807766154388e-06,0.0003303738605663403,0.002484758305440565],["0","0","0","0","0","0","0","0","0","0","1","1","1","1","1","1","1","1","1","1","2","2","2","2","2","2","2","2","2","2","3","3","3","3","3","3","3","3","3","3","4","4","4","4","4","4","4","4","4","4"],["ADAMTSL1","NAV3","NRG1","AFF3","SLC4A4","DCLK2","ADAMTS12","MET","FMN2","SLC1A3","TIMP1","HSPB1","CRYAB","CKAP4","COMP","PPIC","MXRA5","SCD","ACTC1","LOX","EDNRA","ABCA1","TSPAN15","B4GALNT3","PLXDC1","COL18A1","MGP","ARHGAP44","INSIG2","MAMDC2","HJURP","KIF4A","KNL1","SPC25","NCAPG","TTK","BUB1B","NDC80","NEIL3","CKAP2L","ARHGAP6","PAMR1","SLC6A15","PPARGC1A","LRFN5","GPC5","KYNU","KAZN","GNA14","TBX2"]],"container":"<table class=\"cell-border stripe hover\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-ba32e0541469b5ed4906">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"6.4361973e-08\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.43940464165708\" data-max=\"6.58773129866373\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.5\" data-max=\"0.934\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.006\" data-max=\"0.679\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.002484758305441\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[4.188222052231292e-70,6.897247359177431e-54,4.091774611869336e-46,2.539425603874477e-43,1.640203817913199e-34,2.647374793702109e-33,1.41945307693955e-32,1.784994508917665e-30,3.372354755404968e-27,1.058514579681231e-25,2.004382654607961e-45,3.903597137174457e-36,1.070056625302381e-28,1.478969895988039e-28,1.145660773372672e-24,3.289338568117076e-22,5.896206075212322e-21,3.693894231343102e-20,3.494915856975935e-15,8.211601777089835e-14,9.757562586987536e-50,7.417440207473798e-42,1.267710190392788e-40,3.040176388629282e-35,2.007901316540285e-33,5.815442463842226e-29,6.336072433345299e-26,6.70054991057385e-26,1.922427348263015e-25,2.320360783513725e-21,6.055373387692385e-153,2.007506865318767e-121,1.053484635984216e-119,9.499288402602014e-119,3.188347978612405e-118,3.653522760915978e-118,1.50866095886819e-112,2.908189356054057e-111,8.570325331395882e-108,1.86082797771247e-93,5.912510680830502e-16,8.166838468994101e-14,2.552140080703456e-13,4.896911749262765e-13,2.812893058257477e-12,3.140753318938571e-12,1.951885967109319e-11,1.130344445462982e-10,8.55757811133866e-09,6.436197237322088e-08],[1.815858940204218,1.814267256916851,2.450856005337867,2.021335290223063,2.159672889401524,1.865419762010799,2.061579085787112,1.929677851795063,1.878934002421447,2.058097912846749,1.6933657673693,1.440309887859492,1.64595135487605,1.490651486640326,1.881473808061144,1.460159421356457,1.481517976742211,1.517412305987121,1.439404641657085,1.521494197382407,1.747157911380458,1.994538874948777,1.757506568680434,1.796646580856316,1.887085686610717,1.819087067519151,1.769198953381209,1.739003753978837,1.875100590386793,1.757092087544319,6.128503061877526,6.587731298663733,6.326060295934563,6.106282144867215,5.770246480707399,6.037019212780453,6.277989346147056,6.531728381717592,5.928708818736744,6.012586796082726,3.030917810302846,3.199198026443257,3.332164821493101,2.982345155932909,3.085145435578886,4.116843145504284,2.984886440185944,2.995842337258299,3.067917615696424,3.622050392093033],[0.9340000000000001,0.904,0.661,0.754,0.582,0.727,0.544,0.536,0.585,0.5570000000000001,0.901,0.851,0.539,0.735,0.662,0.577,0.787,0.612,0.638,0.583,0.867,0.6929999999999999,0.672,0.641,0.579,0.616,0.706,0.529,0.576,0.632,0.6909999999999999,0.6909999999999999,0.753,0.654,0.79,0.728,0.6909999999999999,0.617,0.605,0.5679999999999999,0.647,0.676,0.588,0.588,0.676,0.588,0.5,0.824,0.588,0.529],[0.5629999999999999,0.679,0.275,0.438,0.28,0.466,0.224,0.225,0.293,0.28,0.648,0.601,0.208,0.434,0.433,0.303,0.6,0.343,0.414,0.382,0.516,0.329,0.294,0.309,0.256,0.323,0.43,0.244,0.313,0.424,0.006,0.021,0.032,0.017,0.038,0.028,0.026,0.016,0.016,0.02,0.15,0.189,0.16,0.159,0.241,0.175,0.119,0.461,0.228,0.185],[1.616905005484413e-65,2.662751315484039e-49,1.579670506658276e-41,9.803706486317807e-39,6.332170859435697e-30,1.022045512856636e-28,5.479940548832826e-28,6.89114980112754e-26,1.301931276871642e-22,4.086501386317361e-21,7.738119676379492e-41,1.507022710777571e-31,4.131060607642371e-24,5.709711180451421e-24,4.422937981682536e-20,1.269882047607278e-17,2.276289317396469e-16,1.426064806952318e-15,1.349247215744129e-10,3.170170982063302e-09,3.767004612332408e-45,2.863576966497335e-37,4.894121961030399e-36,1.173690496594221e-30,7.751703822635426e-29,2.24510971759093e-24,2.446104123617286e-21,2.586814298476141e-21,7.421723020704196e-21,8.957984840833087e-17,2.337737450052522e-148,7.750181004249634e-117,4.067082785680664e-115,3.667295280708534e-114,1.230893620623105e-113,1.410478997079223e-113,5.824336497806534e-108,1.12273558279823e-106,3.308659797438694e-103,7.18391249075676e-89,2.282583873441424e-11,3.152889659339863e-09,9.852791995563763e-09,1.890501749920383e-08,1.085945494070882e-07,1.212519226309425e-07,7.535450964622235e-07,4.363807766154388e-06,0.0003303738605663403,0.002484758305440565],["0","0","0","0","0","0","0","0","0","0","1","1","1","1","1","1","1","1","1","1","2","2","2","2","2","2","2","2","2","2","3","3","3","3","3","3","3","3","3","3","4","4","4","4","4","4","4","4","4","4"],["ADAMTSL1","NAV3","NRG1","AFF3","SLC4A4","DCLK2","ADAMTS12","MET","FMN2","SLC1A3","TIMP1","HSPB1","CRYAB","CKAP4","COMP","PPIC","MXRA5","SCD","ACTC1","LOX","EDNRA","ABCA1","TSPAN15","B4GALNT3","PLXDC1","COL18A1","MGP","ARHGAP44","INSIG2","MAMDC2","HJURP","KIF4A","KNL1","SPC25","NCAPG","TTK","BUB1B","NDC80","NEIL3","CKAP2L","ARHGAP6","PAMR1","SLC6A15","PPARGC1A","LRFN5","GPC5","KYNU","KAZN","GNA14","TBX2"]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>p_val<\/th>\n      <th>avg_log2FC<\/th>\n      <th>pct.1<\/th>\n      <th>pct.2<\/th>\n      <th>p_val_adj<\/th>\n      <th>cluster<\/th>\n      <th>gene<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"p_val","targets":1},{"name":"avg_log2FC","targets":2},{"name":"pct.1","targets":3},{"name":"pct.2","targets":4},{"name":"p_val_adj","targets":5},{"name":"cluster","targets":6},{"name":"gene","targets":7}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>VlnPlot(Fibroblasts.clean, 
         features = c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;), 
         group.by = &quot;SCT_snn_res.0.3&quot;, 
         pt.size = 0.1)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-10-10.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-10">
+Past versions of unnamed-chunk-10-10.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-10.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>gradient_colors &lt;- custom_palette(4)
 
 cellCounts1 &lt;- as.data.frame(table(Celltype = Fibroblasts.clean$SCT_snn_res.0.2, sample = Fibroblasts.clean$orig.ident))
@@ -1357,24 +2638,123 @@ ggplot(data = cellCounts1, aes(x = sample, fill = Celltype, y = Freq)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
   labs(title = &quot;Proportions across Identities&quot;, x = &quot;&quot;, y = &quot;fraction of cells&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-11-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>############ Fibro sub
-
-quiescent &lt;- c( &quot;DCN&quot;, &quot;GSN&quot;, &quot;PDGFRA&quot;)
-FeaturePlot_scCustom(Fibroblasts.clean, features = quiescent, pt.size = 0, reduction = &quot;umap&quot;) + 
-  theme(axis.title.x = element_blank())</code></pre>
-<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-11-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>inflammatory &lt;- c(&quot;IL6&quot;, &quot;CCL2&quot;, &quot;CXCL1&quot;, &quot;CXCL12&quot;)
-FeaturePlot_scCustom(Fibroblasts.clean, features = inflammatory, pt.size = 0, reduction = &quot;umap&quot;) + 
-  theme(axis.title.x = element_blank())</code></pre>
-<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-11-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>active &lt;- c(&quot;ACTA2&quot;, &quot;POSTN&quot;, &quot;COL1A1&quot;, &quot;FN1&quot;)
-FeaturePlot_scCustom(Fibroblasts.clean, features = active, pt.size = 0, reduction = &quot;umap&quot;) + 
-  theme(axis.title.x = element_blank())</code></pre>
-<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-11-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-11-1.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>table(Fibroblasts.clean$orig.ident)  # --&gt; Proportions too different to sinvoll subsets machen. </code></pre>
 <pre><code>
    CMF_NC   CMF_TGF  CMFHM_NC CMFHM_TGF 
       174       804        64       105 </code></pre>
+<div id="biomarkers-from-gino-dcm-subclustering-analysis"
+class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Biomarkers from Gino
+DCM subclustering analysis</h2>
+<pre class="r"><code>gino.markers &lt;- c(&quot;ACSM3&quot;, &quot;PDZRN4&quot;, &quot;FGF14&quot;, &quot;KAZN&quot;, &quot;NFATC2&quot;, 
+&quot;POSTN&quot;, &quot;ACTA2&quot;, &quot;FAP&quot;, &quot;VIM&quot;, &quot;COL1A1&quot;, &quot;FN1&quot;, &quot;SHISA6&quot;, &quot;CNTNAP2&quot;, &quot;NFATC2&quot;)
+                                              
+plot_features(Fibroblasts.clean, features = gino.markers, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Gino Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-12-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="biomarkers-obtained-through-small-talk-with-chatgpt-maks-and-magda"
+class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Biomarkers obtained
+through small talk with chatgpt (Maks and Magda):</h2>
+<pre class="r"><code>chat.markers &lt;- c(&quot;COL1A1&quot;, &quot;TNC&quot;, &quot;COL3A1&quot;, &quot;FN1&quot;, # fibroblasty produkujące ECM
+                    &quot;FOS&quot;, &quot;JUN&quot;, &quot;EGR1&quot;, &quot;HSPA1A&quot;, # fibroblasty stresowe
+                          &quot;COL15A1&quot;, &quot;CD34&quot;, &quot;PI16&quot;) # fibroblasty związane zremodellingiem naczyń
+
+chat.markers2 &lt;- c(&quot;ACTA2&quot;, &quot;TAGLN&quot;, &quot;MYH11&quot;, &quot;CCN2&quot;, # miofibroblasty
+                    &quot;POSTN&quot;, &quot;FAP&quot;, &quot;CTHRC1&quot;, &quot;COMP&quot;, # fibroblasty związane z włóknieniem
+                        &quot;DCN&quot;, &quot;LUM&quot;, &quot;DPT&quot;, &quot;SHISA6&quot;) # fibroblasty rezydentne
+                                              
+plot_features(Fibroblasts.clean, features = chat.markers, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Chat Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-13-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_features(Fibroblasts.clean, features = chat.markers2, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Chat Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-13-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="biomarkers-from-reichart-paper" class="section level2"
+number="4.3">
+<h2><span class="header-section-number">4.3</span> Biomarkers from
+Reichart paper:</h2>
+<pre class="r"><code># lipogenic markers
+Reichard.lipo &lt;- c(&quot;APOD&quot;, &quot;APOE&quot;, &quot;CST3&quot;)
+plot_features(Fibroblasts.clean, features = Reichard.lipo, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Reichart lipogenic Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-14-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Cytoskeletal markers 
+Reichard.cytosk &lt;- c(&quot;DAAM1&quot;, &quot;GPC6&quot;)
+plot_features(Fibroblasts.clean, features = Reichard.cytosk, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Reichart Cytoskeletal Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-14-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># biomarkers_inflammatory
+Reichard.inflm &lt;- c(&quot;CCL2&quot;, &quot;IL6ST&quot;, &quot;OSMR&quot;)
+plot_features(Fibroblasts.clean, features = Reichard.inflm, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Reichart inflammatory Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-14-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># biomarkers_fibrosis
+Reichard.fibrosis &lt;- c(&quot;TGFB2&quot;, &quot;PCOLCE2&quot;, &quot;COL4A1&quot;, &quot;COL4A2&quot;)
+plot_features(Fibroblasts.clean, features = Reichard.fibrosis, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Reichart fibrosis Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-14-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="biomarkers-from-maatz-publication" class="section level2"
+number="4.4">
+<h2><span class="header-section-number">4.4</span> Biomarkers from Maatz
+publication:</h2>
+<pre class="r"><code>maatz.markers &lt;- c(&quot;MGP&quot;, &quot;APOD&quot;, &quot;CFD&quot;, &quot;GSN&quot;, &quot;SERPINF1&quot;)
+
+plot_features(Fibroblasts.clean, features = maatz.markers, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Maatz Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-15-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="biomarkers-gabi" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Biomarkers Gabi</h2>
+<pre class="r"><code>gabi.markers &lt;- c(&quot;COMP&quot;, &quot;CLIP1&quot;, &quot;CHAD&quot;, &quot;THBS4&quot;,
+                  &quot;PDPN&quot;, &quot;DYSF&quot;, &quot;POSTN&quot;,
+                  &quot;FAP&quot;, &quot;ACTA2&quot;, &quot;MXRA5&quot;,
+                  &quot;FOSL2&quot;)
+
+plot_features(Fibroblasts.clean, features = gabi.markers, 
+              title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Gabi Markers&quot;)</code></pre>
+<p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-16-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1421,13 +2801,13 @@ other attached packages:
 [31] Seqinfo_1.2.0               IRanges_2.46.0             
 [33] S4Vectors_0.50.1            BiocGenerics_0.58.1        
 [35] generics_0.1.4              MatrixGenerics_1.24.0      
-[37] matrixStats_1.5.0           workflowr_1.7.2            
-[39] ggrepel_0.9.8               cowplot_1.2.0              
-[41] patchwork_1.3.2             scCustomize_3.3.0          
-[43] hdf5r_1.3.12                Seurat_5.5.0               
-[45] SeuratObject_5.4.0          sp_2.2-1                   
-[47] ggplot2_4.0.3               dplyr_1.2.1                
-[49] readr_2.2.0                
+[37] matrixStats_1.5.0           ggrepel_0.9.8              
+[39] cowplot_1.2.0               patchwork_1.3.2            
+[41] scCustomize_3.3.0           hdf5r_1.3.12               
+[43] Seurat_5.5.0                SeuratObject_5.4.0         
+[45] sp_2.2-1                    ggplot2_4.0.3              
+[47] dplyr_1.2.1                 readr_2.2.0                
+[49] workflowr_1.7.2            
 
 loaded via a namespace (and not attached):
   [1] ggpp_0.6.1                goftest_1.2-3            
@@ -1536,6 +2916,7 @@ loaded via a namespace (and not attached):
 [207] RColorBrewer_1.1-3        rlang_1.2.0              
 [209] spatstat.sparse_3.2-0     spatstat.explore_3.8-1   
 [211] ggnewscale_0.5.2          beeswarm_0.4.0           </code></pre>
+</div>
 </div>
 </div>
 </div>
