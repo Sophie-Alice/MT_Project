@@ -554,15 +554,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeaaec6d04a7fa71647fd1f477da0b06b5612b7f74targetblankaaec6d0a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree99328029aa804ffacee2a07afe94f2dd27a1d793targetblank9932802a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/aaec6d04a7fa71647fd1f477da0b06b5612b7f74" target="_blank">aaec6d0</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/99328029aa804ffacee2a07afe94f2dd27a1d793" target="_blank">9932802</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeaaec6d04a7fa71647fd1f477da0b06b5612b7f74targetblankaaec6d0a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree99328029aa804ffacee2a07afe94f2dd27a1d793targetblank9932802a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -572,7 +572,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/aaec6d04a7fa71647fd1f477da0b06b5612b7f74" target="_blank">aaec6d0</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/99328029aa804ffacee2a07afe94f2dd27a1d793" target="_blank">9932802</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -588,6 +588,7 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
 
@@ -644,6 +645,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/99328029aa804ffacee2a07afe94f2dd27a1d793/analysis/Subclusters_Fib.Rmd" target="_blank">9932802</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+<td>
+subclusters exp
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/Subclusters_Fib.html" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -707,8 +742,8 @@ Update viewing of tables
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907874 48.5    1753068 93.7         NA  1321067 70.6
-Vcells 1599252 12.3    8388608 64.0      16384  2442348 18.7</code></pre>
+Ncells  907875 48.5    1753068 93.7         NA  1321070 70.6
+Vcells 1599340 12.3    8388608 64.0      16384  2438782 18.7</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -833,10 +868,10 @@ class="section level2" number="3.2">
 Sub-clustering Cardiac Fibroblasts</h2>
 <p>PC = 20</p>
 <pre class="r"><code>set.seed(42)
-# 2. Split by sample to prepare for fresh subset normalization
+
 Fibroblasts.list &lt;- SplitObject(Fibroblasts.raw, split.by = &quot;orig.ident&quot;)
 
-# 3. Re-run SCTransform on the fibroblast subsets to find fibroblast-specific variance
+#  Re-run SCTransform on the fibroblast subsets to find fibroblast-specific variance
 for (i in 1:length(Fibroblasts.list)) {
   DefaultAssay(Fibroblasts.list[[i]]) &lt;- &quot;RNA&quot;
   Fibroblasts.list[[i]] &lt;- SCTransform(Fibroblasts.list[[i]], 
@@ -906,21 +941,21 @@ Sophie.Alice
 
 Dims &lt;- 20
 Fibroblasts &lt;- RunUMAP(Fibroblasts, dims = 1:Dims)</code></pre>
-<pre><code>12:54:21 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>12:54:21 Read 1354 rows and found 20 numeric columns</code></pre>
-<pre><code>12:54:21 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>12:54:21 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>14:46:30 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>14:46:30 Read 1354 rows and found 20 numeric columns</code></pre>
+<pre><code>14:46:30 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>14:46:30 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-12:54:21 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmpe6RvuE/file3b16128df467
-12:54:21 Searching Annoy index using 1 thread, search_k = 3000
-12:54:21 Annoy recall = 100%
-12:54:22 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-12:54:23 Initializing from normalized Laplacian + noise (using RSpectra)
-12:54:23 Commencing optimization for 500 epochs, with 53180 positive edges
-12:54:23 Using rng type: pcg
-12:54:25 Optimization finished</code></pre>
+14:46:30 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpRAWARL/file5764212763ab
+14:46:30 Searching Annoy index using 1 thread, search_k = 3000
+14:46:30 Annoy recall = 100%
+14:46:30 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+14:46:31 Initializing from normalized Laplacian + noise (using RSpectra)
+14:46:31 Commencing optimization for 500 epochs, with 53180 positive edges
+14:46:31 Using rng type: pcg
+14:46:33 Optimization finished</code></pre>
 <pre class="r"><code>Fibroblasts &lt;- FindNeighbors(Fibroblasts, dims = 1:Dims)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1281,7 +1316,7 @@ Sophie.Alice
 </div>
 <pre class="r"><code>##################################### integration
 
-# 6. Run Harmony to integrate fibroblasts across your conditions/samples
+# Run Harmony to integrate 
 Fibroblasts &lt;- RunHarmony(Fibroblasts, 
                           group.by.vars = &quot;orig.ident&quot;, 
                           dims.use = 1:Dims,
@@ -1339,29 +1374,28 @@ Sophie.Alice
 </div>
 <pre class="r"><code>##################################### Clustering with integration
 
-# 7. UMAP and Clustering using the Harmony reduction
+
 DefaultAssay(Fibroblasts) &lt;- &quot;SCT&quot;
 Fibroblasts &lt;- RunUMAP(Fibroblasts, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>12:54:27 UMAP embedding parameters a = 0.9922 b = 1.112
-12:54:27 Read 1354 rows and found 20 numeric columns
-12:54:27 Using Annoy for neighbor search, n_neighbors = 30
-12:54:27 Building Annoy index with metric = cosine, n_trees = 50
+<pre><code>14:46:36 UMAP embedding parameters a = 0.9922 b = 1.112
+14:46:36 Read 1354 rows and found 20 numeric columns
+14:46:36 Using Annoy for neighbor search, n_neighbors = 30
+14:46:36 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-12:54:27 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmpe6RvuE/file3b1625a89fb5
-12:54:27 Searching Annoy index using 1 thread, search_k = 3000
-12:54:27 Annoy recall = 100%
-12:54:28 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-12:54:29 Initializing from normalized Laplacian + noise (using RSpectra)
-12:54:29 Commencing optimization for 500 epochs, with 53146 positive edges
-12:54:29 Using rng type: pcg
-12:54:31 Optimization finished</code></pre>
+14:46:36 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpRAWARL/file57642100808e
+14:46:36 Searching Annoy index using 1 thread, search_k = 3000
+14:46:36 Annoy recall = 100%
+14:46:36 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+14:46:37 Initializing from normalized Laplacian + noise (using RSpectra)
+14:46:37 Commencing optimization for 500 epochs, with 53146 positive edges
+14:46:37 Using rng type: pcg
+14:46:39 Optimization finished</code></pre>
 <pre class="r"><code>Fibroblasts &lt;- FindNeighbors(Fibroblasts, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
-<pre class="r"><code># Using a slightly lower resolution range since sub-clustering is more sensitive
-Fibroblasts &lt;- FindClusters(Fibroblasts, graph.name = &quot;SCT_snn&quot;, resolution = seq(0.1, 0.8, by=0.1))</code></pre>
+<pre class="r"><code>Fibroblasts &lt;- FindClusters(Fibroblasts, graph.name = &quot;SCT_snn&quot;, resolution = seq(0.1, 0.8, by=0.1))</code></pre>
 <pre><code>Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
 Number of nodes: 1354
@@ -2200,21 +2234,21 @@ Sophie.Alice
 </div>
 <pre class="r"><code>DefaultAssay(Fibroblasts.clean) &lt;- &quot;SCT&quot;
 Fibroblasts.clean &lt;- RunUMAP(Fibroblasts.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>12:54:56 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>12:54:56 Read 1147 rows and found 20 numeric columns</code></pre>
-<pre><code>12:54:56 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>12:54:56 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>14:47:02 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>14:47:02 Read 1147 rows and found 20 numeric columns</code></pre>
+<pre><code>14:47:02 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>14:47:02 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-12:54:56 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmpe6RvuE/file3b1667f17e7b
-12:54:56 Searching Annoy index using 1 thread, search_k = 3000
-12:54:57 Annoy recall = 100%
-12:54:57 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-12:54:58 Initializing from normalized Laplacian + noise (using RSpectra)
-12:54:58 Commencing optimization for 500 epochs, with 44318 positive edges
-12:54:58 Using rng type: pcg
-12:55:00 Optimization finished</code></pre>
+14:47:02 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpRAWARL/file57642b7ca8f4
+14:47:02 Searching Annoy index using 1 thread, search_k = 3000
+14:47:02 Annoy recall = 100%
+14:47:03 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+14:47:03 Initializing from normalized Laplacian + noise (using RSpectra)
+14:47:03 Commencing optimization for 500 epochs, with 44318 positive edges
+14:47:03 Using rng type: pcg
+14:47:05 Optimization finished</code></pre>
 <pre class="r"><code>Fibroblasts.clean &lt;- FindNeighbors(Fibroblasts.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -2569,6 +2603,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-8.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-10-8.png" target="_blank">fc83bf1</a>
 </td>
 <td>
@@ -2689,6 +2734,43 @@ DCM subclustering analysis</h2>
 plot_features(Fibroblasts.clean, features = gino.markers, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Gino Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-12-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-12-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div
 id="biomarkers-obtained-through-small-talk-with-chatgpt-maks-and-magda"
@@ -2706,9 +2788,83 @@ chat.markers2 &lt;- c(&quot;ACTA2&quot;, &quot;TAGLN&quot;, &quot;MYH11&quot;, &
 plot_features(Fibroblasts.clean, features = chat.markers, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Chat Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-13-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-13-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_features(Fibroblasts.clean, features = chat.markers2, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Chat Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-13-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-2">
+Past versions of unnamed-chunk-13-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-13-2.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="biomarkers-from-reichart-paper" class="section level2"
 number="4.3">
@@ -2719,21 +2875,169 @@ Reichard.lipo &lt;- c(&quot;APOD&quot;, &quot;APOE&quot;, &quot;CST3&quot;)
 plot_features(Fibroblasts.clean, features = Reichard.lipo, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Reichart lipogenic Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-14-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-14-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Cytoskeletal markers 
 Reichard.cytosk &lt;- c(&quot;DAAM1&quot;, &quot;GPC6&quot;)
 plot_features(Fibroblasts.clean, features = Reichard.cytosk, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Reichart Cytoskeletal Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-14-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-2">
+Past versions of unnamed-chunk-14-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-14-2.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># biomarkers_inflammatory
 Reichard.inflm &lt;- c(&quot;CCL2&quot;, &quot;IL6ST&quot;, &quot;OSMR&quot;)
 plot_features(Fibroblasts.clean, features = Reichard.inflm, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Reichart inflammatory Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-14-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-3">
+Past versions of unnamed-chunk-14-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-14-3.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># biomarkers_fibrosis
 Reichard.fibrosis &lt;- c(&quot;TGFB2&quot;, &quot;PCOLCE2&quot;, &quot;COL4A1&quot;, &quot;COL4A2&quot;)
 plot_features(Fibroblasts.clean, features = Reichard.fibrosis, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Reichart fibrosis Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-14-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-4">
+Past versions of unnamed-chunk-14-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-14-4.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="biomarkers-from-maatz-publication" class="section level2"
 number="4.4">
@@ -2744,6 +3048,43 @@ publication:</h2>
 plot_features(Fibroblasts.clean, features = maatz.markers, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Maatz Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-15-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-15-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="biomarkers-gabi" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Biomarkers Gabi</h2>
@@ -2755,6 +3096,43 @@ plot_features(Fibroblasts.clean, features = maatz.markers,
 plot_features(Fibroblasts.clean, features = gabi.markers, 
               title = &quot;Modified Fibroblast Subset&quot;, subtitle = &quot;Gabi Markers&quot;)</code></pre>
 <p><img src="figure/Subclusters_Fib.Rmd/unnamed-chunk-16-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Subclusters_Fib.Rmd/unnamed-chunk-16-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
