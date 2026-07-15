@@ -50,7 +50,7 @@ library(ggrain)
 
 library(edgeR)
 library(limma)
-
+library(aPEAR)
 ```
 
 
@@ -1215,5 +1215,273 @@ E.down.M2
 
 E.Up.Mast
 E.down.Mast
+
+```
+
+
+
+# GSEA using Methods closely
+
+ - Method 1: cell based method
+ - Method 2: Pseudobulk based method
+ 
+## Method 1 
+
+ - dispersion estimation method combines with t-like stat and GO Terms
+ 
+```{r, warning = FALSE, fig.width=8, fig.height=5}
+Data.method1.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Fibro_DEG_Lists_method1.rds")
+
+Degs.M1 <- Data.method1.list$`NC vs TGF`
+
+generate_volcano(Degs.M1, "TGF vs MAC+TGF: Method 1")
+Volcano_Plots(Degs.M1, "NTGF vs MAC+TGF", "Method 1")
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=5}
+
+ranked_vector <- Degs.M1$t_like
+
+names(ranked_vector) <- Degs.M1$gene
+
+ranked_vector <- sort(ranked_vector, decreasing = TRUE)
+
+```
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+Humanlibrary <- org.Hs.eg.db
+
+gsea_results <- gseGO(
+  geneList     = ranked_vector,
+  OrgDb        = Humanlibrary,      
+  ont          = "BP",              
+  keyType      = "SYMBOL",          
+  minGSSize    = 15,
+  maxGSSize    = 800,
+  pvalueCutoff = 0.1,
+  pAdjustMethod = "BH"              
+)
+
+global_dotplot <- dotplot(
+  gsea_results, 
+  showCategory = 10, 
+  split = ".sign"
+) + 
+facet_grid(. ~ .sign) +
+theme(axis.text.y = element_text(size = 8))
+
+print(global_dotplot)
+
+```
+
+## EMAP plot
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+gsea_sig_df <- gsea_results@result %>%
+  dplyr::filter(p.adjust < 0.05)  
+
+set.seed(42)
+p_apear <- enrichmentNetwork(
+  enrichment = gsea_sig_df,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  fontSize     = 3,
+  colorBy      = "NES",        
+  colorType    = "nes"  
+)
+
+p_apear <- p_apear + labs(
+  title    = "Enrichment Network of sign. GO Terms found by GSEA",
+  subtitle = "Method 1, t-like statistic",
+  color    = "NES",       
+) +
+theme(
+  plot.title.position = "plot",
+  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+)
+
+print(p_apear)
+
+
+```
+
+## Method 2 
+
+ - Sampled Pseudobulk method combines with t-like stat and GO Terms
+ 
+```{r, warning = FALSE, fig.width=8, fig.height=5}
+Data.method2.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Fibro_DEG_Lists_method2.rds")
+
+Degs.M2 <- Data.method2.list$`NC vs TGF`
+
+generate_volcano(Degs.M2, "TGF vs MAC+TGF: Method 2")
+Volcano_Plots(Degs.M2, "TGF vs MAC+TGF", "Method 2")
+
+```
+
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=5}
+
+ranked_vector <- Degs.M2$t_like
+
+names(ranked_vector) <- Degs.M2$gene
+
+ranked_vector <- sort(ranked_vector, decreasing = TRUE)
+
+```
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+Humanlibrary <- org.Hs.eg.db
+
+gsea_results <- gseGO(
+  geneList     = ranked_vector,
+  OrgDb        = Humanlibrary,      
+  ont          = "BP",              
+  keyType      = "SYMBOL",          
+  minGSSize    = 15,
+  maxGSSize    = 800,
+  pvalueCutoff = 0.1,
+  pAdjustMethod = "BH"              
+)
+
+global_dotplot <- dotplot(
+  gsea_results, 
+  showCategory = 10, 
+  split = ".sign"
+) + 
+facet_grid(. ~ .sign) +
+theme(axis.text.y = element_text(size = 8))
+
+print(global_dotplot)
+
+```
+
+## EMAP plot
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+gsea_sig_df <- gsea_results@result %>%
+  dplyr::filter(p.adjust < 0.05)  
+
+set.seed(42)
+p_apear <- enrichmentNetwork(
+  enrichment = gsea_sig_df,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  fontSize     = 3,
+  colorBy      = "NES",        
+  colorType    = "nes"  
+)
+
+p_apear <- p_apear + labs(
+  title    = "Enrichment Network of sign. GO Terms found by GSEA",
+  subtitle = "Method 2, t-like statistic",
+  color    = "NES",       
+) +
+theme(
+  plot.title.position = "plot",
+  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+)
+
+print(p_apear)
+
+
+```
+
+
+## Method MAST
+
+ - Cell based approach MAST combined with l2FC stat and GO Terms
+ 
+```{r, warning = FALSE, fig.width=8, fig.height=5}
+Data.mast.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Fibro_DEG_Lists.rds")
+
+Degs.Mast <- Data.mast.list$Baseline_TGF_Response
+
+Degs.Mast <- Degs.Mast %>%
+  rename(
+      FDR = p_val_adj)
+
+generate_volcano(Degs.Mast, "TGF vs MAC+TGF: Method Mast")
+Volcano_Plots(Degs.Mast, "TGF vs MAC+TGF", "Method Mast")
+
+```
+
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=5}
+
+ranked_vector <- Degs.Mast$avg_log2FC
+
+names(ranked_vector) <- Degs.Mast$gene
+
+ranked_vector <- sort(ranked_vector, decreasing = TRUE)
+
+```
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+Humanlibrary <- org.Hs.eg.db
+
+gsea_results <- gseGO(
+  geneList     = ranked_vector,
+  OrgDb        = Humanlibrary,      
+  ont          = "BP",              
+  keyType      = "SYMBOL",          
+  minGSSize    = 15,
+  maxGSSize    = 800,
+  pvalueCutoff = 0.1,
+  pAdjustMethod = "BH"              
+)
+
+global_dotplot <- dotplot(
+  gsea_results, 
+  showCategory = 10, 
+  split = ".sign"
+) + 
+facet_grid(. ~ .sign) +
+theme(axis.text.y = element_text(size = 8))
+
+print(global_dotplot)
+
+```
+
+## EMAP plot
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+gsea_sig_df <- gsea_results@result %>%
+  dplyr::filter(p.adjust < 0.05)  
+
+set.seed(42)
+p_apear <- enrichmentNetwork(
+  enrichment = gsea_sig_df,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  fontSize     = 3,
+  colorBy      = "NES",        
+  colorType    = "nes"  
+)
+
+p_apear <- p_apear + labs(
+  title    = "Enrichment Network of sign. GO Terms found by GSEA",
+  subtitle = "Method MAST, l2FC statistic",
+  color    = "NES",       
+) +
+theme(
+  plot.title.position = "plot",
+  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+)
+
+print(p_apear)
+
 
 ```
