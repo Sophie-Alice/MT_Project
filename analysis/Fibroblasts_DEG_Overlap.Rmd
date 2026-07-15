@@ -51,6 +51,10 @@ library(DT)
 library(ggforce) 
 library(enrichplot)
 library(ggrain)
+
+library(ComplexHeatmap)
+library(tidyverse)
+library(circlize)
 ```
 
 
@@ -343,9 +347,7 @@ ggvenn(
 
 ```{r, warning = FALSE}
 
-library(ComplexHeatmap)
-library(tidyverse)
-library(circlize)
+
 
 FDR <- 0.01 
 
