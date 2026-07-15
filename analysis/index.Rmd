@@ -17,9 +17,9 @@ Project MT
 * [3. Clustering and Annotation](Dim_Reduction.html)
 * [4. Celltype Proportions](Proportions.html)
 
-## Cardiomyocite Subset
+## Cardiomyocyte Subset
 
-* **5. Cardiomyocite Subset**
+* **5. Cardiomyocyte Subset**
     * [5. CM Subtypes](CM_Subtypes.html)
 
 ## Macrophages DGEA
