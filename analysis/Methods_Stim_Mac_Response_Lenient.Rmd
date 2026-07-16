@@ -285,7 +285,7 @@ Volcano_Plots(Degs.Mast, "TGF vs MAC+TGF", "Mast")
 ```
 
 
-# FGSEA - MAST
+# FGSEA
 
 ## Get Hallmark pathways
 
@@ -796,9 +796,6 @@ E.down.M1 <- emapplot(
 ```
 
 
-
-# PAH
-
 ## PAH - Method 2
 
 ```{r,warning = FALSE}
@@ -998,7 +995,6 @@ E.down.M2 <- emapplot(
 
 ```
 
-# PAH
 
 ## PAH - Method Mast
 

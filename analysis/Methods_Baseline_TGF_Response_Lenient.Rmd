@@ -1290,7 +1290,7 @@ p_apear <- enrichmentNetwork(
   drawEllipses = TRUE,
   fontSize     = 3,
   colorBy      = "NES",        
-  colorType    = "nes"  
+  colorType    = "nes"
 )
 
 p_apear <- p_apear + labs(
