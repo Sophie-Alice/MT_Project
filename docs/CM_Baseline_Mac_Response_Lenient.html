@@ -725,15 +725,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree295e485ff6530d46b49b316d081d5ccc1787761ctargetblank295e485a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeb1e95348c23d3aa26f4b15b34312461ec13a8a53targetblankb1e9534a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/295e485ff6530d46b49b316d081d5ccc1787761c" target="_blank">295e485</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/b1e95348c23d3aa26f4b15b34312461ec13a8a53" target="_blank">b1e9534</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree295e485ff6530d46b49b316d081d5ccc1787761ctargetblank295e485a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeb1e95348c23d3aa26f4b15b34312461ec13a8a53targetblankb1e9534a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -743,7 +743,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/295e485ff6530d46b49b316d081d5ccc1787761c" target="_blank">295e485</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/b1e95348c23d3aa26f4b15b34312461ec13a8a53" target="_blank">b1e9534</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -807,6 +807,41 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/b1e95348c23d3aa26f4b15b34312461ec13a8a53/analysis/CM_Baseline_Mac_Response_Lenient.Rmd" target="_blank">b1e9534</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Update cardiomyocyte, fibroblast, and macrophage baseline/stimulated
+response analyses, including lenient
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/CM_Baseline_Mac_Response_Lenient.html" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -887,8 +922,8 @@ CM DGEA
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  908265 48.6    1754170 93.7         NA  1321095 70.6
-Vcells 1601708 12.3    8388608 64.0      16384  2393427 18.3</code></pre>
+Ncells  908331 48.6    1754358 93.7         NA  1321095 70.6
+Vcells 1602279 12.3    8388608 64.0      16384  2486975 19.0</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -1160,8 +1195,8 @@ Sophie.Alice
 </div>
 </div>
 </div>
-<div id="fgsea" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> FGSEA</h1>
+<div id="fgsea---limma" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> FGSEA - Limma</h1>
 <div id="get-hallmark-pathways" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Get Hallmark
 pathways</h2>
@@ -1181,10 +1216,10 @@ ranked &lt;- deframe(DEG.ranked)
 
 rank &lt;- ranked[names(ranked) != &quot;&quot;]</code></pre>
 </div>
-<div id="functional-gene-set-enrichment-analysis" class="section level2"
-number="5.3">
+<div id="functional-gene-set-enrichment-analysis---with-limma"
+class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Functional gene set
-enrichment Analysis</h2>
+enrichment Analysis - with Limma</h2>
 <pre class="r"><code>############################## Hallmark
 set.seed(42)
 
@@ -1247,7 +1282,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
     plot.subtitle   = element_text(hjust = 0, size = 9, face = &quot;italic&quot;),
     legend.position = &quot;left&quot; 
   )</code></pre>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-8-1.png" alt="" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-8-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
 Past versions of unnamed-chunk-8-1.png
@@ -1287,8 +1322,66 @@ Sophie.Alice
 </div>
 </div>
 </div>
-<div id="pah" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> PAH</h1>
+<div id="fgsea---clusterprofiler" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> FGSEA -
+ClusterProfiler</h1>
+<ul>
+<li>Done in this way for GO BP terms and compatibility with aPEAR
+Emapplot</li>
+</ul>
+<pre class="r"><code>set.seed(42)
+
+ranked_vector &lt;- Degs$avg_log2FC
+
+names(ranked_vector) &lt;- Degs$gene
+
+ranked_vector &lt;- sort(ranked_vector, decreasing = TRUE)
+
+Humanlibrary &lt;- org.Hs.eg.db
+
+gsea_results &lt;- gseGO(
+  geneList     = ranked_vector,
+  OrgDb        = Humanlibrary,      
+  ont          = &quot;BP&quot;,              
+  keyType      = &quot;SYMBOL&quot;,          
+  minGSSize    = 15,
+  maxGSSize    = 800,
+  pvalueCutoff = 0.1,
+  pAdjustMethod = &quot;BH&quot;              
+)
+
+
+gsea_sig_df &lt;- gsea_results@result %&gt;%
+  dplyr::filter(p.adjust &lt; 0.05)  
+
+
+p_apear &lt;- enrichmentNetwork(
+  enrichment = gsea_sig_df,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  fontSize     = 3,
+  simMethod = &quot;jaccard&quot;, 
+  clustMethod = &quot;hier&quot;,
+  colorBy      = &quot;NES&quot;,        
+  colorType    = &quot;nes&quot;  
+)
+
+p_apear &lt;- p_apear + labs(
+  title    = &quot;Network of Significant GO-BP Terms Identified by GSEA&quot;,
+  subtitle = &quot;MT-Cardiomyocytes: differences in CMFHM_NC compared to CMF_NC&quot;,
+  color    = &quot;NES&quot;,       
+) +
+theme(
+  plot.title.position = &quot;plot&quot;,
+  plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+  plot.subtitle = element_text(face = &quot;italic&quot;, size = 10, hjust = 0)
+)
+
+print(p_apear)</code></pre>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pah" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> PAH</h1>
 <pre class="r"><code>df &lt;- Degs
 
 # Upregulated Genes
@@ -1337,7 +1430,7 @@ simp.up.GO.sign &lt;- as.data.frame(simp.up.GO.show) %&gt;%
 
 create_table(simp.up.GO.show)</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-484ed42468d86de4a421" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-484ed42468d86de4a421">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.247169811320754\" data-max=\"0.96875\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.25006678911337\" data-max=\"4.89947455752212\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.9987200444412\" data-max=\"11.8255170490033\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.002724010451287\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.078723902042177\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.078723902042177\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"11\" data-max=\"139\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["GO:0002181","GO:0160307","GO:1901740","GO:0140253","GO:0006119","GO:0014902","GO:0009060","GO:1902600","GO:0015986","GO:0042254","GO:0006396","GO:0140053","GO:0006364","GO:0006941","GO:0007283","GO:0046390","GO:0046034","GO:0003006","GO:0061061","GO:0051093","GO:0022618","GO:0007006","GO:0006403","GO:0071826","GO:0051246","GO:0006986","GO:0006417","GO:0010608","GO:0042255","GO:0050821"],["GO:0002181","GO:0160307","GO:1901740","GO:0140253","GO:0006119","GO:0014902","GO:0009060","GO:1902600","GO:0015986","GO:0042254","GO:0006396","GO:0140053","GO:0006364","GO:0006941","GO:0007283","GO:0046390","GO:0046034","GO:0003006","GO:0061061","GO:0051093","GO:0022618","GO:0007006","GO:0006403","GO:0071826","GO:0051246","GO:0006986","GO:0006417","GO:0010608","GO:0042255","GO:0050821"],["cytoplasmic translation","protein biosynthetic process","negative regulation of myoblast fusion","cell-cell fusion","oxidative phosphorylation","myotube differentiation","aerobic respiration","proton transmembrane transport","proton motive force-driven ATP synthesis","ribosome biogenesis","RNA processing","mitochondrial gene expression","rRNA processing","striated muscle contraction","spermatogenesis","ribose phosphate biosynthetic process","ATP metabolic process","developmental process involved in reproduction","muscle structure development","negative regulation of developmental process","protein-RNA complex assembly","mitochondrial membrane organization","RNA localization","protein-RNA complex organization","regulation of protein metabolic process","response to unfolded protein","regulation of translation","post-transcriptional regulation of gene expression","ribosome assembly","protein stabilization"],["81/904","139/904","31/904","31/904","39/904","35/904","52/904","36/904","26/904","52/904","126/904","35/904","36/904","45/904","51/904","29/904","33/904","58/904","65/904","71/904","33/904","11/904","32/904","34/904","131/904","21/904","49/904","65/904","13/904","29/904"],["136/4572","316/4572","32/4572","40/4572","59/4572","56/4572","113/4572","65/4572","41/4572","119/4572","396/4572","73/4572","80/4572","112/4572","140/4572","70/4572","95/4572","195/4572","232/4572","258/4572","101/4572","22/4572","98/4572","106/4572","530/4572","57/4572","169/4572","238/4572","30/4572","89/4572"],[0.5955882352941176,0.439873417721519,0.96875,0.775,0.6610169491525424,0.625,0.4601769911504425,0.5538461538461539,0.6341463414634146,0.4369747899159664,0.3181818181818182,0.4794520547945205,0.45,0.4017857142857143,0.3642857142857143,0.4142857142857143,0.3473684210526316,0.2974358974358974,0.2801724137931034,0.2751937984496124,0.3267326732673267,0.5,0.3265306122448979,0.3207547169811321,0.2471698113207547,0.3684210526315789,0.2899408284023668,0.273109243697479,0.4333333333333333,0.3258426966292135],[3.01220067673087,2.224669541839364,4.899474557522123,3.919579646017699,3.34310784460777,3.160951327433628,2.327355313650247,2.801089176310415,3.207209151737535,2.210009667583848,1.609211584875302,2.424839374469633,2.275884955752212,2.032040139064475,1.842383059418458,2.095259165613148,1.756823474615743,1.50428863172226,1.416978181263351,1.391798724017288,1.652457723648471,2.528761061946903,1.651435795557161,1.622224077475372,1.250066789113375,1.863297624592455,1.466382154265068,1.381256042239905,2.191592920353982,1.647956647111465],[11.82551704900328,11.20048453923726,10.98824454660901,9.206202739856769,8.992092784040457,8.076760302826525,7.092230480253431,7.259776956580524,7.047150522502815,6.639129436182499,6.296666094117798,6.091784112430497,5.714941625138826,5.489254075178385,5.025148830408019,4.583933760495399,3.700309170979764,3.572591598989724,3.235844333057571,3.215940183428366,3.291439607532579,3.567963615855598,3.236024709764346,3.217477719207877,3.039281736515655,3.255699095157402,3.066804530132995,2.998720044441196,3.250424920996832,3.064303277809673],[3.854463952355323e-25,1.763791644514505e-24,2.581636835627074e-21,4.242698199174219e-15,8.183939563379356e-15,2.392382334214528e-12,1.47818039384401e-10,1.640577182913243e-10,1.081567481138457e-09,1.493162881361449e-09,1.715104697860804e-09,4.424435922261848e-08,2.153627865102996e-07,3.958713530136463e-07,2.335982703568546e-06,2.370016421396173e-05,0.0004002416590499917,0.0004352139911448865,0.001191793206016915,0.001226536849983093,0.001359638174729371,0.001401342004462845,0.001617153089671572,0.0016543036678937,0.001757340763106755,0.001933962579630593,0.002175092663759255,0.002400932563044598,0.002709180128721172,0.002724010451286375],[8.911520657845506e-22,1.359295427372512e-21,1.193748872793959e-18,8.917380214991632e-13,1.576772355877756e-12,4.254759966695376e-10,2.441109336119537e-08,2.528676297930279e-08,1.250292008196056e-07,1.643901229384605e-07,1.724053070197469e-07,3.299772855570772e-06,1.422625035462322e-05,2.542373800465417e-05,0.0001350198002662619,0.001191190862232164,0.01713627251339965,0.01765289030749084,0.04239116757401705,0.04296595753274108,0.04691766358170604,0.04764562815173673,0.05306983405776687,0.05306983405776687,0.05490502492301105,0.05961761978807907,0.06530927582612205,0.07116610366357834,0.07872390204217625,0.07872390204217625],[8.911520657845506e-22,1.359295427372512e-21,1.193748872793959e-18,8.917380214991631e-13,1.576772355877756e-12,4.254759966695376e-10,2.441109336119537e-08,2.528676297930279e-08,1.250292008196056e-07,1.643901229384605e-07,1.724053070197469e-07,3.299772855570772e-06,1.422625035462322e-05,2.542373800465417e-05,0.000135019800266262,0.001191190862232164,0.01713627251339965,0.01765289030749084,0.04239116757401705,0.04296595753274108,0.04691766358170604,0.04764562815173673,0.05306983405776687,0.05306983405776687,0.05490502492301105,0.05961761978807907,0.06530927582612205,0.07116610366357835,0.07872390204217625,0.07872390204217625],["RPL12/RPS24/RPL37A/RPL13/RPS7/RPL17/RPL18/RNF14/EIF4E2/RPL36A/RPS9/CNBP/RPL35/RPL31/RPLP1/RPLP0/RPS28/RPS25/UFSP2/RPS29/RPS16/RPL14/RPS12/RWDD1/RPL3/YBX1/RPS8/RPL35A/RPL15/RPS14/PABPC1/RPL5/EEF2/RPL4/ABCE1/NCBP2/RPS3/RPL24/RPL8/RPS18/EIF4A1/ZC3H15/RPS26/RPL6/NCBP1/EIF2B4/METTL3/RPSA/RPS2/GAPDH/RPS3A/RPL41/RPL10A/RPL30/RPS6/RPL32/EIF3M/EIF4A2/PAIP1/RCHY1/RPS27/RPL9/RPS19/RPL13A/EIF2S2/RACK1/RPL7A/EIF3D/RPL10/RPLP2/RPL11/RPL21/UFL1/RPL34/RPL22/RPL26/RPS23/RPL37/RPS27A/CPEB2/RPS20","RPL12/RPS24/METTL17/RPL37A/NACA/RPL13/RPS7/SECISBP2/HARS1/RPL17/TARS1/MRPS30/RPL18/EIF1/RNF14/EIF4E2/UQCC2/RPL36A/GUF1/RPS9/CNBP/RPL35/RPL31/RPLP1/RPLP0/ZNF706/RPS28/GFM2/RPS25/EIF1B/EEF1A1/UFSP2/RPS29/RPS16/RPL14/MRPS9/CIRBP/MRPS31/RPS12/RWDD1/RPL3/YBX1/MRPS5/MRPL3/RPS8/RPL35A/RPL15/EIF1AX/IGFBP5/RPS14/PABPC1/RPL5/EEF2/RPL4/MTG1/EIF2A/ZCCHC4/MRPS10/SSB/MRPL35/ABCE1/NCBP2/MRPL22/RPS3/RPL24/RPL8/RPS18/OTUD6B/EIF4A1/GFM1/NCL/METAP1/EEF1G/ZC3H15/MRPS21/RPS26/RPL6/MRPL20/FASTKD2/NCBP1/EIF2B4/SRP9/METTL3/RPSA/RPS2/GAPDH/RPS3A/MRPL30/RPL41/RPL10A/RPL30/RPS6/RPL32/SERBP1/COPS5/PAIP2B/EIF3M/MTRF1L/EIF4A2/PAIP1/RCHY1/RPS27/MRPL27/RPL9/RPS19/RPL13A/EIF2S2/FXR1/YTHDF1/RACK1/LRPPRC/PURB/RPL7A/EIF3D/MRPL42/MRPL32/PA2G4/METTL5/OSGEP/RPL10/RPLP2/MRPL19/RPL11/RPL21/UFL1/MRPS22/HSPB1/MRPL13/RPL34/RPS27L/RPL22/UPF3A/MRPS25/RPL26/RPS23/RPL37/RPS27A/CPEB2/RPS20","RPL12/RPL37A/RPL13/RPL17/RPL18/RPL36A/RPL35/RPL31/RPLP1/RPLP0/RPL14/RPL35A/RPL15/RPL5/RPL4/RPL24/RPL8/RPL6/RPL41/RPL10A/RPL30/RPL32/RPL9/RPL13A/RPL7A/RPL10/RPLP2/RPL11/RPL21/RPL34/RPL37","RPL12/RPL37A/RPL13/RPL17/RPL18/RPL36A/RPL35/RPL31/RPLP1/RPLP0/RPL14/RPL35A/RPL15/RPL5/RPL4/RPL24/RPL8/RPL6/RPL41/RPL10A/RPL30/RPL32/RPL9/RPL13A/RPL7A/RPL10/RPLP2/RPL11/RPL21/RPL34/RPL37","UQCRH/NDUFV1/CYCS/NDUFA5/UQCC2/ATP5F1B/ATP5IF1/MT-CO1/ATP5PO/COX6B1/NDUFA12/ATP5F1A/NDUFV2/COX6C/UQCRFS1/COX7C/COX5A/NDUFA11/RHOA/NDUFB5/ATP5F1E/ATP5PD/COX7A2/NDUFB2/NDUFA13/ATP5PF/ATP5MG/NDUFB4/TEFM/COX4I1/COX7B/ATP5F1D/UQCRB/GHITM/NDUFB1/COX5B/NDUFB8/NDUFB9/NDUFS5","RPL12/RPL37A/NACA/RPL13/RPL17/RPL18/RPL36A/RPL35/RPL31/RPLP1/RPLP0/NKX2-5/RPL14/RPL35A/RPL15/RPL5/RPL4/MYEF2/RPL24/RPL8/CAV2/RPL6/RPL41/RPL10A/RPL30/RPL32/RPL9/RPL13A/RPL7A/RPL10/RPLP2/RPL11/RPL21/RPL34/RPL37","UQCRH/NDUFV1/CYCS/NDUFA5/PDHA1/UQCC2/ATP5F1B/ATP5IF1/DLD/MT-CO1/ENO3/IDH3A/ATP5PO/COX6B1/NDUFA12/ATP5F1A/NDUFV2/FH/COX6C/UQCRFS1/MDH2/DLST/COX7C/COX5A/NDUFA11/MDH1/RHOA/NDUFB5/TPI1/ATP5F1E/GAPDH/ATP5PD/COX7A2/LDHA/PFKM/NDUFB2/NDUFA13/ATP5PF/ATP5MG/NDUFB4/TEFM/COX4I1/SUCLG1/COX7B/ATP5F1D/UQCRB/GHITM/NDUFB1/COX5B/NDUFB8/NDUFB9/NDUFS5","UQCRH/NDUFV1/NDUFA5/CLCN3/ATP5F1B/MT-CO1/ATP5PO/COX6B1/NDUFA12/ATP6V0A2/SLC25A4/ATP5F1A/NDUFV2/ATP5MC1/UQCRFS1/COX5A/ATP5MC2/SLC9B2/ATP5MC3/NDUFB5/SLC25A3/ATP5F1E/ATP5PD/NDUFB2/ATP5PF/ATP5MG/NDUFB4/COX4I1/COX7B/ATP5F1D/GHITM/NDUFB1/COX5B/NDUFB8/NDUFB9/NDUFS5","NDUFV1/NDUFA5/ATP5F1B/ATP5IF1/ATP5PO/NDUFA12/ATP5F1A/NDUFV2/ATP5MC1/NDUFA11/ATP5MK/ATP5MC2/ATP5MC3/NDUFB5/ATP5F1E/ATP5PD/NDUFB2/NDUFA13/ATP5PF/ATP5MG/NDUFB4/ATP5F1D/NDUFB1/NDUFB8/NDUFB9/NDUFS5","RPS24/METTL17/RPS7/SNU13/NOL11/WDR75/RPS9/RPL35/RPLP0/RPS28/RPS25/RBIS/RPS16/RPL14/NSA2/EXOSC8/RPS12/RPS8/RPL35A/EIF1AX/RPS14/RPL5/MTG1/EIF2A/ZCCHC4/MTREX/RRP36/RRP15/FASTKD2/NOL7/WBP11/RPSA/XRN2/CUL4B/RPS3A/WDR12/RPS6/RPS27/RBFA/RPS19/C1D/RPL7A/PA2G4/METTL5/RPL11/DDX18/RPS27L/RPL26/RPS23/RPL37/RPS27A/FGF12","RPS24/STRAP/RPS7/NONO/SF1/SNU13/NOL11/WDR75/FASTKD1/PRPF39/PRMT9/CPSF6/SUPV3L1/HNRNPDL/TIAL1/SMNDC1/FAM98A/RPL35/BARD1/RPS28/RPS25/GCFC2/RNPC3/LSM8/RSRP1/KHDC4/HNRNPA2B1/RPS16/CRIPT/RBM17/RPL14/NSA2/SNHG29/HNRNPK/SNRNP40/CLK1/TRMU/EXOSC8/CIRBP/DTWD1/IVNS1ABP/PPWD1/YBX1/METTL4/SRSF10/TMBIM6/RPL35A/RPS14/ELAC2/SLIRP/CLK4/PABPC1/RPL5/ARL6IP4/SUPT7L/ZCCHC4/RBM48/ANGEL2/SSB/DDX5/NCBP2/MTREX/PAXBP1/PAPOLA/RRP36/PRKRA/HNRNPH3/RRP15/THOC7/NCL/ENY2/RPS26/SRSF1/FRA10AC1/TRMT13/HNRNPA1/FASTKD2/RNMT/TRUB1/NCBP1/FAM98B/NOL7/METTL3/SRSF3/WBP11/XRN2/WDR12/ARGLU1/RTRAF/RPS6/SNHG1/PRDX6/IK/TSEN15/SRSF2/SMU1/RPS27/GRSF1/RBFA/DDX39B/RPS19/DHX16/C1D/WTAP/LRPPRC/RPL7A/APOBEC2/TARDBP/GEMIN8/SRSF7/THUMPD2/PAPOLG/PA2G4/METTL5/OSGEP/PLRG1/POP1/RPL11/PSIP1/FAM50A/DDX18/RPS27L/PUS7L/RPL26/RPL37/RBM12B","MRPS30/FASTKD1/UQCC2/SUPV3L1/GFM2/MTERF2/MRPS9/TRMU/MRPS31/METTL4/MRPS5/MRPL3/ELAC2/SLIRP/MTG1/MRPS10/ANGEL2/MRPL35/MRPL22/GFM1/MRPS21/MRPL20/FASTKD2/MRPL30/MTRF1L/MRPL27/TEFM/TFAM/LRPPRC/MRPL42/MRPL32/MRPL19/MRPS22/MRPL13/MRPS25","RPS24/RPS7/SNU13/NOL11/WDR75/RPL35/RPS28/RPS25/RPS16/RPL14/NSA2/EXOSC8/RPL35A/RPS14/RPL5/ZCCHC4/MTREX/RRP36/RRP15/NOL7/WBP11/XRN2/WDR12/RPS6/RPS27/RBFA/RPS19/C1D/RPL7A/PA2G4/METTL5/RPL11/DDX18/RPS27L/RPL26/RPL37","RPL12/RPL37A/RPL13/RPL17/MB/RPL18/RPL36A/GJA1/CSRP3/RPL35/RPL31/RPLP1/RPLP0/NKX2-5/RPL14/TNNI1/RPL35A/RPL15/RNF207/RPL5/EEF2/RPL4/RPL24/RPL8/RPL6/RPL41/RPL10A/RPL30/RPL32/PLN/RPL9/RPL13A/SUMO1/RPL7A/MYL2/RPL10/RPLP2/RPL11/RPL21/RPL34/TNNC1/RPL37/CALM2/SRI/FGF12","RPL12/RPL37A/RPL13/RPL17/RPL18/GJA1/BTG1/MKRN2/RPL35/RPL31/RPLP1/RPLP0/RPL14/PSMA4/HOOK1/RPL3/HADH/VDAC3/RPL35A/CIBAR1/RPL15/RPL5/RPL4/PSMA3/RPL24/RPL8/RPL6/IFT81/METTL3/XRN2/CUL4B/RPL41/RPL10A/RPL30/DCAF17/RPL32/PLN/PSMA2/RPL9/RPL13A/FXR1/RPL7A/PSMB2/TTC12/RPLP2/RPL11/RPL21/FAM50A/RPL34/PSMB1/RPL37","NDUFV1/NDUFA5/ATP5F1B/ATP5IF1/TMSB4X/ATP5PO/NDUFA12/ATP5F1A/NDUFV2/ATP5MC1/NDUFA11/ATP5MK/ATP5MC2/ATP5MC3/NDUFB5/ATP5F1E/ATP5PD/COX11/NDUFB2/NDUFA13/ATP5PF/ATP5MG/NDUFB4/ATP5F1D/NDUFB1/NDUFB8/NDUFB9/NDUFS5/GUCY1A2","NDUFV1/NDUFA5/ATP5F1B/ATP5IF1/TMSB4X/ENO3/ATP5PO/NDUFA12/ATP5F1A/NDUFV2/ATP5MC1/NDUFA11/ATP5MK/ATP5MC2/ATP5MC3/NDUFB5/TPI1/ATP5F1E/GAPDH/ATP5PD/LDHA/PFKM/COX11/NDUFB2/NDUFA13/ATP5PF/ATP5MG/NDUFB4/ATP5F1D/NDUFB1/NDUFB8/NDUFB9/NDUFS5","RPL12/RPL37A/RPL13/E2F8/SMAD4/RPL17/RPL18/GJA1/BTG1/MKRN2/RPL35/RPL31/RPLP1/RPLP0/RPL14/PSMA4/HOOK1/RPL3/HADH/VDAC3/RPL35A/CIBAR1/RPL15/RPL5/RPL4/PSMA3/RPL24/RPL8/RPL6/IFT81/EIF2B4/METTL3/PARP2/XRN2/CUL4B/RPL41/RPL10A/RPL30/DCAF17/RPL32/CASP2/PLN/PSMA2/RPL9/RPL13A/ROBO2/FXR1/RPL7A/PSMB2/TTC12/RPLP2/RPL11/RPL21/FAM50A/RPL34/PSMB1/CITED2/RPL37","RPL12/RPL37A/ITGB1BP2/NACA/RPL13/SMAD4/CAVIN4/RPL17/RPL18/UQCC2/RPL36A/BTG1/CSRP3/RPL35/RPL31/PDCD4/RPLP1/RPLP0/NKX2-5/LRRC10/SOX4/RPL14/SMARCE1/SGCB/RPL35A/RPL15/KDM1A/RPL5/EEF2/RPL4/MYEF2/DDX5/PHF10/PAXBP1/RPL24/RPL8/CAV2/RPL6/RPL41/RPL10A/RPL30/MYL6/RPL32/RPL9/MDM2/RPL13A/FXR1/RPL7A/MYL2/POPDC3/TBX20/RPL10/RPLP2/RPL11/RPL21/SGCE/SMARCD1/S1PR1/RPL34/CFL2/HEY2/TNNC1/LAMA2/RPL37/SRA1","RPL12/RPL37A/BAMBI/RPL13/ATF2/SMAD4/RPL17/IRF1/RPL18/SOCS5/RPL36A/HDAC2/TMSB4X/CSRP3/RPL35/RPL31/PDCD4/RPLP1/B2M/RPLP0/ZNF706/NKX2-5/TP53INP1/RBBP4/SOX4/RPL14/SS18/PSMA4/RPL35A/RPL15/SEMA6A/STAT1/IGFBP5/RPL5/RPL4/PSMA3/CDKN1A/BRD9/RPL24/RPL8/SYNJ2BP/RPL6/CUL4B/RPL41/RPL10A/RPL30/NOCT/RPL32/HSPA9/PSMA2/DPF2/RPL9/RPL13A/ROBO2/TPT1/RPL7A/PSMB2/GPS2/RPL10/RPLP2/RPL11/RPL21/SMARCD1/CFL1/RPL34/HEY2/PSMB1/VEGFC/RPL37/SRA1/DYNLT1","METTL17/STRAP/SF1/SNU13/PRPF39/HSP90AB1/RPS28/GCFC2/LSM8/RSRP1/KHDC4/SNRNP40/SRSF10/RPS14/RPL5/MTG1/PRKRA/SRSF1/FASTKD2/NCBP1/RPSA/GAPDH/RPS6/EIF3M/RBFA/DDX39B/RPS19/RPL13A/EIF2S2/EIF3D/GEMIN8/RPL11/PSIP1","TIMM9/COX18/MTCH1/CIBAR1/MTX2/CHCHD10/SLC25A46/HSPA9/NDUFA13/TOMM20/GHITM","CCT2/ERH/CPSF6/CCT3/CCT6A/G3BP2/HNRNPA2B1/NUP42/YBX1/PEG10/SSB/NCBP2/XPOT/THOC7/ENY2/SRSF1/HNRNPA1/NCBP1/SRSF3/HNRNPAB/RTRAF/NUP85/DDX39B/FXR1/LRPPRC/SRSF7/CCT8/TOMM20/CCT5/UPF3A/CCT4/SENP2","METTL17/STRAP/SF1/SNU13/PRPF39/HSP90AB1/RPS28/GCFC2/LSM8/RSRP1/KHDC4/SNRNP40/SRSF10/RPS14/RPL5/MTG1/PRKRA/SRSF1/FASTKD2/NCBP1/ZFAND1/RPSA/GAPDH/RPS6/EIF3M/RBFA/DDX39B/RPS19/RPL13A/EIF2S2/EIF3D/GEMIN8/RPL11/PSIP1","ITM2B/RPS7/SECISBP2/SMAD4/DR1/LRRTM3/EIF1/SOCS5/BEX3/EIF4E2/UQCC2/GUF1/HDAC2/ATP5IF1/HSP90AB1/CNBP/BIRC2/CCNG1/PDCD4/BARD1/COPS2/ZNF706/EIF1B/EEF1A1/SQSTM1/CRYAB/RAD23B/COPS6/NEK10/PSMA4/CIRBP/IVNS1ABP/ASB11/PRNP/YBX1/NDFIP1/ERBB4/SERPINB1/NEDD8/TOM1L1/IGFBP5/KDM1A/COPS8/PABPC1/RPL5/EEF2/PSMA3/MTG1/EIF2A/ZCCHC4/SSB/ABCE1/NCBP2/MBIP/CDKN1A/SUMO2/RPS3/RHOA/TGFB1I1/OTUD6B/IP6K2/VPS35/PPIA/FGF7/NCL/METAP1/TBC1D7/PDCD10/NCBP1/EIF2B4/SH3RF2/SRP9/METTL3/GNL3/RPS2/GAPDH/PSMD13/RTRAF/SERBP1/COPS5/PAIP2B/CTSC/EIF4A2/NDUFA13/PAIP1/PSMA2/GABARAPL2/RCHY1/DESI1/MDM2/PSMC6/RPL13A/DCUN1D5/SUMO1/EIF2S2/DNAJA1/FXR1/YTHDF1/PAQR3/RACK1/LRPPRC/PURB/TARDBP/CYP51A1/PSMB2/SOCS4/PA2G4/METTL5/GPS2/RPL10/RPL11/UFL1/STRADB/CFL1/PFDN1/HSPB1/MRPL13/PSMD6/RPS27L/MIF/UPF3A/KLHL31/PFDN5/PSMD7/RPL26/PRKAR1A/PSMB1/SENP2/CPEB2/ETAA1/VEGFB","SELENOS/OPTN/MBTPS1/ERLEC1/HSP90AB1/HSPD1/EDEM3/HSPE1/ASB11/HSPB3/TMBIM6/SERP1/JKAMP/CREBZF/COPS5/DNAJC10/HSPB7/DNAJA1/RACK1/UFL1/HSPB1","SECISBP2/EIF1/EIF4E2/UQCC2/GUF1/CNBP/ZNF706/EIF1B/CIRBP/YBX1/IGFBP5/PABPC1/RPL5/EEF2/MTG1/EIF2A/ZCCHC4/SSB/ABCE1/NCBP2/RPS3/OTUD6B/NCL/METAP1/NCBP1/EIF2B4/SRP9/METTL3/GAPDH/SERBP1/PAIP2B/EIF4A2/PAIP1/RPL13A/EIF2S2/FXR1/YTHDF1/RACK1/LRPPRC/PURB/PA2G4/METTL5/RPL10/HSPB1/MRPL13/RPS27L/UPF3A/RPL26/CPEB2","SECISBP2/EIF1/FASTKD1/EIF4E2/UQCC2/GUF1/TIAL1/CNBP/ZNF706/EIF1B/NORAD/CIRBP/FAM76B/YBX1/METTL4/IGFBP5/PABPC1/RPL5/EEF2/MTG1/EIF2A/ZCCHC4/ANGEL2/SSB/APEX1/ABCE1/NCBP2/RPS3/OTUD6B/NCL/METAP1/SRSF1/FASTKD2/TRUB1/NCBP1/EIF2B4/MIR133A1HG/SRP9/METTL3/GAPDH/CUL4B/NOCT/SERBP1/PAIP2B/EIF4A2/PAIP1/RPL13A/EIF2S2/FXR1/YTHDF1/RACK1/LRPPRC/DCP1B/PURB/TARDBP/PA2G4/METTL5/RPL10/HSPB1/MRPL13/RPS27L/UPF3A/RPL26/OIP5-AS1/CPEB2","METTL17/RPS28/EIF1AX/RPS14/RPL5/MTG1/EIF2A/FASTKD2/RPSA/RPS6/RBFA/RPS19/RPL11","CCT2/ZNF207/NAA30/HSP90AB1/PPP1R10/CCT3/CCT6A/HSPD1/CRYAB/SOX4/ZSWIM7/PPIB/URI1/PRKRA/IP6K2/PFN1/PDCD10/GAPDH/SUMO1/SPAG1/TBRG1/CCT8/PFN2/CCT5/UFL1/PFDN1/HSPB1/PFDN5/CCT4"],[81,139,31,31,39,35,52,36,26,52,126,35,36,45,51,29,33,58,65,71,33,11,32,34,131,21,49,65,13,29]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>Description<\/th>\n      <th>GeneRatio<\/th>\n      <th>BgRatio<\/th>\n      <th>RichFactor<\/th>\n      <th>FoldEnrichment<\/th>\n      <th>zScore<\/th>\n      <th>pvalue<\/th>\n      <th>p.adjust<\/th>\n      <th>qvalue<\/th>\n      <th>geneID<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"Description","targets":2},{"name":"GeneRatio","targets":3},{"name":"BgRatio","targets":4},{"name":"RichFactor","targets":5},{"name":"FoldEnrichment","targets":6},{"name":"zScore","targets":7},{"name":"pvalue","targets":8},{"name":"p.adjust","targets":9},{"name":"qvalue","targets":10},{"name":"geneID","targets":11},{"name":"Count","targets":12}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-484ed42468d86de4a421">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.247169811320754\" data-max=\"0.96875\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.25006678911337\" data-max=\"4.89947455752212\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.9987200444412\" data-max=\"11.8255170490033\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.002724010451287\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.078723902042177\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.078723902042177\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"11\" data-max=\"139\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["GO:0002181","GO:0160307","GO:1901740","GO:0140253","GO:0006119","GO:0014902","GO:0009060","GO:1902600","GO:0015986","GO:0042254","GO:0006396","GO:0140053","GO:0006364","GO:0006941","GO:0007283","GO:0046390","GO:0046034","GO:0003006","GO:0061061","GO:0051093","GO:0022618","GO:0007006","GO:0006403","GO:0071826","GO:0051246","GO:0006986","GO:0006417","GO:0010608","GO:0042255","GO:0050821"],["GO:0002181","GO:0160307","GO:1901740","GO:0140253","GO:0006119","GO:0014902","GO:0009060","GO:1902600","GO:0015986","GO:0042254","GO:0006396","GO:0140053","GO:0006364","GO:0006941","GO:0007283","GO:0046390","GO:0046034","GO:0003006","GO:0061061","GO:0051093","GO:0022618","GO:0007006","GO:0006403","GO:0071826","GO:0051246","GO:0006986","GO:0006417","GO:0010608","GO:0042255","GO:0050821"],["cytoplasmic translation","protein biosynthetic process","negative regulation of myoblast fusion","cell-cell fusion","oxidative phosphorylation","myotube differentiation","aerobic respiration","proton transmembrane transport","proton motive force-driven ATP synthesis","ribosome biogenesis","RNA processing","mitochondrial gene expression","rRNA processing","striated muscle contraction","spermatogenesis","ribose phosphate biosynthetic process","ATP metabolic process","developmental process involved in reproduction","muscle structure development","negative regulation of developmental process","protein-RNA complex assembly","mitochondrial membrane organization","RNA localization","protein-RNA complex organization","regulation of protein metabolic process","response to unfolded protein","regulation of translation","post-transcriptional regulation of gene expression","ribosome assembly","protein stabilization"],["81/904","139/904","31/904","31/904","39/904","35/904","52/904","36/904","26/904","52/904","126/904","35/904","36/904","45/904","51/904","29/904","33/904","58/904","65/904","71/904","33/904","11/904","32/904","34/904","131/904","21/904","49/904","65/904","13/904","29/904"],["136/4572","316/4572","32/4572","40/4572","59/4572","56/4572","113/4572","65/4572","41/4572","119/4572","396/4572","73/4572","80/4572","112/4572","140/4572","70/4572","95/4572","195/4572","232/4572","258/4572","101/4572","22/4572","98/4572","106/4572","530/4572","57/4572","169/4572","238/4572","30/4572","89/4572"],[0.5955882352941176,0.439873417721519,0.96875,0.775,0.6610169491525424,0.625,0.4601769911504425,0.5538461538461539,0.6341463414634146,0.4369747899159664,0.3181818181818182,0.4794520547945205,0.45,0.4017857142857143,0.3642857142857143,0.4142857142857143,0.3473684210526316,0.2974358974358974,0.2801724137931034,0.2751937984496124,0.3267326732673267,0.5,0.3265306122448979,0.3207547169811321,0.2471698113207547,0.3684210526315789,0.2899408284023668,0.273109243697479,0.4333333333333333,0.3258426966292135],[3.01220067673087,2.224669541839364,4.899474557522123,3.919579646017699,3.34310784460777,3.160951327433628,2.327355313650247,2.801089176310415,3.207209151737535,2.210009667583848,1.609211584875302,2.424839374469633,2.275884955752212,2.032040139064475,1.842383059418458,2.095259165613148,1.756823474615743,1.50428863172226,1.416978181263351,1.391798724017288,1.652457723648471,2.528761061946903,1.651435795557161,1.622224077475372,1.250066789113375,1.863297624592455,1.466382154265068,1.381256042239905,2.191592920353982,1.647956647111465],[11.82551704900328,11.20048453923726,10.98824454660901,9.206202739856769,8.992092784040457,8.076760302826525,7.092230480253431,7.259776956580524,7.047150522502815,6.639129436182499,6.296666094117798,6.091784112430497,5.714941625138826,5.489254075178385,5.025148830408019,4.583933760495399,3.700309170979764,3.572591598989724,3.235844333057571,3.215940183428366,3.291439607532579,3.567963615855598,3.236024709764346,3.217477719207877,3.039281736515655,3.255699095157402,3.066804530132995,2.998720044441196,3.250424920996832,3.064303277809673],[3.854463952355323e-25,1.763791644514505e-24,2.581636835627074e-21,4.242698199174219e-15,8.183939563379356e-15,2.392382334214528e-12,1.47818039384401e-10,1.640577182913243e-10,1.081567481138457e-09,1.493162881361449e-09,1.715104697860804e-09,4.424435922261848e-08,2.153627865102996e-07,3.958713530136463e-07,2.335982703568546e-06,2.370016421396173e-05,0.0004002416590499917,0.0004352139911448865,0.001191793206016915,0.001226536849983093,0.001359638174729371,0.001401342004462845,0.001617153089671572,0.0016543036678937,0.001757340763106755,0.001933962579630593,0.002175092663759255,0.002400932563044598,0.002709180128721172,0.002724010451286375],[8.911520657845506e-22,1.359295427372512e-21,1.193748872793959e-18,8.917380214991632e-13,1.576772355877756e-12,4.254759966695376e-10,2.441109336119537e-08,2.528676297930279e-08,1.250292008196056e-07,1.643901229384605e-07,1.724053070197469e-07,3.299772855570772e-06,1.422625035462322e-05,2.542373800465417e-05,0.0001350198002662619,0.001191190862232164,0.01713627251339965,0.01765289030749084,0.04239116757401705,0.04296595753274108,0.04691766358170604,0.04764562815173673,0.05306983405776687,0.05306983405776687,0.05490502492301105,0.05961761978807907,0.06530927582612205,0.07116610366357834,0.07872390204217625,0.07872390204217625],[8.911520657845506e-22,1.359295427372512e-21,1.193748872793959e-18,8.917380214991631e-13,1.576772355877756e-12,4.254759966695376e-10,2.441109336119537e-08,2.528676297930279e-08,1.250292008196056e-07,1.643901229384605e-07,1.724053070197469e-07,3.299772855570772e-06,1.422625035462322e-05,2.542373800465417e-05,0.000135019800266262,0.001191190862232164,0.01713627251339965,0.01765289030749084,0.04239116757401705,0.04296595753274108,0.04691766358170604,0.04764562815173673,0.05306983405776687,0.05306983405776687,0.05490502492301105,0.05961761978807907,0.06530927582612205,0.07116610366357835,0.07872390204217625,0.07872390204217625],["RPL6/RPL14/EIF3M/UFL1/ABCE1/RPL8/RPS24/RPS6/RPL32/RPL9/RPL31/RPS25/RPLP2/RPL10/RPL35A/RPL34/RPL11/EIF3D/RPS27/EIF2B4/RPS28/RPL37/RPL7A/RPL35/RPS29/RPS7/RPL13/RPS26/RPS8/RPS27A/CPEB2/RPL17/NCBP2/RACK1/EIF2S2/RPL18/RPLP0/RPL13A/RWDD1/RPL36A/EEF2/EIF4A1/RPL37A/CNBP/NCBP1/RPS3/RPS16/PABPC1/RPL41/RPL5/RPL21/RPS23/UFSP2/RPS12/EIF4E2/RPLP1/ZC3H15/PAIP1/RPL10A/RPL26/RPL4/RPL22/METTL3/RPL12/RPSA/RPS19/RPL24/YBX1/RPL30/RCHY1/RPS18/GAPDH/RPS2/RNF14/RPL3/RPS20/EIF4A2/RPS3A/RPL15/RPS9/RPS14","RPL6/MTRF1L/EIF1B/RPL14/EIF1/EIF3M/UPF3A/UFL1/ABCE1/NACA/MRPL20/RPL8/MTG1/RPS24/RPS6/RPL32/RPL9/FXR1/RPL31/RPS25/NCL/RPLP2/RPL10/MRPS31/TARS1/RPL35A/MRPL42/RPL34/RPL11/GFM2/EIF3D/ZCCHC4/RPS27/MRPL3/MRPL22/EIF2B4/ZNF706/RPS28/OSGEP/RPL37/RPL7A/PURB/RPL35/RPS29/RPS7/EIF1AX/RPL13/MRPL19/OTUD6B/RPS26/RPS8/RPS27A/CPEB2/RPL17/NCBP2/RACK1/EIF2S2/METTL5/RPL18/RPLP0/RPL13A/RWDD1/PAIP2B/RPL36A/EEF1A1/SERBP1/EEF2/MRPS5/UQCC2/HSPB1/MRPS25/IGFBP5/HARS1/PA2G4/EIF4A1/GFM1/GUF1/SRP9/METAP1/MRPS30/RPL37A/CNBP/NCBP1/RPS3/FASTKD2/RPS16/MRPL13/PABPC1/RPL41/MRPL32/RPL5/RPL21/RPS23/UFSP2/RPS12/SECISBP2/MRPS10/EIF4E2/RPLP1/RPS27L/ZC3H15/MRPS22/PAIP1/MRPL27/LRPPRC/RPL10A/MRPS21/MRPL35/RPL26/YTHDF1/RPL4/RPL22/MRPS9/METTL3/RPL12/RPSA/SSB/RPS19/RPL24/YBX1/RPL30/EIF2A/EEF1G/RCHY1/RPS18/GAPDH/RPS2/METTL17/COPS5/CIRBP/RNF14/RPL3/RPS20/EIF4A2/MRPL30/RPS3A/RPL15/RPS9/RPS14","RPL6/RPL14/RPL8/RPL32/RPL9/RPL31/RPLP2/RPL10/RPL35A/RPL34/RPL11/RPL37/RPL7A/RPL35/RPL13/RPL17/RPL18/RPLP0/RPL13A/RPL36A/RPL37A/RPL41/RPL5/RPL21/RPLP1/RPL10A/RPL4/RPL12/RPL24/RPL30/RPL15","RPL6/RPL14/RPL8/RPL32/RPL9/RPL31/RPLP2/RPL10/RPL35A/RPL34/RPL11/RPL37/RPL7A/RPL35/RPL13/RPL17/RPL18/RPLP0/RPL13A/RPL36A/RPL37A/RPL41/RPL5/RPL21/RPLP1/RPL10A/RPL4/RPL12/RPL24/RPL30/RPL15","NDUFB8/NDUFB9/ATP5PF/NDUFA11/COX6B1/MT-CO1/NDUFA12/NDUFV1/COX5B/NDUFS5/NDUFA5/TEFM/COX6C/ATP5IF1/ATP5PO/NDUFV2/ATP5F1A/COX7A2/ATP5F1B/UQCC2/GHITM/NDUFA13/COX7B/NDUFB5/NDUFB1/ATP5F1E/RHOA/ATP5F1D/COX5A/COX7C/COX4I1/CYCS/ATP5PD/NDUFB2/NDUFB4/ATP5MG/UQCRB/UQCRFS1/UQCRH","RPL6/RPL14/NACA/RPL8/RPL32/RPL9/RPL31/RPLP2/RPL10/RPL35A/RPL34/RPL11/RPL37/RPL7A/RPL35/RPL13/RPL17/RPL18/RPLP0/RPL13A/NKX2-5/RPL36A/MYEF2/CAV2/RPL37A/RPL41/RPL5/RPL21/RPLP1/RPL10A/RPL4/RPL12/RPL24/RPL30/RPL15","NDUFB8/ENO3/NDUFB9/PFKM/ATP5PF/NDUFA11/DLST/COX6B1/MT-CO1/NDUFA12/NDUFV1/COX5B/NDUFS5/NDUFA5/TEFM/PDHA1/COX6C/ATP5IF1/FH/ATP5PO/NDUFV2/ATP5F1A/COX7A2/ATP5F1B/IDH3A/UQCC2/GHITM/NDUFA13/COX7B/NDUFB5/NDUFB1/ATP5F1E/RHOA/TPI1/ATP5F1D/COX5A/MDH1/COX7C/COX4I1/MDH2/CYCS/ATP5PD/NDUFB2/NDUFB4/ATP5MG/GAPDH/UQCRB/SUCLG1/LDHA/DLD/UQCRFS1/UQCRH","ATP5MC2/NDUFB8/NDUFB9/ATP6V0A2/ATP5PF/COX6B1/MT-CO1/NDUFA12/NDUFV1/COX5B/CLCN3/NDUFS5/NDUFA5/SLC25A4/ATP5PO/NDUFV2/ATP5F1A/ATP5F1B/GHITM/COX7B/NDUFB5/NDUFB1/ATP5F1E/ATP5F1D/COX5A/SLC25A3/COX4I1/SLC9B2/ATP5PD/NDUFB2/NDUFB4/ATP5MG/ATP5MC1/UQCRFS1/ATP5MC3/UQCRH","ATP5MC2/NDUFB8/NDUFB9/ATP5PF/NDUFA11/NDUFA12/NDUFV1/NDUFS5/NDUFA5/ATP5IF1/ATP5PO/NDUFV2/ATP5F1A/ATP5F1B/NDUFA13/NDUFB5/NDUFB1/ATP5F1E/ATP5F1D/ATP5PD/NDUFB2/NDUFB4/ATP5MG/ATP5MK/ATP5MC1/ATP5MC3","RPL14/RBFA/FGF12/WBP11/RRP15/WDR12/MTG1/RPS24/RPS6/MTREX/RPS25/RPL35A/RPL11/ZCCHC4/RPS27/EXOSC8/DDX18/RPS28/RPL37/RPL7A/RPL35/RPS7/EIF1AX/WDR75/RPS8/RPS27A/METTL5/RPLP0/RRP36/PA2G4/FASTKD2/RBIS/RPS16/NOL11/RPL5/RPS23/XRN2/CUL4B/RPS12/RPS27L/RPL26/RPSA/RPS19/EIF2A/METTL17/C1D/NSA2/SNU13/NOL7/RPS3A/RPS9/RPS14","RSRP1/CPSF6/TARDBP/RPL14/APOBEC2/GRSF1/RBFA/WBP11/RRP15/WDR12/RBM12B/RPS24/RPS6/SNHG1/PUS7L/MTREX/RPS25/NCL/DTWD1/RPL35A/RPL11/POP1/ZCCHC4/RPS27/SLIRP/EXOSC8/SUPT7L/FAM98A/DDX18/RPS28/OSGEP/RPL37/RNMT/RPL7A/RPL35/RPS7/WDR75/SF1/ELAC2/RPS26/SRSF1/TRMU/SRSF2/TRUB1/NCBP2/SRSF3/METTL5/CRIPT/RBM17/GCFC2/RTRAF/PAPOLA/TIAL1/HNRNPA1/RRP36/PRDX6/HNRNPDL/LSM8/IVNS1ABP/SRSF7/PAPOLG/KHDC4/TRMT13/SRSF10/IK/PA2G4/WTAP/NONO/ANGEL2/PLRG1/CLK4/NCBP1/FASTKD2/RPS16/PPWD1/PABPC1/NOL11/ENY2/RPL5/XRN2/PRKRA/PAXBP1/THUMPD2/FASTKD1/RBM48/PRPF39/PRMT9/SMNDC1/BARD1/RPS27L/PSIP1/LRPPRC/HNRNPH3/TMBIM6/DDX39B/DDX5/RPL26/HNRNPA2B1/METTL4/ARL6IP4/HNRNPK/METTL3/FRA10AC1/SSB/RPS19/YBX1/FAM50A/CLK1/SMU1/SNRNP40/C1D/DHX16/STRAP/NSA2/SNU13/CIRBP/THOC7/SUPV3L1/NOL7/SNHG29/ARGLU1/TSEN15/RNPC3/FAM98B/GEMIN8/RPS14","MTRF1L/MRPL20/MTG1/MRPS31/MRPL42/GFM2/SLIRP/MRPL3/MRPL22/MRPL19/ELAC2/TRMU/TEFM/TFAM/MTERF2/MRPS5/UQCC2/MRPS25/ANGEL2/GFM1/MRPS30/FASTKD2/MRPL13/MRPL32/FASTKD1/MRPS10/MRPS22/MRPL27/LRPPRC/MRPS21/MRPL35/METTL4/MRPS9/SUPV3L1/MRPL30","RPL14/RBFA/WBP11/RRP15/WDR12/RPS24/RPS6/MTREX/RPS25/RPL35A/RPL11/ZCCHC4/RPS27/EXOSC8/DDX18/RPS28/RPL37/RPL7A/RPL35/RPS7/WDR75/METTL5/RRP36/PA2G4/RPS16/NOL11/RPL5/XRN2/RPS27L/RPL26/RPS19/C1D/NSA2/SNU13/NOL7/RPS14","RPL6/RPL14/FGF12/RPL8/CALM2/RPL32/RPL9/RPL31/RPLP2/RPL10/RPL35A/RPL34/RPL11/GJA1/RPL37/RPL7A/RPL35/RPL13/RNF207/RPL17/RPL18/RPLP0/RPL13A/NKX2-5/PLN/RPL36A/EEF2/SRI/TNNC1/RPL37A/CSRP3/SUMO1/TNNI1/MB/RPL41/RPL5/RPL21/RPLP1/RPL10A/RPL4/MYL2/RPL12/RPL24/RPL30/RPL15","RPL6/RPL14/RPL8/PSMB1/BTG1/RPL32/RPL9/FXR1/CIBAR1/RPL31/PSMB2/MKRN2/RPLP2/RPL35A/RPL34/RPL11/GJA1/RPL37/RPL7A/RPL35/RPL13/RPL17/HADH/RPL18/RPLP0/RPL13A/PLN/HOOK1/IFT81/VDAC3/DCAF17/RPL37A/RPL41/RPL5/RPL21/XRN2/CUL4B/TTC12/RPLP1/RPL10A/RPL4/PSMA3/METTL3/RPL12/PSMA2/RPL24/FAM50A/RPL30/PSMA4/RPL3/RPL15","ATP5MC2/TMSB4X/NDUFB8/NDUFB9/ATP5PF/NDUFA11/NDUFA12/NDUFV1/NDUFS5/NDUFA5/ATP5IF1/ATP5PO/NDUFV2/ATP5F1A/ATP5F1B/NDUFA13/NDUFB5/GUCY1A2/NDUFB1/ATP5F1E/ATP5F1D/COX11/ATP5PD/NDUFB2/NDUFB4/ATP5MG/ATP5MK/ATP5MC1/ATP5MC3","ATP5MC2/TMSB4X/NDUFB8/ENO3/NDUFB9/PFKM/ATP5PF/NDUFA11/NDUFA12/NDUFV1/NDUFS5/NDUFA5/ATP5IF1/ATP5PO/NDUFV2/ATP5F1A/ATP5F1B/NDUFA13/NDUFB5/NDUFB1/ATP5F1E/TPI1/ATP5F1D/COX11/ATP5PD/NDUFB2/NDUFB4/ATP5MG/ATP5MK/GAPDH/ATP5MC1/LDHA/ATP5MC3","RPL6/RPL14/ROBO2/RPL8/PSMB1/BTG1/RPL32/RPL9/FXR1/CIBAR1/RPL31/PSMB2/MKRN2/RPLP2/RPL35A/RPL34/RPL11/GJA1/CASP2/EIF2B4/RPL37/RPL7A/RPL35/RPL13/RPL17/SMAD4/HADH/RPL18/RPLP0/RPL13A/PLN/HOOK1/IFT81/VDAC3/DCAF17/RPL37A/E2F8/RPL41/RPL5/RPL21/XRN2/CUL4B/TTC12/RPLP1/RPL10A/RPL4/PSMA3/PARP2/METTL3/RPL12/PSMA2/RPL24/FAM50A/RPL30/CITED2/PSMA4/RPL3/RPL15","RPL6/RPL14/NACA/RPL8/BTG1/RPL32/RPL9/FXR1/RPL31/RPLP2/RPL10/RPL35A/RPL34/RPL11/PDCD4/RPL37/HEY2/RPL7A/RPL35/RPL13/SGCB/RPL17/SMAD4/PHF10/SRA1/SMARCE1/RPL18/RPLP0/RPL13A/NKX2-5/SOX4/RPL36A/EEF2/MYEF2/UQCC2/POPDC3/CAV2/TNNC1/RPL37A/CSRP3/RPL41/RPL5/RPL21/CAVIN4/KDM1A/PAXBP1/RPLP1/TBX20/MDM2/DDX5/RPL10A/RPL4/ITGB1BP2/S1PR1/MYL2/RPL12/RPL24/RPL30/SMARCD1/SGCE/LAMA2/CFL2/MYL6/RPL15/LRRC10","RPL6/RPL14/TMSB4X/ROBO2/BRD9/RPL8/PSMB1/RPL32/RPL9/RPL31/PSMB2/RPLP2/RPL10/RPL35A/RPL34/RPL11/STAT1/PDCD4/CDKN1A/ZNF706/RPL37/HEY2/RPL7A/RPL35/RPL13/B2M/RPL17/SMAD4/SS18/SRA1/DPF2/RPL18/RPLP0/RPL13A/NKX2-5/HSPA9/SOCS5/SOX4/RPL36A/RBBP4/IRF1/IGFBP5/RPL37A/CSRP3/ATF2/RPL41/BAMBI/RPL5/RPL21/HDAC2/CUL4B/GPS2/RPLP1/NOCT/RPL10A/SYNJ2BP/RPL4/TP53INP1/PSMA3/CFL1/RPL12/PSMA2/RPL24/RPL30/SMARCD1/VEGFC/PSMA4/TPT1/DYNLT1/SEMA6A/RPL15","RSRP1/EIF3M/RBFA/MTG1/RPS6/RPL11/EIF3D/RPS28/SF1/SRSF1/EIF2S2/RPL13A/GCFC2/LSM8/KHDC4/SRSF10/NCBP1/FASTKD2/RPL5/PRKRA/PRPF39/PSIP1/DDX39B/RPSA/RPS19/HSP90AB1/GAPDH/SNRNP40/METTL17/STRAP/SNU13/GEMIN8/RPS14","TIMM9/CIBAR1/MTX2/TOMM20/HSPA9/GHITM/CHCHD10/NDUFA13/MTCH1/COX18/SLC25A46","CPSF6/UPF3A/SENP2/ERH/CCT4/FXR1/CCT2/CCT3/XPOT/CCT5/NUP42/SRSF1/PEG10/NCBP2/TOMM20/SRSF3/G3BP2/CCT6A/NUP85/RTRAF/HNRNPA1/HNRNPAB/SRSF7/NCBP1/ENY2/LRPPRC/DDX39B/HNRNPA2B1/CCT8/SSB/YBX1/THOC7","RSRP1/EIF3M/RBFA/MTG1/RPS6/RPL11/EIF3D/ZFAND1/RPS28/SF1/SRSF1/EIF2S2/RPL13A/GCFC2/LSM8/KHDC4/SRSF10/NCBP1/FASTKD2/RPL5/PRKRA/PRPF39/PSIP1/DDX39B/RPSA/RPS19/HSP90AB1/GAPDH/SNRNP40/METTL17/STRAP/SNU13/GEMIN8/RPS14","CTSC/ITM2B/TARDBP/EIF1B/MBIP/EIF1/UPF3A/UFL1/ABCE1/SENP2/PSMD7/SQSTM1/MIF/MTG1/KLHL31/PSMB1/FXR1/DNAJA1/PSMB2/NCL/RPL10/RAD23B/PPIA/RPL11/ZCCHC4/DESI1/TOM1L1/PDCD4/CDKN1A/SOCS4/EIF2B4/ZNF706/PURB/RPS7/COPS2/IP6K2/OTUD6B/SERPINB1/CPEB2/ETAA1/SMAD4/VPS35/NCBP2/PRKAR1A/NEK10/ATP5IF1/RACK1/GABARAPL2/EIF2S2/METTL5/PSMD6/RPL13A/RTRAF/SOCS5/PAIP2B/VEGFB/EEF1A1/SERBP1/EEF2/CRYAB/UQCC2/IVNS1ABP/CYP51A1/PRNP/COPS8/HSPB1/PFDN5/PAQR3/PFDN1/IGFBP5/NDUFA13/COPS6/PA2G4/BIRC2/BEX3/FGF7/GUF1/SRP9/METAP1/CNBP/CCNG1/NCBP1/DCUN1D5/SUMO1/NEDD8/RPS3/LRRTM3/MRPL13/PABPC1/ERBB4/TBC1D7/TGFB1I1/RPL5/SH3RF2/SUMO2/GNL3/RHOA/KDM1A/HDAC2/PSMD13/GPS2/SECISBP2/EIF4E2/ASB11/BARD1/RPS27L/PAIP1/LRPPRC/NDFIP1/MDM2/PSMC6/RPL26/YTHDF1/PSMA3/STRADB/CFL1/METTL3/PSMA2/SSB/YBX1/HSP90AB1/EIF2A/PSMA4/RCHY1/GAPDH/RPS2/DR1/COPS5/CIRBP/PDCD10/EIF4A2","HSPE1/UFL1/DNAJA1/ERLEC1/EDEM3/MBTPS1/JKAMP/RACK1/HSPB3/CREBZF/SELENOS/HSPB1/SERP1/HSPB7/OPTN/ASB11/TMBIM6/HSP90AB1/COPS5/HSPD1/DNAJC10","EIF1B/EIF1/UPF3A/ABCE1/MTG1/FXR1/NCL/RPL10/ZCCHC4/EIF2B4/ZNF706/PURB/OTUD6B/CPEB2/NCBP2/RACK1/EIF2S2/METTL5/RPL13A/PAIP2B/SERBP1/EEF2/UQCC2/HSPB1/IGFBP5/PA2G4/GUF1/SRP9/METAP1/CNBP/NCBP1/RPS3/MRPL13/PABPC1/RPL5/SECISBP2/EIF4E2/RPS27L/PAIP1/LRPPRC/RPL26/YTHDF1/METTL3/SSB/YBX1/EIF2A/GAPDH/CIRBP/EIF4A2","TARDBP/EIF1B/EIF1/UPF3A/ABCE1/MTG1/FXR1/NCL/RPL10/ZCCHC4/EIF2B4/ZNF706/PURB/OTUD6B/SRSF1/CPEB2/TRUB1/NCBP2/RACK1/EIF2S2/METTL5/RPL13A/TIAL1/PAIP2B/SERBP1/EEF2/NORAD/UQCC2/FAM76B/HSPB1/IGFBP5/DCP1B/PA2G4/ANGEL2/GUF1/SRP9/METAP1/CNBP/NCBP1/RPS3/FASTKD2/MRPL13/PABPC1/RPL5/CUL4B/SECISBP2/FASTKD1/EIF4E2/RPS27L/PAIP1/LRPPRC/NOCT/APEX1/RPL26/YTHDF1/METTL4/METTL3/OIP5-AS1/SSB/YBX1/EIF2A/GAPDH/MIR133A1HG/CIRBP/EIF4A2","RBFA/MTG1/RPS6/RPL11/RPS28/EIF1AX/FASTKD2/RPL5/RPSA/RPS19/EIF2A/METTL17/RPS14","SPAG1/UFL1/PFN1/CCT4/PFN2/CCT2/CCT3/ZSWIM7/PPIB/CCT5/PPP1R10/IP6K2/CCT6A/SOX4/CRYAB/HSPB1/PFDN5/PFDN1/TBRG1/SUMO1/URI1/PRKRA/NAA30/CCT8/ZNF207/HSP90AB1/GAPDH/PDCD10/HSPD1"],[81,139,31,31,39,35,52,36,26,52,126,35,36,45,51,29,33,58,65,71,33,11,32,34,131,21,49,65,13,29]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>Description<\/th>\n      <th>GeneRatio<\/th>\n      <th>BgRatio<\/th>\n      <th>RichFactor<\/th>\n      <th>FoldEnrichment<\/th>\n      <th>zScore<\/th>\n      <th>pvalue<\/th>\n      <th>p.adjust<\/th>\n      <th>qvalue<\/th>\n      <th>geneID<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"Description","targets":2},{"name":"GeneRatio","targets":3},{"name":"BgRatio","targets":4},{"name":"RichFactor","targets":5},{"name":"FoldEnrichment","targets":6},{"name":"zScore","targets":7},{"name":"pvalue","targets":8},{"name":"p.adjust","targets":9},{"name":"qvalue","targets":10},{"name":"geneID","targets":11},{"name":"Count","targets":12}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>###################################### downregulated genes
 
 down.GO &lt;- enrichGO(
@@ -1361,7 +1454,7 @@ simp.down.GO.sign &lt;- as.data.frame(simp.down.GO.show) %&gt;%
 
 create_table(simp.down.GO.show)</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-697d58abce2053a24549" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-697d58abce2053a24549">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.105970149253731\" data-max=\"0.333333333333334\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.43341870529012\" data-max=\"4.50887573964497\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.81683334319391\" data-max=\"6.21311229484833\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.3746334e-08\" data-max=\"0.004541982801375\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"7.8021524687e-05\" data-max=\"0.092929772006876\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"7.8021524687e-05\" data-max=\"0.092929772006876\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"6\" data-max=\"75\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["GO:0098657","GO:0050804","GO:0003008","GO:0030036","GO:0006897","GO:0007268","GO:0007155","GO:0030029","GO:0048468","GO:0141124","GO:0001501","GO:0001775","GO:0070887","GO:0060627","GO:0002376","GO:1902531","GO:0097435","GO:0051240","GO:0002682","GO:0000902","GO:0031623","GO:1901698","GO:0045055","GO:0023057","GO:1901700","GO:0048870","GO:0010648","GO:0007166","GO:0046330","GO:0048589","GO:0002696","GO:0045321","GO:0034330","GO:0043502","GO:0051098","GO:0120036","GO:0098884","GO:0007423","GO:0030048","GO:0050878","GO:0048771","GO:0002090","GO:0098659","GO:0097553","GO:0000122","GO:0150104","GO:0050803","GO:0050807","GO:1903039","GO:0010720","GO:0006954","GO:0030182","GO:0051962","GO:0023056","GO:0046434","GO:0043500","GO:0016310","GO:0048585"],["GO:0098657","GO:0050804","GO:0003008","GO:0030036","GO:0006897","GO:0007268","GO:0007155","GO:0030029","GO:0048468","GO:0141124","GO:0001501","GO:0001775","GO:0070887","GO:0060627","GO:0002376","GO:1902531","GO:0097435","GO:0051240","GO:0002682","GO:0000902","GO:0031623","GO:1901698","GO:0045055","GO:0023057","GO:1901700","GO:0048870","GO:0010648","GO:0007166","GO:0046330","GO:0048589","GO:0002696","GO:0045321","GO:0034330","GO:0043502","GO:0051098","GO:0120036","GO:0098884","GO:0007423","GO:0030048","GO:0050878","GO:0048771","GO:0002090","GO:0098659","GO:0097553","GO:0000122","GO:0150104","GO:0050803","GO:0050807","GO:1903039","GO:0010720","GO:0006954","GO:0030182","GO:0051962","GO:0023056","GO:0046434","GO:0043500","GO:0016310","GO:0048585"],["import into cell","modulation of chemical synaptic transmission","system process","actin cytoskeleton organization","endocytosis","chemical synaptic transmission","cell adhesion","actin filament-based process","cell development","intracellular signaling cassette","skeletal system development","cell activation","cellular response to chemical stimulus","regulation of vesicle-mediated transport","immune system process","regulation of intracellular signal transduction","supramolecular fiber organization","positive regulation of multicellular organismal process","regulation of immune system process","cell morphogenesis","receptor internalization","response to nitrogen compound","regulated exocytosis","negative regulation of signaling","response to oxygen-containing compound","cell motility","negative regulation of cell communication","cell surface receptor signaling pathway","positive regulation of JNK cascade","developmental growth","positive regulation of leukocyte activation","leukocyte activation","cell junction organization","regulation of muscle adaptation","regulation of binding","plasma membrane bounded cell projection organization","postsynaptic neurotransmitter receptor internalization","sensory organ development","actin filament-based movement","regulation of body fluid levels","tissue remodeling","regulation of receptor internalization","inorganic cation import across plasma membrane","calcium ion transmembrane import into cytosol","negative regulation of transcription by RNA polymerase II","transport across blood-brain barrier","regulation of synapse structure or activity","regulation of synapse organization","positive regulation of leukocyte cell-cell adhesion","positive regulation of cell development","inflammatory response","neuron differentiation","positive regulation of nervous system development","positive regulation of signaling","organophosphate catabolic process","muscle adaptation","phosphorylation","negative regulation of response to stimulus"],["48/338","26/338","57/338","40/338","37/338","30/338","49/338","43/338","75/338","68/338","17/338","33/338","64/338","28/338","63/338","67/338","36/338","46/338","43/338","34/338","12/338","34/338","11/338","49/338","47/338","48/338","48/338","71/338","8/338","20/338","14/338","26/338","32/338","7/338","7/338","49/338","6/338","16/338","12/338","12/338","7/338","8/338","8/338","10/338","35/338","7/338","16/338","16/338","11/338","16/338","20/338","40/338","12/338","51/338","12/338","7/338","28/338","49/338"],["288/4572","124/4572","414/4572","252/4572","230/4572","169/4572","353/4572","295/4572","637/4572","560/4572","76/4572","214/4572","534/4572","178/4572","543/4572","596/4572","265/4572","369/4572","339/4572","247/4572","53/4572","253/4572","46/4572","412/4572","391/4572","408/4572","409/4572","670/4572","28/4572","125/4572","73/4572","185/4572","249/4572","24/4572","24/4572","434/4572","18/4572","95/4572","62/4572","62/4572","25/4572","32/4572","32/4572","47/4572","289/4572","26/4572","100/4572","100/4572","58/4572","102/4572","140/4572","350/4572","67/4572","478/4572","69/4572","29/4572","227/4572","460/4572"],[0.1666666666666667,0.2096774193548387,0.1376811594202899,0.1587301587301587,0.1608695652173913,0.1775147928994083,0.1388101983002833,0.1457627118644068,0.1177394034536892,0.1214285714285714,0.2236842105263158,0.1542056074766355,0.1198501872659176,0.1573033707865168,0.1160220994475138,0.1124161073825503,0.1358490566037736,0.1246612466124661,0.1268436578171092,0.1376518218623482,0.2264150943396226,0.1343873517786561,0.2391304347826087,0.1189320388349515,0.1202046035805627,0.1176470588235294,0.117359413202934,0.1059701492537313,0.2857142857142857,0.16,0.1917808219178082,0.1405405405405405,0.1285140562248996,0.2916666666666667,0.2916666666666667,0.1129032258064516,0.3333333333333333,0.1684210526315789,0.1935483870967742,0.1935483870967742,0.28,0.25,0.25,0.2127659574468085,0.1211072664359862,0.2692307692307692,0.16,0.16,0.1896551724137931,0.1568627450980392,0.1428571428571428,0.1142857142857143,0.1791044776119403,0.1066945606694561,0.1739130434782609,0.2413793103448276,0.1233480176211454,0.1065217391304348],[2.254437869822485,2.836228287841192,1.862361718549009,2.147083685545224,2.17602263956779,2.40117642939673,1.877633806594364,1.971677865810852,1.592617019497831,1.642519019442096,3.025692930551231,2.085881767405851,1.621168805265607,2.12778405691111,1.569387688384714,1.520610777967515,1.837579546723233,1.686246211574542,1.715766874378175,1.861964880339219,3.062632577872056,1.817807610449751,3.234628248006174,1.608749353708278,1.62596286263412,1.59136790810999,1.587477033029036,1.433418705290118,3.864750633981403,2.164260355029586,2.594147685823134,1.901039501039501,1.738361730947458,3.945266272189349,3.945266272189349,1.527199847299103,4.508875739644971,2.278168794767985,2.618056881084176,2.618056881084176,3.787455621301776,3.381656804733728,3.381656804733728,2.878005791262747,1.638172846583813,3.641784251251707,2.164260355029586,2.164260355029586,2.565394817384207,2.121823877479986,1.932375316990701,1.545900253592561,2.42267950189879,1.443217548463767,2.352456907640854,3.265047949398082,1.668482652555848,1.440879855930023],[6.213112294848329,5.856574346519938,5.197995884714394,5.29227050114474,5.170389069580132,5.243851283397936,4.849360469736919,4.874748639002402,4.554702356403419,4.585514522119941,5.031017074535096,4.596574980052122,4.315048115564796,4.336051778379576,3.992986918526463,3.850362605228632,3.968716699294673,3.884203559950857,3.869330656116221,3.934898425610769,4.267044489107847,3.781014477262344,4.303437097676031,3.659560992633085,3.656666868689813,3.536071255756729,3.517530528631004,3.430756961329319,4.295712548659335,3.728722685563354,3.879006617241957,3.534552294670396,3.385047513762353,4.08703626099686,4.08703626099686,3.261470324608971,4.214016794462168,3.556681695789497,3.624014214637372,3.624014214637372,3.94824435346886,3.819572666214317,3.819572666214317,3.656159203170508,3.166662212598291,3.816434727827127,3.325735802598915,3.325735802598915,3.389578099756545,3.237125506718393,3.165508206329252,3.002456594586504,3.314252647163273,2.892980526638526,3.198052155850275,3.456953713351552,2.918748762259825,2.816833343193914],[3.37463342075429e-08,7.335167571929458e-07,1.454076893581004e-06,1.965591877339085e-06,3.558389525095124e-06,4.175058459358476e-06,7.08135374810584e-06,7.905175780711231e-06,1.21448992009575e-05,1.216012327849613e-05,2.662134543612945e-05,3.067561756297968e-05,3.55759072099776e-05,8.779251575702127e-05,0.0001122603956987154,0.0001733076191523431,0.0002033957883706692,0.0002112571281832068,0.0002348729273707104,0.000238561947156767,0.0003661975336845739,0.000378292599767835,0.0003881351832925687,0.0004070416400549313,0.0004235243118343112,0.0006028576565399451,0.000637561177625393,0.0006544885822185661,0.0006863045505017343,0.0007252504842667496,0.0007439744974595568,0.0009560197374394433,0.001228999770721398,0.001304958882781445,0.001304958882781445,0.001338953043676297,0.001350857389650895,0.001398862746486239,0.001618904729574238,0.001618904729574238,0.001699401787845025,0.001788785233368876,0.001788785233368876,0.001867927947260402,0.00210252189027255,0.002180624597490488,0.002428233743576371,0.002428233743576371,0.002971041225077601,0.002987453263741039,0.002999087327031728,0.003038578982713805,0.003214875775559948,0.003656139936910929,0.004133970197189008,0.004268044519307016,0.004485404463499812,0.004541982801374123],[7.802152468783919e-05,0.0006662055245321783,0.0008404564444898206,0.0009088896840815927,0.0012065918947546,0.0012065918947546,0.001575878285249748,0.001575878285249748,0.002008157501420219,0.002008157501420219,0.003846784415520705,0.004171883988565237,0.00432902618260359,0.009226195292283326,0.01081441811897625,0.01484026724000805,0.01611030691383812,0.01611030691383812,0.01671379460080137,0.01671379460080137,0.02300940794500335,0.02300940794500335,0.02300940794500335,0.02300940794500335,0.02331400497526018,0.03075163111749468,0.03075163111749468,0.03088117555284336,0.03111247295607862,0.03137217540865759,0.03137217540865759,0.03746301072813547,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04403454247165903,0.04924878598388997,0.04924878598388997,0.05102619394152853,0.05169589324436052,0.05169589324436052,0.05266645626909816,0.05718859541541335,0.05794947206204609,0.06102256972987575,0.06102256972987575,0.0700392919201753,0.0700392919201753,0.0700392919201753,0.07025194608034316,0.07359200785242179,0.08127880321286603,0.08849758422130544,0.08970653571488929,0.09292977200687587,0.09292977200687587],[7.802152468783919e-05,0.0006662055245321784,0.0008404564444898206,0.0009088896840815927,0.0012065918947546,0.0012065918947546,0.001575878285249748,0.001575878285249748,0.002008157501420219,0.002008157501420219,0.003846784415520705,0.004171883988565238,0.00432902618260359,0.009226195292283327,0.01081441811897625,0.01484026724000805,0.01611030691383812,0.01611030691383812,0.01671379460080137,0.01671379460080137,0.02300940794500335,0.02300940794500335,0.02300940794500335,0.02300940794500335,0.02331400497526018,0.03075163111749468,0.03075163111749468,0.03088117555284336,0.03111247295607862,0.03137217540865759,0.03137217540865759,0.03746301072813547,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04403454247165903,0.04924878598388997,0.04924878598388997,0.05102619394152853,0.05169589324436051,0.05169589324436051,0.05266645626909817,0.05718859541541336,0.05794947206204609,0.06102256972987576,0.06102256972987576,0.07003929192017531,0.07003929192017531,0.07003929192017531,0.07025194608034316,0.07359200785242179,0.08127880321286603,0.08849758422130544,0.08970653571488928,0.09292977200687587,0.09292977200687587],["ATP2B4/INPPL1/PACSIN2/FNBP1/ARAP1/MYO1D/CD44/CACNA1B/MYO5A/GRB2/AP2A2/VAV2/ELMO1/KCNQ1/MYO18A/RIN3/ARRB1/SYT7/ITGB3/AP3D1/IQSEC1/SLC39A11/VAC14/TAFA4/MYO1B/GRK3/RUBCN/DNM2/SLC9A9/CTBP1/GAK/SLC6A6/KCNJ3/SGIP1/SLC27A1/SCARB1/TNK2/SH3KBP1/CAMK1D/MYH9/RNF220/LDLR/GAS7/TRPV1/P2RX1/HIP1/LMAN2/IRS2","CAMK2G/ABR/PACSIN2/NRXN3/PRKAR1B/SV2C/CBLN2/CACNA1B/CYFIP1/SYT7/CDH11/PLCB1/CHRM2/EPHA4/BCR/SLC6A6/DLGAP4/EPHB2/COLQ/CAMK2B/ADCY1/SLC4A8/PRKCZ/SYN3/P2RX1/HIP1","ATP2B4/CAMK2G/TNNT1/NRXN3/DEAF1/TPM4/KIRREL1/PRKAR1B/TTN/KCNQ1/MYBPC3/ARRB1/CYFIP1/TBL1X/ADGRV1/RAB11FIP1/PLCB1/CHRM2/EGR1/PLEC/SLIT2/PPARA/CALD1/ITGA1/ABCC4/BCR/SHROOM4/SYNM/TBC1D9B/SLC6A6/KCNJ3/HRH1/SLC27A1/SCARB1/RYR3/MYH6/CYB5R3/PDE3A/EPHB2/GPI/KIFC3/PRKCA/RAB11FIP3/CAMK2B/ADCY1/RNF220/LDLR/SLC4A8/NPC1/SLC2A13/ABCC1/PRKCZ/TRPV1/PRKRIP1/P2RX1/DMPK/NOL3","INPPL1/PACSIN2/TNNT1/FMNL2/ARHGEF10L/ARAP1/TPM4/MYO1D/MYO5A/WIPF1/ACTN1/GRB2/TTN/ELMO1/MYO18A/MYBPC3/LDB3/ARRB1/CYFIP1/ITGB3/PDPK1/ADPRHL1/MYO1B/PLEC/SLIT2/DNM2/SHTN1/CALD1/LLGL2/SHROOM4/ARHGEF17/PREX1/MYH6/SH3KBP1/MYH9/XIRP1/PXN/TRIOBP/HIP1/SH3D21","INPPL1/PACSIN2/FNBP1/ARAP1/MYO1D/CD44/MYO5A/GRB2/AP2A2/VAV2/ELMO1/MYO18A/RIN3/ARRB1/SYT7/ITGB3/AP3D1/IQSEC1/VAC14/TAFA4/MYO1B/GRK3/RUBCN/DNM2/CTBP1/GAK/SGIP1/SCARB1/TNK2/SH3KBP1/CAMK1D/MYH9/RNF220/LDLR/GAS7/HIP1/LMAN2","CAMK2G/ABR/PACSIN2/NRXN3/PRKAR1B/SV2C/CBLN2/CACNA1B/CYFIP1/SYT7/CDH11/PLCB1/CHRM2/DNAJC5/RPS6KA2/EPHA4/BCR/SLC6A6/DLGAP4/HRH1/EPHB2/COLQ/CAMK2B/ADCY1/SLC4A8/PRKCZ/TRPV1/SYN3/P2RX1/HIP1","INPPL1/LAMA5/NRXN3/TYK2/CD44/KIRREL1/GLI2/TIAM1/ACTN1/COL13A1/MYBPC3/NECTIN1/SPOCK1/SDK2/ITGB3/RUNX1/CDH11/ADGRV1/PDPK1/BCL6/NINJ2/PPARA/NECTIN2/ADAM19/PNN/RAB40C/MAEA/EPHA4/ITGA1/BCR/COL5A1/KLHL22/PCDHGA10/COL7A1/CDH4/EPHB2/MAPK14/KIFC3/PRKCA/MYH9/CEACAM19/PXN/PCDH9/SLC23A2/PRKCZ/SMARCA4/IGSF9B/TRIOBP/BRD2","INPPL1/PACSIN2/TNNT1/FMNL2/ARHGEF10L/ARAP1/TPM4/MYO1D/MYO5A/WIPF1/ACTN1/GRB2/TTN/ELMO1/KCNQ1/MYO18A/MYBPC3/LDB3/ARRB1/CYFIP1/ITGB3/PDPK1/ADPRHL1/MYO1B/PLEC/MYO9B/SLIT2/DNM2/SHTN1/CALD1/LLGL2/SHROOM4/ARHGEF17/PREX1/KCNJ3/MYH6/SH3KBP1/MYH9/XIRP1/PXN/TRIOBP/HIP1/SH3D21","SPEN/CAMK2G/LIMD1/TNNT1/NRXN3/DEAF1/ARSB/ZBTB46/TPM4/SKI/GLI2/TIAM1/ACTN1/GRB2/TTN/KCNQ1/RILPL1/MYBPC3/ZNF804A/NECTIN1/SPOCK1/CYFIP1/TCF3/RUNX1/IQSEC1/ADGRV1/PDPK1/PRDM16/RTN4RL1/PLCB1/CUX1/ADPRHL1/PLEC/BCL6/SLIT2/ZBTB7A/OSBP2/DNM2/PPARA/GARIN1A/SHTN1/NECTIN2/ZFPM1/ST3GAL1/GAK/DAB2IP/MAEA/EPHA4/ITGA1/ABHD2/SUFU/PREX1/CFAP44/MYH6/IFI16/SIPA1L3/PDE3A/SLIT3/EPHB2/CTCF/MAPK14/MAPK8IP3/PRKCA/NTN1/CAMK1D/CAMK2B/MYH9/LDLR/GAS7/SEMA5B/SLC23A2/PRKCZ/SMARCA4/HIPK2/BRD2","ATP2B4/TPCN1/ABR/NAIP/ARHGEF10L/ARAP1/CD44/SKI/TIAM1/PRKAR1B/GRB2/TTN/VAV2/ELMO1/RILPL1/MYO18A/ARRB1/STK25/CYFIP1/ITGB3/IQSEC1/PDPK1/PLCB1/WWC1/MAP3K1/MYO9B/SLIT2/RUBCN/PPARA/SHTN1/MDFIC/DAB2IP/EPHA4/SPRED2/ITGA1/RAPGEF5/BCR/ARHGEF17/PREX1/MAP2K7/SCARB1/TRIM56/RYR3/IGBP1/SIPA1L3/PDE3A/EPHB2/MAPK14/PDE10A/SH3RF3/TNK2/MAPK8IP3/MAP3K3/PRKCA/NTN1/RAP1GAP2/TSPAN18/PRKCZ/MID1/TRPV1/MFN2/P2RX1/HIPK2/ARHGAP1/DMPK/NOL3/HIP1/IRS2","INPPL1/LAMA5/DEAF1/CD44/SKI/GLI2/COL13A1/EVC/RUNX1/CDH11/XYLT1/ANKRD11/COL27A1/DYNC2I1/COL5A1/SH3PXD2B/MAPK14","TYK2/ZBTB46/CD44/GLI2/GRB2/VAV2/MYO18A/TCF3/ITGB3/RUNX1/PDPK1/PRDM16/PLCB1/BCL6/ZBTB7A/NECTIN2/ZFPM1/ST3GAL1/PREX1/KLHL22/IGBP1/DNASE1/EPHB2/MAPK14/SH3KBP1/PRKCA/MYH9/XIRP1/LDLR/PRKCZ/SMARCA4/IRS2/BRD2","ATP2B4/TYK2/ITPKB/CASTOR3P/PRKAR1B/DAPK2/MYO5A/GRB2/VAV2/KCNQ1/RIN3/AKAP8/STK25/SPIDR/ITGB3/ADGRV1/PDPK1/ETV5/PLCB1/ATP6V0D1/TAFA4/CHRM2/EGR1/PLEC/SLIT2/ZBTB7A/PPARA/CRTC1/AGAP3/DAB2IP/EPHA4/ITGA1/ABCC4/ABHD2/SUFU/MAP2K7/ESRRA/HRH1/KLHL22/SLC27A1/SCARB1/RYR3/PDE3A/SLIT3/EPHB2/MAPK14/MN1/NXN/PRKCA/NTN1/CAMK1D/ADCY1/LDLR/PXN/ABCC1/SLC23A2/PRKCZ/TRPV1/SMARCA4/HIPK2/NOL3/DNMT3A/IRS2/ERO1A","PACSIN2/ARAP1/PRKAR1B/SV2C/CACNA1B/MYO18A/RIN3/ARRB1/SYT7/ABCA3/ITGB3/IQSEC1/PDPK1/VAC14/DNAJC5/RUBCN/SGIP1/SCARB1/TNK2/PRKCA/CAMK1D/RAB11FIP3/RNF220/SLC4A8/P2RX1/ARHGAP1/HIP1/LMAN2","INPPL1/TYK2/NAIP/SPPL2B/ZBTB46/CD44/GLI2/PRKAR1B/DAPK2/GRB2/KDM6B/VAV2/KCNQ1/MYO18A/RIN3/AKAP8/NECTIN1/TCF3/ITGB3/RUNX1/IFNAR2/PDPK1/PRDM16/PLCB1/TAFA4/MAP3K1/PLEC/BCL6/SLIT2/ZBTB7A/RUBCN/DNM2/NECTIN2/ZFPM1/ST3GAL1/DAB2IP/MAEA/BCR/PREX1/GRAMD4/MAP2K7/KLHL22/TRIM56/IGBP1/IFI16/DNASE1/EPHB2/MAPK14/SH3KBP1/MARK4/GPI/PRKCA/CAMK1D/MYH9/RAP1GAP2/RNF220/LDLR/PRKCZ/SMARCA4/BACH2/HIPK2/IRS2/BRD2","ATP2B4/LIMD1/ABR/NAIP/CASTOR3P/ARHGEF10L/ARAP1/CD44/SKI/TIAM1/PRKAR1B/DAPK2/GRB2/TTN/MAD1L1/VAV2/ARRB1/STK25/ITGB3/IQSEC1/PDPK1/PLCB1/WWC1/MYO9B/SLIT2/ZBTB7A/RUBCN/PPARA/MDFIC/NACC2/DAB2IP/EPHA4/SPRED2/ITGA1/BCR/CLEC16A/ARHGEF17/PREX1/GRAMD4/MAP2K7/KLHL22/SCARB1/TRIM56/IGBP1/IFI16/SIPA1L3/PDE3A/EPHB2/MAPK14/PDE10A/SH3RF3/MN1/MARK4/MAPK8IP3/MAP3K3/PRKCA/RAP1GAP2/NPC1/PRKCZ/MID1/SMARCA4/MFN2/HIPK2/ARHGAP1/NOL3/HIP1/IRS2","INPPL1/TNNT1/ADAMTS3/ARHGEF10L/ARAP1/TPM4/MYO1D/MYO5A/WIPF1/ACTN1/TTN/ELMO1/MYBPC3/ARRB1/CYFIP1/ADPRHL1/MYO1B/PLEC/CLIP1/SLIT2/DNM2/SHTN1/CALD1/SHROOM4/PREX1/COL5A1/MYH6/BMERB1/SH3KBP1/XIRP1/LDLR/PXN/TRIOBP/HIP1/SH3D21/PCNT","SPEN/TYK2/NAIP/GLI2/TIAM1/PRKAR1B/KDM6B/KCNQ1/ARRB1/TCF3/ITGB3/RUNX1/ADGRV1/PDPK1/HK2/PRDM16/RTN4RL1/PLCB1/CUX1/EGR1/BCL6/SLIT2/LRRTM4/SHTN1/NECTIN2/ZFPM1/NPAS2/EPHA4/SGIP1/HRH1/KLHL22/TRIM56/IFI16/EPHB2/MAPK14/SH3KBP1/PRKCA/NTN1/CAMK2B/RNF220/PRKCZ/SMARCA4/MFN2/HIPK2/IRS2/BRD2","INPPL1/TYK2/NAIP/SPPL2B/GLI2/PRKAR1B/DAPK2/GRB2/VAV2/MYO18A/RIN3/TCF3/ITGB3/RUNX1/PDPK1/PRDM16/PLCB1/MAP3K1/BCL6/SLIT2/NECTIN2/ZFPM1/DAB2IP/BCR/GRAMD4/MAP2K7/KLHL22/TRIM56/IFI16/DNASE1/EPHB2/MAPK14/SH3KBP1/MARK4/GPI/PRKCA/CAMK1D/RNF220/LDLR/PRKCZ/SMARCA4/IRS2/BRD2","PACSIN2/NRXN3/FMNL2/ARAP1/TPM4/CD44/GLI2/TIAM1/ACTN1/RILPL1/NECTIN1/CYFIP1/CDH11/CUX1/PLEC/MYO9B/SLIT2/DNM2/SHTN1/ZFPM1/DAB2IP/EPHA4/ITGA1/CDH4/SIPA1L3/SLIT3/EPHB2/PRKCA/NTN1/CAMK2B/MYH9/GAS7/SEMA5B/SLC23A2","ARAP1/GRB2/AP2A2/RIN3/ARRB1/ITGB3/IQSEC1/VAC14/GRK3/DNM2/RNF220/HIP1","ATP2B4/TYK2/CASTOR3P/PRKAR1B/CACNA1B/MYO5A/GRB2/KCNQ1/SPIDR/ITGB3/PDPK1/PLCB1/CHRM2/EGR1/SLIT2/PPARA/CRTC1/EPHA4/HRH1/KLHL22/SLC27A1/RYR3/PDE3A/EPHB2/MAPK14/PRKCA/ADCY1/PXN/ABCC1/PRKCZ/TRPV1/P2RX1/DNMT3A/IRS2","SV2C/CACNA1B/SYT7/PDPK1/RAB11FIP1/DNAJC5/ABCC4/MYH9/SLC4A8/TSPAN18/P2RX1","ATP2B4/INPPL1/LIMD1/NAIP/CASTOR3P/CD44/SKI/PRKAR1B/CCDC3/MAD1L1/ZFYVE28/ARRB1/STK25/PDPK1/RAB11FIP1/PRDM16/WWC1/EGR1/GRK3/SLIT2/ZBTB7A/RUBCN/PPARA/MIDN/DAB2IP/EPHA4/SPRED2/ITGA1/SUFU/PREX1/GRAMD4/ZGPAT/IGBP1/IFI16/PDE3A/SLIT3/EPHB2/MAPK14/PDE10A/NXN/COLQ/RAB11FIP3/LDLR/NPC1/PRKCZ/SMARCA4/MFN2/HIPK2/NOL3","ATP2B4/TYK2/CASTOR3P/PRKAR1B/CACNA1B/MYO5A/GRB2/KCNQ1/AKAP8/STK25/SPIDR/ITGB3/PDPK1/PLCB1/CHRM2/EGR1/PLEC/SLIT2/PPARA/CRTC1/AGAP3/DAB2IP/EPHA4/ABHD2/MAP2K7/KLHL22/SLC27A1/SCARB1/RYR3/PDE3A/SLIT3/EPHB2/MAPK14/MN1/GPI/PRKCA/ADCY1/LDLR/PXN/ABCC1/SLC23A2/PRKCZ/TRPV1/SMARCA4/P2RX1/DNMT3A/IRS2","ATP2B4/LAMA5/PACSIN2/SORD/FMNL2/ARSB/CD44/SKI/TIAM1/DAPK2/VAV2/ELMO1/MYO18A/RIN3/SPOCK1/ITGB3/CDH11/IQSEC1/PDPK1/PLCB1/WWC1/TAFA4/PLEC/SLIT2/DNAH11/SHTN1/DAB2IP/RAB40C/EPHA4/ITGA1/BCR/PREX1/COL5A1/CFAP44/SCARB1/CDH4/EPHB2/SH3KBP1/GPI/PRKCA/NTN1/CAMK1D/CAMK2B/MYH9/PXN/SEMA5B/ABCC1/SH3D21","ATP2B4/INPPL1/LIMD1/NAIP/CASTOR3P/CD44/SKI/PRKAR1B/CCDC3/MAD1L1/ZFYVE28/ARRB1/STK25/PDPK1/RAB11FIP1/PRDM16/WWC1/EGR1/GRK3/SLIT2/ZBTB7A/RUBCN/PPARA/MIDN/DAB2IP/EPHA4/SPRED2/ITGA1/SUFU/PREX1/GRAMD4/ZGPAT/IGBP1/IFI16/PDE3A/SLIT3/EPHB2/MAPK14/PDE10A/NXN/COLQ/RAB11FIP3/NPC1/PRKCZ/SMARCA4/MFN2/HIPK2/NOL3","INPPL1/SPEN/LIMD1/LAMA5/TYK2/ADAMTS3/NAIP/SPPL2B/CD44/SKI/GLI2/TIAM1/PRKAR1B/CCDC3/GRB2/VAV2/ZFYVE28/EVC/ARRB1/CYFIP1/ADGRL1/PILRB/ITGB3/IFNAR2/TBL1X/ADGRV1/PDPK1/PRDM16/PLCB1/MAP3K1/EGR1/MYO9B/SLIT2/ZBTB7A/ARMC9/PPARA/SHTN1/MDFIC/NECTIN2/DAB2IP/EPHA4/SPRED2/ITGA1/CASP8AP2/LLGL2/SUFU/MAP2K7/ZGPAT/SCARB1/TRIM56/SHC2/SAMD12/SLIT3/EPHB2/MAPK14/PDE10A/TNK2/NXN/PRKCA/MYH9/RNF220/PXN/SEMA5B/PRKCZ/TRPV1/SMARCA4/P2RX1/HIPK2/NOL3/HIP1/IRS2","NAIP/PLCB1/DAB2IP/EPHA4/MAP2K7/SH3RF3/MAPK8IP3/HIPK2","SKI/GLI2/EVC/CYFIP1/RUNX1/PLCB1/WWC1/ADPRHL1/PLEC/NINJ2/SLIT2/DNM2/PPARA/SHTN1/CPQ/SLIT3/NTN1/XIRP1/SEMA5B/SLC23A2","TYK2/GLI2/TCF3/RUNX1/PDPK1/BCL6/NECTIN2/KLHL22/EPHB2/SH3KBP1/PRKCZ/SMARCA4/IRS2/BRD2","TYK2/ZBTB46/CD44/GLI2/GRB2/MYO18A/TCF3/RUNX1/PDPK1/PRDM16/BCL6/ZBTB7A/NECTIN2/ZFPM1/ST3GAL1/PREX1/KLHL22/IGBP1/DNASE1/EPHB2/SH3KBP1/LDLR/PRKCZ/SMARCA4/IRS2/BRD2","LAMA5/NRXN3/KIRREL1/AGAP1/CBLN2/ACTN1/ELMO1/ZNF804A/NECTIN1/CYFIP1/SDK2/ITGB3/CDH11/IQSEC1/RTN4RL1/PLEC/ZC4H2/LRRTM4/DAB2IP/RAB40C/EPHA4/BCR/DLGAP4/CDH4/EPHB2/MAPK14/KIFC3/PRKCA/NTN1/CAMK2B/SYN3/DMPK","ATP2B4/CAMK2G/ARRB1/PPARA/PRKCA/CAMK2B/NOL3","NES/SKI/ZC4H2/ZBTB7A/IFI16/XIRP1/RNF220","EVI5L/CAMK2G/NRXN3/ARSB/ARAP1/CD44/GLI2/TIAM1/KCNQ1/RILPL1/SEPTIN9/ZNF804A/ARRB1/NECTIN1/ABLIM2/SPOCK1/CYFIP1/IQSEC1/ADGRV1/RTN4RL1/ATP6V0D1/CUX1/MYO9B/SLIT2/SYNE1/ARMC9/DNM2/SHTN1/DYNC2I1/GAK/DAB2IP/EPHA4/ITGA1/ABCC4/PREX1/CFAP44/SLIT3/EPHB2/MARK4/MAPK8IP3/PRKCA/NTN1/CAMK1D/RAB11FIP3/CAMK2B/GAS7/SEMA5B/SLC23A2/PCNT","AP2A2/ITGB3/IQSEC1/VAC14/RNF220/HIP1","ATP2B4/NES/SKI/KCNQ1/NECTIN1/SDK2/AP3D1/ADGRV1/EPHA4/SPRED2/COL5A1/SH3PXD2B/SIPA1L3/EPHB2/SMARCA4/HIPK2","MYO1D/MYO5A/WIPF1/TTN/KCNQ1/MYBPC3/MYO1B/MYO9B/SHTN1/KCNJ3/MYH6/MYH9","PRKAR1B/ITPK1/VAV2/ITGB3/HK2/PPARA/EPHB2/MAPK14/GPI/PRKCA/MYH9/ADCY1","ARAP1/SYT7/ITGB3/RUNX1/BCR/PRKCA/NOL3","ARAP1/RIN3/ARRB1/ITGB3/IQSEC1/VAC14/RNF220/HIP1","ATP2B4/CACNA1B/KCNQ1/SLC39A11/SLC9A9/KCNJ3/TRPV1/P2RX1","ATP2B4/CACNA1B/ITGB3/PDPK1/PLCB1/RYR3/TRPV1/P2RX1/NOL3/ERO1A","SPEN/DEAF1/ZBTB46/SKI/GLI2/ZBTB4/NFIC/TCF3/RUNX1/TBL1X/ZNF117/PRDM16/ETV5/WWC1/CUX1/BCL6/ZBTB7A/PPARA/CTBP1/NACC2/ZFPM1/DAB2IP/SUFU/ESRRA/ZGPAT/IGBP1/IFI16/GATAD2A/CTCF/TRPV1/SMARCA4/BACH2/HIPK2/DNMT3A/BPTF","ATP2B4/ABCC4/SLC6A6/SLC27A1/SLC4A8/SLC2A13/ABCC1","AGAP1/ELMO1/ZNF804A/NECTIN1/CYFIP1/RTN4RL1/LRRTM4/DAB2IP/EPHA4/DLGAP4/EPHB2/MAPK14/PRKCA/NTN1/CAMK2B/DMPK","AGAP1/ELMO1/ZNF804A/NECTIN1/CYFIP1/RTN4RL1/LRRTM4/DAB2IP/EPHA4/DLGAP4/EPHB2/MAPK14/PRKCA/NTN1/CAMK2B/DMPK","TYK2/CD44/GLI2/RUNX1/PDPK1/BCL6/EPHA4/KLHL22/PRKCZ/SMARCA4/BRD2","SPEN/GLI2/TIAM1/RUNX1/CUX1/BCL6/SLIT2/SHTN1/EPHA4/EPHB2/PRKCA/NTN1/CAMK2B/PRKCZ/SMARCA4/BRD2","NAIP/CD44/PRKAR1B/KDM6B/BCL6/PPARA/DAB2IP/HRH1/IFI16/DNASE1/EPHB2/MAPK14/MARK4/CAMK1D/NEAT1/ADCY1/LDLR/ABCC1/TSPAN18/PRKCZ","CAMK2G/NRXN3/ARSB/GLI2/TIAM1/MDGA2/KCNQ1/ZNF804A/NECTIN1/SPOCK1/CYFIP1/SDK2/TCF3/RUNX1/IQSEC1/ADGRV1/RTN4RL1/CASZ1/CUX1/ZC4H2/SLIT2/DNM2/SHTN1/GAK/DAB2IP/EPHA4/ITGA1/PREX1/SLIT3/EPHB2/MAPK8IP3/PRKCA/NTN1/CAMK1D/CAMK2B/GAS7/SEMA5B/SLC23A2/HIPK2/DNMT3A","SPEN/TIAM1/RTN4RL1/CUX1/SLIT2/LRRTM4/SHTN1/EPHA4/EPHB2/PRKCA/NTN1/CAMK2B","CAMK2G/ADAMTS3/NAIP/ARAP1/CD44/SKI/GLI2/PRKAR1B/CACNA1B/GRB2/TTN/MAD1L1/VAV2/EVC/ARRB1/STK25/CYFIP1/ITGB3/TBL1X/PDPK1/PLCB1/WWC1/ARMC9/NACC2/NECTIN2/DAB2IP/EPHA4/SPRED2/ITGA1/CLEC16A/MAP2K7/KLHL22/SCARB1/TRIM56/EPHB2/SH3RF3/MN1/MARK4/MAPK8IP3/MAP3K3/PRKCA/CAMK2B/ADCY1/RNF220/SLC4A8/PRKCZ/MID1/SMARCA4/HIPK2/HIP1/IRS2","PNPLA7/PFKFB3/PFKFB4/HK2/PLCB1/ZBTB7A/PPARA/SCARB1/PDE10A/PRKAG1/GPI/LDLR","ATP2B4/CAMK2G/ARRB1/PPARA/PRKCA/CAMK2B/NOL3","LIMD1/TYK2/PFKFB3/PRKAR1B/DAPK2/PFKFB4/ZFYVE28/ARRB1/STK25/PILRB/PDPK1/HK2/MAP3K1/SLIT2/MIDN/CTBP1/BCR/ZGPAT/EPHB2/TNK2/PRKAG1/MARK4/MAP3K3/PRKCA/CAMK2B/PRKCZ/HIPK2/DMPK","ATP2B4/INPPL1/LIMD1/NAIP/CASTOR3P/CD44/SKI/PRKAR1B/CCDC3/GRB2/MAD1L1/ZFYVE28/RIN3/ARRB1/STK25/PDPK1/PRDM16/RTN4RL1/WWC1/EGR1/GRK3/SLIT2/ZBTB7A/RUBCN/PPARA/NECTIN2/DAB2IP/EPHA4/SPRED2/ITGA1/SUFU/PREX1/GRAMD4/ZGPAT/IGBP1/IFI16/PDE3A/SLIT3/EPHB2/MAPK14/PDE10A/NXN/LDLR/NPC1/PRKCZ/SMARCA4/MFN2/HIPK2/NOL3"],[48,26,57,40,37,30,49,43,75,68,17,33,64,28,63,67,36,46,43,34,12,34,11,49,47,48,48,71,8,20,14,26,32,7,7,49,6,16,12,12,7,8,8,10,35,7,16,16,11,16,20,40,12,51,12,7,28,49]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>Description<\/th>\n      <th>GeneRatio<\/th>\n      <th>BgRatio<\/th>\n      <th>RichFactor<\/th>\n      <th>FoldEnrichment<\/th>\n      <th>zScore<\/th>\n      <th>pvalue<\/th>\n      <th>p.adjust<\/th>\n      <th>qvalue<\/th>\n      <th>geneID<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"Description","targets":2},{"name":"GeneRatio","targets":3},{"name":"BgRatio","targets":4},{"name":"RichFactor","targets":5},{"name":"FoldEnrichment","targets":6},{"name":"zScore","targets":7},{"name":"pvalue","targets":8},{"name":"p.adjust","targets":9},{"name":"qvalue","targets":10},{"name":"geneID","targets":11},{"name":"Count","targets":12}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-697d58abce2053a24549">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.105970149253731\" data-max=\"0.333333333333334\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.43341870529012\" data-max=\"4.50887573964497\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.81683334319391\" data-max=\"6.21311229484833\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.3746334e-08\" data-max=\"0.004541982801375\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"7.8021524687e-05\" data-max=\"0.092929772006876\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"7.8021524687e-05\" data-max=\"0.092929772006876\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"6\" data-max=\"75\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["GO:0098657","GO:0050804","GO:0003008","GO:0030036","GO:0006897","GO:0007268","GO:0007155","GO:0030029","GO:0048468","GO:0141124","GO:0001501","GO:0001775","GO:0070887","GO:0060627","GO:0002376","GO:1902531","GO:0097435","GO:0051240","GO:0002682","GO:0000902","GO:0031623","GO:1901698","GO:0045055","GO:0023057","GO:1901700","GO:0048870","GO:0010648","GO:0007166","GO:0046330","GO:0048589","GO:0002696","GO:0045321","GO:0034330","GO:0043502","GO:0051098","GO:0120036","GO:0098884","GO:0007423","GO:0030048","GO:0050878","GO:0048771","GO:0002090","GO:0098659","GO:0097553","GO:0000122","GO:0150104","GO:0050803","GO:0050807","GO:1903039","GO:0010720","GO:0006954","GO:0030182","GO:0051962","GO:0023056","GO:0046434","GO:0043500","GO:0016310","GO:0048585"],["GO:0098657","GO:0050804","GO:0003008","GO:0030036","GO:0006897","GO:0007268","GO:0007155","GO:0030029","GO:0048468","GO:0141124","GO:0001501","GO:0001775","GO:0070887","GO:0060627","GO:0002376","GO:1902531","GO:0097435","GO:0051240","GO:0002682","GO:0000902","GO:0031623","GO:1901698","GO:0045055","GO:0023057","GO:1901700","GO:0048870","GO:0010648","GO:0007166","GO:0046330","GO:0048589","GO:0002696","GO:0045321","GO:0034330","GO:0043502","GO:0051098","GO:0120036","GO:0098884","GO:0007423","GO:0030048","GO:0050878","GO:0048771","GO:0002090","GO:0098659","GO:0097553","GO:0000122","GO:0150104","GO:0050803","GO:0050807","GO:1903039","GO:0010720","GO:0006954","GO:0030182","GO:0051962","GO:0023056","GO:0046434","GO:0043500","GO:0016310","GO:0048585"],["import into cell","modulation of chemical synaptic transmission","system process","actin cytoskeleton organization","endocytosis","chemical synaptic transmission","cell adhesion","actin filament-based process","cell development","intracellular signaling cassette","skeletal system development","cell activation","cellular response to chemical stimulus","regulation of vesicle-mediated transport","immune system process","regulation of intracellular signal transduction","supramolecular fiber organization","positive regulation of multicellular organismal process","regulation of immune system process","cell morphogenesis","receptor internalization","response to nitrogen compound","regulated exocytosis","negative regulation of signaling","response to oxygen-containing compound","cell motility","negative regulation of cell communication","cell surface receptor signaling pathway","positive regulation of JNK cascade","developmental growth","positive regulation of leukocyte activation","leukocyte activation","cell junction organization","regulation of muscle adaptation","regulation of binding","plasma membrane bounded cell projection organization","postsynaptic neurotransmitter receptor internalization","sensory organ development","actin filament-based movement","regulation of body fluid levels","tissue remodeling","regulation of receptor internalization","inorganic cation import across plasma membrane","calcium ion transmembrane import into cytosol","negative regulation of transcription by RNA polymerase II","transport across blood-brain barrier","regulation of synapse structure or activity","regulation of synapse organization","positive regulation of leukocyte cell-cell adhesion","positive regulation of cell development","inflammatory response","neuron differentiation","positive regulation of nervous system development","positive regulation of signaling","organophosphate catabolic process","muscle adaptation","phosphorylation","negative regulation of response to stimulus"],["48/338","26/338","57/338","40/338","37/338","30/338","49/338","43/338","75/338","68/338","17/338","33/338","64/338","28/338","63/338","67/338","36/338","46/338","43/338","34/338","12/338","34/338","11/338","49/338","47/338","48/338","48/338","71/338","8/338","20/338","14/338","26/338","32/338","7/338","7/338","49/338","6/338","16/338","12/338","12/338","7/338","8/338","8/338","10/338","35/338","7/338","16/338","16/338","11/338","16/338","20/338","40/338","12/338","51/338","12/338","7/338","28/338","49/338"],["288/4572","124/4572","414/4572","252/4572","230/4572","169/4572","353/4572","295/4572","637/4572","560/4572","76/4572","214/4572","534/4572","178/4572","543/4572","596/4572","265/4572","369/4572","339/4572","247/4572","53/4572","253/4572","46/4572","412/4572","391/4572","408/4572","409/4572","670/4572","28/4572","125/4572","73/4572","185/4572","249/4572","24/4572","24/4572","434/4572","18/4572","95/4572","62/4572","62/4572","25/4572","32/4572","32/4572","47/4572","289/4572","26/4572","100/4572","100/4572","58/4572","102/4572","140/4572","350/4572","67/4572","478/4572","69/4572","29/4572","227/4572","460/4572"],[0.1666666666666667,0.2096774193548387,0.1376811594202899,0.1587301587301587,0.1608695652173913,0.1775147928994083,0.1388101983002833,0.1457627118644068,0.1177394034536892,0.1214285714285714,0.2236842105263158,0.1542056074766355,0.1198501872659176,0.1573033707865168,0.1160220994475138,0.1124161073825503,0.1358490566037736,0.1246612466124661,0.1268436578171092,0.1376518218623482,0.2264150943396226,0.1343873517786561,0.2391304347826087,0.1189320388349515,0.1202046035805627,0.1176470588235294,0.117359413202934,0.1059701492537313,0.2857142857142857,0.16,0.1917808219178082,0.1405405405405405,0.1285140562248996,0.2916666666666667,0.2916666666666667,0.1129032258064516,0.3333333333333333,0.1684210526315789,0.1935483870967742,0.1935483870967742,0.28,0.25,0.25,0.2127659574468085,0.1211072664359862,0.2692307692307692,0.16,0.16,0.1896551724137931,0.1568627450980392,0.1428571428571428,0.1142857142857143,0.1791044776119403,0.1066945606694561,0.1739130434782609,0.2413793103448276,0.1233480176211454,0.1065217391304348],[2.254437869822485,2.836228287841192,1.862361718549009,2.147083685545224,2.17602263956779,2.40117642939673,1.877633806594364,1.971677865810852,1.592617019497831,1.642519019442096,3.025692930551231,2.085881767405851,1.621168805265607,2.12778405691111,1.569387688384714,1.520610777967515,1.837579546723233,1.686246211574542,1.715766874378175,1.861964880339219,3.062632577872056,1.817807610449751,3.234628248006174,1.608749353708278,1.62596286263412,1.59136790810999,1.587477033029036,1.433418705290118,3.864750633981403,2.164260355029586,2.594147685823134,1.901039501039501,1.738361730947458,3.945266272189349,3.945266272189349,1.527199847299103,4.508875739644971,2.278168794767985,2.618056881084176,2.618056881084176,3.787455621301776,3.381656804733728,3.381656804733728,2.878005791262747,1.638172846583813,3.641784251251707,2.164260355029586,2.164260355029586,2.565394817384207,2.121823877479986,1.932375316990701,1.545900253592561,2.42267950189879,1.443217548463767,2.352456907640854,3.265047949398082,1.668482652555848,1.440879855930023],[6.213112294848329,5.856574346519938,5.197995884714394,5.29227050114474,5.170389069580132,5.243851283397936,4.849360469736919,4.874748639002402,4.554702356403419,4.585514522119941,5.031017074535096,4.596574980052122,4.315048115564796,4.336051778379576,3.992986918526463,3.850362605228632,3.968716699294673,3.884203559950857,3.869330656116221,3.934898425610769,4.267044489107847,3.781014477262344,4.303437097676031,3.659560992633085,3.656666868689813,3.536071255756729,3.517530528631004,3.430756961329319,4.295712548659335,3.728722685563354,3.879006617241957,3.534552294670396,3.385047513762353,4.08703626099686,4.08703626099686,3.261470324608971,4.214016794462168,3.556681695789497,3.624014214637372,3.624014214637372,3.94824435346886,3.819572666214317,3.819572666214317,3.656159203170508,3.166662212598291,3.816434727827127,3.325735802598915,3.325735802598915,3.389578099756545,3.237125506718393,3.165508206329252,3.002456594586504,3.314252647163273,2.892980526638526,3.198052155850275,3.456953713351552,2.918748762259825,2.816833343193914],[3.37463342075429e-08,7.335167571929458e-07,1.454076893581004e-06,1.965591877339085e-06,3.558389525095124e-06,4.175058459358476e-06,7.08135374810584e-06,7.905175780711231e-06,1.21448992009575e-05,1.216012327849613e-05,2.662134543612945e-05,3.067561756297968e-05,3.55759072099776e-05,8.779251575702127e-05,0.0001122603956987154,0.0001733076191523431,0.0002033957883706692,0.0002112571281832068,0.0002348729273707104,0.000238561947156767,0.0003661975336845739,0.000378292599767835,0.0003881351832925687,0.0004070416400549313,0.0004235243118343112,0.0006028576565399451,0.000637561177625393,0.0006544885822185661,0.0006863045505017343,0.0007252504842667496,0.0007439744974595568,0.0009560197374394433,0.001228999770721398,0.001304958882781445,0.001304958882781445,0.001338953043676297,0.001350857389650895,0.001398862746486239,0.001618904729574238,0.001618904729574238,0.001699401787845025,0.001788785233368876,0.001788785233368876,0.001867927947260402,0.00210252189027255,0.002180624597490488,0.002428233743576371,0.002428233743576371,0.002971041225077601,0.002987453263741039,0.002999087327031728,0.003038578982713805,0.003214875775559948,0.003656139936910929,0.004133970197189008,0.004268044519307016,0.004485404463499812,0.004541982801374123],[7.802152468783919e-05,0.0006662055245321783,0.0008404564444898206,0.0009088896840815927,0.0012065918947546,0.0012065918947546,0.001575878285249748,0.001575878285249748,0.002008157501420219,0.002008157501420219,0.003846784415520705,0.004171883988565237,0.00432902618260359,0.009226195292283326,0.01081441811897625,0.01484026724000805,0.01611030691383812,0.01611030691383812,0.01671379460080137,0.01671379460080137,0.02300940794500335,0.02300940794500335,0.02300940794500335,0.02300940794500335,0.02331400497526018,0.03075163111749468,0.03075163111749468,0.03088117555284336,0.03111247295607862,0.03137217540865759,0.03137217540865759,0.03746301072813547,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04403454247165903,0.04924878598388997,0.04924878598388997,0.05102619394152853,0.05169589324436052,0.05169589324436052,0.05266645626909816,0.05718859541541335,0.05794947206204609,0.06102256972987575,0.06102256972987575,0.0700392919201753,0.0700392919201753,0.0700392919201753,0.07025194608034316,0.07359200785242179,0.08127880321286603,0.08849758422130544,0.08970653571488929,0.09292977200687587,0.09292977200687587],[7.802152468783919e-05,0.0006662055245321784,0.0008404564444898206,0.0009088896840815927,0.0012065918947546,0.0012065918947546,0.001575878285249748,0.001575878285249748,0.002008157501420219,0.002008157501420219,0.003846784415520705,0.004171883988565238,0.00432902618260359,0.009226195292283327,0.01081441811897625,0.01484026724000805,0.01611030691383812,0.01611030691383812,0.01671379460080137,0.01671379460080137,0.02300940794500335,0.02300940794500335,0.02300940794500335,0.02300940794500335,0.02331400497526018,0.03075163111749468,0.03075163111749468,0.03088117555284336,0.03111247295607862,0.03137217540865759,0.03137217540865759,0.03746301072813547,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04398848288553338,0.04403454247165903,0.04924878598388997,0.04924878598388997,0.05102619394152853,0.05169589324436051,0.05169589324436051,0.05266645626909817,0.05718859541541336,0.05794947206204609,0.06102256972987576,0.06102256972987576,0.07003929192017531,0.07003929192017531,0.07003929192017531,0.07025194608034316,0.07359200785242179,0.08127880321286603,0.08849758422130544,0.08970653571488928,0.09292977200687587,0.09292977200687587],["SLC6A6/INPPL1/LMAN2/LDLR/GAK/GRB2/SGIP1/MYO18A/PACSIN2/ARAP1/TNK2/AP2A2/TAFA4/CACNA1B/MYO5A/ATP2B4/ITGB3/SLC9A9/ARRB1/SLC27A1/SCARB1/FNBP1/SLC39A11/VAC14/IQSEC1/ELMO1/VAV2/GRK3/P2RX1/TRPV1/MYO1B/HIP1/RNF220/SYT7/AP3D1/MYO1D/KCNQ1/SH3KBP1/CTBP1/CAMK1D/GAS7/IRS2/RIN3/CD44/KCNJ3/MYH9/DNM2/RUBCN","SLC6A6/PRKCZ/PACSIN2/SV2C/BCR/CACNA1B/CAMK2B/PRKAR1B/CAMK2G/SLC4A8/CYFIP1/PLCB1/SYN3/P2RX1/EPHA4/NRXN3/HIP1/ABR/SYT7/CDH11/CHRM2/EPHB2/COLQ/ADCY1/DLGAP4/CBLN2","SLC6A6/PRKCZ/TPM4/LDLR/ITGA1/KIRREL1/TTN/TBC1D9B/DEAF1/KIFC3/BCR/PDE3A/CAMK2B/ATP2B4/PRKAR1B/CAMK2G/SLC4A8/ARRB1/SLC27A1/SCARB1/CYFIP1/PLCB1/ADGRV1/HRH1/ABCC1/P2RX1/SHROOM4/GPI/RYR3/TBL1X/SLC2A13/TRPV1/PRKRIP1/MYH6/PLEC/EGR1/NRXN3/SLIT2/NOL3/RNF220/RAB11FIP1/MYBPC3/PPARA/ABCC4/KCNQ1/TNNT1/CHRM2/DMPK/PRKCA/EPHB2/CALD1/NPC1/RAB11FIP3/SYNM/CYB5R3/ADCY1/KCNJ3","INPPL1/TPM4/GRB2/MYO18A/WIPF1/LDB3/PACSIN2/ARAP1/FMNL2/TTN/ARHGEF17/ARHGEF10L/MYO5A/ITGB3/SH3D21/SHTN1/ACTN1/ARRB1/CYFIP1/ELMO1/PDPK1/XIRP1/LLGL2/SHROOM4/PXN/MYH6/PLEC/MYO1B/SLIT2/HIP1/TRIOBP/MYBPC3/MYO1D/TNNT1/SH3KBP1/ADPRHL1/CALD1/PREX1/MYH9/DNM2","INPPL1/LMAN2/LDLR/GAK/GRB2/SGIP1/MYO18A/PACSIN2/ARAP1/TNK2/AP2A2/TAFA4/MYO5A/ITGB3/ARRB1/SCARB1/FNBP1/VAC14/IQSEC1/ELMO1/VAV2/GRK3/MYO1B/HIP1/RNF220/SYT7/AP3D1/MYO1D/SH3KBP1/CTBP1/CAMK1D/GAS7/RIN3/CD44/MYH9/DNM2/RUBCN","SLC6A6/PRKCZ/PACSIN2/SV2C/DNAJC5/BCR/CACNA1B/CAMK2B/PRKAR1B/CAMK2G/SLC4A8/CYFIP1/PLCB1/HRH1/SYN3/P2RX1/TRPV1/EPHA4/NRXN3/RPS6KA2/HIP1/ABR/SYT7/CDH11/CHRM2/EPHB2/COLQ/ADCY1/DLGAP4/CBLN2","RUNX1/PRKCZ/LAMA5/TYK2/INPPL1/ITGA1/ADAM19/KIRREL1/KIFC3/BCR/COL13A1/COL7A1/IGSF9B/CDH4/PCDH9/GLI2/NECTIN1/ITGB3/ACTN1/NECTIN2/TIAM1/SPOCK1/PCDHGA10/KLHL22/ADGRV1/PDPK1/NINJ2/CEACAM19/PXN/SMARCA4/EPHA4/NRXN3/TRIOBP/PNN/MAEA/RAB40C/CDH11/MYBPC3/BCL6/PPARA/PRKCA/COL5A1/SDK2/EPHB2/MAPK14/BRD2/CD44/MYH9/SLC23A2","INPPL1/TPM4/GRB2/MYO18A/WIPF1/LDB3/PACSIN2/ARAP1/FMNL2/TTN/ARHGEF17/ARHGEF10L/MYO5A/ITGB3/SH3D21/SHTN1/ACTN1/ARRB1/CYFIP1/ELMO1/PDPK1/MYO9B/XIRP1/LLGL2/SHROOM4/PXN/MYH6/PLEC/MYO1B/SLIT2/HIP1/TRIOBP/MYBPC3/MYO1D/KCNQ1/TNNT1/SH3KBP1/ADPRHL1/CALD1/PREX1/KCNJ3/MYH9/DNM2","RUNX1/PRKCZ/TPM4/LDLR/GAK/GRB2/ITGA1/OSBP2/TTN/DEAF1/RILPL1/SIPA1L3/PDE3A/CAMK2B/GLI2/NECTIN1/TCF3/SHTN1/ACTN1/CAMK2G/NECTIN2/ZNF804A/ZFPM1/TIAM1/SPOCK1/CYFIP1/PLCB1/ZBTB46/ADGRV1/IQSEC1/PDPK1/SEMA5B/PRDM16/RTN4RL1/ABHD2/SUFU/MAPK8IP3/SKI/SMARCA4/EPHA4/MYH6/PLEC/CFAP44/NRXN3/SLIT2/DAB2IP/MAEA/MYBPC3/LIMD1/BCL6/ZBTB7A/GARIN1A/PPARA/KCNQ1/TNNT1/ADPRHL1/CUX1/PRKCA/NTN1/CAMK1D/EPHB2/GAS7/MAPK14/SPEN/BRD2/PREX1/IFI16/SLIT3/ARSB/MYH9/HIPK2/ST3GAL1/CTCF/DNM2/SLC23A2","PRKCZ/MID1/GRB2/TPCN1/MYO18A/ITGA1/ARAP1/NAIP/TTN/ARHGEF17/TNK2/ARHGEF10L/SH3RF3/PDE10A/WWC1/RILPL1/TSPAN18/BCR/SIPA1L3/PDE3A/MDFIC/ATP2B4/PRKAR1B/ITGB3/SHTN1/ARRB1/SCARB1/TIAM1/CYFIP1/STK25/TRIM56/PLCB1/IQSEC1/ELMO1/VAV2/PDPK1/RAPGEF5/MAP3K1/MYO9B/P2RX1/MAPK8IP3/MAP3K3/RYR3/SKI/TRPV1/SPRED2/EPHA4/SLIT2/HIP1/NOL3/ABR/RAP1GAP2/DAB2IP/MFN2/PPARA/DMPK/PRKCA/NTN1/MAP2K7/EPHB2/MAPK14/IRS2/PREX1/IGBP1/CD44/ARHGAP1/HIPK2/RUBCN","RUNX1/LAMA5/INPPL1/DEAF1/COL13A1/SH3PXD2B/GLI2/EVC/SKI/COL27A1/ANKRD11/DYNC2I1/CDH11/XYLT1/COL5A1/MAPK14/CD44","RUNX1/PRKCZ/TYK2/LDLR/GRB2/MYO18A/GLI2/TCF3/ITGB3/NECTIN2/ZFPM1/PLCB1/ZBTB46/KLHL22/VAV2/PDPK1/PRDM16/XIRP1/SMARCA4/DNASE1/BCL6/ZBTB7A/SH3KBP1/PRKCA/EPHB2/MAPK14/BRD2/IRS2/PREX1/IGBP1/CD44/MYH9/ST3GAL1","PRKCZ/NXN/TYK2/LDLR/GRB2/ERO1A/ITGA1/CASTOR3P/DNMT3A/ATP6V0D1/TAFA4/MYO5A/PDE3A/ATP2B4/PRKAR1B/SPIDR/ITGB3/SLC27A1/SCARB1/STK25/PLCB1/KLHL22/ADGRV1/VAV2/PDPK1/ITPKB/HRH1/ABCC1/ABHD2/SUFU/RYR3/PXN/SMARCA4/TRPV1/MN1/EPHA4/PLEC/EGR1/CRTC1/SLIT2/NOL3/DAB2IP/ZBTB7A/ETV5/PPARA/ABCC4/KCNQ1/CHRM2/AGAP3/PRKCA/NTN1/CAMK1D/MAP2K7/EPHB2/MAPK14/IRS2/AKAP8/RIN3/SLIT3/ADCY1/ESRRA/HIPK2/DAPK2/SLC23A2","LMAN2/SGIP1/MYO18A/PACSIN2/ARAP1/TNK2/SV2C/DNAJC5/CACNA1B/PRKAR1B/ITGB3/SLC4A8/ARRB1/SCARB1/VAC14/IQSEC1/PDPK1/P2RX1/ABCA3/HIP1/RNF220/SYT7/PRKCA/CAMK1D/RAB11FIP3/RIN3/ARHGAP1/RUBCN","RUNX1/GRAMD4/PRKCZ/TYK2/INPPL1/LDLR/GRB2/MYO18A/NAIP/TAFA4/BCR/SPPL2B/PRKAR1B/GLI2/NECTIN1/TCF3/ITGB3/NECTIN2/KDM6B/MARK4/ZFPM1/TRIM56/PLCB1/ZBTB46/KLHL22/VAV2/PDPK1/MAP3K1/PRDM16/BACH2/GPI/SMARCA4/DNASE1/PLEC/SLIT2/RNF220/RAP1GAP2/DAB2IP/MAEA/BCL6/ZBTB7A/KCNQ1/SH3KBP1/PRKCA/CAMK1D/MAP2K7/EPHB2/MAPK14/BRD2/IRS2/PREX1/AKAP8/RIN3/IGBP1/IFI16/CD44/MYH9/HIPK2/IFNAR2/ST3GAL1/DNM2/RUBCN/DAPK2","GRAMD4/PRKCZ/MID1/GRB2/ITGA1/ARAP1/CASTOR3P/NAIP/TTN/MAD1L1/ARHGEF17/ARHGEF10L/SH3RF3/PDE10A/WWC1/BCR/SIPA1L3/PDE3A/MDFIC/ATP2B4/PRKAR1B/ITGB3/ARRB1/MARK4/SCARB1/TIAM1/STK25/TRIM56/PLCB1/KLHL22/IQSEC1/VAV2/PDPK1/MYO9B/CLEC16A/MAPK8IP3/MAP3K3/SKI/SMARCA4/MN1/SPRED2/EPHA4/SLIT2/HIP1/NOL3/ABR/RAP1GAP2/DAB2IP/LIMD1/ZBTB7A/MFN2/PPARA/NACC2/PRKCA/MAP2K7/EPHB2/NPC1/MAPK14/IRS2/PREX1/IGBP1/IFI16/CD44/ARHGAP1/HIPK2/RUBCN/DAPK2","INPPL1/TPM4/LDLR/WIPF1/ARAP1/TTN/ARHGEF10L/MYO5A/SH3D21/SHTN1/ACTN1/ARRB1/CYFIP1/ELMO1/CLIP1/XIRP1/SHROOM4/PXN/MYH6/PLEC/MYO1B/PCNT/SLIT2/HIP1/TRIOBP/MYBPC3/MYO1D/TNNT1/SH3KBP1/ADPRHL1/ADAMTS3/COL5A1/CALD1/PREX1/BMERB1/DNM2","RUNX1/PRKCZ/TYK2/SGIP1/NAIP/CAMK2B/PRKAR1B/GLI2/TCF3/ITGB3/SHTN1/NECTIN2/ARRB1/KDM6B/ZFPM1/TIAM1/TRIM56/PLCB1/KLHL22/ADGRV1/LRRTM4/PDPK1/HRH1/PRDM16/RTN4RL1/SMARCA4/EPHA4/EGR1/SLIT2/RNF220/NPAS2/HK2/BCL6/MFN2/KCNQ1/SH3KBP1/CUX1/PRKCA/NTN1/EPHB2/MAPK14/SPEN/BRD2/IRS2/IFI16/HIPK2","RUNX1/GRAMD4/PRKCZ/TYK2/INPPL1/LDLR/GRB2/MYO18A/NAIP/BCR/SPPL2B/PRKAR1B/GLI2/TCF3/ITGB3/NECTIN2/MARK4/ZFPM1/TRIM56/PLCB1/KLHL22/VAV2/PDPK1/MAP3K1/PRDM16/GPI/SMARCA4/DNASE1/SLIT2/RNF220/DAB2IP/BCL6/SH3KBP1/PRKCA/CAMK1D/MAP2K7/EPHB2/MAPK14/BRD2/IRS2/RIN3/IFI16/DAPK2","TPM4/PACSIN2/ITGA1/ARAP1/FMNL2/RILPL1/SIPA1L3/CAMK2B/CDH4/GLI2/NECTIN1/SHTN1/ACTN1/ZFPM1/TIAM1/CYFIP1/SEMA5B/MYO9B/EPHA4/PLEC/NRXN3/SLIT2/DAB2IP/CDH11/CUX1/PRKCA/NTN1/EPHB2/GAS7/SLIT3/CD44/MYH9/DNM2/SLC23A2","GRB2/ARAP1/AP2A2/ITGB3/ARRB1/VAC14/IQSEC1/GRK3/HIP1/RNF220/RIN3/DNM2","PRKCZ/TYK2/GRB2/CASTOR3P/DNMT3A/CACNA1B/MYO5A/PDE3A/ATP2B4/PRKAR1B/SPIDR/ITGB3/SLC27A1/PLCB1/KLHL22/PDPK1/HRH1/ABCC1/P2RX1/RYR3/PXN/TRPV1/EPHA4/EGR1/CRTC1/SLIT2/PPARA/KCNQ1/CHRM2/PRKCA/EPHB2/MAPK14/IRS2/ADCY1","SV2C/DNAJC5/TSPAN18/CACNA1B/SLC4A8/PDPK1/P2RX1/RAB11FIP1/SYT7/ABCC4/MYH9","GRAMD4/PRKCZ/NXN/INPPL1/LDLR/ITGA1/ZFYVE28/CCDC3/CASTOR3P/NAIP/MAD1L1/PDE10A/WWC1/PDE3A/ATP2B4/PRKAR1B/ARRB1/STK25/ZGPAT/PDPK1/PRDM16/GRK3/SUFU/SKI/SMARCA4/SPRED2/EPHA4/EGR1/MIDN/SLIT2/NOL3/DAB2IP/RAB11FIP1/LIMD1/ZBTB7A/MFN2/PPARA/EPHB2/NPC1/MAPK14/COLQ/RAB11FIP3/PREX1/IGBP1/IFI16/SLIT3/CD44/HIPK2/RUBCN","PRKCZ/TYK2/LDLR/GRB2/CASTOR3P/DNMT3A/CACNA1B/MYO5A/PDE3A/ATP2B4/PRKAR1B/SPIDR/ITGB3/SLC27A1/SCARB1/STK25/PLCB1/KLHL22/PDPK1/ABCC1/P2RX1/ABHD2/GPI/RYR3/PXN/SMARCA4/TRPV1/MN1/EPHA4/PLEC/EGR1/CRTC1/SLIT2/DAB2IP/PPARA/KCNQ1/CHRM2/AGAP3/PRKCA/MAP2K7/EPHB2/MAPK14/IRS2/AKAP8/SLIT3/ADCY1/SLC23A2","LAMA5/MYO18A/PACSIN2/ITGA1/FMNL2/SORD/TAFA4/WWC1/BCR/CAMK2B/ATP2B4/CDH4/ITGB3/SH3D21/SHTN1/SCARB1/TIAM1/SPOCK1/PLCB1/IQSEC1/DNAH11/ELMO1/VAV2/PDPK1/SEMA5B/ABCC1/GPI/SKI/PXN/EPHA4/PLEC/CFAP44/SLIT2/DAB2IP/RAB40C/CDH11/SH3KBP1/PRKCA/NTN1/CAMK1D/COL5A1/EPHB2/PREX1/RIN3/CD44/ARSB/MYH9/DAPK2","GRAMD4/PRKCZ/NXN/INPPL1/ITGA1/ZFYVE28/CCDC3/CASTOR3P/NAIP/MAD1L1/PDE10A/WWC1/PDE3A/ATP2B4/PRKAR1B/ARRB1/STK25/ZGPAT/PDPK1/PRDM16/GRK3/SUFU/SKI/SMARCA4/SPRED2/EPHA4/EGR1/MIDN/SLIT2/NOL3/DAB2IP/RAB11FIP1/LIMD1/ZBTB7A/MFN2/PPARA/EPHB2/NPC1/MAPK14/COLQ/RAB11FIP3/PREX1/IGBP1/IFI16/SLIT3/CD44/HIPK2/RUBCN","PRKCZ/NXN/LAMA5/TYK2/INPPL1/GRB2/ITGA1/ZFYVE28/CCDC3/NAIP/TNK2/PDE10A/SPPL2B/MDFIC/PRKAR1B/SAMD12/GLI2/ADGRL1/ITGB3/SHTN1/NECTIN2/ARRB1/EVC/SCARB1/TIAM1/CYFIP1/TRIM56/SHC2/PLCB1/ZGPAT/ADGRV1/VAV2/PDPK1/SEMA5B/MAP3K1/PRDM16/MYO9B/P2RX1/LLGL2/SUFU/PILRB/TBL1X/SKI/PXN/SMARCA4/TRPV1/SPRED2/EPHA4/EGR1/SLIT2/HIP1/NOL3/RNF220/DAB2IP/LIMD1/ZBTB7A/PPARA/PRKCA/ADAMTS3/MAP2K7/EPHB2/MAPK14/SPEN/IRS2/SLIT3/CASP8AP2/CD44/MYH9/HIPK2/IFNAR2/ARMC9","NAIP/SH3RF3/PLCB1/MAPK8IP3/EPHA4/DAB2IP/MAP2K7/HIPK2","RUNX1/WWC1/GLI2/SHTN1/EVC/CYFIP1/PLCB1/SEMA5B/NINJ2/XIRP1/CPQ/SKI/PLEC/SLIT2/PPARA/ADPRHL1/NTN1/SLIT3/DNM2/SLC23A2","RUNX1/PRKCZ/TYK2/GLI2/TCF3/NECTIN2/KLHL22/PDPK1/SMARCA4/BCL6/SH3KBP1/EPHB2/BRD2/IRS2","RUNX1/PRKCZ/TYK2/LDLR/GRB2/MYO18A/GLI2/TCF3/NECTIN2/ZFPM1/ZBTB46/KLHL22/PDPK1/PRDM16/SMARCA4/DNASE1/BCL6/ZBTB7A/SH3KBP1/EPHB2/BRD2/IRS2/PREX1/IGBP1/CD44/ST3GAL1","LAMA5/AGAP1/KIRREL1/KIFC3/BCR/CAMK2B/CDH4/NECTIN1/ITGB3/ACTN1/ZNF804A/CYFIP1/IQSEC1/LRRTM4/ELMO1/RTN4RL1/SYN3/EPHA4/PLEC/NRXN3/DAB2IP/RAB40C/CDH11/ZC4H2/DMPK/PRKCA/NTN1/SDK2/EPHB2/MAPK14/DLGAP4/CBLN2","CAMK2B/ATP2B4/CAMK2G/ARRB1/NOL3/PPARA/PRKCA","NES/XIRP1/SKI/RNF220/ZC4H2/ZBTB7A/IFI16","GAK/ITGA1/ARAP1/ATP6V0D1/RILPL1/CAMK2B/GLI2/NECTIN1/SHTN1/EVI5L/CAMK2G/SYNE1/ARRB1/MARK4/ZNF804A/TIAM1/ABLIM2/SPOCK1/CYFIP1/ADGRV1/IQSEC1/SEMA5B/RTN4RL1/MYO9B/MAPK8IP3/EPHA4/PCNT/CFAP44/NRXN3/SLIT2/DYNC2I1/DAB2IP/SEPTIN9/ABCC4/KCNQ1/CUX1/PRKCA/NTN1/CAMK1D/EPHB2/GAS7/RAB11FIP3/PREX1/SLIT3/CD44/ARSB/DNM2/ARMC9/SLC23A2","AP2A2/ITGB3/VAC14/IQSEC1/HIP1/RNF220","SIPA1L3/SH3PXD2B/ATP2B4/NECTIN1/NES/ADGRV1/SKI/SMARCA4/SPRED2/EPHA4/AP3D1/KCNQ1/COL5A1/SDK2/EPHB2/HIPK2","WIPF1/TTN/MYO5A/SHTN1/MYO9B/MYH6/MYO1B/MYBPC3/MYO1D/KCNQ1/KCNJ3/MYH9","ITPK1/PRKAR1B/ITGB3/VAV2/GPI/HK2/PPARA/PRKCA/EPHB2/MAPK14/ADCY1/MYH9","RUNX1/ARAP1/BCR/ITGB3/NOL3/SYT7/PRKCA","ARAP1/ITGB3/ARRB1/VAC14/IQSEC1/HIP1/RNF220/RIN3","CACNA1B/ATP2B4/SLC9A9/SLC39A11/P2RX1/TRPV1/KCNQ1/KCNJ3","ERO1A/CACNA1B/ATP2B4/ITGB3/PLCB1/PDPK1/P2RX1/RYR3/TRPV1/NOL3","RUNX1/ZBTB4/DNMT3A/DEAF1/WWC1/NFIC/GLI2/TCF3/ZFPM1/ZBTB46/ZGPAT/PRDM16/BACH2/SUFU/TBL1X/SKI/SMARCA4/TRPV1/DAB2IP/ZNF117/BCL6/ZBTB7A/ETV5/PPARA/CUX1/NACC2/CTBP1/BPTF/SPEN/GATAD2A/IGBP1/IFI16/ESRRA/HIPK2/CTCF","SLC6A6/ATP2B4/SLC4A8/SLC27A1/ABCC1/SLC2A13/ABCC4","AGAP1/CAMK2B/NECTIN1/ZNF804A/CYFIP1/LRRTM4/ELMO1/RTN4RL1/EPHA4/DAB2IP/DMPK/PRKCA/NTN1/EPHB2/MAPK14/DLGAP4","AGAP1/CAMK2B/NECTIN1/ZNF804A/CYFIP1/LRRTM4/ELMO1/RTN4RL1/EPHA4/DAB2IP/DMPK/PRKCA/NTN1/EPHB2/MAPK14/DLGAP4","RUNX1/PRKCZ/TYK2/GLI2/KLHL22/PDPK1/SMARCA4/EPHA4/BCL6/BRD2/CD44","RUNX1/PRKCZ/CAMK2B/GLI2/SHTN1/TIAM1/SMARCA4/EPHA4/SLIT2/BCL6/CUX1/PRKCA/NTN1/EPHB2/SPEN/BRD2","PRKCZ/LDLR/NAIP/TSPAN18/PRKAR1B/KDM6B/MARK4/HRH1/ABCC1/DNASE1/NEAT1/DAB2IP/BCL6/PPARA/CAMK1D/EPHB2/MAPK14/IFI16/ADCY1/CD44","RUNX1/GAK/ITGA1/DNMT3A/CASZ1/CAMK2B/GLI2/NECTIN1/TCF3/SHTN1/CAMK2G/ZNF804A/TIAM1/SPOCK1/CYFIP1/ADGRV1/IQSEC1/SEMA5B/RTN4RL1/MAPK8IP3/EPHA4/NRXN3/SLIT2/DAB2IP/ZC4H2/KCNQ1/CUX1/PRKCA/NTN1/CAMK1D/SDK2/MDGA2/EPHB2/GAS7/PREX1/SLIT3/ARSB/HIPK2/DNM2/SLC23A2","CAMK2B/SHTN1/TIAM1/LRRTM4/RTN4RL1/EPHA4/SLIT2/CUX1/PRKCA/NTN1/EPHB2/SPEN","PRKCZ/MID1/GRB2/ITGA1/ARAP1/NAIP/TTN/MAD1L1/SH3RF3/WWC1/CACNA1B/CAMK2B/PRKAR1B/GLI2/ITGB3/CAMK2G/NECTIN2/SLC4A8/ARRB1/EVC/MARK4/SCARB1/CYFIP1/STK25/TRIM56/PLCB1/KLHL22/VAV2/PDPK1/CLEC16A/MAPK8IP3/MAP3K3/TBL1X/SKI/SMARCA4/MN1/SPRED2/EPHA4/HIP1/RNF220/DAB2IP/NACC2/PRKCA/ADAMTS3/MAP2K7/EPHB2/IRS2/ADCY1/CD44/HIPK2/ARMC9","LDLR/PRKAG1/PDE10A/SCARB1/PLCB1/GPI/HK2/ZBTB7A/PPARA/PNPLA7/PFKFB3/PFKFB4","CAMK2B/ATP2B4/CAMK2G/ARRB1/NOL3/PPARA/PRKCA","PRKCZ/TYK2/ZFYVE28/TNK2/PRKAG1/BCR/CAMK2B/PRKAR1B/ARRB1/MARK4/STK25/ZGPAT/PDPK1/MAP3K1/PILRB/MAP3K3/MIDN/SLIT2/HK2/LIMD1/DMPK/CTBP1/PRKCA/EPHB2/PFKFB3/HIPK2/PFKFB4/DAPK2","GRAMD4/PRKCZ/NXN/INPPL1/LDLR/GRB2/ITGA1/ZFYVE28/CCDC3/CASTOR3P/NAIP/MAD1L1/PDE10A/WWC1/PDE3A/ATP2B4/PRKAR1B/NECTIN2/ARRB1/STK25/ZGPAT/PDPK1/PRDM16/RTN4RL1/GRK3/SUFU/SKI/SMARCA4/SPRED2/EPHA4/EGR1/SLIT2/NOL3/DAB2IP/LIMD1/ZBTB7A/MFN2/PPARA/EPHB2/NPC1/MAPK14/PREX1/RIN3/IGBP1/IFI16/SLIT3/CD44/HIPK2/RUBCN"],[48,26,57,40,37,30,49,43,75,68,17,33,64,28,63,67,36,46,43,34,12,34,11,49,47,48,48,71,8,20,14,26,32,7,7,49,6,16,12,12,7,8,8,10,35,7,16,16,11,16,20,40,12,51,12,7,28,49]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>Description<\/th>\n      <th>GeneRatio<\/th>\n      <th>BgRatio<\/th>\n      <th>RichFactor<\/th>\n      <th>FoldEnrichment<\/th>\n      <th>zScore<\/th>\n      <th>pvalue<\/th>\n      <th>p.adjust<\/th>\n      <th>qvalue<\/th>\n      <th>geneID<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"Description","targets":2},{"name":"GeneRatio","targets":3},{"name":"BgRatio","targets":4},{"name":"RichFactor","targets":5},{"name":"FoldEnrichment","targets":6},{"name":"zScore","targets":7},{"name":"pvalue","targets":8},{"name":"p.adjust","targets":9},{"name":"qvalue","targets":10},{"name":"geneID","targets":11},{"name":"Count","targets":12}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>go_up_df   &lt;- as.data.frame(simp.up.GO) %&gt;% mutate(Direction = &quot;Up-regulated&quot;)
 go_down_df &lt;- as.data.frame(simp.down.GO) %&gt;% mutate(Direction = &quot;Down-regulated&quot;)
 
@@ -1408,79 +1501,6 @@ ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) +
     strip.text    = element_text(face = &quot;bold&quot;, size = 10), 
     legend.position = &quot;right&quot;
   )</code></pre>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-11-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
-Past versions of unnamed-chunk-11-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-11-1.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="emap-plot" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> EMAP Plot</h2>
-<pre class="r"><code>set.seed(42)
-
-################################################### Upregulated Go terms
-
-############################ top 30
-
-simp.up.GO &lt;- pairwise_termsim(simp.up.GO)
-
-emapplot(
-  simp.up.GO,
-  showCategory = 30,          
-  node_label   = &quot;group&quot;, 
-  nCluster     = 5,           
-  nWords       = 4,           
-  node_label_size = 3.5       
-) + 
-  theme_bw() + 
-  labs(
-    title    = &quot;DEG MT-Cardiomyocytes CMFHM_NC vs CMF_NC: GO BP Enrichment&quot;, 
-    subtitle = &quot;Functional clustering map of top enriched terms for Up-regulated genes&quot;,
-    x        = &quot;&quot;, 
-    y        = &quot;&quot;
-  ) +
-  theme(
-    plot.title.position = &quot;plot&quot;, 
-    plot.title      = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
-    plot.subtitle   = element_text(face = &quot;italic&quot;, size = 10, hjust = 0),
-    axis.text.y     = element_blank(), 
-    axis.text.x     = element_blank(),  
-    axis.ticks      = element_blank(),  
-    panel.grid      = element_blank(),  
-    legend.position = &quot;right&quot;
-  )</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
@@ -1519,6 +1539,101 @@ Sophie.Alice
 </table>
 </div>
 </div>
+<div id="emap-plot" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> EMAP Plot</h2>
+<pre class="r"><code>set.seed(42)
+
+################################################### Upregulated Go terms
+
+############################ top 30
+
+simp.up.GO &lt;- pairwise_termsim(simp.up.GO)
+
+emapplot(
+  simp.up.GO,
+  showCategory = 30,          
+  node_label   = &quot;group&quot;, 
+  nCluster     = 5,           
+  nWords       = 4,           
+  node_label_size = 3.5       
+) + 
+  theme_bw() + 
+  labs(
+    title    = &quot;DEG MT-Cardiomyocytes CMFHM_NC vs CMF_NC: GO BP Enrichment&quot;, 
+    subtitle = &quot;Functional clustering map of top enriched terms for Up-regulated genes&quot;,
+    x        = &quot;&quot;, 
+    y        = &quot;&quot;
+  ) +
+  theme(
+    plot.title.position = &quot;plot&quot;, 
+    plot.title      = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+    plot.subtitle   = element_text(face = &quot;italic&quot;, size = 10, hjust = 0),
+    axis.text.y     = element_blank(), 
+    axis.text.x     = element_blank(),  
+    axis.ticks      = element_blank(),  
+    panel.grid      = element_blank(),  
+    legend.position = &quot;right&quot;
+  )</code></pre>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-1.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>############################ All signif. Pathways
 
 simp.up.GO.sign$NES &lt;- simp.up.GO.sign$zScore
@@ -1544,13 +1659,13 @@ theme(
 )
 
 print(p_apear)</code></pre>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-2">
-Past versions of unnamed-chunk-12-2.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-2">
+Past versions of unnamed-chunk-13-2.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-12-2" class="collapse">
+<div id="fig-unnamed-chunk-13-2" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1569,7 +1684,29 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-2.png" target="_blank">a41e2a7</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-2.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-2.png" target="_blank">a41e2a7</a>
 </td>
 <td>
 Sophie.Alice
@@ -1613,44 +1750,7 @@ emapplot(
     panel.grid      = element_blank(),  
     legend.position = &quot;right&quot;
   )</code></pre>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-3">
-Past versions of unnamed-chunk-12-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-12-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-3.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>############################ All signif. Pathways
 
 simp.down.GO.sign$NES &lt;- simp.down.GO.sign$zScore
@@ -1677,44 +1777,7 @@ theme(
 )
 
 print(p_apear)</code></pre>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-4">
-Past versions of unnamed-chunk-12-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-12-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-4.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>##################### combining the 2 lists 
 
 simp.up.GO.sign$NES   &lt;- simp.up.GO.sign$zScore      
@@ -1758,59 +1821,22 @@ theme(
 )
 
 print(p_combined)</code></pre>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-5.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-5">
-Past versions of unnamed-chunk-12-5.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-12-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-12-5.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-5.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="deeper-look-into-specific-genesets" class="section level1"
-number="7">
-<h1><span class="header-section-number">7</span> Deeper look into
+number="8">
+<h1><span class="header-section-number">8</span> Deeper look into
 specific Genesets</h1>
 </div>
 <div
 id="upregulated-in-cardiomyocytes-upon-macrophage-addition-no-tgf-b-stimulation"
-class="section level1" number="8">
-<h1><span class="header-section-number">8</span> Upregulated in
+class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Upregulated in
 Cardiomyocytes upon Macrophage addition (No TGF-B stimulation)</h1>
 <div id="negative-regulation-of-myoblast-fusion" class="section level2"
-number="8.1">
-<h2><span class="header-section-number">8.1</span> negative regulation
+number="9.1">
+<h2><span class="header-section-number">9.1</span> negative regulation
 of myoblast fusion</h2>
 <p>The geneset is quite big so for visualization purposes it will be
 split in sets of 9</p>
@@ -1842,119 +1868,6 @@ if (total_genes &gt; 0) {
     ))
   }
 }</code></pre>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
-Past versions of unnamed-chunk-13-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-13-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-1.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-1.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-2">
-Past versions of unnamed-chunk-13-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-13-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-2.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-13-2.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>chunk_size &lt;- 9
-total_genes &lt;- length(genes)
-
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx &lt;- min(i + chunk_size - 1, total_genes)
-  slice_num &lt;- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
-    plot_subtitle = paste0(&quot;Geneset = negative regulation of myoblast fusion - Slice &quot;, slice_num),
-    seurat_obj    = Cardiomyocytes,
-    colors        = gradient_colors4
-  ))
-}</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
@@ -1978,6 +1891,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-1.png" target="_blank">676253f</a>
@@ -2029,6 +1953,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-2.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -2053,136 +1988,20 @@ Sophie.Alice
 </table>
 </div>
 </div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-3">
-Past versions of unnamed-chunk-14-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-14-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-3.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-3.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-4">
-Past versions of unnamed-chunk-14-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-14-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-4.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-14-4.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="proton-motive-force-driven-atp-synthesis"
-class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> proton motive
-force-driven ATP synthesis</h2>
-<pre class="r"><code>simp.up.GO.df &lt;- as.data.frame(simp.up.GO)
-
-descr &lt;- &quot;proton motive force-driven ATP synthesis&quot;
-
-genes &lt;- simp.up.GO.df %&gt;%
-  filter(Description == descr) %&gt;%
-  pull(geneID) %&gt;%
-  stringr::str_split(&quot;/&quot;) %&gt;%
-  unlist()
-
-chunk_size &lt;- 25
+<pre class="r"><code>chunk_size &lt;- 9
 total_genes &lt;- length(genes)
 
-if (total_genes &gt; 0) {
-  for (i in seq(1, total_genes, by = chunk_size)) {
-    
-    end_idx &lt;- min(i + chunk_size - 1, total_genes)
-    slice_num &lt;- ((i - 1) / chunk_size) + 1
-
-    print(SCpubr::do_DotPlot(
-      sample = Cardiomyocytes, 
-      features = genes[i:end_idx],
-      dot.scale = 10,
-      plot.title = &quot;proton motive force-driven ATP synthesis: Gene Set Expression Across Conditions&quot;,
-      plot.subtitle = paste0(&quot;Slice &quot;, slice_num, &quot; (Genes &quot;, i, &quot; to &quot;, end_idx, &quot; of &quot;, total_genes, &quot;)&quot;)
-    ))
-  }
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx &lt;- min(i + chunk_size - 1, total_genes)
+  slice_num &lt;- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = genes[i:end_idx],
+    plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
+    plot_subtitle = paste0(&quot;Geneset = negative regulation of myoblast fusion - Slice &quot;, slice_num),
+    seurat_obj    = Cardiomyocytes,
+    colors        = gradient_colors4
+  ))
 }</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-15-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
@@ -2207,6 +2026,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-15-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-15-1.png" target="_blank">676253f</a>
@@ -2258,6 +2088,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-15-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-15-2.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -2282,20 +2123,39 @@ Sophie.Alice
 </table>
 </div>
 </div>
-<pre class="r"><code>chunk_size &lt;- 9
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-15-3.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-15-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="proton-motive-force-driven-atp-synthesis"
+class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> proton motive
+force-driven ATP synthesis</h2>
+<pre class="r"><code>simp.up.GO.df &lt;- as.data.frame(simp.up.GO)
+
+descr &lt;- &quot;proton motive force-driven ATP synthesis&quot;
+
+genes &lt;- simp.up.GO.df %&gt;%
+  filter(Description == descr) %&gt;%
+  pull(geneID) %&gt;%
+  stringr::str_split(&quot;/&quot;) %&gt;%
+  unlist()
+
+chunk_size &lt;- 25
 total_genes &lt;- length(genes)
 
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx &lt;- min(i + chunk_size - 1, total_genes)
-  slice_num &lt;- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
-    plot_subtitle = paste0(&quot;Geneset = proton motive force-driven ATP synthesis - Slice &quot;, slice_num),
-    seurat_obj    = Cardiomyocytes,
-    colors        = gradient_colors4
-  ))
+if (total_genes &gt; 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx &lt;- min(i + chunk_size - 1, total_genes)
+    slice_num &lt;- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Cardiomyocytes, 
+      features = genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = &quot;proton motive force-driven ATP synthesis: Gene Set Expression Across Conditions&quot;,
+      plot.subtitle = paste0(&quot;Slice &quot;, slice_num, &quot; (Genes &quot;, i, &quot; to &quot;, end_idx, &quot; of &quot;, total_genes, &quot;)&quot;)
+    ))
+  }
 }</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-16-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
@@ -2320,6 +2180,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-16-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-16-1.png" target="_blank">676253f</a>
@@ -2371,6 +2242,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-16-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-16-2.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -2395,93 +2277,20 @@ Sophie.Alice
 </table>
 </div>
 </div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-16-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-3">
-Past versions of unnamed-chunk-16-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-16-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-16-3.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-16-3.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div
-id="downregulated-in-cardiomyocytes-upon-macrophage-addition-no-tgf-b-stimulation"
-class="section level1" number="9">
-<h1><span class="header-section-number">9</span> Downregulated in
-Cardiomyocytes upon Macrophage addition (No TGF-B stimulation)</h1>
-<div id="actin-cytoskeleton-organization" class="section level2"
-number="9.1">
-<h2><span class="header-section-number">9.1</span> actin cytoskeleton
-organization</h2>
-<pre class="r"><code>simp.down.GO.df &lt;- as.data.frame(simp.down.GO)
-
-descr &lt;- &quot;actin cytoskeleton organization&quot;
-
-genes &lt;- simp.down.GO.df %&gt;%
-  filter(Description == descr) %&gt;%
-  pull(geneID) %&gt;%
-  stringr::str_split(&quot;/&quot;) %&gt;%
-  unlist()
-
-chunk_size &lt;- 25
+<pre class="r"><code>chunk_size &lt;- 9
 total_genes &lt;- length(genes)
 
-if (total_genes &gt; 0) {
-  for (i in seq(1, total_genes, by = chunk_size)) {
-    
-    end_idx &lt;- min(i + chunk_size - 1, total_genes)
-    slice_num &lt;- ((i - 1) / chunk_size) + 1
-
-    print(SCpubr::do_DotPlot(
-      sample = Cardiomyocytes, 
-      features = genes[i:end_idx],
-      dot.scale = 10,
-      plot.title = &quot;actin cytoskeleton organization: Gene Set Expression Across Conditions&quot;,
-      plot.subtitle = paste0(&quot;Slice &quot;, slice_num, &quot; (Genes &quot;, i, &quot; to &quot;, end_idx, &quot; of &quot;, total_genes, &quot;)&quot;)
-    ))
-  }
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx &lt;- min(i + chunk_size - 1, total_genes)
+  slice_num &lt;- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = genes[i:end_idx],
+    plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
+    plot_subtitle = paste0(&quot;Geneset = proton motive force-driven ATP synthesis - Slice &quot;, slice_num),
+    seurat_obj    = Cardiomyocytes,
+    colors        = gradient_colors4
+  ))
 }</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-17-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
@@ -2506,6 +2315,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-17-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-17-1.png" target="_blank">676253f</a>
@@ -2557,6 +2377,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-17-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-17-2.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -2581,20 +2412,45 @@ Sophie.Alice
 </table>
 </div>
 </div>
-<pre class="r"><code>chunk_size &lt;- 9
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-17-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div
+id="downregulated-in-cardiomyocytes-upon-macrophage-addition-no-tgf-b-stimulation"
+class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Downregulated in
+Cardiomyocytes upon Macrophage addition (No TGF-B stimulation)</h1>
+<div id="actin-cytoskeleton-organization" class="section level2"
+number="10.1">
+<h2><span class="header-section-number">10.1</span> actin cytoskeleton
+organization</h2>
+<pre class="r"><code>simp.down.GO.df &lt;- as.data.frame(simp.down.GO)
+
+descr &lt;- &quot;actin cytoskeleton organization&quot;
+
+genes &lt;- simp.down.GO.df %&gt;%
+  filter(Description == descr) %&gt;%
+  pull(geneID) %&gt;%
+  stringr::str_split(&quot;/&quot;) %&gt;%
+  unlist()
+
+chunk_size &lt;- 25
 total_genes &lt;- length(genes)
 
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx &lt;- min(i + chunk_size - 1, total_genes)
-  slice_num &lt;- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
-    plot_subtitle = paste0(&quot;Geneset = actin cytoskeleton organization - Slice &quot;, slice_num),
-    seurat_obj    = Cardiomyocytes,
-    colors        = gradient_colors4
-  ))
+if (total_genes &gt; 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx &lt;- min(i + chunk_size - 1, total_genes)
+    slice_num &lt;- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Cardiomyocytes, 
+      features = genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = &quot;actin cytoskeleton organization: Gene Set Expression Across Conditions&quot;,
+      plot.subtitle = paste0(&quot;Slice &quot;, slice_num, &quot; (Genes &quot;, i, &quot; to &quot;, end_idx, &quot; of &quot;, total_genes, &quot;)&quot;)
+    ))
+  }
 }</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
@@ -2619,6 +2475,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-1.png" target="_blank">676253f</a>
@@ -2670,6 +2537,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-2.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -2694,184 +2572,20 @@ Sophie.Alice
 </table>
 </div>
 </div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-3">
-Past versions of unnamed-chunk-18-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-18-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-3.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-3.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-4">
-Past versions of unnamed-chunk-18-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-18-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-4.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-4.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-5.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-5">
-Past versions of unnamed-chunk-18-5.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-18-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-5.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-18-5.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="immune-system-process" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> immune system
-process</h2>
-<pre class="r"><code>simp.down.GO.df &lt;- as.data.frame(simp.down.GO)
-
-descr &lt;- &quot;immune system process&quot;
-
-genes &lt;- simp.down.GO.df %&gt;%
-  filter(Description == descr) %&gt;%
-  pull(geneID) %&gt;%
-  stringr::str_split(&quot;/&quot;) %&gt;%
-  unlist()
-
-chunk_size &lt;- 25
+<pre class="r"><code>chunk_size &lt;- 9
 total_genes &lt;- length(genes)
 
-if (total_genes &gt; 0) {
-  for (i in seq(1, total_genes, by = chunk_size)) {
-    
-    end_idx &lt;- min(i + chunk_size - 1, total_genes)
-    slice_num &lt;- ((i - 1) / chunk_size) + 1
-
-    print(SCpubr::do_DotPlot(
-      sample = Cardiomyocytes, 
-      features = genes[i:end_idx],
-      dot.scale = 10,
-      plot.title = &quot;immune system process: Gene Set Expression Across Conditions&quot;,
-      plot.subtitle = paste0(&quot;Slice &quot;, slice_num, &quot; (Genes &quot;, i, &quot; to &quot;, end_idx, &quot; of &quot;, total_genes, &quot;)&quot;)
-    ))
-  }
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx &lt;- min(i + chunk_size - 1, total_genes)
+  slice_num &lt;- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = genes[i:end_idx],
+    plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
+    plot_subtitle = paste0(&quot;Geneset = actin cytoskeleton organization - Slice &quot;, slice_num),
+    seurat_obj    = Cardiomyocytes,
+    colors        = gradient_colors4
+  ))
 }</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
@@ -2896,6 +2610,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-1.png" target="_blank">676253f</a>
@@ -2947,6 +2672,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-2.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -2996,6 +2732,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-3.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-3.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -3020,20 +2767,38 @@ Sophie.Alice
 </table>
 </div>
 </div>
-<pre class="r"><code>chunk_size &lt;- 9
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-4.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-19-5.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="immune-system-process" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> immune system
+process</h2>
+<pre class="r"><code>simp.down.GO.df &lt;- as.data.frame(simp.down.GO)
+
+descr &lt;- &quot;immune system process&quot;
+
+genes &lt;- simp.down.GO.df %&gt;%
+  filter(Description == descr) %&gt;%
+  pull(geneID) %&gt;%
+  stringr::str_split(&quot;/&quot;) %&gt;%
+  unlist()
+
+chunk_size &lt;- 25
 total_genes &lt;- length(genes)
 
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx &lt;- min(i + chunk_size - 1, total_genes)
-  slice_num &lt;- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
-    plot_subtitle = paste0(&quot;Geneset = immune system process - Slice &quot;, slice_num),
-    seurat_obj    = Cardiomyocytes,
-    colors        = gradient_colors4
-  ))
+if (total_genes &gt; 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx &lt;- min(i + chunk_size - 1, total_genes)
+    slice_num &lt;- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Cardiomyocytes, 
+      features = genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = &quot;immune system process: Gene Set Expression Across Conditions&quot;,
+      plot.subtitle = paste0(&quot;Slice &quot;, slice_num, &quot; (Genes &quot;, i, &quot; to &quot;, end_idx, &quot; of &quot;, total_genes, &quot;)&quot;)
+    ))
+  }
 }</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
@@ -3058,6 +2823,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-1.png" target="_blank">676253f</a>
@@ -3109,6 +2885,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-2.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -3158,6 +2945,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-3.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-3.png" target="_blank">676253f</a>
 </td>
 <td>
@@ -3182,217 +2980,21 @@ Sophie.Alice
 </table>
 </div>
 </div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-4">
-Past versions of unnamed-chunk-20-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-20-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-4.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-4.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-5.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-5">
-Past versions of unnamed-chunk-20-5.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-20-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-5.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-5.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-6.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-6">
-Past versions of unnamed-chunk-20-6.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-20-6" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-6.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-6.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-7.png" alt="" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-7">
-Past versions of unnamed-chunk-20-7.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-20-7" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-7.png" target="_blank">676253f</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-20-7.png" target="_blank">a41e2a7</a>
-</td>
-<td>
-Sophie.Alice
-</td>
-<td>
-2026-07-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div id="checking-for-specific-marker-genes" class="section level1"
-number="10">
-<h1><span class="header-section-number">10</span> Checking for specific
-Marker genes</h1>
-<div id="pro-fibrotic-genes" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Pro-Fibrotic
-Genes</h2>
-<pre class="r"><code>genes &lt;- c(&quot;ACTA2&quot;, &quot;FN1&quot;, &quot;COL1A1&quot;)
+<pre class="r"><code>chunk_size &lt;- 9
+total_genes &lt;- length(genes)
 
-SCpubr::do_DotPlot(Cardiomyocytes, 
-                   features = genes,
-                   dot.scale = 10,
-                   plot.title = &quot;Pro-Fibrotic Genes: Gene Set Expression Across Conditions&quot;) </code></pre>
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx &lt;- min(i + chunk_size - 1, total_genes)
+  slice_num &lt;- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = genes[i:end_idx],
+    plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
+    plot_subtitle = paste0(&quot;Geneset = immune system process - Slice &quot;, slice_num),
+    seurat_obj    = Cardiomyocytes,
+    colors        = gradient_colors4
+  ))
+}</code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-21-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
@@ -3431,13 +3033,22 @@ Sophie.Alice
 </table>
 </div>
 </div>
-<pre class="r"><code>raincloud.plots(
-  gene_list     = genes,
-  plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
-  plot_subtitle = &quot;Geneset = Pro-Fibrotic genes&quot;,
-  seurat_obj = Cardiomyocytes,
-  colors = gradient_colors4
-)</code></pre>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-21-2.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-21-3.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-21-4.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-21-5.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-21-6.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-21-7.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="checking-for-specific-marker-genes" class="section level1"
+number="11">
+<h1><span class="header-section-number">11</span> Checking for specific
+Marker genes</h1>
+<div id="pro-fibrotic-genes" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Pro-Fibrotic
+Genes</h2>
+<pre class="r"><code>genes &lt;- c(&quot;ACTA2&quot;, &quot;FN1&quot;, &quot;COL1A1&quot;)
+
+SCpubr::do_DotPlot(Cardiomyocytes, 
+                   features = genes,
+                   dot.scale = 10,
+                   plot.title = &quot;Pro-Fibrotic Genes: Gene Set Expression Across Conditions&quot;) </code></pre>
 <p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-22-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-1">
@@ -3476,6 +3087,14 @@ Sophie.Alice
 </table>
 </div>
 </div>
+<pre class="r"><code>raincloud.plots(
+  gene_list     = genes,
+  plot_title    = &quot;Cardiomyocytes CMFHM_NC vs CMF_NC: Gene distribution profiles across MT conditions&quot;,
+  plot_subtitle = &quot;Geneset = Pro-Fibrotic genes&quot;,
+  seurat_obj = Cardiomyocytes,
+  colors = gradient_colors4
+)</code></pre>
+<p><img src="figure/CM_Baseline_Mac_Response_Lenient.Rmd/unnamed-chunk-23-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
