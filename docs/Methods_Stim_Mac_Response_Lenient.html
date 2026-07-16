@@ -360,9 +360,6 @@ div.tocify {
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="index.html">Home</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Global Overview
@@ -395,7 +392,9 @@ div.tocify {
       <a href="CM_Subtypes.html">5. CM Subtypes</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Standard Thresholds (DGEA)</li>
+    <li>
+      <a href="#">Standard Thresholds (DGEA)</a>
+    </li>
     <li>
       <a href="CM_DGEA.html">Overview Dashboard</a>
     </li>
@@ -412,7 +411,9 @@ div.tocify {
       <a href="CM_Stim_Mac_Response.html">8.1.4 Stimulated Macrophage Response</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Lenient Thresholds (DGEA)</li>
+    <li>
+      <a href="#">Lenient Thresholds (DGEA)</a>
+    </li>
     <li>
       <a href="CM_DGEA_Lenient.html">Overview Dashboard</a>
     </li>
@@ -452,7 +453,9 @@ div.tocify {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Global Comparisons</li>
+    <li>
+      <a href="#">Global Comparisons</a>
+    </li>
     <li>
       <a href="Fibroblasts_DEG_Overlap.html">Overview &amp; DEG Overlap</a>
     </li>
@@ -460,7 +463,9 @@ div.tocify {
       <a href="Fibroblast_Comparisons.html">All Fibroblast Comparisons Dashboard</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Standard Thresholds (DGEA)</li>
+    <li>
+      <a href="#">Standard Thresholds (DGEA)</a>
+    </li>
     <li>
       <a href="DGEA.html">Overview Dashboard</a>
     </li>
@@ -477,7 +482,9 @@ div.tocify {
       <a href="Fibro_Stim_Mac_Response.html">7.1.4 Stimulated Macrophage Response</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Lenient Thresholds (DGEA)</li>
+    <li>
+      <a href="#">Lenient Thresholds (DGEA)</a>
+    </li>
     <li>
       <a href="DGEA_Lenient.html">Overview Dashboard</a>
     </li>
@@ -494,7 +501,9 @@ div.tocify {
       <a href="Fibro_Stim_Mac_Response_Lenient.html">7.2.4 Stimulated Macrophage Response</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Subclusters</li>
+    <li>
+      <a href="#">Subclusters</a>
+    </li>
     <li>
       <a href="fib_markers.html">Unmodified - Fibroblast Marker</a>
     </li>
@@ -564,7 +573,7 @@ Method comparisons</h1>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -575,8 +584,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -589,9 +598,9 @@ aria-hidden="true"></span> </a>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MT_Project/</code> <span
@@ -614,21 +623,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -719,15 +725,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree414dbda76f4e4b897f3e1e0e84430ea542ab6784targetblank414dbdaa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree9a465ca55b53e77671fb8e94d990009f9631eadbtargetblank9a465caa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/414dbda76f4e4b897f3e1e0e84430ea542ab6784" target="_blank">414dbda</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/9a465ca55b53e77671fb8e94d990009f9631eadb" target="_blank">9a465ca</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree414dbda76f4e4b897f3e1e0e84430ea542ab6784targetblank414dbdaa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree9a465ca55b53e77671fb8e94d990009f9631eadbtargetblank9a465caa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -737,7 +743,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/414dbda76f4e4b897f3e1e0e84430ea542ab6784" target="_blank">414dbda</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/9a465ca55b53e77671fb8e94d990009f9631eadb" target="_blank">9a465ca</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -756,20 +762,6 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
-
-Unstaged changes:
-    Deleted:    analysis/Baseline_Mac_Response.Rmd
-    Deleted:    analysis/Baseline_Mac_Response_Lenient.Rmd
-    Deleted:    analysis/Baseline_TGF_Response.Rmd
-    Deleted:    analysis/Baseline_TGF_Response_Lenient.Rmd
-    Modified:   analysis/Method1_Baseline_Mac_Response_Lenient.Rmd
-    Modified:   analysis/Methods_Baseline_TGF_Response_Lenient.Rmd
-    Modified:   analysis/Methods_Stim_Mac_Response_Lenient.Rmd
-    Deleted:    analysis/Modulated_TGF_Response.Rmd
-    Deleted:    analysis/Modulated_TGF_Response_Lenient.Rmd
-    Deleted:    analysis/Stim_Mac_Response.Rmd
-    Deleted:    analysis/Stim_Mac_Response_Lenient.Rmd
-    Modified:   analysis/_site.yml
 
 </code></pre>
 <p>
@@ -815,6 +807,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/9a465ca55b53e77671fb8e94d990009f9631eadb/analysis/Methods_Stim_Mac_Response_Lenient.Rmd" target="_blank">9a465ca</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Clean up deleted Rmd files
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/9a465ca55b53e77671fb8e94d990009f9631eadb/docs/Methods_Stim_Mac_Response_Lenient.html" target="_blank">9a465ca</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Clean up deleted Rmd files
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -895,8 +921,8 @@ adding Methodds comparisons
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  908938 48.6    1756092 93.8         NA  1321095 70.6
-Vcells 1604924 12.3    8388608 64.0      16384  2393427 18.3</code></pre>
+Ncells  908927 48.6    1756061 93.8         NA  1321095 70.6
+Vcells 1604819 12.3    8388608 64.0      16384  2393427 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -1298,6 +1324,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/9a465ca55b53e77671fb8e94d990009f9631eadb/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-4.png" target="_blank">9a465ca</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/7bb8771151d78e5b3d67d4645b771c6608296df8/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-6-4.png" target="_blank">7bb8771</a>
@@ -3236,6 +3273,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/9a465ca55b53e77671fb8e94d990009f9631eadb/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-39-2.png" target="_blank">9a465ca</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/320a19a6a71af17fe37c18649e8432bc7b76f6cd/docs/figure/Methods_Stim_Mac_Response_Lenient.Rmd/unnamed-chunk-39-2.png" target="_blank">320a19a</a>
