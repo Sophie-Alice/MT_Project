@@ -339,6 +339,65 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
 
 ```
 
+
+
+# FGSEA - ClusterProfiler
+
+  - Done in this way for GO BP terms and compatibility with aPEAR Emapplot
+
+```{r,warning = FALSE}
+set.seed(42)
+
+ranked_vector <- Degs$avg_log2FC
+
+names(ranked_vector) <- Degs$gene
+
+ranked_vector <- sort(ranked_vector, decreasing = TRUE)
+
+Humanlibrary <- org.Hs.eg.db
+
+gsea_results <- gseGO(
+  geneList     = ranked_vector,
+  OrgDb        = Humanlibrary,      
+  ont          = "BP",              
+  keyType      = "SYMBOL",          
+  minGSSize    = 15,
+  maxGSSize    = 800,
+  pvalueCutoff = 0.1,
+  pAdjustMethod = "BH"              
+)
+
+
+gsea_sig_df <- gsea_results@result %>%
+  dplyr::filter(p.adjust < 0.05)  
+
+
+p_apear <- enrichmentNetwork(
+  enrichment = gsea_sig_df,
+  repelLabels = TRUE,
+  drawEllipses = TRUE,
+  fontSize     = 3,
+  simMethod = "jaccard", 
+  clustMethod = "hier",
+  colorBy      = "NES",        
+  colorType    = "nes"  
+)
+
+p_apear <- p_apear + labs(
+  title    = "Network of Significant GO-BP Terms Identified by GSEA",
+  subtitle = "MT-Cardiomyocytes: differences in CMFHM_NC compared to CMF_NC",
+  color    = "NES",       
+) +
+theme(
+  plot.title.position = "plot",
+  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+)
+
+print(p_apear)
+
+```
+
 # PAH
 
 ```{r,warning = FALSE}

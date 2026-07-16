@@ -1337,7 +1337,7 @@ print(global_dotplot)
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 gsea_sig_df <- gsea_results@result %>%
-  dplyr::filter(p.adjust < 0.05)  
+  dplyr::filter(p.adjust < 0.01)  
 
 set.seed(42)
 p_apear <- enrichmentNetwork(
