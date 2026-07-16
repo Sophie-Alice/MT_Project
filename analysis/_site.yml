@@ -3,16 +3,109 @@ output_dir: ../docs
 navbar:
   title: MT_Project
   left:
-  - text: Home
+  - text: "Home"
     href: index.html
-  - text: About
-    href: about.html
-  - text: License
-    href: license.html
+  - text: "Global Overview"
+    menu:
+      - text: "1. Cellbender vs. Raw Data QC Comparison"
+        href: Checking_Cellbender.html
+      - text: "2. Quality Control (QC)"
+        href: QC.html
+      - text: "3. Clustering and Annotation"
+        href: Dim_Reduction.html
+      - text: "4. Celltype Proportions"
+        href: Proportions.html
+
+  - text: "Cardiomyocytes"
+    menu:
+      - text: "5. CM Subtypes"
+        href: CM_Subtypes.html
+      - text: "---"
+      - text: "Standard Thresholds (DGEA)"
+      - text: "Overview Dashboard"
+        href: CM_DGEA.html
+      - text: "8.1.1 Baseline TGF-beta Response"
+        href: CM_Baseline_TGF_Response.html
+      - text: "8.1.2 Modulated TGF-beta Response"
+        href: CM_Modulated_TGF_Response.html
+      - text: "8.1.3 Baseline Macrophage Response"
+        href: CM_Baseline_Mac_Response.html
+      - text: "8.1.4 Stimulated Macrophage Response"
+        href: CM_Stim_Mac_Response.html
+      - text: "---"
+      - text: "Lenient Thresholds (DGEA)"
+      - text: "Overview Dashboard"
+        href: CM_DGEA_Lenient.html
+      - text: "8.2.1 Baseline TGF-beta Response"
+        href: CM_Baseline_TGF_Response_Lenient.html
+      - text: "8.2.2 Modulated TGF-beta Response"
+        href: CM_Modulated_TGF_Response_Lenient.html
+      - text: "8.2.3 Baseline Macrophage Response"
+        href: CM_Baseline_Mac_Response_Lenient.html
+      - text: "8.2.4 Stimulated Macrophage Response"
+        href: CM_Baseline_Mac_Response_Lenient.html
+
+  - text: "Macrophages"
+    menu:
+      - text: "6.1 Differential Gene Expression (DGEA)"
+        href: Macrophage_subset_DGEA.html
+      - text: "6.2 DGEA - Lenient Thresholds"
+        href: Macrophage_subset_DGEA_Lenient.html
+
+  - text: "Fibroblasts"
+    menu:
+      - text: "Global Comparisons"
+      - text: "Overview & DEG Overlap"
+        href: Fibroblasts_DEG_Overlap.html
+      - text: "All Fibroblast Comparisons Dashboard"
+        href: Fibroblast_Comparisons.html
+      - text: "---"
+      - text: "Standard Thresholds (DGEA)"
+      - text: "Overview Dashboard"
+        href: DGEA.html
+      - text: "7.1.1 Baseline TGF-beta Response"
+        href: Fibro_Baseline_TGF_Response.html
+      - text: "7.1.2 Modulated TGF-beta Response"
+        href: Fibro_Modulated_TGF_Response_Lenient.html
+      - text: "7.1.3 Baseline Macrophage Response"
+        href: Fibro_Baseline_Mac_Response.html
+      - text: "7.1.4 Stimulated Macrophage Response"
+        href: Fibro_Stim_Mac_Response.html
+      - text: "---"
+      - text: "Lenient Thresholds (DGEA)"
+      - text: "Overview Dashboard"
+        href: DGEA_Lenient.html
+      - text: "7.2.1 Baseline TGF-beta Response"
+        href: Fibro_Baseline_TGF_Response_Lenient.html
+      - text: "7.2.2 Modulated TGF-beta Response"
+        href: Fibro_Modulated_TGF_Response_Lenient.html
+      - text: "7.2.3 Baseline Macrophage Response"
+        href: Fibro_Baseline_Mac_Response_Lenient.html
+      - text: "7.2.4 Stimulated Macrophage Response"
+        href: Fibro_Stim_Mac_Response_Lenient.html
+      - text: "---"
+      - text: "Subclusters"
+      - text: "Unmodified - Fibroblast Marker"
+        href: fib_markers.html
+      - text: "Modified - Fibroblast Marker"
+        href: Subclusters_Fib.html
+
+  - text: "Method Comparison"
+    menu:
+      - text: "X.1.1 NC vs. Macrophages"
+        href: Method1_Baseline_Mac_Response_Lenient.html
+      - text: "X.1.2 TGF-beta vs. Macrophages + TGF-beta"
+        href: Methods_Stim_Mac_Response_Lenient.html
+      - text: "X.1.3 NC vs. TGF-beta"
+        href: Methods_Baseline_TGF_Response_Lenient.html
   right:
   - icon: fab fa-github
     text: Source code
     href: https://github.com/Sophie-Alice/MT_Project
+  - text: About
+    href: about.html
+  - text: License
+    href: license.html
 output:
   workflowr::wflow_html:
     toc: yes
