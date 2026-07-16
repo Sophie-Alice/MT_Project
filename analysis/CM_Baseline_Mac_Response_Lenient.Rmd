@@ -343,7 +343,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
 
   - Done in this way for GO BP terms and compatibility with aPEAR Emapplot
 
-```{r,warning = FALSE}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 set.seed(42)
 
 ranked_vector <- Degs$avg_log2FC

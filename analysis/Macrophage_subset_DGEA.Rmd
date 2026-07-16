@@ -322,7 +322,7 @@ create_table(fgseares.tidy)
 
 ## Visualization
 
-```{r,warning = FALSE, fig.width=6, fig.height=5}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 
 plot_df <- fgseares.tidy.top.both %>%
   mutate(
@@ -374,7 +374,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
 
   - Done in this way for GO BP terms and compatibility with aPEAR Emapplot
 
-```{r,warning = FALSE}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 set.seed(42)
 
 ranked_vector <- Macrophages.MAST$avg_log2FC

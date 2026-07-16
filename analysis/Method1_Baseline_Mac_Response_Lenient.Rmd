@@ -50,6 +50,8 @@ library(ggrain)
 
 library(aPEAR)
 
+library(purrr)
+library(tidyr)
 ```
 
 
@@ -263,7 +265,7 @@ names(Data.method2.list)
 
 # VolcanoPlots to compare
 
-```{r,warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 FDR <- 0.05
 FC <- 0.5
@@ -1245,10 +1247,8 @@ E.down.Mast
  - Interestingly the Pathway cell adhesion is downregulated in Method 1 and Method 2 BUT upregulated in MAST. 
  - So we look at the specific genes
  
-```{r, warning = FALSE, fig.width=8, fig.height=5}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
-library(purrr)
-library(tidyr)
 
 Fibroblasts<- subset(Data, cell_type == "Cardiac Fibroblasts")
 Idents(Fibroblasts) <- "orig.ident" 
@@ -1285,7 +1285,8 @@ create_table(gene_table)
 
  - dispersion estimation method combines with t-like stat and GO Terms
  
-```{r, warning = FALSE, fig.width=8, fig.height=5}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
 Data.method1.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Fibro_DEG_Lists_method1.rds")
 
 Degs.M1 <- Data.method1.list$`NC vs MAC`
@@ -1295,7 +1296,7 @@ Volcano_Plots(Degs.M1, "NC vs MAC", "Method 1")
 
 ```
 
-```{r, warning = FALSE, fig.width=8, fig.height=5}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 ranked_vector <- Degs.M1$t_like
 
@@ -1306,7 +1307,7 @@ ranked_vector <- sort(ranked_vector, decreasing = TRUE)
 ```
 
 
-```{r, warning = FALSE, fig.width=8, fig.height=6}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 Humanlibrary <- org.Hs.eg.db
 
@@ -1336,6 +1337,7 @@ print(global_dotplot)
 ## EMAP plot
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
+
 gsea_sig_df <- gsea_results@result %>%
   dplyr::filter(p.adjust < 0.01)  
 
@@ -1369,7 +1371,8 @@ print(p_apear)
 
  - Sampled Pseudobulk method combines with t-like stat and GO Terms
  
-```{r, warning = FALSE, fig.width=8, fig.height=5}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
 Data.method2.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Fibro_DEG_Lists_method2.rds")
 
 Degs.M2 <- Data.method2.list$`NC vs MAC`
@@ -1381,7 +1384,7 @@ Volcano_Plots(Degs.M2, "NC vs MAC", "Method 2")
 
 
 
-```{r, warning = FALSE, fig.width=8, fig.height=5}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 ranked_vector <- Degs.M2$t_like
 
@@ -1392,7 +1395,7 @@ ranked_vector <- sort(ranked_vector, decreasing = TRUE)
 ```
 
 
-```{r, warning = FALSE, fig.width=8, fig.height=6}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 Humanlibrary <- org.Hs.eg.db
 
@@ -1456,7 +1459,7 @@ print(p_apear)
 
  - Cell based approach MAST combined with l2FC stat and GO Terms
  
-```{r, warning = FALSE, fig.width=8, fig.height=5}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 Data.mast.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Fibro_DEG_Lists.rds")
 
 Degs.Mast <- Data.mast.list$Baseline_Mac_Response
@@ -1472,7 +1475,7 @@ Volcano_Plots(Degs.Mast, "NC vs MAC", "Method Mast")
 
 
 
-```{r, warning = FALSE, fig.width=8, fig.height=5}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 ranked_vector <- Degs.Mast$avg_log2FC
 
@@ -1483,7 +1486,7 @@ ranked_vector <- sort(ranked_vector, decreasing = TRUE)
 ```
 
 
-```{r, warning = FALSE, fig.width=8, fig.height=6}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 Humanlibrary <- org.Hs.eg.db
 

@@ -261,7 +261,7 @@ names(Data.method2.list)
 
 # VolcanoPlots to compare
 
-```{r,warning = FALSE}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 
 FDR <- 0.05
 FC <- 0.5
@@ -343,7 +343,7 @@ create_table(fgseares.tidy.show)
 
 ### Visualization
 
-```{r,warning = FALSE, fig.width=6, fig.height=5}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 
 plot_df <- fgseares.tidy.top.both %>%
   mutate(
@@ -439,7 +439,7 @@ create_table(fgseares.tidy.show)
 
 ### Visualization
 
-```{r,warning = FALSE, fig.width=6, fig.height=5}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 
 plot_df <- fgseares.tidy.top.both %>%
   mutate(
@@ -536,7 +536,7 @@ create_table(fgseares.tidy.show)
 
 ### Visualization
 
-```{r,warning = FALSE, fig.width=6, fig.height=5}
+```{r,warning = FALSE, fig.width=8, fig.height=7}
 
 plot_df <- fgseares.tidy.top.both %>%
   mutate(
