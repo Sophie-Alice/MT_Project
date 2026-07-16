@@ -545,6 +545,7 @@ p_apear <- enrichmentNetwork(
   enrichment = simp.up.GO.sign,
   repelLabels = TRUE,
   drawEllipses = TRUE,
+  fontSize     = 3,
   colorBy      = "NES",        
   colorType    = "nes"  
 )
@@ -603,6 +604,7 @@ p_apear <- enrichmentNetwork(
   enrichment = simp.down.GO.sign,
   repelLabels = TRUE,
   drawEllipses = TRUE,
+  fontSize     = 3,
   colorBy      = "NES",        
   colorType    = "nes"  
 )
@@ -646,6 +648,7 @@ p_combined <- enrichmentNetwork(
   enrichment   = combined.enrichment,
   repelLabels  = TRUE,
   drawEllipses = TRUE,
+  fontSize     = 3,
   colorBy      = "NES",          
   colorType    = "nes"
 )
