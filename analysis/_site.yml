@@ -22,6 +22,7 @@ navbar:
         href: CM_Subtypes.html
       - text: "---"
       - text: "Standard Thresholds (DGEA)"
+        href: "#"
       - text: "Overview Dashboard"
         href: CM_DGEA.html
       - text: "8.1.1 Baseline TGF-beta Response"
@@ -34,6 +35,7 @@ navbar:
         href: CM_Stim_Mac_Response.html
       - text: "---"
       - text: "Lenient Thresholds (DGEA)"
+        href: "#"
       - text: "Overview Dashboard"
         href: CM_DGEA_Lenient.html
       - text: "8.2.1 Baseline TGF-beta Response"
@@ -55,12 +57,14 @@ navbar:
   - text: "Fibroblasts"
     menu:
       - text: "Global Comparisons"
+        href: "#"
       - text: "Overview & DEG Overlap"
         href: Fibroblasts_DEG_Overlap.html
       - text: "All Fibroblast Comparisons Dashboard"
         href: Fibroblast_Comparisons.html
       - text: "---"
       - text: "Standard Thresholds (DGEA)"
+        href: "#"
       - text: "Overview Dashboard"
         href: DGEA.html
       - text: "7.1.1 Baseline TGF-beta Response"
@@ -73,6 +77,7 @@ navbar:
         href: Fibro_Stim_Mac_Response.html
       - text: "---"
       - text: "Lenient Thresholds (DGEA)"
+        href: "#"
       - text: "Overview Dashboard"
         href: DGEA_Lenient.html
       - text: "7.2.1 Baseline TGF-beta Response"
@@ -85,6 +90,7 @@ navbar:
         href: Fibro_Stim_Mac_Response_Lenient.html
       - text: "---"
       - text: "Subclusters"
+        href: "#"
       - text: "Unmodified - Fibroblast Marker"
         href: fib_markers.html
       - text: "Modified - Fibroblast Marker"
