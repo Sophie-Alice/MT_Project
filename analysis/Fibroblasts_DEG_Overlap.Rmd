@@ -556,7 +556,7 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ### Block 2
 
-```{r, warning = FALSE, fig.width=8, fig.height=4}
+```{r, warning = FALSE, fig.width=8, fig.height=5}
 
 block2_genes
 
@@ -605,7 +605,7 @@ for (i in seq(1, total_genes, by = chunk_size)) {
 
 ### Block 3
 
-```{r, warning = FALSE, fig.width=8, fig.height=4}
+```{r, warning = FALSE, fig.width=8, fig.height=5}
 
 block3_genes
 
