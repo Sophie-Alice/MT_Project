@@ -221,7 +221,7 @@ raincloud.plots <- function(gene_list,
 
 Cutoffs Chosen: FDR <= 0.01, abs(log2FC) > 1
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 names(DEG.lists) <- c("Baseline_TGF_Response" = "CMF_TGF vs. CMF_NC",
                       "Modulated_TGF_Response" = "CMFHM_TGF vs. CMFHM_NC",
@@ -234,7 +234,7 @@ names(DEG.lists) <- c("Baseline_TGF_Response" = "CMF_TGF vs. CMF_NC",
 
 
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 upset_up_genes   <- list()
 upset_down_genes <- list()
@@ -273,7 +273,7 @@ upset_final_data <- list(
 
 ### UpsetPlot for all Groups
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 ################################################### Upregulated Intersections
 
@@ -302,7 +302,7 @@ upset(
 
 ### Venn diagram of all ovelapping genes
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 ################################# upregulated genes
 
@@ -345,7 +345,7 @@ ggvenn(
 
 ## Log2FC differences across Codnitions
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 
 
@@ -404,7 +404,7 @@ Heatmap(
 
  - Display of the log2FC across Contitions
  
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 FDR <- 0.01 
 
@@ -484,15 +484,14 @@ H1 <- Heatmap(
   row_km = 4
 )
 
-print(H1)
+ht_shifted <- draw(H1)
+
 ```
 
 
 ## Checking on the 4 Blocks
 
 ```{r, warning = FALSE, fig.width=8, fig.height=12}
-
-ht_shifted <- draw(H1)
 
 m_blocks <- row_order(ht_shifted)
 
@@ -506,18 +505,36 @@ block4_genes <- rownames(scaled_matrix)[m_blocks[[4]]]
 ```
 
 
-
-
 ### Block 1
 
-```{r, warning = FALSE, fig.width=8, fig.height=5}
+```{r, warning = FALSE, fig.width=8, fig.height=4}
+
+block1_genes
+
+chunk_size <- 25
+total_genes <- length(block1_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Fibroblasts, 
+      features = block1_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = "avg. Gene Expression of G.o.I - Block 1",
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 block1_genes 
-
-SCpubr::do_DotPlot(Fibroblasts, 
-                   features = block1_genes,
-                   dot.scale = 10,
-                   plot.title = "avg. Gene Expression of G.o.I - Block 1") 
 
 chunk_size <- 9
 total_genes <- length(block1_genes)
@@ -528,8 +545,155 @@ for (i in seq(1, total_genes, by = chunk_size)) {
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
     gene_list     = block1_genes[i:end_idx],
-    plot_title    = "Fibroblasts CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = positive regulation of cell migration - Slice ", slice_num),
+    plot_title    = "Fibroblasts: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("G.o.I - Block 1 - Slice ", slice_num),
+    seurat_obj    = Fibroblasts,
+    colors        = gradient_colors4
+  ))
+}
+
+```
+
+### Block 2
+
+```{r, warning = FALSE, fig.width=8, fig.height=4}
+
+block2_genes
+
+chunk_size <- 25
+total_genes <- length(block2_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Fibroblasts, 
+      features = block2_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = "avg. Gene Expression of G.o.I - Block 2",
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+block2_genes 
+
+chunk_size <- 9
+total_genes <- length(block2_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = block2_genes[i:end_idx],
+    plot_title    = "Fibroblasts: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("G.o.I - Block 2 - Slice ", slice_num),
+    seurat_obj    = Fibroblasts,
+    colors        = gradient_colors4
+  ))
+}
+
+```
+
+### Block 3
+
+```{r, warning = FALSE, fig.width=8, fig.height=4}
+
+block3_genes
+
+chunk_size <- 25
+total_genes <- length(block3_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Fibroblasts, 
+      features = block3_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = "avg. Gene Expression of G.o.I - Block 3",
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+block3_genes 
+
+chunk_size <- 9
+total_genes <- length(block3_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = block3_genes[i:end_idx],
+    plot_title    = "Fibroblasts: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("G.o.I - Block 3 - Slice ", slice_num),
+    seurat_obj    = Fibroblasts,
+    colors        = gradient_colors4
+  ))
+}
+
+```
+
+### Block 4
+
+```{r, warning = FALSE, fig.width=8, fig.height=4}
+
+block4_genes
+
+chunk_size <- 25
+total_genes <- length(block4_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = Fibroblasts, 
+      features = block4_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = "avg. Gene Expression of G.o.I - Block 4",
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+block4_genes 
+
+chunk_size <- 9
+total_genes <- length(block4_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = block4_genes[i:end_idx],
+    plot_title    = "Fibroblasts: Gene distribution profiles across MT conditions",
+    plot_subtitle = paste0("G.o.I - Block 4 - Slice ", slice_num),
     seurat_obj    = Fibroblasts,
     colors        = gradient_colors4
   ))
