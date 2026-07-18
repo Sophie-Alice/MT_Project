@@ -127,10 +127,15 @@ create_table <- function(df) {
       dom = 'Blfrtip',                       
       buttons = c('copy', 'csv', 'excel', 'pdf'),
       pageLength = 10,                      
-      lengthMenu = c(10, 25, 50, 100)     
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = '_all',
+        className = 'dt-nowrap'
+      ))
     ),
     filter = 'top',                         
-    class = 'cell-border stripe hover'       
+    class = 'cell-border stripe hover nowrap'       
   )
 }
 

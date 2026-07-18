@@ -48,6 +48,7 @@ library(ggforce)
 library(enrichplot)
 library(ggrain)
 library(aPEAR)
+library(plotly)
 ```
 
 
@@ -652,6 +653,10 @@ theme(
 print(p_apear)
 
 ##################### combining the 2 lists 
+simp.up.GO.sign <- as.data.frame(simp.up.GO.show) %>% 
+  dplyr::filter(p.adjust < 0.01)
+simp.down.GO.sign <- as.data.frame(simp.down.GO.show) %>% 
+  dplyr::filter(p.adjust < 0.01)
 
 simp.up.GO.sign$NES   <- simp.up.GO.sign$zScore      
 simp.down.GO.sign$NES <- -simp.down.GO.sign$zScore   
@@ -675,12 +680,13 @@ combined.enrichment$ID <- paste0(combined.enrichment$ID, ifelse(combined.enrichm
 
 p_combined <- enrichmentNetwork(
   enrichment   = combined.enrichment,
-  repelLabels  = TRUE,
+  repelLabels  = FALSE,
   drawEllipses = TRUE,
   fontSize     = 3,
   colorBy      = "NES",          
   colorType    = "nes"
 )
+
 
 p_combined <- p_combined + labs(
   title    = "DEG MT-Fibroblasts CMF_TGF vs CMF_NC: Combined GO BP Enrichment",
@@ -694,7 +700,6 @@ theme(
 )
 
 print(p_combined)
-
 
 ```
 

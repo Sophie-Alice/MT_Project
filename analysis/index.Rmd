@@ -15,7 +15,9 @@ Project MT
 * [1. Cellbender vs. Raw Data QC Comparison](Checking_Cellbender.html)
 * [2. Quality Control (QC)](QC.html)
 * [3. Clustering and Annotation](Dim_Reduction.html)
+* [3.1 Cell scores](Checking_celscores.html)
 * [4. Celltype Proportions](Proportions.html)
+
 
 ## Cardiomyocyte Subset
 

@@ -1,0 +1,176 @@
+---
+title: "Checking Cellscores"
+author: "Sophie.Alice"
+date: "2026-07-17"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+library(UpSetR)
+library(grid)
+library(ggvenn)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+
+library(ComplexHeatmap)
+library(tidyverse)
+library(circlize)
+library(UCell)
+```
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors6 <- custom_palette(6)
+
+```
+
+# Checking Cellscores
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+cardiomyocyte.genes <- c("TNNT2", "ACTC1", "MYH6", "MYH7", "MYL2", "NKX2-5", "RYR2", "GATA4")
+cardiomyocyte.genes_signature <- list(cardiomyocyte.genes = cardiomyocyte.genes)
+Idents(Data) <- Data$cell_type
+
+SCpubr::do_DotPlot(Data, 
+        features = cardiomyocyte.genes,
+        dot.scale = 10) + 
+  RotatedAxis() +
+  labs(
+    x = "", 
+    y = "", 
+    title = "avg. Cardiomyocyte Marker Gene Expression")
+
+
+Data <- AddModuleScore_UCell(
+  Data,
+  features = cardiomyocyte.genes_signature
+)
+
+FeaturePlot_scCustom(Data, features = "cardiomyocyte.genes_UCell") +
+  labs(
+    x = "", 
+    y = "", 
+    title = "Cardiomyocyte UCell score",
+    subtitle = "TNNT2 • ACTC1 • MYH6 • MYH7 • MYL2 • NKX2-5 • RYR2 • GATA4"
+  ) +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic")
+  )
+
+
+VlnPlot_scCustom(Data, features = "cardiomyocyte.genes_UCell", colors_use = gradient_colors6) +
+  labs(
+    x = "", 
+    y = "", 
+    title = "Cardiomyocyte UCell score",
+    subtitle = "TNNT2 • ACTC1 • MYH6 • MYH7 • MYL2 • NKX2-5 • RYR2 • GATA4"
+  ) +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic")
+  )
+
+################################################################# 
+
+c.fibroblast.genes <- c("TCF21", "DDR2", "PDGFRA", "VIM", "ACTA2", "POSTN", "FAP", "COL1A1", "COL1A2", "COL3A1", "FN1")
+c.fibroblast.genes_signature <- list(c.fibroblast.genes = c.fibroblast.genes)
+Idents(Data) <- Data$cell_type
+
+SCpubr::do_DotPlot(Data, 
+        features = c.fibroblast.genes,
+        dot.scale = 10) + 
+  RotatedAxis() +
+  labs(
+    x = "", 
+    y = "", 
+    title = "avg. Cardiac Fibroblast Marker Gene Expression"
+  ) 
+
+Data <- AddModuleScore_UCell(
+  Data,
+  features = c.fibroblast.genes_signature
+)
+FeaturePlot_scCustom(Data, features = "c.fibroblast.genes_UCell") +
+  labs(
+    x = "", 
+    y = "", 
+    title = "Cardiac Fibroblast UCell score",
+    subtitle = "TCF21 • DDR2 • PDGFRA • VIM • ACTA2 • POSTN • FAP • COL1A1 • COL1A2 • COL3A1 • FN1"
+  ) +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic")
+  )
+
+
+VlnPlot_scCustom(Data, features = "c.fibroblast.genes_UCell", colors_use = gradient_colors6) +
+  labs(
+    x = "", 
+    y = "", 
+    title = "Cardiac Fibroblast UCell score",
+    subtitle = "TCF21 • DDR2 • PDGFRA • VIM • ACTA2 • POSTN • FAP • COL1A1 • COL1A2 • COL3A1 • FN1"
+  ) +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic")
+  )
+
+```

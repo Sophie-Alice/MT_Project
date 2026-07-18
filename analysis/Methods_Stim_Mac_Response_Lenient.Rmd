@@ -126,10 +126,15 @@ create_table <- function(df) {
       dom = 'Blfrtip',                       
       buttons = c('copy', 'csv', 'excel', 'pdf'),
       pageLength = 10,                      
-      lengthMenu = c(10, 25, 50, 100)     
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = '_all',
+        className = 'dt-nowrap'
+      ))
     ),
     filter = 'top',                         
-    class = 'cell-border stripe hover'       
+    class = 'cell-border stripe hover nowrap'       
   )
 }
 
@@ -1233,7 +1238,7 @@ Data.method1.list <- read_rds("/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Projec
 Degs.M1 <- Data.method1.list$`TGF vs MAC+TGF`
 
 generate_volcano(Degs.M1, "TGF vs MAC+TGF: Method 1")
-Volcano_Plots(Degs.M1, "NTGF vs MAC+TGF", "Method 1")
+Volcano_Plots(Degs.M1, "TGF vs MAC+TGF", "Method 1")
 
 ```
 
