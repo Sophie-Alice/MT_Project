@@ -13,6 +13,8 @@ navbar:
         href: QC.html
       - text: "3. Clustering and Annotation"
         href: Dim_Reduction.html
+      - text: "3.1 Cell scores"
+        href: Checking_celscores.html
       - text: "4. Celltype Proportions"
         href: Proportions.html
 
