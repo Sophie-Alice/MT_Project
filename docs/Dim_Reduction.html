@@ -377,6 +377,9 @@ div.tocify {
       <a href="Dim_Reduction.html">3. Clustering and Annotation</a>
     </li>
     <li>
+      <a href="Checking_cellscores.html">3.1 Cell scores</a>
+    </li>
+    <li>
       <a href="Proportions.html">4. Celltype Proportions</a>
     </li>
   </ul>
@@ -593,7 +596,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-16
+<strong>Last updated:</strong> 2026-07-22
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -724,15 +727,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree9a465ca55b53e77671fb8e94d990009f9631eadbtargetblank9a465caa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeec30fb4e31674af29ed9dfa3143911b167ce659atargetblankec30fb4a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/9a465ca55b53e77671fb8e94d990009f9631eadb" target="_blank">9a465ca</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/ec30fb4e31674af29ed9dfa3143911b167ce659a" target="_blank">ec30fb4</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree9a465ca55b53e77671fb8e94d990009f9631eadbtargetblank9a465caa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeec30fb4e31674af29ed9dfa3143911b167ce659atargetblankec30fb4a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -742,7 +745,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/9a465ca55b53e77671fb8e94d990009f9631eadb" target="_blank">9a465ca</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/ec30fb4e31674af29ed9dfa3143911b167ce659a" target="_blank">ec30fb4</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -805,6 +808,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/ec30fb4e31674af29ed9dfa3143911b167ce659a/analysis/Dim_Reduction.Rmd" target="_blank">ec30fb4</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-22
+</td>
+<td>
+Update analysis Rmd files
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/676253fc925536ec951d5aaea3accca913375d85/docs/Dim_Reduction.html" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -987,8 +1024,8 @@ Tryinging
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907601 48.5    1752272 93.6         NA  1321095 70.6
-Vcells 1598298 12.2    8388608 64.0      16384  2393423 18.3</code></pre>
+Ncells  907594 48.5    1752265 93.6         NA  1321070 70.6
+Vcells 1598415 12.2    8388608 64.0      16384  2393441 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -1084,7 +1121,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 22723 genes</code></pre>
 <pre><code>Computing corrected count matrix for 22723 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 8.247921 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 8.175693 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -1101,7 +1138,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 24429 genes</code></pre>
 <pre><code>Computing corrected count matrix for 24429 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 12.32634 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 11.59795 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -1118,7 +1155,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 25640 genes</code></pre>
 <pre><code>Computing corrected count matrix for 25640 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 15.47139 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 16.14551 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -1135,7 +1172,7 @@ for (i in 1:length(Data)) {
 <pre><code>Second step: Get residuals using fitted parameters for 24767 genes</code></pre>
 <pre><code>Computing corrected count matrix for 24767 genes</code></pre>
 <pre><code>Calculating gene attributes</code></pre>
-<pre><code>Wall clock passed: Time difference of 10.81673 secs</code></pre>
+<pre><code>Wall clock passed: Time difference of 11.15318 secs</code></pre>
 <pre><code>Determine variable features</code></pre>
 <pre><code>Regressing out percent.mt</code></pre>
 <pre><code>Centering data matrix</code></pre>
@@ -1247,21 +1284,21 @@ integration</h2>
 
 
 Data &lt;- RunUMAP(Data, dims = 1:Dims)</code></pre>
-<pre><code>11:41:14 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>11:41:14 Read 13577 rows and found 25 numeric columns</code></pre>
-<pre><code>11:41:14 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>11:41:14 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>19:59:29 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>19:59:29 Read 13577 rows and found 25 numeric columns</code></pre>
+<pre><code>19:59:29 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>19:59:29 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-11:41:15 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmp2fRG3H/file84f149293112
-11:41:15 Searching Annoy index using 1 thread, search_k = 3000
-11:41:17 Annoy recall = 100%
-11:41:18 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-11:41:19 Initializing from normalized Laplacian + noise (using RSpectra)
-11:41:19 Commencing optimization for 200 epochs, with 557838 positive edges
-11:41:19 Using rng type: pcg
-11:41:25 Optimization finished</code></pre>
+19:59:29 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpUCgMx4/file729262426e6d
+19:59:29 Searching Annoy index using 1 thread, search_k = 3000
+19:59:32 Annoy recall = 100%
+19:59:33 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+19:59:33 Initializing from normalized Laplacian + noise (using RSpectra)
+19:59:34 Commencing optimization for 200 epochs, with 557838 positive edges
+19:59:34 Using rng type: pcg
+19:59:39 Optimization finished</code></pre>
 <pre class="r"><code>Data &lt;- FindNeighbors(Data, dims = 1:Dims)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1511,21 +1548,21 @@ Sophie.Alice
 </div>
 <pre class="r"><code>DefaultAssay(Data) &lt;- &quot;SCT&quot;
 Data &lt;- RunUMAP(Data, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>11:41:45 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>11:41:45 Read 13577 rows and found 25 numeric columns</code></pre>
-<pre><code>11:41:45 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>11:41:45 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>19:59:59 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>19:59:59 Read 13577 rows and found 25 numeric columns</code></pre>
+<pre><code>19:59:59 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>19:59:59 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-11:41:46 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmp2fRG3H/file84f13c0890bf
-11:41:46 Searching Annoy index using 1 thread, search_k = 3000
-11:41:48 Annoy recall = 100%
-11:41:49 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-11:41:50 Initializing from normalized Laplacian + noise (using RSpectra)
-11:41:50 Commencing optimization for 200 epochs, with 561634 positive edges
-11:41:50 Using rng type: pcg
-11:41:56 Optimization finished</code></pre>
+20:00:00 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpUCgMx4/file72926aaa8e1
+20:00:00 Searching Annoy index using 1 thread, search_k = 3000
+20:00:02 Annoy recall = 100%
+20:00:03 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+20:00:04 Initializing from normalized Laplacian + noise (using RSpectra)
+20:00:04 Commencing optimization for 200 epochs, with 561634 positive edges
+20:00:04 Using rng type: pcg
+20:00:10 Optimization finished</code></pre>
 <pre class="r"><code>Data &lt;- FindNeighbors(Data, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -2369,21 +2406,21 @@ Sophie.Alice
 </div>
 <pre class="r"><code>DefaultAssay(Data.clean) &lt;- &quot;SCT&quot;
 Data.clean &lt;- RunUMAP(Data.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>11:44:15 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>11:44:15 Read 13386 rows and found 25 numeric columns</code></pre>
-<pre><code>11:44:15 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>11:44:15 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>20:02:26 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>20:02:26 Read 13386 rows and found 25 numeric columns</code></pre>
+<pre><code>20:02:26 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>20:02:26 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-11:44:16 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmp2fRG3H/file84f1e5c2ab
-11:44:16 Searching Annoy index using 1 thread, search_k = 3000
-11:44:19 Annoy recall = 100%
-11:44:19 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-11:44:20 Initializing from normalized Laplacian + noise (using RSpectra)
-11:44:20 Commencing optimization for 200 epochs, with 554098 positive edges
-11:44:20 Using rng type: pcg
-11:44:26 Optimization finished</code></pre>
+20:02:27 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpUCgMx4/file72927bc5d5cc
+20:02:27 Searching Annoy index using 1 thread, search_k = 3000
+20:02:30 Annoy recall = 100%
+20:02:30 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+20:02:31 Initializing from normalized Laplacian + noise (using RSpectra)
+20:02:31 Commencing optimization for 200 epochs, with 554098 positive edges
+20:02:31 Using rng type: pcg
+20:02:37 Optimization finished</code></pre>
 <pre class="r"><code>Data.clean &lt;- FindNeighbors(Data.clean, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -2432,7 +2469,7 @@ Number of edges: 440202
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.8594
 Number of communities: 11
-Elapsed time: 2 seconds
+Elapsed time: 1 seconds
 Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
 Number of nodes: 13386
@@ -2441,7 +2478,7 @@ Number of edges: 440202
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.8477
 Number of communities: 11
-Elapsed time: 2 seconds
+Elapsed time: 1 seconds
 Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
 Number of nodes: 13386
@@ -3095,7 +3132,7 @@ Sophie.Alice
 <h2><span class="header-section-number">3.11</span> Save File</h2>
 <pre class="r"><code>outputdir &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files&quot;
 
-# saveRDS(Data.clean, file = file.path(outputdir, &quot;Post_Annotation.rds&quot;))</code></pre>
+saveRDS(Data.clean, file = file.path(outputdir, &quot;Post_Annotation_pre.rds&quot;))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

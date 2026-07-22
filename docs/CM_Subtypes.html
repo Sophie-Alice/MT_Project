@@ -377,6 +377,9 @@ div.tocify {
       <a href="Dim_Reduction.html">3. Clustering and Annotation</a>
     </li>
     <li>
+      <a href="Checking_cellscores.html">3.1 Cell scores</a>
+    </li>
+    <li>
       <a href="Proportions.html">4. Celltype Proportions</a>
     </li>
   </ul>
@@ -593,7 +596,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-16
+<strong>Last updated:</strong> 2026-07-22
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -724,15 +727,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree9a465ca55b53e77671fb8e94d990009f9631eadbtargetblank9a465caa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeec30fb4e31674af29ed9dfa3143911b167ce659atargetblankec30fb4a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/9a465ca55b53e77671fb8e94d990009f9631eadb" target="_blank">9a465ca</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/ec30fb4e31674af29ed9dfa3143911b167ce659a" target="_blank">ec30fb4</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree9a465ca55b53e77671fb8e94d990009f9631eadbtargetblank9a465caa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreeec30fb4e31674af29ed9dfa3143911b167ce659atargetblankec30fb4a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -742,7 +745,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/9a465ca55b53e77671fb8e94d990009f9631eadb" target="_blank">9a465ca</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/ec30fb4e31674af29ed9dfa3143911b167ce659a" target="_blank">ec30fb4</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -805,6 +808,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/ec30fb4e31674af29ed9dfa3143911b167ce659a/analysis/CM_Subtypes.Rmd" target="_blank">ec30fb4</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-22
+</td>
+<td>
+Update analysis Rmd files
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/676253fc925536ec951d5aaea3accca913375d85/docs/CM_Subtypes.html" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -885,8 +922,8 @@ adding CM subtype identification
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907999 48.5    1753410 93.7         NA  1321095 70.6
-Vcells 1599890 12.3    8388608 64.0      16384  2393423 18.3</code></pre>
+Ncells  907986 48.5    1753385 93.7         NA  1321070 70.6
+Vcells 1599996 12.3    8388608 64.0      16384  2393441 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -925,7 +962,7 @@ path &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_
 Data &lt;- read_rds(path)
 Data</code></pre>
 <pre><code>An object of class Seurat 
-65557 features across 13386 samples within 2 assays 
+65557 features across 13201 samples within 2 assays 
 Active assay: RNA (38606 features, 0 variable features)
  2 layers present: counts, data
  1 other assay present: SCT
@@ -1164,6 +1201,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/CM_Subtypes.Rmd/unnamed-chunk-5-2.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/Sophie-Alice/MT_Project/blob/028e94ed8d44498d6d3befed13a72f888e74daaf/docs/figure/CM_Subtypes.Rmd/unnamed-chunk-5-2.png" target="_blank">028e94e</a>
 </td>
 <td>
@@ -1317,8 +1365,8 @@ Sophie.Alice
 </div>
 </div>
 </div>
-<div id="pah" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> PAH</h2>
+<div id="ora" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> ORA</h2>
 <pre class="r"><code>df &lt;- deg_list[[&quot;0 vs. 4&quot;]]
 
 # Upregulated Genes
@@ -2003,8 +2051,8 @@ Sophie.Alice
 </div>
 </div>
 </div>
-<div id="pah-1" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> PAH</h2>
+<div id="ora-1" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> ORA</h2>
 <p>-&gt; 0 enriched terms found</p>
 <pre class="r"><code>df &lt;- deg_list[[&quot;0 vs. 5&quot;]]
 
