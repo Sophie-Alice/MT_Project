@@ -325,17 +325,3 @@ plot_features(Fibroblasts, features = gabi.markers,
 
 
 
-
-```{r, warning = FALSE, fig.width=8, fig.height=7}
-
-
-
-```
-
-
-```{r, warning = FALSE, fig.width=8, fig.height=7}
-
-
-
-```
-

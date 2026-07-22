@@ -400,7 +400,7 @@ gsea_sig_df # No sign. terms found!
 
 ```
 
-# PAH
+# ORA
 
 ```{r,warning = FALSE}
 

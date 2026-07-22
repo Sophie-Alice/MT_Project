@@ -599,9 +599,9 @@ plot.M2
 
 ```
 
-# PAH
+# ORA
 
-## PAH - Method 1
+## ORA - Method 1
 
 ```{r,warning = FALSE}
 
@@ -801,7 +801,7 @@ E.down.M1 <- emapplot(
 ```
 
 
-## PAH - Method 2
+## ORA - Method 2
 
 ```{r,warning = FALSE}
 
@@ -1001,7 +1001,7 @@ E.down.M2 <- emapplot(
 ```
 
 
-## PAH - Method Mast
+## ORA - Method Mast
 
 ```{r,warning = FALSE}
 

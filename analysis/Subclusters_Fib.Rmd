@@ -53,7 +53,7 @@ library(ggrain)
 # Get the Data
 
 ```{r, warning = FALSE}
-path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation_pre.rds"
 Data <- read_rds(path)
 Data
 Fibroblasts.raw <- subset(Data, cell_type == "Cardiac Fibroblasts")
@@ -276,12 +276,15 @@ FeaturePlot_scCustom(Fibroblasts, features = "TTN", pt.size = 0, reduction = "um
 
 VlnPlot_scCustom(Fibroblasts, features = dplyr::filter(Markers_top10, cluster == "6")$gene, num_columns = 5, pt.size = 0) + theme(axis.title.x = element_blank())
 ## --> assumption = Cluster 6 is MT-Cells
+
+table(Data$SCT_snn_res.0.5, Data$orig.ident)
+
+table(Data$orig.ident)
 ```
 
 # Feature Plots
 
 ```{r, warning = FALSE}
-
 
 FeaturePlot_scCustom(Fibroblasts, features = "CD163", pt.size = 0, reduction = "umap") + 
   theme(axis.title.x = element_blank()) # Macrophage marker
@@ -300,11 +303,31 @@ DimPlot(Fibroblasts, reduction = "umap", shuffle = T,
 
 ```
 
+## Clean Data and resafe
+
+```{r, warning = FALSE, fig.width=8, fig.height=12}
+
+doublet_clusters <- c("3", "7")
+
+doublet_cells <- colnames(subset(Fibroblasts, idents = doublet_clusters))
+length(doublet_cells)
+
+valid_cells <- setdiff(colnames(Data), doublet_cells)
+
+Data_clean <- subset(Data, cells = valid_cells)
+
+ncol(Data)       # Original total cells
+ncol(Data_clean) # Cleaned total cells
+
+# Overwrite data file
+# saveRDS(Data_clean, file = "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds")
+```
+
 
 ```{r, warning = FALSE}
 
-# Remove only the clearly mitochondrial cluster and the left over doubles
-Fibroblasts.clean <- subset(Fibroblasts, subset = SCT_snn_res.0.5 %in% c("0", "1", "2", "4", "5","7"))
+# Remove only the clearly mitochondrial cluster and the left over doubles -> remove 3 , 6 and 7 
+Fibroblasts.clean <- subset(Fibroblasts, subset = SCT_snn_res.0.5 %in% c("0", "1", "2", "4", "5"))
 
 
 DefaultAssay(Fibroblasts.clean) <- "SCT"

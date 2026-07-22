@@ -604,9 +604,9 @@ plot.M2
 ```
 
 
-# PAH
+# ORA
 
-## PAH - Method 1
+## ORA - Method 1
 
 ```{r,warning = FALSE}
 
@@ -814,7 +814,7 @@ E.down.M1 <- emapplot(
 ```
 
 
-## PAH - Method 2
+## ORA - Method 2
 
 ```{r,warning = FALSE}
 
@@ -1021,7 +1021,7 @@ E.down.M2 <- emapplot(
 
 
 
-## PAH - Method Mast
+## ORA - Method Mast
 
 ```{r,warning = FALSE}
 
@@ -1109,119 +1109,119 @@ go.results[["GO.Mast.down"]] <- as.data.frame(simp.down.GO)
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
-go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
-go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
-
-go_combined <- rbind(go_up_df, go_down_df) %>%
-  group_by(Direction) %>%
-  slice_head(n = 10) %>% # Adjust 'n' to show more or fewer terms per panel
-  ungroup()
-
-
-go_plot_data <- go_combined %>%
-  mutate(
-    GeneRatio_num = sapply(GeneRatio, function(x) {
-      num_den <- as.numeric(strsplit(x, "/")[[1]])
-      return(num_den[1] / num_den[2])})) %>%
-  arrange(Direction, GeneRatio_num) %>%
-  mutate(Description = factor(Description, levels = unique(Description)))
-
-
-PAH.plot.Mast <- ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
-  geom_point(aes(color = p.adjust, size = Count)) +  
-  facet_wrap(~Direction, scales = "free_y", ncol = 1) +
-  
-  scale_color_viridis_c(
-    option = "plasma", 
-    name = "adj. p-value",                          
-    guide = guide_colorbar(reverse = TRUE)
-  ) +
-  scale_size_continuous(range = c(3, 8), name = "Gene Count") +
-  scale_y_discrete(labels = scales::label_wrap(45)) +
-  
-  theme_bw() + 
-  labs(
-    title = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Method Mast", 
-    subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
-    x = "Gene Ratio", 
-    y = ""
-  ) +
-  theme(
-    plot.title.position = "plot", 
-    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
-    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
-    axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
-    axis.title.x  = element_text(face = "bold"),
-    strip.text    = element_text(face = "bold", size = 10), 
-    legend.position = "right"
-  )
+# go_up_df   <- as.data.frame(simp.up.GO) %>% mutate(Direction = "Up-regulated")
+# go_down_df <- as.data.frame(simp.down.GO) %>% mutate(Direction = "Down-regulated")
+# 
+# go_combined <- rbind(go_up_df, go_down_df) %>%
+#   group_by(Direction) %>%
+#   slice_head(n = 10) %>% # Adjust 'n' to show more or fewer terms per panel
+#   ungroup()
+# 
+# 
+# go_plot_data <- go_combined %>%
+#   mutate(
+#     GeneRatio_num = sapply(GeneRatio, function(x) {
+#       num_den <- as.numeric(strsplit(x, "/")[[1]])
+#       return(num_den[1] / num_den[2])})) %>%
+#   arrange(Direction, GeneRatio_num) %>%
+#   mutate(Description = factor(Description, levels = unique(Description)))
+# 
+# 
+# PAH.plot.Mast <- ggplot(go_plot_data, aes(x = GeneRatio_num, y = Description)) + 
+#   geom_point(aes(color = p.adjust, size = Count)) +  
+#   facet_wrap(~Direction, scales = "free_y", ncol = 1) +
+#   
+#   scale_color_viridis_c(
+#     option = "plasma", 
+#     name = "adj. p-value",                          
+#     guide = guide_colorbar(reverse = TRUE)
+#   ) +
+#   scale_size_continuous(range = c(3, 8), name = "Gene Count") +
+#   scale_y_discrete(labels = scales::label_wrap(45)) +
+#   
+#   theme_bw() + 
+#   labs(
+#     title = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Method Mast", 
+#     subtitle = "Comparing top enriched terms for Up-regulated vs Down-regulated genes",
+#     x = "Gene Ratio", 
+#     y = ""
+#   ) +
+#   theme(
+#     plot.title.position = "plot", 
+#     plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+#     plot.subtitle = element_text(size = 10, face = "italic", hjust = 0),
+#     axis.text.y   = element_text(size = 9, color = "black", face = "bold"),
+#     axis.title.x  = element_text(face = "bold"),
+#     strip.text    = element_text(face = "bold", size = 10), 
+#     legend.position = "right"
+#   )
 ```
 
 ## EMAP Plot
 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
-set.seed(42)
-
-################################################### Upregulated Go terms
-
-simp.up.GO <- pairwise_termsim(simp.up.GO)
-
-E.Up.Mast <- emapplot(
-  simp.up.GO,
-  showCategory = 30,          
-  node_label   = "group", 
-  nCluster     = 5,           
-  nWords       = 4,           
-  node_label_size = 3.5       
-) + 
-  theme_bw() + 
-  labs(
-    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - MAST", 
-    subtitle = "Functional clustering map of top 30 enriched terms for Up-regulated genes",
-    x        = "", 
-    y        = ""
-  ) +
-  theme(
-    plot.title.position = "plot", 
-    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
-    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
-    axis.text.y     = element_blank(), 
-    axis.text.x     = element_blank(),  
-    axis.ticks      = element_blank(),  
-    panel.grid      = element_blank(),  
-    legend.position = "right"
-  )
-
-################################################### Down Go terms
-
-simp.down.GO <- pairwise_termsim(simp.down.GO)
-
-E.down.Mast <- emapplot(
-  simp.down.GO,
-  showCategory = 30,          
-  node_label   = "group", 
-  nCluster     = 5,           
-  nWords       = 4,           
-  node_label_size = 3.5       
-) + 
-  theme_bw() + 
-  labs(
-    title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Mast", 
-    subtitle = "Functional clustering map of top 30 enriched terms for Down-regulated genes",
-    x        = "", 
-    y        = ""
-  ) +
-  theme(
-    plot.title.position = "plot", 
-    plot.title      = element_text(face = "bold", size = 12, hjust = 0),
-    plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
-    axis.text.y     = element_blank(), 
-    axis.text.x     = element_blank(),  
-    axis.ticks      = element_blank(),  
-    panel.grid      = element_blank(),  
-    legend.position = "right"
-  )
+# set.seed(42)
+# 
+# ################################################### Upregulated Go terms
+# 
+# simp.up.GO <- pairwise_termsim(simp.up.GO)
+# 
+# E.Up.Mast <- emapplot(
+#   simp.up.GO,
+#   showCategory = 30,          
+#   node_label   = "group", 
+#   nCluster     = 5,           
+#   nWords       = 4,           
+#   node_label_size = 3.5       
+# ) + 
+#   theme_bw() + 
+#   labs(
+#     title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - MAST", 
+#     subtitle = "Functional clustering map of top 30 enriched terms for Up-regulated genes",
+#     x        = "", 
+#     y        = ""
+#   ) +
+#   theme(
+#     plot.title.position = "plot", 
+#     plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+#     plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+#     axis.text.y     = element_blank(), 
+#     axis.text.x     = element_blank(),  
+#     axis.ticks      = element_blank(),  
+#     panel.grid      = element_blank(),  
+#     legend.position = "right"
+#   )
+# 
+# ################################################### Down Go terms
+# 
+# simp.down.GO <- pairwise_termsim(simp.down.GO)
+# 
+# E.down.Mast <- emapplot(
+#   simp.down.GO,
+#   showCategory = 30,          
+#   node_label   = "group", 
+#   nCluster     = 5,           
+#   nWords       = 4,           
+#   node_label_size = 3.5       
+# ) + 
+#   theme_bw() + 
+#   labs(
+#     title    = "DEG MT CMFHM_NC vs CMF_NC: GO Biological Process Enrichment - Mast", 
+#     subtitle = "Functional clustering map of top 30 enriched terms for Down-regulated genes",
+#     x        = "", 
+#     y        = ""
+#   ) +
+#   theme(
+#     plot.title.position = "plot", 
+#     plot.title      = element_text(face = "bold", size = 12, hjust = 0),
+#     plot.subtitle   = element_text(face = "italic", size = 10, hjust = 0),
+#     axis.text.y     = element_blank(), 
+#     axis.text.x     = element_blank(),  
+#     axis.ticks      = element_blank(),  
+#     panel.grid      = element_blank(),  
+#     legend.position = "right"
+#   )
 
 
 ```
@@ -1233,7 +1233,7 @@ E.down.Mast <- emapplot(
 
 PAH.plot.M1
 PAH.plot.M2
-PAH.plot.Mast
+# PAH.plot.Mast
 
 E.Up.M1
 E.down.M1
@@ -1241,43 +1241,9 @@ E.down.M1
 E.Up.M2
 E.down.M2
 
-E.Up.Mast
-E.down.Mast
+# E.Up.Mast
+# E.down.Mast
 
-```
-
-
-# Checking out cell adhesion
-
- - Interestingly the Pathway cell adhesion is downregulated in Method 1 and Method 2 BUT upregulated in MAST. 
- - So we look at the specific genes
- 
-```{r, warning = FALSE, fig.width=8, fig.height=7}
-
-
-Fibroblasts<- subset(Data, cell_type == "Cardiac Fibroblasts")
-Idents(Fibroblasts) <- "orig.ident" 
-
-descr <- "cell adhesion"
-
-cell_adhesion_df <- go.results %>%
-  map(~ filter(.x, Description == descr)) %>%
-  bind_rows(.id = "Analysis")
-
-create_table(cell_adhesion_df)
-
-
-## MAST filters more stringent.
-## Shows how essential it is to look at the specific genes found in the geneset!
-
-gene_table <- go.results %>%
-  map(~ filter(.x, Description == descr)) %>%
-  bind_rows(.id = "Analysis") %>%
-  dplyr::select(Analysis, Description, p.adjust, geneID) %>%
-  tidyr::separate_rows(geneID, sep = "/") %>%
-  rename(Gene = geneID)
-
-create_table(gene_table)
 ```
 
 
@@ -1344,7 +1310,7 @@ print(global_dotplot)
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 
 gsea_sig_df <- gsea_results@result %>%
-  dplyr::filter(p.adjust < 0.01)  
+  dplyr::filter(p.adjust < 0.05)  
 
 set.seed(42)
 p_apear <- enrichmentNetwork(
@@ -1429,32 +1395,34 @@ print(global_dotplot)
 
 ## EMAP plot
 
+Method 2 renders no sign. go terms here
+
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 gsea_sig_df <- gsea_results@result %>%
-  dplyr::filter(p.adjust < 0.05)  
+  dplyr::filter(p.adjust < 0.1)  
 
 set.seed(42)
-p_apear <- enrichmentNetwork(
-  enrichment = gsea_sig_df,
-  repelLabels = TRUE,
-  drawEllipses = TRUE,
-  fontSize     = 3,
-  colorBy      = "NES",        
-  colorType    = "nes"  
-)
-
-p_apear <- p_apear + labs(
-  title    = "Enrichment Network of sign. GO Terms found by GSEA",
-  subtitle = "Method 2, t-like statistic",
-  color    = "NES",       
-) +
-theme(
-  plot.title.position = "plot",
-  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
-  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
-)
-
-print(p_apear)
+# p_apear <- enrichmentNetwork(
+#   enrichment = gsea_sig_df,
+#   repelLabels = TRUE,
+#   drawEllipses = TRUE,
+#   fontSize     = 3,
+#   colorBy      = "NES",        
+#   colorType    = "nes"  
+# )
+# 
+# p_apear <- p_apear + labs(
+#   title    = "Enrichment Network of sign. GO Terms found by GSEA",
+#   subtitle = "Method 2, t-like statistic",
+#   color    = "NES",       
+# ) +
+# theme(
+#   plot.title.position = "plot",
+#   plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+#   plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+# )
+# 
+# print(p_apear)
 
 
 ```

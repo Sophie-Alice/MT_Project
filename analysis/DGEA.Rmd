@@ -154,8 +154,8 @@ MAST.Res <- FindMarkers(
   ident.2 = "CMF_NC",     
   test.use = "MAST",
   latent.vars = "cdr",      
-  logfc.threshold = 0.1,      
-  min.pct = 0.2             
+  logfc.threshold = 0.25,      
+  min.pct = 0.1             
 )
 
 MAST.Res <- MAST.Res %>%
@@ -195,8 +195,8 @@ MAST.Res <- FindMarkers(
   ident.2 = "CMFHM_NC",     
   test.use = "MAST",
   latent.vars = "cdr",      
-  logfc.threshold = 0.1,      
-  min.pct = 0.2             
+  logfc.threshold = 0.25,      
+  min.pct = 0.1            
 )
 
 MAST.Res <- MAST.Res %>%
@@ -236,8 +236,8 @@ MAST.Res <- FindMarkers(
   ident.2 = "CMF_NC",     
   test.use = "MAST",
   latent.vars = "cdr",      
-  logfc.threshold = 0.1,      
-  min.pct = 0.2             
+  logfc.threshold = 0.25,      
+  min.pct = 0.1             
 )
 
 MAST.Res <- MAST.Res %>%
@@ -273,8 +273,8 @@ MAST.Res <- FindMarkers(
   ident.2 = "CMF_TGF",     
   test.use = "MAST",
   latent.vars = "cdr",      
-  logfc.threshold = 0.1,      
-  min.pct = 0.2             
+  logfc.threshold = 0.25,      
+  min.pct = 0.1             
 )
 
 MAST.Res <- MAST.Res %>%

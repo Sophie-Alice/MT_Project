@@ -375,8 +375,6 @@ p_apear <- enrichmentNetwork(
   repelLabels = TRUE,
   drawEllipses = TRUE,
   fontSize     = 3,
-  simMethod = "jaccard", 
-  clustMethod = "hier",
   colorBy      = "NES",        
   colorType    = "nes"  
 )
@@ -396,7 +394,7 @@ print(p_apear)
 
 ```
 
-# PAH
+# ORA
 
 ```{r,warning = FALSE}
 

@@ -178,7 +178,7 @@ ggplot(plot_df, aes(reorder(pathway, NES), NES)) +
 ```
 
 
-# PAH
+# ORA
 
 
 ```{r,warning = FALSE}

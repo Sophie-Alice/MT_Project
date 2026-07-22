@@ -70,6 +70,10 @@ gradient_colors6 <- custom_palette(6)
 
 # Checking Cellscores
 
+We have removed the doublet subclusters found in the fibroblast subsets. Which cleaned our problem.
+As we didn't do any subclusters for Macrophages and the remaining Cardiomyocyte genes don't influence the Macrophage results 
+they will be kept as is.
+
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
 cardiomyocyte.genes <- c("TNNT2", "ACTC1", "MYH6", "MYH7", "MYL2", "NKX2-5", "RYR2", "GATA4")

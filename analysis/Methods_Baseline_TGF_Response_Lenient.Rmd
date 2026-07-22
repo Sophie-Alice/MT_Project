@@ -600,9 +600,9 @@ plot.M2
 
 ```
 
-# PAH
+# ORA
 
-## PAH - Method 1
+## ORA - Method 1
 
 ```{r,warning = FALSE}
 
@@ -803,7 +803,7 @@ E.down.M1 <- emapplot(
 
 
 
-## PAH - Method 2
+## ORA - Method 2
 
 ```{r,warning = FALSE}
 
@@ -1004,7 +1004,7 @@ E.down.M2 <- emapplot(
 
 
 
-## PAH - Method Mast
+## ORA - Method Mast
 
 ```{r,warning = FALSE}
 
@@ -1370,32 +1370,34 @@ print(global_dotplot)
 
 ## EMAP plot
 
+ no sign. go terms found here
+ 
 ```{r, warning = FALSE, fig.width=8, fig.height=7}
 gsea_sig_df <- gsea_results@result %>%
   dplyr::filter(p.adjust < 0.05)  
 
-set.seed(42)
-p_apear <- enrichmentNetwork(
-  enrichment = gsea_sig_df,
-  repelLabels = TRUE,
-  drawEllipses = TRUE,
-  fontSize     = 3,
-  colorBy      = "NES",        
-  colorType    = "nes"  
-)
-
-p_apear <- p_apear + labs(
-  title    = "Enrichment Network of sign. GO Terms found by GSEA",
-  subtitle = "Method 2, t-like statistic",
-  color    = "NES",       
-) +
-theme(
-  plot.title.position = "plot",
-  plot.title    = element_text(face = "bold", size = 12, hjust = 0),
-  plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
-)
-
-print(p_apear)
+# set.seed(42)
+# p_apear <- enrichmentNetwork(
+#   enrichment = gsea_sig_df,
+#   repelLabels = TRUE,
+#   drawEllipses = TRUE,
+#   fontSize     = 3,
+#   colorBy      = "NES",        
+#   colorType    = "nes"  
+# )
+# 
+# p_apear <- p_apear + labs(
+#   title    = "Enrichment Network of sign. GO Terms found by GSEA",
+#   subtitle = "Method 2, t-like statistic",
+#   color    = "NES",       
+# ) +
+# theme(
+#   plot.title.position = "plot",
+#   plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+#   plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+# )
+# 
+# print(p_apear)
 
 
 ```
