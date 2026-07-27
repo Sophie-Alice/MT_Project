@@ -52,9 +52,13 @@ Project MT
 
 
 * **7.3 Subclusters of Fibroblasts**
-    * [Unmodified - Fibroblast Marker](fib_markers.html)
-    * [Modified - Fibroblast Marker](Subclusters_Fib.html)
+    * [7.3.1 Unmodified - Fibroblast Marker](fib_markers.html)
+    * [7.3.2 Modified - Fibroblast Marker](Subclusters_Fib.html)
     
+* **7.4 Cell module scores Fibroblasts**
+    * [7.4.1 Cell Scores](CellScore.html)
+
+        
 ## Fibroblast DGEA Method comparison
 
 * **X.1 DGEA - Comparison of 3 Methods**

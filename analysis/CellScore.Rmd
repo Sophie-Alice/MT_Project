@@ -1,0 +1,611 @@
+---
+title: "CellScore"
+author: "Sophie.Alice"
+date: "2026-07-24"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+library(ComplexHeatmap)
+library(tidyverse)
+library(circlize)
+library(effsize)
+library(ggpubr)
+
+```
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+Fibroblasts <- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(Fibroblasts) <- "orig.ident" 
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+gradient_colors2 <- custom_palette(2)
+```
+
+
+# Functions
+
+```{r, warning = FALSE}
+
+
+
+#################################################### Raincloud Plots
+
+raincloud.plots <- function(gene_list, 
+                                   plot_title, 
+                                   plot_subtitle, 
+                                   seurat_obj = Data, 
+                                   colors = gradient_colors4) {
+
+  
+  valid_genes <- intersect(gene_list, rownames(seurat_obj))
+  expression_matrix <- FetchData(seurat_obj, vars = c(valid_genes, "ident")) 
+
+  
+  rain_data <- expression_matrix %>%
+    tibble::rownames_to_column("Cell_ID") %>%
+    tidyr::pivot_longer(
+      cols = all_of(valid_genes), 
+      names_to = "Gene", 
+      values_to = "Expression"
+    ) %>%
+    dplyr::rename(Condition = ident)
+  
+
+  raincloud_plot <- ggplot(rain_data, aes(x = Condition, y = Expression, fill = Condition, color = Condition)) +
+    geom_rain(
+      alpha = 0.6,
+      violin.args = list(color = NA),          
+      boxplot.args = list(outlier.shape = NA), 
+      point.args = list(
+        size = 0.4,                            
+        alpha = 0.4                            
+      ),
+    group = 1
+    ) +
+    
+    facet_wrap(~Gene, scales = "free_y", ncol = 4) +
+    
+    scale_fill_manual(values = colors) +
+    scale_color_manual(values = colors) +
+    
+    theme_bw() +
+    labs(
+      title    = plot_title,
+      subtitle = plot_subtitle,
+      x        = "Experimental Conditions",
+      y        = "Normalized Expression Level"
+    ) +
+    
+    theme(
+      plot.title.position = "plot",
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
+      axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+      axis.text.y   = element_text(face = "bold", color = "black"),
+      axis.title.x  = element_text(face = "bold"),
+      axis.title.y  = element_text(face = "bold"),
+      strip.text    = element_text(face = "bold", size = 10), 
+      legend.position = "none"
+    )
+  
+  return(raincloud_plot)
+}
+
+
+```
+
+
+
+# Main Cellscores
+
+```{r, warning = FALSE}
+pro_fibrotic_genes <- c(
+  "ADAM12", "ADAM19", "ADAMTS2", "ADAMTS4", "ADAMTS6", "ADAMTS12", 
+  "ADAMTS14", "ADAMTS16", "ADAMTS17", 
+  "CCN2", "CDH2", "CDH11", 
+  "COL4A1", "COL4A2", "COL5A1", "COL5A2", "COL8A1", "COL8A2", 
+  "COL10A1", "COL11A1", "COL12A1", "COL13A1", "COL15A1", 
+  "COMP", "FAP", "FLRT2", "FN1", "IGFBP7", "ITGA11", "ITGAV", "ITGB1", 
+  "ITGB5", "ITGBL1", "LAMB1", "MMP13", "PDGFA", "PLAU", "PLAUR", 
+  "PLOD2", "POSTN", "PXDN", "RHOA", "RUNX1", "SEMA7A", "SERPINE1", 
+  "SPHK1", "SPOCK1", "SRPX2", "TGFBR1", "THBS1", "THBS2", "THY1", 
+  "TIMP3", "TNFAIP6", "TNFRSF12A", "VIM"
+)
+
+Fibroblasts <- AddModuleScore_UCell(
+  obj = Fibroblasts,
+  features = list(Pro_Fibrotic = pro_fibrotic_genes),
+  name = "_UCell"
+)
+
+######################################
+
+rescue.score <- c(
+  "MMP2", "VEGFA", "RCN3", "SRPX2", "ADAM12", "PXDN", "LOXL3", "FBN1", 
+  "HMGA2", "THBS1", "SERPINE1", "HAS2", "GREM1", "WNT5A", "SEMA3C", 
+  "TNFRSF12A", "ITGB1", "FGF2", "COL8A1", "XBP1", "LRP1", "COL12A1", 
+  "POSTN", "ADAMTS6", "ADAMTSL1", "COL14A1", "FBLN5", "ADAMTS1", "ELN")
+
+Fibroblasts <- AddModuleScore_UCell(
+  obj = Fibroblasts,
+  features = list(rescue_score = rescue.score),
+  name = "_UCell"
+)
+
+```
+
+# Pro-Fibrotic score comparison
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+df_tgf <- Fibroblasts@meta.data %>% 
+  dplyr::filter(orig.ident %in% c("CMF_TGF", "CMFHM_TGF"))
+
+# Define comparison group
+my_comparisons <- list(c("CMF_TGF", "CMFHM_TGF"))
+
+# color for the 2 conditions
+colors <- c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+# Plot UCell
+p_tgf <- ggplot(df_tgf, aes(x = orig.ident, y = Pro_Fibrotic_UCell, fill = orig.ident)) +
+  geom_violin(alpha = 0.5, color = NA, scale = "area") +
+  geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
+  scale_fill_manual(values = colors) +
+  
+  # Add pairwise Wilcoxon test p-value
+  stat_compare_means(
+    comparisons = my_comparisons,
+    method = "wilcox.test",
+    label = "p.signif" 
+  ) +
+  
+  theme_bw() +
+  labs(
+    title    = "Pro-Fibrotic Gene Score: TGF-β Response ± Macrophages",
+    subtitle = "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)",
+    x        = "Condition",
+    y        = "UCell Score"
+  ) +
+  theme(
+    plot.title.position = "plot",
+    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+    axis.text.y   = element_text(face = "bold", color = "black"),
+    axis.title.x  = element_text(face = "bold"),
+    axis.title.y  = element_text(face = "bold"),
+    legend.position = "none"
+  )
+
+print(p_tgf)
+
+
+FibroblastsTGF <- subset(Fibroblasts, TGF_status == "TGF_B")
+table(FibroblastsTGF$orig.ident)
+
+##########################################
+
+p_split <- FeaturePlot_scCustom(
+  FibroblastsTGF, 
+  features = "Pro_Fibrotic_UCell", 
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = "Pro-Fibrotic Gene Score: TGF-β Response ± Macrophages",
+    subtitle = "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)",
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain"))
+
+print(p_split)
+
+
+```
+
+# Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+it measures how often values in one group are larger than in another (ranging from -1 to 1)
+
+Interpretation Scale for Cliff's Delta (d):
+
+ - $\vert{}d\vert{} < 0.147$: Negligible
+ - $\vert{}d\vert{} < 0.33$: Small
+ - $\vert{}d\vert{} < 0.474$: Medium
+ - $\vert{}d\vert{} \ge 0.474$: Large
+
+
+Results: 
+
+delta estimate: 0.4221959 (medium)
+
+a medium d in combination with sign. p suggests that the pro-fibrotic score is decreased when macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+# Calculate Cliff's Delta between CMF_TGF and CMFHM_TGF
+cliff.delta(Pro_Fibrotic_UCell ~ orig.ident, data = df_tgf)
+
+```
+
+## Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(pro_fibrotic_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = FibroblastsTGF, 
+      features = pro_fibrotic_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = "Pro-fibrotic Cell score: TGF-β Response ± Macrophages",
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 12
+total_genes <- length(pro_fibrotic_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = pro_fibrotic_genes[i:end_idx],
+    plot_title    = "Fibroblasts CMFHM_TGF vs CMF_TGF: Gene distribution profiles across conditions",
+    plot_subtitle = paste0("Geneset = pro-fibrotic score - Slice ", slice_num),
+    seurat_obj    = FibroblastsTGF,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+# Pro-Fibrotic Module score separated
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+
+Fibroblasts <- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(Fibroblasts) <- "orig.ident" 
+
+fibrosis_modules_expanded <- list(
+  ECM_Structural = c(
+    "COL4A1", "COL4A2", "COL5A1", "COL5A2", "COL8A1", "COL8A2", 
+    "COL10A1", "COL11A1", "COL12A1", "COL13A1", "COL15A1", 
+    "FN1", "COMP", "POSTN", "LAMB1", "VIM"),
+  ECM_Remodeling = c(
+    "ADAM12", "ADAM19", "ADAMTS2", "ADAMTS4", "ADAMTS6", "ADAMTS12", 
+    "ADAMTS14", "ADAMTS16", "ADAMTS17", "MMP13", "PLAU", "PLAUR", 
+    "SERPINE1", "TIMP3"),
+  ECM_Crosslinking = c(
+    "PLOD2", "PXDN", "SPOCK1", "TNFAIP6"),
+  Cell_Adhesion = c(
+    "ITGA11", "ITGAV", "ITGB1", "ITGB5", "ITGBL1", 
+    "CDH2", "CDH11", "FAP", "THY1", "FLRT2", "RHOA"),
+  Fibrotic_Signaling = c(
+    "CCN2", "PDGFA", "TGFBR1", "THBS1", "THBS2", "SEMA7A", 
+    "TNFRSF12A", "IGFBP7", "SPHK1", "SRPX2", "RUNX1"
+  )
+)
+
+Fibroblasts <- AddModuleScore_UCell(
+  obj = Fibroblasts,
+  features = fibrosis_modules_expanded,
+  name = "_UCell"
+)
+
+```
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+Fibroblasts$cardiomyocyte.genes_UCell <- NULL # removing this so it doesn't interfere with my plot
+
+my_comparisons <- list(c("CMF_TGF", "CMFHM_TGF"))
+
+df_long <- Fibroblasts@meta.data %>% 
+  dplyr::filter(orig.ident %in% c("CMF_TGF", "CMFHM_TGF")) %>%
+  pivot_longer(
+    cols = ends_with("_UCell"),
+    names_to = "Module",
+    values_to = "Score"
+  ) %>%
+  mutate(
+    Module = gsub("_UCell", "", Module),
+    Module = gsub("_", " ", Module)
+  )
+
+colors <- c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+# Plot facetted comp
+p_modules <- ggplot(df_long, aes(x = orig.ident, y = Score, fill = orig.ident, color = orig.ident)) +
+  geom_violin(alpha = 0.4, color = NA) +
+  geom_jitter(width = 0.15, size = 0.3, alpha = 0.2) +
+  geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  facet_wrap(~ Module, scales = "free_y", ncol = 2) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
+  
+  stat_compare_means(
+    comparisons = my_comparisons,
+    method = "wilcox.test",
+    label = "p.signif"
+  ) +
+  theme_bw() +
+  labs(
+    title    = "Deconstruction of Pro-Fibrotic Response ± Macrophages",
+    subtitle = "UCell functional sub-modules (CMF_TGF vs CMFHM_TGF)",
+    x        = "Condition",
+    y        = "UCell Score"
+  ) +
+  theme(
+    plot.title.position = "plot",
+    plot.title       = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle    = element_text(face = "italic", size = 10, hjust = 0),
+    strip.background = element_rect(fill = "grey92", color = NA),
+    strip.text       = element_text(face = "bold", size = 10),
+    axis.text.x      = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+    axis.text.y      = element_text(face = "bold", color = "black"),
+    legend.position  = "none"
+  )
+
+print(p_modules)
+
+```
+
+
+# Rescue score 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+
+# Plot UCell
+p_tgf <- ggplot(df_tgf, aes(x = orig.ident, y = rescue_score_UCell, fill = orig.ident)) +
+  geom_violin(alpha = 0.5, color = NA, scale = "area") +
+  geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
+  scale_fill_manual(values = colors) +
+  
+  # Add pairwise Wilcoxon test p-value
+  stat_compare_means(
+    comparisons = my_comparisons,
+    method = "wilcox.test",
+    label = "p.signif"
+  ) +
+
+  theme_bw() +
+  labs(
+    title    = "Rescue Score: TGF-β Response ± Macrophages",
+    subtitle = "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)",
+    x        = "Condition",
+    y        = "UCell Score"
+  ) +
+  theme(
+    plot.title.position = "plot",
+    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
+    axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+    axis.text.y   = element_text(face = "bold", color = "black"),
+    axis.title.x  = element_text(face = "bold"),
+    axis.title.y  = element_text(face = "bold"),
+    legend.position = "none"
+  )
+
+print(p_tgf)
+
+p_split <- FeaturePlot_scCustom(
+  FibroblastsTGF, 
+  features = "rescue_score_UCell", 
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = "Rescue Score: TGF-β Response ± Macrophages",
+    subtitle = "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)",
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain"))
+
+print(p_split)
+
+```
+
+# Adding Cliffs delta
+
+Results: 
+
+delta estimate: 0.7087503 (large)
+
+a large d in combination with sign. p suggests that the pro-fibrotic score is decreased when macrophages are present.!
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+# Calculate Cliff's Delta between CMF_TGF and CMFHM_TGF
+cliff.delta(rescue_score_UCell ~ orig.ident, data = df_tgf)
+
+```
+
+# Subsetted module scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+Fibroblasts <- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(Fibroblasts) <- "orig.ident" 
+
+fibrosis_modules <- list(
+  ECM_Deposition = c("COL8A1", "COL12A1", "COL14A1", "ELN", "LOXL3", "PXDN", "HAS2", "FBN1", "FBLN5", "POSTN"),
+  ECM_Remodeling = c("MMP2", "ADAM12", "ADAMTS1", "ADAMTS6", "ADAMTSL1", "SERPINE1"),
+  Cell_Matrix_Adhesion = c("ITGB1", "LRP1", "TNFRSF12A", "XBP1"),
+  Fibrotic_Signaling = c("THBS1", "GREM1", "WNT5A", "VEGFA", "FGF2", "SEMA3C", "SRPX2", "RCN3", "HMGA2")
+)
+
+Fibroblasts <- AddModuleScore_UCell(
+  obj = Fibroblasts,
+  features = fibrosis_modules,
+  name = "_UCell"
+)
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+Fibroblasts$cardiomyocyte.genes_UCell <- NULL # removing this so it doesn't interfere with my plot
+
+my_comparisons <- list(c("CMF_TGF", "CMFHM_TGF"))
+
+
+df_long <- Fibroblasts@meta.data %>% 
+  dplyr::filter(orig.ident %in% c("CMF_TGF", "CMFHM_TGF")) %>%
+  pivot_longer(
+    cols = ends_with("_UCell"),
+    names_to = "Module",
+    values_to = "Score"
+  ) %>%
+  mutate(
+    Module = gsub("_UCell", "", Module),
+    Module = gsub("_", " ", Module)
+  )
+
+colors <- c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+# Plot facetted comp
+p_modules <- ggplot(df_long, aes(x = orig.ident, y = Score, fill = orig.ident, color = orig.ident)) +
+  geom_violin(alpha = 0.4, color = NA) +
+  geom_jitter(width = 0.15, size = 0.3, alpha = 0.2) +
+  geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  facet_wrap(~ Module, scales = "free_y", ncol = 2) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1))) +
+  
+  stat_compare_means(
+    comparisons = my_comparisons,
+    method = "wilcox.test",
+    label = "p.signif"
+  ) +
+  theme_bw() +
+  labs(
+    title    = "Deconstruction of Rescue Score ± Macrophages",
+    subtitle = "UCell functional sub-modules (CMF_TGF vs CMFHM_TGF)",
+    x        = "Condition",
+    y        = "UCell Score"
+  ) +
+  theme(
+    plot.title.position = "plot",
+    plot.title       = element_text(face = "bold", size = 12, hjust = 0),
+    plot.subtitle    = element_text(face = "italic", size = 10, hjust = 0),
+    strip.background = element_rect(fill = "grey92", color = NA),
+    strip.text       = element_text(face = "bold", size = 10),
+    axis.text.x      = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+    axis.text.y      = element_text(face = "bold", color = "black"),
+    legend.position  = "none"
+  )
+
+print(p_modules)
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+
+```
