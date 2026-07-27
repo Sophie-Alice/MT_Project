@@ -93,11 +93,13 @@ navbar:
       - text: "---"
       - text: "Subclusters"
         href: "#"
-      - text: "Unmodified - Fibroblast Marker"
+      - text: "7.3.1 Unmodified - Fibroblast Marker"
         href: fib_markers.html
-      - text: "Modified - Fibroblast Marker"
+      - text: "7.3.2 Modified - Fibroblast Marker"
         href: Subclusters_Fib.html
-
+      - text: "---"
+      - text: "7.4.1 Cell Scores"
+        href: CellScore.html
   - text: "Method Comparison"
     menu:
       - text: "X.1.1 NC vs. Macrophages"
