@@ -1,0 +1,580 @@
+---
+title: "Chellchat"
+author: "Sophie.Alice"
+date: "2026-07-27"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+This closely follows the CellChat User manual
+https://htmlpreview.github.io/?https://github.com/sqjin/CellChat/blob/master/tutorial/CellChat-vignette.html
+
+
+# Setup
+
+```{r Setup, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+library(UpSetR)
+library(grid)
+library(ggvenn)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+
+library(ComplexHeatmap)
+library(tidyverse)
+library(circlize)
+library(UCell)
+library(CellChat)
+library(NMF)
+library(pander)
+```
+
+
+# Get the Data
+
+```{r Data, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+colors6 <- custom_palette(6)
+colors3 <- custom_palette(3)
+
+```
+
+# Functions
+
+```{r Functions, warning = FALSE}
+
+
+##################################### Tables
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = '_all',
+        className = 'dt-nowrap'
+      ))
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover nowrap'       
+  )
+}
+
+```
+
+
+
+# Data input
+
+We need the gene expression data of cells, and the user assigned cell labels -> Is both in the seurat object.
+
+Normalized data (e.g., library-size normalization and then log-transformed with a pseudocount of 1) is required as input for CellChat analysis. in this library it is stored here: DefaultAssay = "RNA", layer = "data
+
+```{r Data input, warning = FALSE, fig.width=8, fig.height=6}
+
+Data.sub <- subset(Data, cell_type %in% c("Macrophages", "Cardiac Fibroblasts", "Cardiomyocytes"))
+Data.sub$cell_type <- droplevels(Data.sub$cell_type)
+
+DefaultAssay(Data.sub) <- "RNA"
+data.input <- GetAssayData(Data.sub, layer = "data")
+sanitycheck1 <- as.data.frame(data.input[c("FAP", "TNNC1"), 1:20]) # THis is the log norm layer
+
+meta.data  <- Data.sub@meta.data
+
+```
+
+# initialization of CellChat object 
+
+```{r initializing object, warning = FALSE}
+
+cellchat <- createCellChat(
+  object   = data.input, 
+  meta     = meta.data, 
+  group.by = "cell_type"
+)
+
+cellchat <- addMeta(cellchat, meta = meta.data)
+cellchat <- setIdent(cellchat, ident.use = "cell_type") 
+levels(cellchat@idents)
+as.numeric(table(cellchat@idents)) 
+#CellChatDB <- CellChatDB.human
+# showDatabaseCategory(CellChatDB)
+CellChatDB.use <- subsetDB(CellChatDB.human, search = "Secreted Signaling")
+cellchat@DB <- CellChatDB.use
+
+#cellchat@DB <- CellChatDB
+cellchat
+
+```
+
+# Communitation network inference
+
+For the computeCommunProb() command, standard is ‘trimean’. Which approximates 25% truncated mean, implying that the average gene expression is zero if the percent of expressed cells in one group is less than 25%.
+
+As we already have not too many cells to begin with a trim of 10% is used here:
+
+```{r network inference, warning = FALSE, fig.width=8, fig.height=6}
+
+cellchat <- subsetData(cellchat) # here we subset only the genes that are listed in the database
+
+cellchat <- identifyOverExpressedGenes(cellchat)
+cellchat <- identifyOverExpressedInteractions(cellchat)
+
+cellchat <- projectData(cellchat, PPI.human) # project gene expression data onto a protein-protein interaction network
+
+cellchat <- computeCommunProb(cellchat, type = "truncatedMean", trim = 0.1) # compute the probability of communication on the L-R level
+#cellchat <- computeCommunProb(cellchat) 
+
+cellchat <- filterCommunication(cellchat, min.cells = 20)
+
+cellchat <- computeCommunProbPathway(cellchat) #  compute the probability of communication on the pathway level
+
+```
+
+## Overview of the Communication probabilities
+
+The results are stored in the net slot of the CellChat object which contains three-dimensional arrays of probabilities and p-values for interactions between each pair of cell types for each interaction pair. We look at the fist 2 snippets
+
+```{r overview, warning = FALSE}
+# communication probabilities of the network at the interaction pair - level
+pander(cellchat@net$prob[1:3, 1:3, 1]) # info for the first interaction pair (1)
+pander(cellchat@net$pval[1:3, 1:3, 1])
+pander(cellchat@net$prob[1:3, 1:3, 2]) # info for the second interaction pair (2)
+pander(cellchat@net$pval[1:3, 1:3, 2])
+
+# communication probabilities of the network at the pathway - level
+pander(cellchat@netP$prob[1:3, 1:3, 1]) # info for the first pathway (1)
+pander(cellchat@netP$prob[1:3, 1:3, 2]) # info for the second pathway (2)
+
+```
+
+# look at the interactions
+
+df.net <- subsetCommunication(cellchat) returns a data frame consisting of all the inferred cell-cell communications at the level of ligands/receptors. Set slot.name = "netP" to access the the inferred communications at the level of signaling pathways
+
+df.net <- subsetCommunication(cellchat, sources.use = c(1,2), targets.use = c(4,5)) gives the inferred cell-cell communications sending from cell groups 1 and 2 to cell groups 4 and 5.
+
+df.net <- subsetCommunication(cellchat, signaling = c("WNT", "TGFb")) gives the inferred cell-cell communications mediated by signaling WNT and TGFb.
+
+```{r interactions, warning = FALSE, fig.width=8, fig.height=6}
+
+df.LR <- subsetCommunication(cellchat) # = all inferred cell-cell communications at the L/R level
+create_table(df.LR)
+
+df.PATH <- subsetCommunication(cellchat, slot.name = "netP") # = all inferred cell-cell communications at the Pathway level
+create_table(df.PATH)
+
+df.Mac.Fib <- subsetCommunication(cellchat, sources.use = 2, targets.use = 3) # = all inferred cell-cell communications at the L/R level where Macrophages at senders and Fibroblasts are the Targets
+create_table(df.Mac.Fib)
+
+df.Mac.Fib.PATH <- subsetCommunication(cellchat, sources.use = 2, targets.use = 3, slot.name = "netP") # = all inferred cell-cell communications at the Pathway level where Macrophages at senders and Fibroblasts are the Targets
+create_table(df.Mac.Fib.PATH)
+# 1 = Cardiomyocytes
+# 2 = Macrophages
+# 3 = Cardiac Fibroblasts
+
+```
+
+# Calculation and visualization of aggregated cell-cell communication network
+
+calculate the aggregated cell-cell communication network by counting the number of links or summarizing the communication probability.
+
+```{r aggregation, warning = FALSE}
+
+cellchat <- aggregateNet(cellchat)
+
+pander(cellchat@net$count[1:3, 1:3]) # the number of links between the cell groups
+pander(cellchat@net$weight[1:3, 1:3]) # the communication weight between the cell groups
+
+groupSize <- as.numeric(table(cellchat@idents))
+
+
+# 2. Set margins with extra space at the top (4th value in mar) for the title
+par(mfrow = c(1, 2), mar = c(2, 2, 4, 2), xpd = TRUE)
+
+# Draw circle plot with title.name disabled
+netVisual_circle(
+  cellchat@net$count, 
+  color.use     = colors3,
+  vertex.weight = groupSize, 
+  weight.scale  = TRUE, 
+  label.edge    = FALSE, 
+  alpha.edge    = 0.8
+)
+# Force the title onto the active canvas
+title(main = "Number of interactions", line = 2, cex.main = 1.2)
+
+
+# Plot 2: Interaction strength
+netVisual_circle(
+  cellchat@net$weight, 
+  vertex.weight = groupSize, 
+  color.use = colors3,
+  weight.scale = TRUE, 
+  label.edge = FALSE,
+  alpha.edge    = 0.8
+)
+# Force the title onto the active canvas
+title(main = "Strength of interactions", line = 2, cex.main = 1.2)
+
+```
+
+
+
+# Checking signals send by Macrophages and recieved by Fibroblasts
+
+Can't show a hierarchy plot (fragile with little groups)
+
+```{r mac_fib, warning = FALSE}
+
+df.Mac.Fib.PATH.ordered <- df.Mac.Fib.PATH[order(-df.Mac.Fib.PATH$prob), ]
+
+pander(df.Mac.Fib.PATH.ordered)
+
+```
+
+## highest communication probability
+
+```{r, warning = FALSE}
+
+pathways.show <- c("SPP1") # highest communication probability
+par(mfrow=c(1,1))
+netVisual_aggregate(cellchat, signaling = pathways.show, color.use = colors3, layout = "chord")
+par(mfrow=c(1,1))
+netVisual_heatmap(cellchat, signaling = pathways.show, color.use = colors3, color.heatmap = "Reds")
+netAnalysis_contribution(cellchat, signaling = pathways.show)
+
+```
+
+## 2nd highest communication probability
+
+```{r, warning = FALSE}
+
+pathways.show <- c("SEMA3") # 2nd highest communication probability
+par(mfrow=c(1,1))
+netVisual_aggregate(cellchat, signaling = pathways.show, color.use = colors3, layout = "chord")
+par(mfrow=c(1,1))
+netVisual_heatmap(cellchat, signaling = pathways.show, color.use = colors3, color.heatmap = "Reds")
+netAnalysis_contribution(cellchat, signaling = pathways.show)
+
+```
+
+## 3rd highest communication probability
+
+```{r, warning = FALSE}
+
+pathways.show <- c("PDGF") # 3rd highest communication probability
+par(mfrow=c(1,1))
+netVisual_aggregate(cellchat, signaling = pathways.show, color.use = colors3, layout = "chord")
+par(mfrow=c(1,1))
+netVisual_heatmap(cellchat, signaling = pathways.show, color.use = colors3, color.heatmap = "Reds")
+netAnalysis_contribution(cellchat, signaling = pathways.show)
+
+```
+
+# Bubble Plot anf Volcano for the top 3 interactions (Macrophages as Senders - CF as Recievers)
+
+```{r mac_fib 2, warning = FALSE, fig.width=8, fig.height=7}
+# show all the significant interactions (L-R pairs) from some cell groups (defined by 'sources.use') to other cell groups (defined by 'targets.use')
+netVisual_bubble(cellchat, sources.use = 2, targets.use = c(1:3), signaling = c("SPP1","TGFb", "SEMA3", "PDGF"), remove.isolate = TRUE, thresh = 0.01)
+#> Comparing communications on a single object
+netVisual_bubble(cellchat, sources.use = c(1:3), targets.use = c(1:3), signaling = c("SPP1","TGFb", "SEMA3", "PDGF"), remove.isolate = TRUE)
+
+plotGeneExpression(cellchat, signaling = "SPP1", color.use = colors3)
+plotGeneExpression(cellchat, signaling = "TGFb", color.use = colors3)
+plotGeneExpression(cellchat, signaling = "SEMA3", color.use = colors3)
+plotGeneExpression(cellchat, signaling = "PDGF", color.use = colors3)
+```
+
+# Visual chord of specific top 30 L-R Interactions
+
+```{r 1, warning = FALSE, fig.width=8, fig.height=6}
+
+# Extract and filter for top 30 interactions
+df.mac_out <- subsetCommunication(cellchat, sources.use = c(1:3), targets.use = c(1:3))
+df.mac_out <- df.mac_out[order(-df.mac_out$prob), ][1:min(30, nrow(df.mac_out)), ]
+
+# Plot top 30
+netVisual_chord_gene(
+  cellchat, 
+  net = df.mac_out, 
+  lab.cex = 0.5, 
+  color.use = colors3,
+  legend.pos.y = 30,
+  title.name = "Top 30 Interactions"
+)
+
+# Extract and filter for top 30 outgoing macrophage interactions
+df.mac_out <- subsetCommunication(cellchat, sources.use = 2, targets.use = c(1:3))
+df.mac_out <- df.mac_out[order(-df.mac_out$prob), ][1:min(30, nrow(df.mac_out)), ]
+
+# Plot top 30
+netVisual_chord_gene(
+  cellchat, 
+  net = df.mac_out, 
+  lab.cex = 0.5, 
+  color.use = colors3,
+  legend.pos.y = 30,
+  title.name = "Top 30 Outgoing Macrophage Interactions"
+)
+
+# Extract and filter for top 30 outgoing Fibroblast interactions
+df.mac_out <- subsetCommunication(cellchat, sources.use = 3, targets.use = c(1:3))
+df.mac_out <- df.mac_out[order(-df.mac_out$prob), ][1:min(30, nrow(df.mac_out)), ]
+
+# Plot top 30
+netVisual_chord_gene(
+  cellchat, 
+  net = df.mac_out, 
+  lab.cex = 0.5, 
+  color.use = colors3,
+  legend.pos.y = 30,
+  title.name = "Top 30 Outgoing Cardiac Fibroblast Interactions"
+)
+
+# show all the 
+# Extract and filter for top 30 interactions recieved by fibroblasts
+df.fib_in <- subsetCommunication(cellchat, sources.use = c(1,2,3), targets.use = 3)
+df.fib_in <- df.fib_in[order(-df.fib_in$prob), ][1:min(30, nrow(df.fib_in)), ]
+
+netVisual_chord_gene(
+  cellchat, 
+  net = df.fib_in, 
+  lab.cex = 0.5, 
+  color.use = colors3,
+  legend.pos.y = 30,
+  title.name = "Top 30 Incoming Cardiac Fibroblast Interactions"
+)
+
+
+```
+
+# Systems analysis of cell-cell communication network
+
+## Identify signaling roles (e.g., dominant senders, receivers) of cell groups as well as the major contributing signaling
+
+Information from the publishers:
+
+CellChat allows ready identification of dominant senders, receivers, mediators and influencers in the intercellular communication network by computing several network centrality measures for each cell group. Specifically, we used measures in weighted-directed networks, including out-degree, in-degree, flow betweenesss and information centrality, to respectively identify dominant senders, receivers, mediators and influencers for the intercellular communications. In a weighteddirected network with the weights as the computed communication probabilities, the outdegree, computed as the sum of communication probabilities of the outgoing signaling from a cell group, and the in-degree, computed as the sum of the communication probabilities of the incoming signaling to a cell group, can be used to identify the dominant cell senders and receivers of signaling networks, respectively. For the definition of flow betweenness and information centrality, please check our paper and related reference.
+
+
+```{r 2, warning = FALSE}
+
+# Compute the network centrality scores
+cellchat <- netAnalysis_computeCentrality(cellchat, slot.name = "netP") # the slot 'netP' means the inferred intercellular communication network of signaling pathways
+# Visualize the computed centrality scores using heatmap, allowing ready identification of major signaling roles of cell groups
+netAnalysis_signalingRole_network(cellchat, signaling = "SPP1", width = 8, 
+                                        color.use = colors3, height = 2.5, font.size = 10)
+netAnalysis_signalingRole_network(cellchat, signaling = "TGFb", width = 8, 
+                                        color.use = colors3, height = 2.5, font.size = 10)
+netAnalysis_signalingRole_network(cellchat, signaling = "SEMA3", width = 8, 
+                                        color.use = colors3, height = 2.5, font.size = 10)
+netAnalysis_signalingRole_network(cellchat, signaling = "PDGF", width = 8, 
+                                        color.use = colors3, height = 2.5, font.size = 10)
+
+
+```
+
+```{r 3, warning = FALSE}
+
+# # Signaling role analysis on the aggregated cell-cell communication network from all signaling pathways
+# gg1 <- netAnalysis_signalingRole_scatter(cellchat)
+# #> Signaling role analysis on the aggregated cell-cell communication network from all signaling pathways
+# # Signaling role analysis on the cell-cell communication networks of interest
+# gg2 <- netAnalysis_signalingRole_scatter(cellchat, signaling = c("Collagen", "TGFb"))
+# #> Signaling role analysis on the cell-cell communication network from user's input
+# gg1 + gg2
+# 
+# 
+# # Signaling role analysis on the aggregated cell-cell communication network from all signaling pathways
+# ht1 <- netAnalysis_signalingRole_heatmap(cellchat, pattern = "outgoing")
+# ht2 <- netAnalysis_signalingRole_heatmap(cellchat, pattern = "incoming")
+# ht1 + ht2
+
+
+```
+
+# Identify patterns
+Outgoing patterns reveal how the sender cells (i.e. cells as signal source) coordinate with each other as well as how they coordinate with certain signaling pathways to drive communication.
+
+To intuitively show the associations of latent patterns with cell groups and ligand-receptor pairs or signaling pathways, we used river (alluvial) plots. We first normalized each row of W and each column of H to be [0,1], and then set the elements in W and H to be zero if they are less than 0.5. Such thresholding allows to uncover the most enriched cell groups and signaling pathways associated with each inferred pattern, that is, each cell group or signaling pathway is associated with only one inferred pattern. These thresholded matrices W and H are used as inputs for creating alluvial plots.
+
+To directly relate cell groups with their enriched signaling pathways, we set the elements in W and H to be zero if they are less than 1/R where R is the number of latent patterns. By using a less strict threshold, more enriched signaling pathways associated each cell group might be obtained. Using a contribution score of each cell group to each signaling pathway computed by multiplying W by H, we constructed a dot plot in which the dot size is proportion to the contribution score to show association between cell group and their enriched signaling pathways. USERS can also decrease the parameter cutoff to show more enriched signaling pathways associated each cell group.
+
+```{r 4, warning = FALSE}
+# library(ggalluvial)
+# # first we need to select K
+# selectK(cellchat, pattern = "outgoing")
+# nPatterns = 3
+# cellchat <- identifyCommunicationPatterns(cellchat, pattern = "outgoing", k = nPatterns)
+# netAnalysis_river(cellchat, pattern = "outgoing")
+# netAnalysis_dot(cellchat, pattern = "outgoing")
+```
+
+```{r 5, warning = FALSE}
+# selectK(cellchat, pattern = "incoming")
+# nPatterns = 3
+# cellchat <- identifyCommunicationPatterns(cellchat, pattern = "incoming", k = nPatterns)
+# netAnalysis_river(cellchat, pattern = "incoming")
+# netAnalysis_dot(cellchat, pattern = "incoming")
+# 
+
+```
+
+# Identify signaling groups based on their functional similarity
+
+```{r 6, warning = FALSE}
+# #reticulate::py_install("umap-learn")
+# library(reticulate)
+# 
+# # Verify reticulate detects umap
+# py_module_available("umap")
+# 
+# library(uwot)
+# library(future)
+# 
+# # 1. Set the parallel backend explicitly to 'multisession' with 4 workers
+# plan("sequential")
+# 
+# cellchat <- computeNetSimilarity(cellchat, type = "functional")
+# cellchat <- netEmbedding(cellchat, type = "functional", umap.method = "uwot")
+# #> Manifold learning of the signaling networks for a single dataset
+# cellchat <- netClustering(cellchat, type = "functional")
+# #> Classification learning of the signaling networks for a single dataset
+# # Visualization in 2D-space
+# netVisual_embedding(cellchat, type = "functional", label.size = 3.5)
+# netVisual_embeddingZoomIn(cellchat, type = "functional", nCol = 2)
+
+```
+
+
+# Identify signaling groups based on their structural similarity
+
+```{r 7, warning = FALSE}
+# cellchat <- computeNetSimilarity(cellchat, type = "structural")
+# cellchat <- netEmbedding(cellchat, type = "structural")
+# #> Manifold learning of the signaling networks for a single dataset
+# cellchat <- netClustering(cellchat, type = "structural")
+# #> Classification learning of the signaling networks for a single dataset
+# # Visualization in 2D-space
+# netVisual_embedding(cellchat, type = "structural", label.size = 3.5)
+# netVisual_embeddingZoomIn(cellchat, type = "structural", nCol = 2)
+```
+
+
+# specificly looking at Mac as sender and fibroblasts as reciever
+
+```{r 8, warning = FALSE}
+
+
+
+```
+
+# what do the mac do
+
+```{r 9, warning = FALSE}
+
+# # Compute network centrality for all pathways
+# cellchat <- netAnalysis_computeCentrality(cellchat, slot.name = "netP")
+# 
+# # 2D 2-axis scatter plot: Outgoing vs Incoming signaling strength
+# netAnalysis_signalingRole_scatter(cellchat)
+
+
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```
+
+```{r, warning = FALSE}
+
+
+```

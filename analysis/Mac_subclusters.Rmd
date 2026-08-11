@@ -1,0 +1,407 @@
+---
+title: "Mac_subclusters"
+author: "Sophie.Alice"
+date: "2026-07-27"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+```
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation_pre.rds"
+Data <- read_rds(path)
+Data
+Macrophages.raw <- subset(Data, cell_type == "Macrophages")
+Idents(Data) <- "orig.ident" 
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors6 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+
+# Functions
+
+```{r, warning = FALSE}
+
+
+##################################### Tables
+
+create_table <- function(df) {
+  DT::datatable(
+    df,
+    extensions = 'Buttons', 
+    options = list(
+      dom = 'Blfrtip',                       
+      buttons = c('copy', 'csv', 'excel', 'pdf'),
+      pageLength = 10,                      
+      lengthMenu = c(10, 25, 50, 100),
+      autoWidth = TRUE,
+      columnDefs = list(list(
+        targets = '_all',
+        className = 'dt-nowrap'
+      ))
+    ),
+    filter = 'top',                         
+    class = 'cell-border stripe hover nowrap'       
+  )
+}
+
+###################################### Feature Plots
+
+plot_features <- function(seurat_obj, features, title = NULL, subtitle = NULL, num_columns = 2) {
+  p <- FeaturePlot_scCustom(seurat_obj, features = features, num_columns = num_columns, pt.size = 0.1)
+
+  p <- p + patchwork::plot_annotation(
+    title = title,
+    subtitle = subtitle,
+    theme = ggplot2::theme(
+      plot.title.position = "plot",
+      plot.title    = ggplot2::element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = ggplot2::element_text(face = "italic", size = 10, hjust = 0)
+    )
+  )
+  
+  return(p)
+}
+
+```
+
+## Inspecting Data
+
+```{r, warning = FALSE}
+
+Data 
+DefaultAssay(Data)
+
+table(Data$orig.ident)
+table(Data$TGF_status)
+table(Data$Macrophage_status)
+
+```
+
+
+## Isolating and Sub-clustering Macrophages
+
+PC = 20 
+
+```{r, warning = FALSE}
+
+set.seed(42)
+
+Macrophages.list <- SplitObject(Macrophages.raw, split.by = "orig.ident")
+
+#  Re-run SCTransform on the fibroblast subsets to find fibroblast-specific variance
+for (i in 1:length(Macrophages.list)) {
+  DefaultAssay(Macrophages.list[[i]]) <- "RNA"
+  Macrophages.list[[i]] <- SCTransform(Macrophages.list[[i]], 
+                                       vst.flavor = "v2", 
+                                       vars.to.regress = "percent.mt", 
+                                       return.only.var.genes = TRUE,
+                                       method = "glmGamPoi",
+                                       verbose = FALSE)
+}
+
+
+fib_features <- SelectIntegrationFeatures(object.list = Macrophages.list, nfeatures = 3000)
+Macrophages <- merge(x = Macrophages.list[[1]], y = Macrophages.list[2:length(Macrophages.list)], merge.data = TRUE)
+VariableFeatures(Macrophages) <- fib_features
+Macrophages
+Macrophages <- RunPCA(Macrophages, npcs = 50, verbose = FALSE)
+
+
+##################################### Elbowplot
+
+ElbowPlot(Macrophages, ndims = 50)+
+  labs(
+    title = "Principal Component (PC) Variance Elbow Plot"
+  ) +
+  geom_vline(xintercept = 20, linetype = "dashed", color = "darkred", linewidth = 0.8)+
+  theme_minimal(base_size = 11)
+
+##################################### Clustering without integrations
+
+
+Dims <- 20
+Macrophages <- RunUMAP(Macrophages, dims = 1:Dims)
+Macrophages <- FindNeighbors(Macrophages, dims = 1:Dims)
+Graphs(Macrophages)
+Macrophages <- FindClusters(Macrophages, graph.name = "SCT_snn", resolution = seq(0.1, 0.8, by=0.1))
+
+clustree::clustree(Macrophages@meta.data[,grep("SCT_snn_res", colnames(Macrophages@meta.data))],
+                   prefix = "SCT_snn_res.")+
+  labs(
+    title = "Clustree - Before integration"
+  ) +
+  xlab("Cluster") +
+  ylab("Resolution depth") +
+  theme_minimal(base_size = 11)
+
+
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.1")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.2")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.3")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.4")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.5")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "orig.ident")
+
+##################################### integration
+
+# Run Harmony to integrate 
+Macrophages <- RunHarmony(Macrophages, 
+                          group.by.vars = "orig.ident", 
+                          dims.use = 1:Dims,
+                          plot_convergence = TRUE,
+                          .options = harmony_options(max.iter.cluster = 100))
+
+
+##################################### Clustering with integration
+
+
+DefaultAssay(Macrophages) <- "SCT"
+Macrophages <- RunUMAP(Macrophages, dims = 1:Dims, reduction = "harmony")
+Macrophages <- FindNeighbors(Macrophages, dims = 1:Dims, reduction = "harmony")
+
+
+Macrophages <- FindClusters(Macrophages, graph.name = "SCT_snn", resolution = seq(0.1, 0.8, by=0.1))
+
+
+clustree::clustree(Macrophages@meta.data[,grep("SCT_snn_res", colnames(Macrophages@meta.data))],
+                   prefix = "SCT_snn_res.")+
+  labs(
+    title = "Clustree - After integration"
+  ) +
+  xlab("Cluster") +
+  ylab("Resolution depth") +
+  theme_minimal(base_size = 11)
+
+
+
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.1")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.2")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.3")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.4")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.5")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.6")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "SCT_snn_res.0.8")
+DimPlot(Macrophages, reduction = "umap", shuffle = T, group.by = "orig.ident")
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+DefaultAssay(Macrophages) <- "RNA"
+Idents(Macrophages) <- "SCT_snn_res.0.8"
+Markers <- FindAllMarkers(Macrophages, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.5)
+Markers_top10 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC))
+Markers_top3 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 3, wt = avg_log2FC))
+Markers_top5 <- as.data.frame(Markers %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC))
+
+create_table(Markers_top10)
+
+
+```
+
+## Heatmap vis
+
+```{r, warning = FALSE}
+
+
+heatmap_cols <- colorRampPalette(RColorBrewer::brewer.pal(9,"RdBu"))(256)
+heatmap_cols <- rev(heatmap_cols[1:256])
+Heatmap <- DoHeatmap(Macrophages, cells = colnames(Macrophages), label = FALSE, draw.line = F, features = Markers_top10$gene, assay = "SCT") +
+  scale_fill_gradientn(colours = heatmap_cols) +
+  theme(axis.text.y = element_text(size = 5)) +
+  theme(plot.margin = unit(c(0.1, 0, 0, 0), 
+                           "inches"))
+Heatmap
+
+```
+
+## VLN vis
+
+```{r, warning = FALSE}
+table(Macrophages$SCT_snn_res.0.8)
+
+VlnPlot(Macrophages, features = c("nCount_RNA", "nFeature_RNA", "percent.mt", "percent.rp", "scDblFinder.score"), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())
+
+### Cehck whether the cardiomyocyte score is high in me suspected doublets
+
+cardiomyocyte.genes <- c("TNNT2", "ACTC1", "MYH6", "MYH7", "MYL2", "NKX2-5", "RYR2", "GATA4")
+cardiomyocyte.genes_signature <- list(cardiomyocyte.genes = cardiomyocyte.genes)
+
+Macrophages <- AddModuleScore_UCell(
+  Macrophages,
+  features = cardiomyocyte.genes_signature
+)
+
+
+FeaturePlot_scCustom(Macrophages, features = "cardiomyocyte.genes_UCell") +
+  labs(
+    x = "", 
+    y = "", 
+    title = "Cardiomyocyte UCell score",
+    subtitle = "TNNT2 • ACTC1 • MYH6 • MYH7 • MYL2 • NKX2-5 • RYR2 • GATA4"
+  ) +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic")
+  )
+
+
+VlnPlot_scCustom(Macrophages, features = "cardiomyocyte.genes_UCell", colors_use = gradient_colors6, split.by = "orig.ident") +
+  labs(
+    x = "", 
+    y = "", 
+    title = "Cardiomyocyte UCell score",
+    subtitle = "TNNT2 • ACTC1 • MYH6 • MYH7 • MYL2 • NKX2-5 • RYR2 • GATA4"
+  ) +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic")
+  )
+
+
+########### fibroblast genes
+
+c.fibroblast.genes <- c("TCF21", "DDR2", "PDGFRA", "VIM", "ACTA2", "POSTN", "FAP", "COL1A1", "COL1A2", "COL3A1", "FN1")
+c.fibroblast.genes_signature <- list(c.fibroblast.genes = c.fibroblast.genes)
+
+Macrophages <- AddModuleScore_UCell(
+  Macrophages,
+  features = c.fibroblast.genes_signature
+)
+
+FeaturePlot_scCustom(Macrophages, features = "c.fibroblast.genes_UCell") +
+  labs(
+    x = "", 
+    y = "", 
+    title = "Cardiac Fibroblast UCell score",
+    subtitle = "TCF21 • DDR2 • PDGFRA • VIM • ACTA2 • POSTN • FAP • COL1A1 • COL1A2 • COL3A1 • FN1"
+  ) +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic")
+  )
+
+
+VlnPlot_scCustom(Macrophages, features = "c.fibroblast.genes_UCell", colors_use = gradient_colors6) +
+  labs(
+    x = "", 
+    y = "", 
+    title = "Cardiac Fibroblast UCell score",
+    subtitle = "TCF21 • DDR2 • PDGFRA • VIM • ACTA2 • POSTN • FAP • COL1A1 • COL1A2 • COL3A1 • FN1"
+  ) +
+  theme(
+    aspect.ratio    = 1.4, 
+    axis.text.y     = element_text(size = 8, hjust = 0), 
+    axis.title      = element_text(face = "bold"),
+    plot.title      = element_text(hjust = 0, face = "bold"),
+    plot.subtitle   = element_text(hjust = 0, size = 9, face = "italic")
+  )
+
+
+table(Macrophages$SCT_snn_res.0.8, Macrophages$orig.ident)
+
+
+```
+
+# Feature Plots
+
+```{r, warning = FALSE}
+
+FeaturePlot_scCustom(Macrophages, features = "CD163", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Macrophage marker
+
+
+FeaturePlot_scCustom(Macrophages, features = "FAP", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Activated Fibroblast Marker
+
+FeaturePlot_scCustom(Macrophages, features = "TTN", pt.size = 0, reduction = "umap") + 
+  theme(axis.title.x = element_blank()) # Cardiomyocyte marker
+## --> assumption = Cluster 3 is Cardiomyocyte and Fibroblast doublets?
+
+DimPlot(Macrophages, reduction = "umap", shuffle = T,
+        group.by = "Phase")
+DimPlot(Macrophages, reduction = "umap", shuffle = T,
+        group.by = "orig.ident")
+DimPlot(Macrophages, reduction = "umap", shuffle = T,
+        group.by = "SCT_snn_res.0.8")
+```
+
+
+# cleanup.
+
+```{r, warning = FALSE}
+
+doublet_clusters <- c("3", "4")
+doublet_cells <- colnames(subset(Macrophages, idents = doublet_clusters))
+
+cmf_samples <- c("CMF_TGF", "CMF_NC")
+cmf_cells <- colnames(subset(Macrophages, subset = orig.ident %in% cmf_samples))
+
+cells_to_remove <- unique(c(doublet_cells, cmf_cells))
+
+length(cells_to_remove)
+valid_cells <- setdiff(colnames(Data), cells_to_remove)
+Data_clean  <- subset(Data, cells = valid_cells)
+
+# # Overwrite data file
+# saveRDS(Data_clean, file = "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds")
+```

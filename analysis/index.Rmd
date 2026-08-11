@@ -12,53 +12,71 @@ Project MT
 
 ## Data Processing & Global Overview
 
-* [1. Cellbender vs. Raw Data QC Comparison](Checking_Cellbender.html)
-* [2. Quality Control (QC)](QC.html)
-* [3. Clustering and Annotation](Dim_Reduction.html)
-* [3.1 Cell scores](Checking_cellscores.html)
-* [4. Celltype Proportions](Proportions.html)
+* [1.1 Cellbender vs. Raw Data QC Comparison](Checking_Cellbender.html)
+* [1.2 Quality Control (QC)](QC.html)
+* [1.3 Clustering and Annotation](Dim_Reduction.html)
+* [1.4 Cell scores](Checking_cellscores.html)
+* [1.5 Celltype Proportions](Proportions.html)
 
+## Cardiomyocyte DGEA
 
-## Cardiomyocyte Subset
+* **2.0 Cardiomyocyte Subset**
+    * [2.0 CM Subtypes](CM_Subtypes.html)
 
-* **5. Cardiomyocyte Subset**
-    * [5. CM Subtypes](CM_Subtypes.html)
+* **2.1 Standard Thresholds (DGEA)**
+    * [Overview Dashboard](CM_DGEA.html)
+    * [2.1.1 Baseline TGF-$\beta$ Response](CM_Baseline_TGF_Response.html)
+    * [2.1.2 Modulated TGF-$\beta$ Response](CM_Modulated_TGF_Response.html)
+    * [2.1.3 Baseline Macrophage Response](CM_Baseline_Mac_Response.html)
+    * [2.1.4 Stimulated Macrophage Response](CM_Stim_Mac_Response.html)
 
+* **2.2 Lenient Thresholds (DGEA)**
+    * [Overview Dashboard Lenient](CM_DGEA_Lenient.html)
+    * [2.2.1 Baseline TGF-$\beta$ Response](CM_Baseline_TGF_Response_Lenient.html)
+    * [2.2.2 Modulated TGF-$\beta$ Response](CM_Modulated_TGF_Response_Lenient.html)
+    * [2.2.3 Baseline Macrophage Response](CM_Baseline_Mac_Response_Lenient.html)
+    * [2.2.4 Stimulated Macrophage Response](CM_Stim_Mac_Response_Lenient.html)
+    
 ## Macrophages DGEA
 
-* **6. Macrophages Subset**
-    * [6.1 Differential Gene Expression (DGEA)](Macrophage_subset_DGEA.html)
-    * [6.2 DGEA - Lenient Thresholds](Macrophage_subset_DGEA_Lenient.html)
+* **3. Macrophages Subset**
+    * [3.1 Subclusters to clean up](Mac_subclusters.html)
+    * [3.2 Differential Gene Expression (DGEA)](Macrophage_subset_DGEA.html)
+    * [3.3 DGEA - Lenient Thresholds](Macrophage_subset_DGEA_Lenient.html)
 
 ## Fibroblast DGEA
 
-* **7.0 Global Comparisons**
+* **4.0 Global Comparisons**
     * [Overview & DEG Overlap](Fibroblasts_DEG_Overlap.html)
     * [All Fibroblast Comparisons Dashboard](Fibroblast_Comparisons.html)
 
-* **7.1 Standard Thresholds (DGEA)**
+* **4.1 Standard Thresholds (DGEA)**
     * [Overview Dashboard](DGEA.html)
-    * [7.1.1 Baseline TGF-$\beta$ Response](Fibro_Baseline_TGF_Response.html)
-    * [7.2.2 Modulated TGF-$\beta$ Response](Fibro_Modulated_TGF_Response_Lenient.html)
-    * [7.1.3 Baseline Macrophage Response](Fibro_Baseline_Mac_Response.html)
-    * [7.1.4 Stimulated Macrophage Response](Fibro_Stim_Mac_Response.html)
+    * [4.1.1 Baseline TGF-$\beta$ Response](Fibro_Baseline_TGF_Response.html)
+    * [4.2.2 Modulated TGF-$\beta$ Response](Fibro_Modulated_TGF_Response_Lenient.html)
+    * [4.1.3 Baseline Macrophage Response](Fibro_Baseline_Mac_Response.html)
+    * [4.1.4 Stimulated Macrophage Response](Fibro_Stim_Mac_Response.html)
 
-* **7.2 Lenient Thresholds (DGEA)**
+* **4.2 Lenient Thresholds (DGEA)**
     * [Overview Dashboard](DGEA_Lenient.html)
-    * [7.2.1 Baseline TGF-$\beta$ Response](Fibro_Baseline_TGF_Response_Lenient.html)
-    * [7.2.2 Modulated TGF-$\beta$ Response](Fibro_Modulated_TGF_Response_Lenient.html)
-    * [7.2.3 Baseline Macrophage Response](Fibro_Baseline_Mac_Response_Lenient.html)
-    * [7.2.4 Stimulated Macrophage Response](Fibro_Stim_Mac_Response_Lenient.html)
+    * [4.2.1 Baseline TGF-$\beta$ Response](Fibro_Baseline_TGF_Response_Lenient.html)
+    * [4.2.2 Modulated TGF-$\beta$ Response](Fibro_Modulated_TGF_Response_Lenient.html)
+    * [4.2.3 Baseline Macrophage Response](Fibro_Baseline_Mac_Response_Lenient.html)
+    * [4.2.4 Stimulated Macrophage Response](Fibro_Stim_Mac_Response_Lenient.html)
 
 
-* **7.3 Subclusters of Fibroblasts**
-    * [7.3.1 Unmodified - Fibroblast Marker](fib_markers.html)
-    * [7.3.2 Modified - Fibroblast Marker](Subclusters_Fib.html)
+* **4.3 Subclusters of Fibroblasts**
+    * [4.3.1 Unmodified - Fibroblast Marker](fib_markers.html)
+    * [4.3.2 Modified - Fibroblast Marker](Subclusters_Fib.html)
     
-* **7.4 Cell module scores Fibroblasts**
-    * [7.4.1 Cell Scores](CellScore.html)
+* **4.4 Cell module scores Fibroblasts**
+    * [4.4.1 Cell Scores](CellScore.html)
 
-        
+## Interactions
+
+* **5.4 Cell Chat**
+    * [5.1 Cellchat](Chellchat.html)
+    
 ## Fibroblast DGEA Method comparison
 
 * **X.1 DGEA - Comparison of 3 Methods**
@@ -66,19 +84,4 @@ Project MT
     * [X.1.2 TGF-$\beta$ vs. Macrophages + TGF-$\beta$](Methods_Stim_Mac_Response_Lenient.html)
     * [X.1.3 NC vs. TGF-$\beta$](Methods_Baseline_TGF_Response_Lenient.html)
 
-## Cardiomyocytes DGEA
-
-* **8.1 Standard Thresholds (DGEA)**
-    * [Overview Dashboard](CM_DGEA.html)
-    * [8.1.1 Baseline TGF-$\beta$ Response](CM_Baseline_TGF_Response.html)
-    * [8.1.2 Modulated TGF-$\beta$ Response](CM_Modulated_TGF_Response.html)
-    * [8.1.3 Baseline Macrophage Response](CM_Baseline_Mac_Response.html)
-    * [8.1.4 Stimulated Macrophage Response](CM_Stim_Mac_Response.html)
-
-* **8.2 Lenient Thresholds (DGEA)**
-    * [Overview Dashboard](CM_DGEA_Lenient.html)
-    * [8.2.1 Baseline TGF-$\beta$ Response](CM_Baseline_TGF_Response_Lenient.html)
-    * [8.2.2 Modulated TGF-$\beta$ Response](CM_Modulated_TGF_Response_Lenient.html)
-    * [8.2.3 Baseline Macrophage Response](CM_Baseline_Mac_Response_Lenient.html)
-    * [8.2.4 Stimulated Macrophage Response](CM_Stim_Mac_Response_Lenient.html)
 
