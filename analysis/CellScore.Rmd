@@ -53,6 +53,7 @@ library(circlize)
 library(effsize)
 library(ggpubr)
 
+
 ```
 
 # Get the Data
@@ -62,8 +63,6 @@ path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Proje
 Data <- read_rds(path)
 Data
 
-Fibroblasts <- subset(Data, cell_type == "Cardiac Fibroblasts")
-Idents(Fibroblasts) <- "orig.ident" 
 
 custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
 gradient_colors3 <- custom_palette(6)
@@ -76,7 +75,100 @@ gradient_colors2 <- custom_palette(2)
 
 ```{r, warning = FALSE}
 
+###################################################### UCell violin plot 
 
+plot_ucell_violin <- function(
+    df, 
+    score_col,  
+    title = "Gene Score", 
+    subtitle = "CMF_TGF vs CMFHM_TGF",
+    colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67"),
+    comparisons = list(c("CMF_TGF", "CMFHM_TGF"))
+) {
+  
+  # Use .data[[score_col]] to evaluate the dynamic string
+  p <- ggplot(df, aes(x = orig.ident, y = .data[[score_col]], fill = orig.ident)) +
+    geom_violin(alpha = 0.5, color = NA, scale = "area") +
+    geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
+    scale_fill_manual(values = colors) +
+    
+    stat_compare_means(
+      comparisons = comparisons,
+      method = "wilcox.test",
+      label = "p.signif" 
+    ) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+    
+    theme_bw() +
+    labs(
+      title    = title,
+      subtitle = subtitle,
+      x        = "Condition",
+      y        = "UCell Score"
+    ) +
+    theme(
+      plot.title.position = "plot",
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
+      axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+      axis.text.y   = element_text(face = "bold", color = "black"),
+      axis.title.x  = element_text(face = "bold"),
+      axis.title.y  = element_text(face = "bold"),
+      legend.position = "none"
+    )
+  
+  return(p)
+}
+
+###################################################### UCell violin plot facetted
+
+plot_ucell_violin.facetted <- function(
+    df, 
+    title = "CF: Deconstruction of Pro-Fibrotic Response ± Macrophages", 
+    subtitle = "UCell functional sub-modules (CMF_TGF vs CMFHM_TGF)",
+    colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67"),
+    comparisons = list(c("CMF_TGF", "CMFHM_TGF")),
+    ncol = 2
+) {
+  
+  p <- ggplot(df, aes(x = orig.ident, y = Score, fill = orig.ident, color = orig.ident)) +
+    geom_violin(alpha = 0.4, color = NA) +
+    geom_jitter(width = 0.15, size = 0.3, alpha = 0.2) +
+    geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
+    scale_fill_manual(values = colors) +
+    scale_color_manual(values = colors) +
+    facet_wrap(~ Module, scales = "free_y", ncol = ncol) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
+    
+    # Add pairwise Wilcoxon test p-value
+    stat_compare_means(
+      comparisons = comparisons,
+      method = "wilcox.test",
+      label = "p.signif"
+    ) +
+    
+    theme_bw() +
+    labs(
+      title    = title,
+      subtitle = subtitle,
+      x        = "Condition",
+      y        = "UCell Score"
+    ) +
+    theme(
+      plot.title.position = "plot",
+      plot.title       = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle    = element_text(face = "italic", size = 10, hjust = 0),
+      strip.background = element_rect(fill = "grey92", color = NA),
+      strip.text       = element_text(face = "bold", size = 10),
+      axis.text.x      = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+      axis.text.y      = element_text(face = "bold", color = "black"),
+      axis.title.x     = element_text(face = "bold"),
+      axis.title.y     = element_text(face = "bold"),
+      legend.position  = "none"
+    )
+  
+  return(p)
+}
 
 #################################################### Raincloud Plots
 
@@ -144,108 +236,77 @@ raincloud.plots <- function(gene_list,
 
 ```
 
+# Cellscores in Cardiac Fibroblasts {.tabset}
 
+## Pro-Fibrotic score
 
-# Main Cellscores
+Comparing CMFHM_TGF vs. CMF_TGF
 
 ```{r, warning = FALSE}
-pro_fibrotic_genes <- c(
-  "ADAM12", "ADAM19", "ADAMTS2", "ADAMTS4", "ADAMTS6", "ADAMTS12", 
-  "ADAMTS14", "ADAMTS16", "ADAMTS17", 
-  "CCN2", "CDH2", "CDH11", 
-  "COL4A1", "COL4A2", "COL5A1", "COL5A2", "COL8A1", "COL8A2", 
-  "COL10A1", "COL11A1", "COL12A1", "COL13A1", "COL15A1", 
-  "COMP", "FAP", "FLRT2", "FN1", "IGFBP7", "ITGA11", "ITGAV", "ITGB1", 
-  "ITGB5", "ITGBL1", "LAMB1", "MMP13", "PDGFA", "PLAU", "PLAUR", 
-  "PLOD2", "POSTN", "PXDN", "RHOA", "RUNX1", "SEMA7A", "SERPINE1", 
-  "SPHK1", "SPOCK1", "SRPX2", "TGFBR1", "THBS1", "THBS2", "THY1", 
-  "TIMP3", "TNFAIP6", "TNFRSF12A", "VIM"
+
+################################ Variables 
+
+current_score_name <- "Pro_fibrotic_Score"  
+
+current_genes <- c(
+            "ADAM12", "ADAM19", "ADAMTS2", "ADAMTS4", "ADAMTS6", "ADAMTS12", "ADAMTS14", "ADAMTS16",
+            "ADAMTS17", "CCN2", "CDH2", "CDH11", "COL4A1", "COL4A2", "COL5A1", "COL5A2", "COL8A1", 
+            "COL8A2", "COL10A1", "COL11A1", "COL12A1", "COL13A1", "COL15A1", "COMP", "FAP", "FLRT2", 
+            "FN1", "IGFBP7", "ITGA11", "ITGAV", "ITGB1", "ITGB5", "ITGBL1", "LAMB1", "MMP13", "PDGFA", 
+            "PLAU", "PLAUR", "PLOD2", "POSTN", "PXDN", "RHOA", "RUNX1", "SEMA7A", "SERPINE1", "SPHK1",
+            "SPOCK1", "SRPX2", "TGFBR1", "THBS1", "THBS2", "THY1", "TIMP3", "TNFAIP6", "TNFRSF12A", "VIM")
+
+scoretitle <- "Pro-Fibrotic Score"
+Celltype <- "CF"
+comp <- c("CMF_TGF", "CMFHM_TGF")
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CF: Pro-Fibrotic Score: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiac Fibroblasts")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle
 )
-
-Fibroblasts <- AddModuleScore_UCell(
-  obj = Fibroblasts,
-  features = list(Pro_Fibrotic = pro_fibrotic_genes),
-  name = "_UCell"
-)
-
-######################################
-
-rescue.score <- c(
-  "MMP2", "VEGFA", "RCN3", "SRPX2", "ADAM12", "PXDN", "LOXL3", "FBN1", 
-  "HMGA2", "THBS1", "SERPINE1", "HAS2", "GREM1", "WNT5A", "SEMA3C", 
-  "TNFRSF12A", "ITGB1", "FGF2", "COL8A1", "XBP1", "LRP1", "COL12A1", 
-  "POSTN", "ADAMTS6", "ADAMTSL1", "COL14A1", "FBLN5", "ADAMTS1", "ELN")
-
-Fibroblasts <- AddModuleScore_UCell(
-  obj = Fibroblasts,
-  features = list(rescue_score = rescue.score),
-  name = "_UCell"
-)
-
-```
-
-# Pro-Fibrotic score comparison
-
-```{r, warning = FALSE, fig.width=8, fig.height=6}
-
-df_tgf <- Fibroblasts@meta.data %>% 
-  dplyr::filter(orig.ident %in% c("CMF_TGF", "CMFHM_TGF"))
-
-# Define comparison group
-my_comparisons <- list(c("CMF_TGF", "CMFHM_TGF"))
-
-# color for the 2 conditions
-colors <- c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
-
-# Plot UCell
-p_tgf <- ggplot(df_tgf, aes(x = orig.ident, y = Pro_Fibrotic_UCell, fill = orig.ident)) +
-  geom_violin(alpha = 0.5, color = NA, scale = "area") +
-  geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
-  scale_fill_manual(values = colors) +
-  
-  # Add pairwise Wilcoxon test p-value
-  stat_compare_means(
-    comparisons = my_comparisons,
-    method = "wilcox.test",
-    label = "p.signif" 
-  ) +
-  
-  theme_bw() +
-  labs(
-    title    = "Pro-Fibrotic Gene Score: TGF-β Response ± Macrophages",
-    subtitle = "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)",
-    x        = "Condition",
-    y        = "UCell Score"
-  ) +
-  theme(
-    plot.title.position = "plot",
-    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
-    plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
-    axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
-    axis.text.y   = element_text(face = "bold", color = "black"),
-    axis.title.x  = element_text(face = "bold"),
-    axis.title.y  = element_text(face = "bold"),
-    legend.position = "none"
-  )
-
-print(p_tgf)
+print(p_violin)
 
 
-FibroblastsTGF <- subset(Fibroblasts, TGF_status == "TGF_B")
-table(FibroblastsTGF$orig.ident)
+########################### Feature Plot
 
-##########################################
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
 
 p_split <- FeaturePlot_scCustom(
-  FibroblastsTGF, 
-  features = "Pro_Fibrotic_UCell", 
+  seurat_obj_tgf, 
+  features = score_col,     
   split.by = "orig.ident"
 ) 
 
 p_split <- p_split + 
   plot_annotation(
-    title    = "Pro-Fibrotic Gene Score: TGF-β Response ± Macrophages",
-    subtitle = "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)",
+    title    = plot_title,
+    subtitle = plot_subtitle,
     theme    = theme(
       plot.title    = element_text(face = "bold", size = 12, hjust = 0),
       plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
@@ -254,14 +315,15 @@ p_split <- p_split +
   theme(
     aspect.ratio = 1.4,
     axis.text.y  = element_text(size = 12, hjust = 0),
-    axis.title   = element_text(face = "plain"))
+    axis.title   = element_text(face = "plain")
+  )
 
 print(p_split)
 
-
 ```
 
-# Adding Cliffs delta
+
+### Adding Cliffs delta
 
 The Cliffs delta to show effect size : 
 
@@ -279,21 +341,23 @@ Results:
 
 delta estimate: 0.4221959 (medium)
 
-a medium d in combination with sign. p suggests that the pro-fibrotic score is decreased when macrophages are present.!
+a medium d in combination with sign. p suggests that the pro-fibrotic score is mediumly decreased when macrophages are present.!
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
 # Calculate Cliff's Delta between CMF_TGF and CMFHM_TGF
-cliff.delta(Pro_Fibrotic_UCell ~ orig.ident, data = df_tgf)
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
 
 ```
 
-## Checking the individual gene scores 
+### Checking the individual gene scores 
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
 chunk_size <- 25
-total_genes <- length(pro_fibrotic_genes)
+total_genes <- length(current_genes)
 
 if (total_genes > 0) {
   for (i in seq(1, total_genes, by = chunk_size)) {
@@ -302,10 +366,10 @@ if (total_genes > 0) {
     slice_num <- ((i - 1) / chunk_size) + 1
 
     print(SCpubr::do_DotPlot(
-      sample = FibroblastsTGF, 
-      features = pro_fibrotic_genes[i:end_idx],
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
       dot.scale = 10,
-      plot.title = "Pro-fibrotic Cell score: TGF-β Response ± Macrophages",
+      plot.title = plot_title,
       plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
     ))
   }
@@ -317,32 +381,32 @@ if (total_genes > 0) {
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
 chunk_size <- 12
-total_genes <- length(pro_fibrotic_genes)
+total_genes <- length(current_genes)
 
 for (i in seq(1, total_genes, by = chunk_size)) {
   
   end_idx <- min(i + chunk_size - 1, total_genes)
   slice_num <- ((i - 1) / chunk_size) + 1
   print(raincloud.plots(
-    gene_list     = pro_fibrotic_genes[i:end_idx],
-    plot_title    = "Fibroblasts CMFHM_TGF vs CMF_TGF: Gene distribution profiles across conditions",
-    plot_subtitle = paste0("Geneset = pro-fibrotic score - Slice ", slice_num),
-    seurat_obj    = FibroblastsTGF,
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
     colors        = gradient_colors2
   ))
 }
 
 ```
 
-# Pro-Fibrotic Module score separated
+### Pro-Fibrotic Module score separated
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
 
-Fibroblasts <- subset(Data, cell_type == "Cardiac Fibroblasts")
-Idents(Fibroblasts) <- "orig.ident" 
+seurat_obj <- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(seurat_obj) <- "orig.ident" 
 
-fibrosis_modules_expanded <- list(
+modules_expanded <- list(
   ECM_Structural = c(
     "COL4A1", "COL4A2", "COL5A1", "COL5A2", "COL8A1", "COL8A2", 
     "COL10A1", "COL11A1", "COL12A1", "COL13A1", "COL15A1", 
@@ -362,9 +426,9 @@ fibrosis_modules_expanded <- list(
   )
 )
 
-Fibroblasts <- AddModuleScore_UCell(
-  obj = Fibroblasts,
-  features = fibrosis_modules_expanded,
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = modules_expanded,
   name = "_UCell"
 )
 
@@ -372,12 +436,10 @@ Fibroblasts <- AddModuleScore_UCell(
 
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
-Fibroblasts$cardiomyocyte.genes_UCell <- NULL # removing this so it doesn't interfere with my plot
 
-my_comparisons <- list(c("CMF_TGF", "CMFHM_TGF"))
 
-df_long <- Fibroblasts@meta.data %>% 
-  dplyr::filter(orig.ident %in% c("CMF_TGF", "CMFHM_TGF")) %>%
+df_long <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp) %>%
   pivot_longer(
     cols = ends_with("_UCell"),
     names_to = "Module",
@@ -388,94 +450,89 @@ df_long <- Fibroblasts@meta.data %>%
     Module = gsub("_", " ", Module)
   )
 
-colors <- c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
 
-# Plot facetted comp
-p_modules <- ggplot(df_long, aes(x = orig.ident, y = Score, fill = orig.ident, color = orig.ident)) +
-  geom_violin(alpha = 0.4, color = NA) +
-  geom_jitter(width = 0.15, size = 0.3, alpha = 0.2) +
-  geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
-  scale_fill_manual(values = colors) +
-  scale_color_manual(values = colors) +
-  facet_wrap(~ Module, scales = "free_y", ncol = 2) +
-  scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
-  
-  stat_compare_means(
-    comparisons = my_comparisons,
-    method = "wilcox.test",
-    label = "p.signif"
-  ) +
-  theme_bw() +
-  labs(
-    title    = "Deconstruction of Pro-Fibrotic Response ± Macrophages",
-    subtitle = "UCell functional sub-modules (CMF_TGF vs CMFHM_TGF)",
-    x        = "Condition",
-    y        = "UCell Score"
-  ) +
-  theme(
-    plot.title.position = "plot",
-    plot.title       = element_text(face = "bold", size = 12, hjust = 0),
-    plot.subtitle    = element_text(face = "italic", size = 10, hjust = 0),
-    strip.background = element_rect(fill = "grey92", color = NA),
-    strip.text       = element_text(face = "bold", size = 10),
-    axis.text.x      = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
-    axis.text.y      = element_text(face = "bold", color = "black"),
-    legend.position  = "none"
-  )
+p_modules <- plot_ucell_violin.facetted(
+  df = df_long,
+  title = paste0(Celltype, ": Deconstruction of ", scoretitle),
+  subtitle = paste0("UCell functional sub-modules (", comptitle, ")"),
+  ncol = 2
+)
+
 
 print(p_modules)
 
 ```
 
 
-# Rescue score 
 
-```{r, warning = FALSE, fig.width=8, fig.height=6}
+## Rescue score
+
+Comparing CMFHM_TGF vs. CMF_TGF
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "Resscue_Score"  
+
+current_genes <- c(
+  "MMP2", "VEGFA", "RCN3", "SRPX2", "ADAM12", "PXDN", "LOXL3", "FBN1", 
+  "HMGA2", "THBS1", "SERPINE1", "HAS2", "GREM1", "WNT5A", "SEMA3C", 
+  "TNFRSF12A", "ITGB1", "FGF2", "COL8A1", "XBP1", "LRP1", "COL12A1", 
+  "POSTN", "ADAMTS6", "ADAMTSL1", "COL14A1", "FBLN5", "ADAMTS1", "ELN")
+
+scoretitle <- "Rescue Score"
+Celltype <- "CF"
+comp <- c("CMF_TGF", "CMFHM_TGF")
+
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CF: Rescue Score: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
 
 
-# Plot UCell
-p_tgf <- ggplot(df_tgf, aes(x = orig.ident, y = rescue_score_UCell, fill = orig.ident)) +
-  geom_violin(alpha = 0.5, color = NA, scale = "area") +
-  geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
-  scale_fill_manual(values = colors) +
-  
-  # Add pairwise Wilcoxon test p-value
-  stat_compare_means(
-    comparisons = my_comparisons,
-    method = "wilcox.test",
-    label = "p.signif"
-  ) +
+seurat_obj <- subset(Data, cell_type == "Cardiac Fibroblasts")
 
-  theme_bw() +
-  labs(
-    title    = "Rescue Score: TGF-β Response ± Macrophages",
-    subtitle = "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)",
-    x        = "Condition",
-    y        = "UCell Score"
-  ) +
-  theme(
-    plot.title.position = "plot",
-    plot.title    = element_text(face = "bold", size = 12, hjust = 0),
-    plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
-    axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
-    axis.text.y   = element_text(face = "bold", color = "black"),
-    axis.title.x  = element_text(face = "bold"),
-    axis.title.y  = element_text(face = "bold"),
-    legend.position = "none"
-  )
+########################### Prep
 
-print(p_tgf)
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
 
 p_split <- FeaturePlot_scCustom(
-  FibroblastsTGF, 
-  features = "rescue_score_UCell", 
+  seurat_obj_tgf, 
+  features = score_col,     
   split.by = "orig.ident"
 ) 
 
 p_split <- p_split + 
   plot_annotation(
-    title    = "Rescue Score: TGF-β Response ± Macrophages",
-    subtitle = "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)",
+    title    = plot_title,
+    subtitle = plot_subtitle,
     theme    = theme(
       plot.title    = element_text(face = "bold", size = 12, hjust = 0),
       plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
@@ -484,58 +541,106 @@ p_split <- p_split +
   theme(
     aspect.ratio = 1.4,
     axis.text.y  = element_text(size = 12, hjust = 0),
-    axis.title   = element_text(face = "plain"))
+    axis.title   = element_text(face = "plain")
+  )
 
 print(p_split)
 
 ```
 
-# Adding Cliffs delta
+
+### Adding Cliffs delta
 
 Results: 
 
 delta estimate: 0.7087503 (large)
 
-a large d in combination with sign. p suggests that the pro-fibrotic score is decreased when macrophages are present.!
-
+a large d in combination with sign. p suggests that the rescue score is largely decreased when macrophages are present.!
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
 # Calculate Cliff's Delta between CMF_TGF and CMFHM_TGF
-cliff.delta(rescue_score_UCell ~ orig.ident, data = df_tgf)
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
 
 ```
 
-# Subsetted module scores 
+### Checking the individual gene scores 
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
-Fibroblasts <- subset(Data, cell_type == "Cardiac Fibroblasts")
-Idents(Fibroblasts) <- "orig.ident" 
+chunk_size <- 25
+total_genes <- length(current_genes)
 
-fibrosis_modules <- list(
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+### Rescue Module score separated
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiac Fibroblasts")
+Idents(seurat_obj) <- "orig.ident" 
+
+modules_expanded <- list(
   ECM_Deposition = c("COL8A1", "COL12A1", "COL14A1", "ELN", "LOXL3", "PXDN", "HAS2", "FBN1", "FBLN5", "POSTN"),
   ECM_Remodeling = c("MMP2", "ADAM12", "ADAMTS1", "ADAMTS6", "ADAMTSL1", "SERPINE1"),
   Cell_Matrix_Adhesion = c("ITGB1", "LRP1", "TNFRSF12A", "XBP1"),
   Fibrotic_Signaling = c("THBS1", "GREM1", "WNT5A", "VEGFA", "FGF2", "SEMA3C", "SRPX2", "RCN3", "HMGA2")
 )
 
-Fibroblasts <- AddModuleScore_UCell(
-  obj = Fibroblasts,
-  features = fibrosis_modules,
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = modules_expanded,
   name = "_UCell"
 )
 
 ```
 
+
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
-Fibroblasts$cardiomyocyte.genes_UCell <- NULL # removing this so it doesn't interfere with my plot
-
-my_comparisons <- list(c("CMF_TGF", "CMFHM_TGF"))
 
 
-df_long <- Fibroblasts@meta.data %>% 
-  dplyr::filter(orig.ident %in% c("CMF_TGF", "CMFHM_TGF")) %>%
+df_long <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp) %>%
   pivot_longer(
     cols = ends_with("_UCell"),
     names_to = "Module",
@@ -546,66 +651,1403 @@ df_long <- Fibroblasts@meta.data %>%
     Module = gsub("_", " ", Module)
   )
 
-colors <- c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
 
-# Plot facetted comp
-p_modules <- ggplot(df_long, aes(x = orig.ident, y = Score, fill = orig.ident, color = orig.ident)) +
-  geom_violin(alpha = 0.4, color = NA) +
-  geom_jitter(width = 0.15, size = 0.3, alpha = 0.2) +
-  geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
-  scale_fill_manual(values = colors) +
-  scale_color_manual(values = colors) +
-  facet_wrap(~ Module, scales = "free_y", ncol = 2) +
-  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1))) +
-  
-  stat_compare_means(
-    comparisons = my_comparisons,
-    method = "wilcox.test",
-    label = "p.signif"
-  ) +
-  theme_bw() +
-  labs(
-    title    = "Deconstruction of Rescue Score ± Macrophages",
-    subtitle = "UCell functional sub-modules (CMF_TGF vs CMFHM_TGF)",
-    x        = "Condition",
-    y        = "UCell Score"
-  ) +
-  theme(
-    plot.title.position = "plot",
-    plot.title       = element_text(face = "bold", size = 12, hjust = 0),
-    plot.subtitle    = element_text(face = "italic", size = 10, hjust = 0),
-    strip.background = element_rect(fill = "grey92", color = NA),
-    strip.text       = element_text(face = "bold", size = 10),
-    axis.text.x      = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
-    axis.text.y      = element_text(face = "bold", color = "black"),
-    legend.position  = "none"
-  )
+p_modules <- plot_ucell_violin.facetted(
+  df = df_long,
+  title = paste0(Celltype, ": Deconstruction of ", scoretitle),
+  subtitle = paste0("UCell functional sub-modules (", comptitle, ")"),
+  ncol = 2
+)
+
 
 print(p_modules)
 
 ```
 
+
+# Cellscores in Macrophages {.tabset}
+
+## anti-fibrotic score in Macrophages
+
+Comparing CMFHM_NC vs. CMFHM_TGF
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "Anti_fibrotic_Score"  
+
+current_genes <- c("APOE", "GRN", "HMOX1", "MMP2", "PPARG", "ROBO1", "SLIT3", "SMAD7", "SMURF2", 
+                   "VASH1", "CXCL12", "SORL1", "SKI", "SKIL", "SMAD6", "PMEPA", "CADM1", "ALCAM", "MMP14")
+
+scoretitle <- "Anti-Fibrotic Score"
+Celltype <- "Mac"
+comp <- c("CMFHM_TGF", "CMFHM_NC")
+colors = c("CMFHM_NC" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+comptitle <- "CMFHM_NC vs. CMFHM_TGF"
+plot_title <- "Mac: Anti-Fibrotic Score: Response ± TGF-β"
+plot_subtitle <- "CMFHM_NC (No TGF-β) vs CMFHM_TGF (With TGF-β)"
+
+
+seurat_obj <- subset(Data, cell_type == "Macrophages")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+# seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B") not needed in this comparison
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: -0.6473982 (large)
+
+a large d in combination with sign. p suggests that the anti-fibrotic score is largely increased in Macrophages when TGF-B is present.!
+
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
 
 
 ```
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+## anti-fibrotic score in Cardiac Fibroblasts
+
+Comparing CMFHM_NC vs. CMFHM_TGF
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "Anti_fibrotic_Score"  
+
+current_genes <- c("APOE", "GRN", "HMOX1", "MMP2", "PPARG", "ROBO1", "SLIT3", "SMAD7", "SMURF2", 
+                   "VASH1", "CXCL12", "SORL1", "SKI", "SKIL", "SMAD6", "PMEPA", "CADM1", "ALCAM", "MMP14")
+
+scoretitle <- "Anti-Fibrotic Score"
+Celltype <- "Mac"
+comp <- c("CMFHM_TGF", "CMF_TGF")
+colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+Celltype <- "CF"
+comp <- c("CMF_TGF", "CMFHM_TGF")
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CF: Anti-Fibrotic Score: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiac Fibroblasts")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj_tgf, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: -0.1682982 (small)
+
+a small d in combination with sign. p suggests that the anti-fibrotic score is slightly increased in Cardiac Firboblasts when Macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
 
 ```
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+
+
+# Cellscores in Cardiomyocytes {.tabset}
+
+## Score 1 score in Cardiomyocytes
+
+Genes dowregulated in cardiomyocytes in comparison TGFb vs. TGFb + mac:
+
+protective or maladabtive score?
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "CM_Score_1"  
+
+current_genes <- c(
+  "ARAP1", "DAB2IP", "TIAM1", "HIP1", "NOL3", "PRKCA", "PDPK1", "ABR", 
+  "NAIP", "MAP2K7", "SCARB1", "MYO18A", "PRKAR1B", "SH3RF3", "PDE10A", 
+  "MDFIC", "IQSEC1", "RILPL1", "TTN", "MFN2", "BCR", "CYFIP1", "TSPAN18", 
+  "MYO9B", "SKI", "IRS2", "RYR3", "SPRED2", "EPHA4", "WWC1", "RAP1GAP2", 
+  "TRPV1", "CD44", "ARHGAP1", "HIPK2", "RAPGEF5", "ARHGEF17", "DMPK", 
+  "RUBCN", "TRIM56", "IGBP1", "ITGB3", "PPARA", "MAPK14", "EPHB2", 
+  "ATP2B4", "ARRB1", "MAPK8IP3", "MAP3K3", "PLCB1", "SIPA1L3", "PDE3A", 
+  "MID1", "PRKCZ", "ITGA1", "SHTN1", "MAP3K1", "SLIT2", "TPCN1", "ELMO1", 
+  "VAV2", "STK25", "PREX1", "TNK2", "GRB2", "P2RX1", "NTN1", "ARHGEF10L"
+)
+
+scoretitle <- "CM Score 1"
+Celltype <- "CM"
+comp <- c("CMFHM_TGF", "CMF_TGF")
+colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CM: Score 1: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiomyocytes")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj_tgf, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: 0.3058863 (small)
+
+a small d in combination with sign. p suggests that the CM score 1 is slightly decreased in Cardiomyocytes when Macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
 
 ```
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+
+
+
+
+
+
+
+## Score 2 score in Cardiomyocytes
+
+Genes dowregulated in cardiomyocytes in comparison TGFb vs. TGFb + mac:
+
+protective or maladabtive score?
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "CM_Score_2"  
+
+current_genes <- c(
+  "ARAP1", "WIPF1", "SH3D21", "HIP1", "TRIOBP", "PDPK1", "PACSIN2", 
+  "MYO18A", "LDB3", "MYO5A", "FMNL2", "TTN", "CYFIP1", "CALD1", 
+  "MYO1D", "PXN", "SHROOM4", "LLGL2", "XIRP1", "ADPRHL1", "INPPL1", 
+  "ARHGEF17", "DNM2", "PLEC", "MYO1B", "ITGB3", "TNNT1", "TPM4", 
+  "MYBPC3", "MYH6", "ARRB1", "SHTN1", "SLIT2", "SH3KBP1", "ELMO1", 
+  "ACTN1", "MYH9", "PREX1", "GRB2", "ARHGEF10L")
+
+scoretitle <- "CM Score 2"
+Celltype <- "CM"
+comp <- c("CMFHM_TGF", "CMF_TGF")
+colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CM: Score 2: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiomyocytes")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj_tgf, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: 0.3084845 (small)
+
+a small d in combination with sign. p suggests that the CM score 2 is slightly decreased in Cardiomyocytes when Macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
 
 ```
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
 
 ```
+
+
+# Cardiomyocytes: Loss of structural adaptation and mechanotransduction {.tabset}
+
+## Cardiac excitation–contraction coupling and calcium signaling
+
+Comparison TGFb vs. TGFb + mac:
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "Score"  
+
+current_genes <- c("RYR2", "CACNA1C", "CACNA1D", "CACNA1G", "CACNB2", "ATP2A2", "PDE4D", "KCNJ5")
+
+scoretitle <- "excitation–contraction coupling"
+Celltype <- "CM"
+comp <- c("CMFHM_TGF", "CMF_TGF")
+colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CM: excitation–contraction coupling Score: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiomyocytes")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj_tgf, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: -0.3020704 (small)
+
+a small d in combination with sign. p suggests that the Cardiac excitation–contraction coupling and calcium signaling score is slightly increased in Cardiomyocytes when Macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+
+
+## Cardiac action-potential and ion-channel pathway
+
+comparison TGFb vs. TGFb + mac:
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "Score"  
+
+current_genes <- c("SCN5A", "KCNQ1", "KCNJ5", "CACNA1C", "CACNA1D", "CACNA1G", "CACNB2", "FGF12")
+
+scoretitle <- "AP & ion-channel pathway"
+Celltype <- "CM"
+comp <- c("CMFHM_TGF", "CMF_TGF")
+colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CM: AP & ion-channel pathway Score: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiomyocytes")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj_tgf, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: -0.1726679 (small)
+
+a small d in combination with sign. p suggests that the Cardiac action-potential and ion-channel pathway score is slightly increased in Cardiomyocytes when Macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+
+
+## Cardiac Sarcomere assembly and cardiac muscle contraction
+
+Comparison TGFb vs. TGFb + mac:
+
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "Score"  
+
+current_genes <- c("MYH6", "MYH7B", "MYBPC3", "TTN", "TNNT1", "MYLK3", "LDB3", "OBSCN")
+
+scoretitle <- "Sarcomere assembly"
+Celltype <- "CM"
+comp <- c("CMFHM_TGF", "CMF_TGF")
+colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CM: Sarcomere assembly Score: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiomyocytes")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj_tgf, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: 0.03610958 (negligible)
+
+
+a negligible d in combination with nonsign p suggests that the Cardiac Sarcomere assembly and cardiac muscle contraction score does not differe in Cardiomyocytes when Macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+
+## Cardiac Intercalated-disc and desmosomal signaling
+
+Comparison TGFb vs. TGFb + mac:
+
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "Score"  
+
+current_genes <- c("PKP2", "DSP", "SCN5A", "FLNA", "PLEC", "LDB3")
+
+scoretitle <- "Intercalated-disc & desmosomal signaling"
+Celltype <- "CM"
+comp <- c("CMFHM_TGF", "CMF_TGF")
+colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CM: Intercalated-disc & desmosomal signaling: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiomyocytes")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj_tgf, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: -0.09812177 (negligible)
+
+a negligible d in combination with sign. p suggests that the Cardiac Intercalated-disc and desmosomal signaling score is very slightly increased in Cardiomyocytes when Macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+
+
+## Cardiac Rho-family GTPase and actin-cytoskeleton regulation
+
+Comparison TGFb vs. TGFb + mac:
+
+
+```{r, warning = FALSE}
+
+################################ Variables 
+
+current_score_name <- "Score"  
+
+current_genes <- c("STARD13", "DLC1", "ARHGAP6", "ARHGEF18", "AKAP13", "CYFIP2", "COBL", "CARMIL1",
+                   "WIPF1", "MYO1D", "MYO1E", "MYH9", "EZR", "PXN", "FLNA", "FLNB")
+
+scoretitle <- "Rho-family GTPase & actin-cytoskeleton regulation"
+Celltype <- "CM"
+comp <- c("CMFHM_TGF", "CMF_TGF")
+colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67")
+
+comptitle <- "CMFHM_TGF vs. CMF_TGF"
+plot_title <- "CM: Rho-family GTPase & actin-cytoskeleton regulation: TGF-β Response ± Macrophages"
+plot_subtitle <- "CMF_TGF (No Macrophages) vs CMFHM_TGF (With Macrophages)"
+
+
+seurat_obj <- subset(Data, cell_type == "Cardiomyocytes")
+
+########################### Prep
+
+features_list <- list()
+features_list[[current_score_name]] <- current_genes
+
+seurat_obj <- AddModuleScore_UCell(
+  obj = seurat_obj,
+  features = features_list,
+  name = "_UCell")
+
+score_col <- paste0(current_score_name, "_UCell")
+
+# Filter data for plots
+df_plot <- seurat_obj@meta.data %>% 
+  dplyr::filter(orig.ident %in% comp)
+
+########################### Violin Plot
+
+p_violin <- plot_ucell_violin(
+  df = df_plot, 
+  score_col = score_col,     
+  title = plot_title,
+  subtitle = plot_subtitle,
+  colors = colors,
+  comparisons = list(comp)
+)
+print(p_violin)
+
+
+########################### Feature Plot
+
+seurat_obj_tgf <- subset(seurat_obj, TGF_status == "TGF_B")
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj_tgf, 
+  features = score_col,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = plot_title,
+    subtitle = plot_subtitle,
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+```
+
+
+### Adding Cliffs delta
+
+The Cliffs delta to show effect size : 
+
+Results: 
+
+delta estimate: -0.02548131 (negligible)
+
+a negligible d in combination with nonsig p suggests that the Cardiac Rho-family GTPase and actin-cytoskeleton regulation score does not differ in Cardiomyocytes when Macrophages are present.!
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+stats_formula <- as.formula(paste(score_col, "~ orig.ident"))
+delta_res <- cliff.delta(stats_formula, data = df_plot)
+print(delta_res)
+
+```
+
+### Checking the individual gene scores 
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 25
+total_genes <- length(current_genes)
+
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+
+    print(SCpubr::do_DotPlot(
+      sample = seurat_obj_tgf, 
+      features = current_genes[i:end_idx],
+      dot.scale = 10,
+      plot.title = plot_title,
+      plot.subtitle = paste0("Slice ", slice_num, " (Genes ", i, " to ", end_idx, " of ", total_genes, ")")
+    ))
+  }
+}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=6}
+
+chunk_size <- 12
+total_genes <- length(current_genes)
+
+for (i in seq(1, total_genes, by = chunk_size)) {
+  
+  end_idx <- min(i + chunk_size - 1, total_genes)
+  slice_num <- ((i - 1) / chunk_size) + 1
+  print(raincloud.plots(
+    gene_list     = current_genes[i:end_idx],
+    plot_title    = paste0(Celltype, ": ", scoretitle, ": Gene distribution profiles across conditions"),
+    plot_subtitle = paste0("Geneset = ", scoretitle," - Slice ", slice_num),
+    seurat_obj    = seurat_obj_tgf,
+    colors        = gradient_colors2
+  ))
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
