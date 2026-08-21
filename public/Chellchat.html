@@ -544,17 +544,11 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/Sophie-Alice/MT_Project">
-    <span class="fab fa-github"></span>
+  <a href="https://gitlab.com/Sophie/MT-Project">
+    <span class="fab fa-gitlab"></span>
      
     Source code
   </a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -604,7 +598,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-08-11
+<strong>Last updated:</strong> 2026-08-21
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -735,15 +729,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree1c9a426eae48d110935be7654345ec107ebc124btargetblank1c9a426a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgitlabcomSophieMTProjecttreeaabbb696de600a5a1103831339360754527836b9targetblankaabbb69a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/1c9a426eae48d110935be7654345ec107ebc124b" target="_blank">1c9a426</a>
+<a href="https://gitlab.com/Sophie/MT-Project/tree/aabbb696de600a5a1103831339360754527836b9" target="_blank">aabbb69</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree1c9a426eae48d110935be7654345ec107ebc124btargetblank1c9a426a"
+id="strongRepositoryversionstrongahrefhttpsgitlabcomSophieMTProjecttreeaabbb696de600a5a1103831339360754527836b9targetblankaabbb69a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -753,7 +747,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/1c9a426eae48d110935be7654345ec107ebc124b" target="_blank">1c9a426</a>.
+<a href="https://gitlab.com/Sophie/MT-Project/tree/aabbb696de600a5a1103831339360754527836b9" target="_blank">aabbb69</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -773,6 +767,10 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
 
+Unstaged changes:
+    Modified:   analysis/Macrophage_subset_DGEA.Rmd
+    Modified:   analysis/Macrophage_subset_DGEA_Lenient.Rmd
+
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not
@@ -789,8 +787,8 @@ have uncommitted changes.
 <p>
 These are the previous versions of the repository in which changes were
 made to the R Markdown (<code>analysis/Chellchat.Rmd</code>) and HTML
-(<code>docs/Chellchat.html</code>) files. If you’ve configured a remote
-Git repository (see <code>?wflow_git_remote</code>), click on the
+(<code>public/Chellchat.html</code>) files. If you’ve configured a
+remote Git repository (see <code>?wflow_git_remote</code>), click on the
 hyperlinks in the table below to view the files as they were in that
 past version.
 </p>
@@ -818,10 +816,27 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://glcdn.githack.com/Sophie/MT-Project/raw/aabbb696de600a5a1103831339360754527836b9/public/Chellchat.html" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+<td>
+Host with GitLab.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/1c9a426eae48d110935be7654345ec107ebc124b/analysis/Chellchat.Rmd" target="_blank">1c9a426</a>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/1c9a426eae48d110935be7654345ec107ebc124b/analysis/Chellchat.Rmd" target="_blank">1c9a426</a>
 </td>
 <td>
 Sophie.Alice
@@ -848,8 +863,8 @@ class="uri">https://htmlpreview.github.io/?https://github.com/sqjin/CellChat/blo
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  908249 48.6    1754154 93.7         NA  1321031 70.6
-Vcells 1601006 12.3    8388608 64.0      16384  2457032 18.8</code></pre>
+Ncells  908548 48.6    1754991 93.8         NA  1321070 70.6
+Vcells 1601720 12.3    8388608 64.0      16384  2393529 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -1001,8 +1016,8 @@ cellchat &lt;- projectData(cellchat, PPI.human) # project gene expression data o
 
 cellchat &lt;- computeCommunProb(cellchat, type = &quot;truncatedMean&quot;, trim = 0.1) # compute the probability of communication on the L-R level</code></pre>
 <pre><code>truncatedMean is used for calculating the average gene expression per cell group. 
-[1] &quot;&gt;&gt;&gt; Run CellChat on sc/snRNA-seq data &lt;&lt;&lt; [2026-08-11 11:00:47.158008]&quot;
-[1] &quot;&gt;&gt;&gt; CellChat inference is done. Parameter values are stored in `object@options$parameter` &lt;&lt;&lt; [2026-08-11 11:01:52.31002]&quot;</code></pre>
+[1] &quot;&gt;&gt;&gt; Run CellChat on sc/snRNA-seq data &lt;&lt;&lt; [2026-08-21 17:41:55.41091]&quot;
+[1] &quot;&gt;&gt;&gt; CellChat inference is done. Parameter values are stored in `object@options$parameter` &lt;&lt;&lt; [2026-08-21 17:43:01.171037]&quot;</code></pre>
 <pre class="r"><code>#cellchat &lt;- computeCommunProb(cellchat) 
 
 cellchat &lt;- filterCommunication(cellchat, min.cells = 20)
@@ -1389,6 +1404,43 @@ netVisual_circle(
 # Force the title onto the active canvas
 title(main = &quot;Strength of interactions&quot;, line = 2, cex.main = 1.2)</code></pre>
 <p><img src="figure/Chellchat.Rmd/aggregation-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-aggregation-1">
+Past versions of aggregation-1.png
+</button>
+</p>
+<div id="fig-aggregation-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/aggregation-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div
 id="checking-signals-send-by-macrophages-and-recieved-by-fibroblasts"
@@ -1541,12 +1593,123 @@ probability</h2>
 par(mfrow=c(1,1))
 netVisual_aggregate(cellchat, signaling = pathways.show, color.use = colors3, layout = &quot;chord&quot;)</code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-1-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-1">
+Past versions of unnamed-chunk-1-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-1-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>par(mfrow=c(1,1))
 netVisual_heatmap(cellchat, signaling = pathways.show, color.use = colors3, color.heatmap = &quot;Reds&quot;)</code></pre>
 <pre><code>Do heatmap based on a single object </code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-1-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-2">
+Past versions of unnamed-chunk-1-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-1-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>netAnalysis_contribution(cellchat, signaling = pathways.show)</code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-1-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-3">
+Past versions of unnamed-chunk-1-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-1-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="nd-highest-communication-probability" class="section level2"
 number="9.2">
@@ -1556,12 +1719,123 @@ communication probability</h2>
 par(mfrow=c(1,1))
 netVisual_aggregate(cellchat, signaling = pathways.show, color.use = colors3, layout = &quot;chord&quot;)</code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-2-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-2-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>par(mfrow=c(1,1))
 netVisual_heatmap(cellchat, signaling = pathways.show, color.use = colors3, color.heatmap = &quot;Reds&quot;)</code></pre>
 <pre><code>Do heatmap based on a single object </code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-2-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-2">
+Past versions of unnamed-chunk-2-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-2-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>netAnalysis_contribution(cellchat, signaling = pathways.show)</code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-2-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-3">
+Past versions of unnamed-chunk-2-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-2-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="rd-highest-communication-probability" class="section level2"
 number="9.3">
@@ -1571,12 +1845,123 @@ communication probability</h2>
 par(mfrow=c(1,1))
 netVisual_aggregate(cellchat, signaling = pathways.show, color.use = colors3, layout = &quot;chord&quot;)</code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-3-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-3-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>par(mfrow=c(1,1))
 netVisual_heatmap(cellchat, signaling = pathways.show, color.use = colors3, color.heatmap = &quot;Reds&quot;)</code></pre>
 <pre><code>Do heatmap based on a single object </code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-3-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-2">
+Past versions of unnamed-chunk-3-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-3-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>netAnalysis_contribution(cellchat, signaling = pathways.show)</code></pre>
 <p><img src="figure/Chellchat.Rmd/unnamed-chunk-3-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-3">
+Past versions of unnamed-chunk-3-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/unnamed-chunk-3-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div
@@ -1589,10 +1974,84 @@ Recievers)</h1>
 netVisual_bubble(cellchat, sources.use = 2, targets.use = c(1:3), signaling = c(&quot;SPP1&quot;,&quot;TGFb&quot;, &quot;SEMA3&quot;, &quot;PDGF&quot;), remove.isolate = TRUE, thresh = 0.01)</code></pre>
 <pre><code>Comparing communications on a single object </code></pre>
 <p><img src="figure/Chellchat.Rmd/mac_fib%202-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-mac_fib-2-1">
+Past versions of "mac_fib 2-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-mac_fib-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/mac_fib 2-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>#&gt; Comparing communications on a single object
 netVisual_bubble(cellchat, sources.use = c(1:3), targets.use = c(1:3), signaling = c(&quot;SPP1&quot;,&quot;TGFb&quot;, &quot;SEMA3&quot;, &quot;PDGF&quot;), remove.isolate = TRUE)</code></pre>
 <pre><code>Comparing communications on a single object </code></pre>
 <p><img src="figure/Chellchat.Rmd/mac_fib%202-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-mac_fib-2-2">
+Past versions of "mac_fib 2-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-mac_fib-2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/mac_fib 2-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotGeneExpression(cellchat, signaling = &quot;SPP1&quot;, color.use = colors3)</code></pre>
 <pre><code>Scale for y is already present.
 Adding another scale for y, which will replace the existing scale.</code></pre>
@@ -1615,6 +2074,43 @@ Adding another scale for y, which will replace the existing scale.
 Scale for y is already present.
 Adding another scale for y, which will replace the existing scale.</code></pre>
 <p><img src="figure/Chellchat.Rmd/mac_fib%202-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-mac_fib-2-3">
+Past versions of "mac_fib 2-3.png"
+</button>
+</p>
+<div id="fig-no-spaces-mac_fib-2-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/mac_fib 2-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotGeneExpression(cellchat, signaling = &quot;TGFb&quot;, color.use = colors3)</code></pre>
 <pre><code>Scale for y is already present.
 Adding another scale for y, which will replace the existing scale.
@@ -1631,6 +2127,43 @@ Adding another scale for y, which will replace the existing scale.
 Scale for y is already present.
 Adding another scale for y, which will replace the existing scale.</code></pre>
 <p><img src="figure/Chellchat.Rmd/mac_fib%202-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-mac_fib-2-4">
+Past versions of "mac_fib 2-4.png"
+</button>
+</p>
+<div id="fig-no-spaces-mac_fib-2-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/mac_fib 2-4.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotGeneExpression(cellchat, signaling = &quot;SEMA3&quot;, color.use = colors3)</code></pre>
 <pre><code>Scale for y is already present.
 Adding another scale for y, which will replace the existing scale.
@@ -1653,6 +2186,43 @@ Adding another scale for y, which will replace the existing scale.
 Scale for y is already present.
 Adding another scale for y, which will replace the existing scale.</code></pre>
 <p><img src="figure/Chellchat.Rmd/mac_fib%202-5.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-mac_fib-2-5">
+Past versions of "mac_fib 2-5.png"
+</button>
+</p>
+<div id="fig-no-spaces-mac_fib-2-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/mac_fib 2-5.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotGeneExpression(cellchat, signaling = &quot;PDGF&quot;, color.use = colors3)</code></pre>
 <pre><code>Scale for y is already present.
 Adding another scale for y, which will replace the existing scale.
@@ -1667,6 +2237,43 @@ Adding another scale for y, which will replace the existing scale.
 Scale for y is already present.
 Adding another scale for y, which will replace the existing scale.</code></pre>
 <p><img src="figure/Chellchat.Rmd/mac_fib%202-6.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-mac_fib-2-6">
+Past versions of "mac_fib 2-6.png"
+</button>
+</p>
+<div id="fig-no-spaces-mac_fib-2-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/mac_fib 2-6.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="visual-chord-of-specific-top-30-l-r-interactions"
 class="section level1" number="11">
@@ -1686,6 +2293,43 @@ netVisual_chord_gene(
   title.name = &quot;Top 30 Interactions&quot;
 )</code></pre>
 <p><img src="figure/Chellchat.Rmd/1-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-1-1">
+Past versions of 1-1.png
+</button>
+</p>
+<div id="fig-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/1-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Extract and filter for top 30 outgoing macrophage interactions
 df.mac_out &lt;- subsetCommunication(cellchat, sources.use = 2, targets.use = c(1:3))
 df.mac_out &lt;- df.mac_out[order(-df.mac_out$prob), ][1:min(30, nrow(df.mac_out)), ]
@@ -1700,6 +2344,43 @@ netVisual_chord_gene(
   title.name = &quot;Top 30 Outgoing Macrophage Interactions&quot;
 )</code></pre>
 <p><img src="figure/Chellchat.Rmd/1-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-1-2">
+Past versions of 1-2.png
+</button>
+</p>
+<div id="fig-1-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/1-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Extract and filter for top 30 outgoing Fibroblast interactions
 df.mac_out &lt;- subsetCommunication(cellchat, sources.use = 3, targets.use = c(1:3))
 df.mac_out &lt;- df.mac_out[order(-df.mac_out$prob), ][1:min(30, nrow(df.mac_out)), ]
@@ -1714,6 +2395,43 @@ netVisual_chord_gene(
   title.name = &quot;Top 30 Outgoing Cardiac Fibroblast Interactions&quot;
 )</code></pre>
 <p><img src="figure/Chellchat.Rmd/1-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-1-3">
+Past versions of 1-3.png
+</button>
+</p>
+<div id="fig-1-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/1-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># show all the 
 # Extract and filter for top 30 interactions recieved by fibroblasts
 df.fib_in &lt;- subsetCommunication(cellchat, sources.use = c(1,2,3), targets.use = 3)
@@ -1728,6 +2446,43 @@ netVisual_chord_gene(
   title.name = &quot;Top 30 Incoming Cardiac Fibroblast Interactions&quot;
 )</code></pre>
 <p><img src="figure/Chellchat.Rmd/1-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-1-4">
+Past versions of 1-4.png
+</button>
+</p>
+<div id="fig-1-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/1-4.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="systems-analysis-of-cell-cell-communication-network"
 class="section level1" number="12">
@@ -1761,15 +2516,163 @@ cellchat &lt;- netAnalysis_computeCentrality(cellchat, slot.name = &quot;netP&qu
 netAnalysis_signalingRole_network(cellchat, signaling = &quot;SPP1&quot;, width = 8, 
                                         color.use = colors3, height = 2.5, font.size = 10)</code></pre>
 <p><img src="figure/Chellchat.Rmd/2-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2-1">
+Past versions of 2-1.png
+</button>
+</p>
+<div id="fig-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/2-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>netAnalysis_signalingRole_network(cellchat, signaling = &quot;TGFb&quot;, width = 8, 
                                         color.use = colors3, height = 2.5, font.size = 10)</code></pre>
 <p><img src="figure/Chellchat.Rmd/2-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2-2">
+Past versions of 2-2.png
+</button>
+</p>
+<div id="fig-2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/2-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>netAnalysis_signalingRole_network(cellchat, signaling = &quot;SEMA3&quot;, width = 8, 
                                         color.use = colors3, height = 2.5, font.size = 10)</code></pre>
 <p><img src="figure/Chellchat.Rmd/2-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2-3">
+Past versions of 2-3.png
+</button>
+</p>
+<div id="fig-2-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/2-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>netAnalysis_signalingRole_network(cellchat, signaling = &quot;PDGF&quot;, width = 8, 
                                         color.use = colors3, height = 2.5, font.size = 10)</code></pre>
 <p><img src="figure/Chellchat.Rmd/2-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-2-4">
+Past versions of 2-4.png
+</button>
+</p>
+<div id="fig-2-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Chellchat.Rmd/2-4.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># # Signaling role analysis on the aggregated cell-cell communication network from all signaling pathways
 # gg1 &lt;- netAnalysis_signalingRole_scatter(cellchat)
 # #&gt; Signaling role analysis on the aggregated cell-cell communication network from all signaling pathways

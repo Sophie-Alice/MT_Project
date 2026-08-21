@@ -544,17 +544,11 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/Sophie-Alice/MT_Project">
-    <span class="fab fa-github"></span>
+  <a href="https://gitlab.com/Sophie/MT-Project">
+    <span class="fab fa-gitlab"></span>
      
     Source code
   </a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -604,7 +598,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-08-11
+<strong>Last updated:</strong> 2026-08-21
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -735,15 +729,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree1c9a426eae48d110935be7654345ec107ebc124btargetblank1c9a426a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgitlabcomSophieMTProjecttreeaabbb696de600a5a1103831339360754527836b9targetblankaabbb69a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/1c9a426eae48d110935be7654345ec107ebc124b" target="_blank">1c9a426</a>
+<a href="https://gitlab.com/Sophie/MT-Project/tree/aabbb696de600a5a1103831339360754527836b9" target="_blank">aabbb69</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree1c9a426eae48d110935be7654345ec107ebc124btargetblank1c9a426a"
+id="strongRepositoryversionstrongahrefhttpsgitlabcomSophieMTProjecttreeaabbb696de600a5a1103831339360754527836b9targetblankaabbb69a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -753,7 +747,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Sophie-Alice/MT_Project/tree/1c9a426eae48d110935be7654345ec107ebc124b" target="_blank">1c9a426</a>.
+<a href="https://gitlab.com/Sophie/MT-Project/tree/aabbb696de600a5a1103831339360754527836b9" target="_blank">aabbb69</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -773,6 +767,10 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
 
+Unstaged changes:
+    Modified:   analysis/Macrophage_subset_DGEA.Rmd
+    Modified:   analysis/Macrophage_subset_DGEA_Lenient.Rmd
+
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not
@@ -789,7 +787,7 @@ have uncommitted changes.
 <p>
 These are the previous versions of the repository in which changes were
 made to the R Markdown (<code>analysis/Mac_subclusters.Rmd</code>) and
-HTML (<code>docs/Mac_subclusters.html</code>) files. If you’ve
+HTML (<code>public/Mac_subclusters.html</code>) files. If you’ve
 configured a remote Git repository (see <code>?wflow_git_remote</code>),
 click on the hyperlinks in the table below to view the files as they
 were in that past version.
@@ -818,10 +816,27 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://glcdn.githack.com/Sophie/MT-Project/raw/aabbb696de600a5a1103831339360754527836b9/public/Mac_subclusters.html" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+<td>
+Host with GitLab.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/Sophie-Alice/MT_Project/blob/1c9a426eae48d110935be7654345ec107ebc124b/analysis/Mac_subclusters.Rmd" target="_blank">1c9a426</a>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/1c9a426eae48d110935be7654345ec107ebc124b/analysis/Mac_subclusters.Rmd" target="_blank">1c9a426</a>
 </td>
 <td>
 Sophie.Alice
@@ -845,8 +860,8 @@ cellchat
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  907360 48.5    1751614 93.6         NA  1321031 70.6
-Vcells 1597090 12.2    8388608 64.0      16384  2393518 18.3</code></pre>
+Ncells  907650 48.5    1752425 93.6         NA  1321070 70.6
+Vcells 1597824 12.2    8388608 64.0      16384  2393770 18.3</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -1007,26 +1022,63 @@ ElbowPlot(Macrophages, ndims = 50)+
   geom_vline(xintercept = 20, linetype = &quot;dashed&quot;, color = &quot;darkred&quot;, linewidth = 0.8)+
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>##################################### Clustering without integrations
 
 
 Dims &lt;- 20
 Macrophages &lt;- RunUMAP(Macrophages, dims = 1:Dims)</code></pre>
-<pre><code>11:02:42 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>11:02:42 Read 1503 rows and found 20 numeric columns</code></pre>
-<pre><code>11:02:42 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>11:02:42 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>18:48:52 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>18:48:52 Read 1503 rows and found 20 numeric columns</code></pre>
+<pre><code>18:48:52 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>18:48:52 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>[----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>**************************************************|
-11:02:42 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmp0JeLV4/filefbd321a6ea
-11:02:42 Searching Annoy index using 1 thread, search_k = 3000
-11:02:43 Annoy recall = 100%
-11:02:43 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-11:02:44 Initializing from normalized Laplacian + noise (using RSpectra)
-11:02:44 Commencing optimization for 500 epochs, with 62314 positive edges
-11:02:44 Using rng type: pcg
-11:02:46 Optimization finished</code></pre>
+18:48:52 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpogJJ8v/filea33d68b1d4e5
+18:48:52 Searching Annoy index using 1 thread, search_k = 3000
+18:48:52 Annoy recall = 100%
+18:48:53 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+18:48:54 Initializing from normalized Laplacian + noise (using RSpectra)
+18:48:54 Commencing optimization for 500 epochs, with 62314 positive edges
+18:48:54 Using rng type: pcg
+18:48:56 Optimization finished</code></pre>
 <pre class="r"><code>Macrophages &lt;- FindNeighbors(Macrophages, dims = 1:Dims)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1114,18 +1166,277 @@ Elapsed time: 0 seconds</code></pre>
   ylab(&quot;Resolution depth&quot;) +
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.1&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-3">
+Past versions of unnamed-chunk-5-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.2&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-4">
+Past versions of unnamed-chunk-5-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-4.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.3&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-5">
+Past versions of unnamed-chunk-5-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-5.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.4&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-6">
+Past versions of unnamed-chunk-5-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-6.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.5&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-7.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-7">
+Past versions of unnamed-chunk-5-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-7.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;orig.ident&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-8.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-8">
+Past versions of unnamed-chunk-5-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-8.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>##################################### integration
 
 # Run Harmony to integrate 
@@ -1146,26 +1457,63 @@ Harmony 4/10
 Harmony 5/10
 Harmony converged after 5 iterations</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-9.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-9">
+Past versions of unnamed-chunk-5-9.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-9.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>##################################### Clustering with integration
 
 
 DefaultAssay(Macrophages) &lt;- &quot;SCT&quot;
 Macrophages &lt;- RunUMAP(Macrophages, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
-<pre><code>11:02:49 UMAP embedding parameters a = 0.9922 b = 1.112
-11:02:49 Read 1503 rows and found 20 numeric columns
-11:02:49 Using Annoy for neighbor search, n_neighbors = 30
-11:02:49 Building Annoy index with metric = cosine, n_trees = 50
+<pre><code>18:48:58 UMAP embedding parameters a = 0.9922 b = 1.112
+18:48:58 Read 1503 rows and found 20 numeric columns
+18:48:58 Using Annoy for neighbor search, n_neighbors = 30
+18:48:58 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-11:02:49 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//Rtmp0JeLV4/filefbd16554e41
-11:02:49 Searching Annoy index using 1 thread, search_k = 3000
-11:02:49 Annoy recall = 100%
-11:02:50 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-11:02:50 Initializing from normalized Laplacian + noise (using RSpectra)
-11:02:51 Commencing optimization for 500 epochs, with 62626 positive edges
-11:02:51 Using rng type: pcg
-11:02:52 Optimization finished</code></pre>
+18:48:58 Writing NN index file to temp file /var/folders/4w/_9gjjltx7r7__536sy6dcwbw0000gn/T//RtmpogJJ8v/filea33d73103c15
+18:48:58 Searching Annoy index using 1 thread, search_k = 3000
+18:48:59 Annoy recall = 100%
+18:48:59 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+18:49:00 Initializing from normalized Laplacian + noise (using RSpectra)
+18:49:00 Commencing optimization for 500 epochs, with 62626 positive edges
+18:49:00 Using rng type: pcg
+18:49:02 Optimization finished</code></pre>
 <pre class="r"><code>Macrophages &lt;- FindNeighbors(Macrophages, dims = 1:Dims, reduction = &quot;harmony&quot;)</code></pre>
 <pre><code>Computing nearest neighbor graph
 Computing SNN</code></pre>
@@ -1251,22 +1599,355 @@ Elapsed time: 0 seconds</code></pre>
   ylab(&quot;Resolution depth&quot;) +
   theme_minimal(base_size = 11)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-10.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-10">
+Past versions of unnamed-chunk-5-10.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-10.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.1&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-11.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-11">
+Past versions of unnamed-chunk-5-11.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-11.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.2&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-12.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-12">
+Past versions of unnamed-chunk-5-12.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-12.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.3&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-13.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-13">
+Past versions of unnamed-chunk-5-13.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-13.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.4&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-14.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-14">
+Past versions of unnamed-chunk-5-14.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-14.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.5&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-15.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-15">
+Past versions of unnamed-chunk-5-15.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-15" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-15.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.6&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-16.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-16">
+Past versions of unnamed-chunk-5-16.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-16" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-16.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;SCT_snn_res.0.8&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-17.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-17">
+Past versions of unnamed-chunk-5-17.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-17" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-17.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T, group.by = &quot;orig.ident&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-5-18.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-18">
+Past versions of unnamed-chunk-5-18.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-18" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-5-18.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DefaultAssay(Macrophages) &lt;- &quot;RNA&quot;
 Idents(Macrophages) &lt;- &quot;SCT_snn_res.0.8&quot;
 Markers &lt;- FindAllMarkers(Macrophages, only.pos = TRUE, min.pct = 0.5, logfc.threshold = 0.5)</code></pre>
@@ -1306,6 +1987,43 @@ Heatmap &lt;- DoHeatmap(Macrophages, cells = colnames(Macrophages), label = FALS
 Adding another scale for fill, which will replace the existing scale.</code></pre>
 <pre class="r"><code>Heatmap</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-7-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-7-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="vln-vis" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> VLN vis</h2>
@@ -1315,6 +2033,43 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 429 318 286 222 139 109 </code></pre>
 <pre class="r"><code>VlnPlot(Macrophages, features = c(&quot;nCount_RNA&quot;, &quot;nFeature_RNA&quot;, &quot;percent.mt&quot;, &quot;percent.rp&quot;, &quot;scDblFinder.score&quot;), ncol = 3, pt.size = 0) + theme(axis.title.x = element_blank())</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-8-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-8-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>### Cehck whether the cardiomyocyte score is high in me suspected doublets
 
 cardiomyocyte.genes &lt;- c(&quot;TNNT2&quot;, &quot;ACTC1&quot;, &quot;MYH6&quot;, &quot;MYH7&quot;, &quot;MYL2&quot;, &quot;NKX2-5&quot;, &quot;RYR2&quot;, &quot;GATA4&quot;)
@@ -1350,6 +2105,43 @@ plot all cells in gradient color palette.
 
 -----This message will be shown once per session.-----</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-8-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-2">
+Past versions of unnamed-chunk-8-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-8-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>VlnPlot_scCustom(Macrophages, features = &quot;cardiomyocyte.genes_UCell&quot;, colors_use = gradient_colors6, split.by = &quot;orig.ident&quot;) +
   labs(
     x = &quot;&quot;, 
@@ -1371,6 +2163,43 @@ set split.plot = TRUE.
       
 This message will be shown once per session.</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-8-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-3">
+Past versions of unnamed-chunk-8-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-8-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>########### fibroblast genes
 
 c.fibroblast.genes &lt;- c(&quot;TCF21&quot;, &quot;DDR2&quot;, &quot;PDGFRA&quot;, &quot;VIM&quot;, &quot;ACTA2&quot;, &quot;POSTN&quot;, &quot;FAP&quot;, &quot;COL1A1&quot;, &quot;COL1A2&quot;, &quot;COL3A1&quot;, &quot;FN1&quot;)
@@ -1396,6 +2225,43 @@ FeaturePlot_scCustom(Macrophages, features = &quot;c.fibroblast.genes_UCell&quot
     plot.subtitle   = element_text(hjust = 0, size = 9, face = &quot;italic&quot;)
   )</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-8-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-4">
+Past versions of unnamed-chunk-8-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-8-4.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>VlnPlot_scCustom(Macrophages, features = &quot;c.fibroblast.genes_UCell&quot;, colors_use = gradient_colors6) +
   labs(
     x = &quot;&quot;, 
@@ -1411,6 +2277,43 @@ FeaturePlot_scCustom(Macrophages, features = &quot;c.fibroblast.genes_UCell&quot
     plot.subtitle   = element_text(hjust = 0, size = 9, face = &quot;italic&quot;)
   )</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-8-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-5">
+Past versions of unnamed-chunk-8-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-8-5.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>table(Macrophages$SCT_snn_res.0.8, Macrophages$orig.ident)</code></pre>
 <pre><code>   
     CMF_TGF CMFHM_NC CMFHM_TGF
@@ -1427,23 +2330,245 @@ FeaturePlot_scCustom(Macrophages, features = &quot;c.fibroblast.genes_UCell&quot
 <pre class="r"><code>FeaturePlot_scCustom(Macrophages, features = &quot;CD163&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Macrophage marker</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-9-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-9-1.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Macrophages, features = &quot;FAP&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Activated Fibroblast Marker</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-9-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-2">
+Past versions of unnamed-chunk-9-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-9-2.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>FeaturePlot_scCustom(Macrophages, features = &quot;TTN&quot;, pt.size = 0, reduction = &quot;umap&quot;) + 
   theme(axis.title.x = element_blank()) # Cardiomyocyte marker</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-9-3.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-3">
+Past versions of unnamed-chunk-9-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-9-3.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## --&gt; assumption = Cluster 3 is Cardiomyocyte and Fibroblast doublets?
 
 DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;Phase&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-9-4.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-4">
+Past versions of unnamed-chunk-9-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-9-4.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;orig.ident&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-9-5.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-5">
+Past versions of unnamed-chunk-9-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-9-5.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(Macrophages, reduction = &quot;umap&quot;, shuffle = T,
         group.by = &quot;SCT_snn_res.0.8&quot;)</code></pre>
 <p><img src="figure/Mac_subclusters.Rmd/unnamed-chunk-9-6.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-6">
+Past versions of unnamed-chunk-9-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Mac_subclusters.Rmd/unnamed-chunk-9-6.png" target="_blank">aabbb69</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cleanup." class="section level1" number="5">
 <h1><span class="header-section-number">5</span> cleanup.</h1>
