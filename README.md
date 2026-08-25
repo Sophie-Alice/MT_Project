@@ -1,10 +1,6 @@
 # MT_Project
 
-A [workflowr][] project.
+Find the Pages here: [Website][]
 
-[workflowr]: https://github.com/workflowr/workflowr
-
-Find Pages here:
-
-https://sophie-alice.github.io/MT_Project/index.html
+[Website]: https://mt-project-6cb475.gitlab.io/
 
