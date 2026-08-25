@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "MT_Project"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
