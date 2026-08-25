@@ -773,19 +773,20 @@ if (total_genes > 0) {
 chunk_size <- 9
 total_genes <- length(genes)
 
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx <- min(i + chunk_size - 1, total_genes)
-  slice_num <- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = extracellular matrix organization - Slice ", slice_num),
-    seurat_obj    = Macrophages,
-    colors        = gradient_colors2
-  ))
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+    print(raincloud.plots(
+      gene_list     = genes[i:end_idx],
+      plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+      plot_subtitle = paste0("Geneset = extracellular matrix organization - Slice ", slice_num),
+      seurat_obj    = Macrophages,
+      colors        = gradient_colors2
+    ))
+  }
 }
-
 
 ```
 
@@ -829,17 +830,19 @@ if (total_genes > 0) {
 chunk_size <- 9
 total_genes <- length(genes)
 
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx <- min(i + chunk_size - 1, total_genes)
-  slice_num <- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = Cell Adhesion - Slice ", slice_num),
-    seurat_obj    = Macrophages,
-    colors        = gradient_colors2
-  ))
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+    print(raincloud.plots(
+      gene_list     = genes[i:end_idx],
+      plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+      plot_subtitle = paste0("Geneset = Cell Adhesion - Slice ", slice_num),
+      seurat_obj    = Macrophages,
+      colors        = gradient_colors2
+    ))
+  }
 }
 
 ```
@@ -870,17 +873,19 @@ SCpubr::do_DotPlot(Macrophages,
 chunk_size <- 9
 total_genes <- length(genes)
 
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx <- min(i + chunk_size - 1, total_genes)
-  slice_num <- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = adaptive immune response - Slice ", slice_num),
-    seurat_obj    = Macrophages,
-    colors        = gradient_colors2
-  ))
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+    print(raincloud.plots(
+      gene_list     = genes[i:end_idx],
+      plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+      plot_subtitle = paste0("Geneset = adaptive immune response - Slice ", slice_num),
+      seurat_obj    = Macrophages,
+      colors        = gradient_colors2
+    ))
+  }
 }
 
 ```
@@ -926,19 +931,20 @@ if (total_genes > 0) {
 chunk_size <- 9
 total_genes <- length(genes)
 
-for (i in seq(1, total_genes, by = chunk_size)) {
-  
-  end_idx <- min(i + chunk_size - 1, total_genes)
-  slice_num <- ((i - 1) / chunk_size) + 1
-  print(raincloud.plots(
-    gene_list     = genes[i:end_idx],
-    plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
-    plot_subtitle = paste0("Geneset = regulation of inflammatory response - Slice ", slice_num),
-    seurat_obj    = Macrophages,
-    colors        = gradient_colors2
-  ))
+if (total_genes > 0) {
+  for (i in seq(1, total_genes, by = chunk_size)) {
+    
+    end_idx <- min(i + chunk_size - 1, total_genes)
+    slice_num <- ((i - 1) / chunk_size) + 1
+    print(raincloud.plots(
+      gene_list     = genes[i:end_idx],
+      plot_title    = "Macrophages CMFHM_TGF vs. CMFHM_NC: Gene distribution profiles across MT conditions",
+      plot_subtitle = paste0("Geneset = regulation of inflammatory response - Slice ", slice_num),
+      seurat_obj    = Macrophages,
+      colors        = gradient_colors2
+    ))
+  }
 }
-
 
 ```
 
