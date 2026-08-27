@@ -71,6 +71,7 @@ Project MT
     
 * **4.4 Cell module scores Fibroblasts**
     * [4.4.1 Cell Scores](CellScore.html)
+    * [4.4.2 Modular Plots](Modular_Plots.html)
 
 ## Interactions
 

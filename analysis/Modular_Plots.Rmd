@@ -1,0 +1,383 @@
+---
+title: "Modular Plots"
+author: "Sophie.Alice"
+date: "2026-08-27"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+# Libraries
+
+```{r error=TRUE, message=FALSE}
+rm(list=ls())
+gc()
+library(readr)      
+library(dplyr)      
+library(ggplot2)    
+library(Seurat)     
+library(ggpubr)     
+library(scCustom)   
+library(patchwork)
+
+
+# if installing is needed:
+
+# if (!requireNamespace("BiocManager", quietly = TRUE)) {
+#   install.packages("BiocManager")
+# }
+# 
+# BiocManager::install(c(
+#   "tidyverse",
+#   "Seurat",
+#   "ggpubr",
+#   "scCustom",
+#   "patchwork"
+# ))
+
+```
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+gradient_colors2 <- custom_palette(2)
+
+```
+
+# Functions
+
+```{r, warning = FALSE}
+
+################################## Violin Plot Function
+
+plot_gene_violin <- function(
+    seurat_obj,
+    target_gene,
+    group_by = "orig.ident",
+    colors = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67"),
+    comparisons = list(c("CMF_TGF", "CMFHM_TGF")),
+    assay = "RNA",
+    celltype = "Celltype"
+) {
+  
+  # Check if gene exists in the object
+  if (!target_gene %in% rownames(seurat_obj[[assay]])) {
+    stop(paste0("Error: Gene '", target_gene, "' was not found in the '", assay, "' assay."))
+  }
+  
+  df_plot <- FetchData(seurat_obj, vars = c(group_by, target_gene))
+  df_plot <- df_plot %>% filter(!is.na(.data[[group_by]]))
+  
+  p <- ggplot(df_plot, aes(x = .data[[group_by]], y = .data[[target_gene]], fill = .data[[group_by]])) +
+    geom_violin(alpha = 0.5, color = NA, scale = "area") +
+    geom_jitter(width = 0.15, size = 0.3, alpha = 0.2) +
+    geom_boxplot(width = 0.2, color = "black", outlier.shape = NA, alpha = 0.8) +
+    scale_fill_manual(values = colors) +
+    
+    stat_compare_means(
+      comparisons = comparisons,
+      method = "wilcox.test",
+      label = "p.signif" 
+    ) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+    
+    theme_bw() +
+    labs(
+      title    = paste0(celltype, ": ", target_gene, " Expression"),
+      subtitle = paste(comparisons[[1]], collapse = " vs "),
+      x        = "",
+      y        = "Expression Level (Log-normalized)"
+    ) +
+    theme(
+      plot.title.position = "plot",
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0),
+      axis.text.x   = element_text(angle = 45, hjust = 1, face = "bold", color = "black"),
+      axis.text.y   = element_text(face = "bold", color = "black"),
+      axis.title.x  = element_text(face = "bold"),
+      axis.title.y  = element_text(face = "bold"),
+      legend.position = "none"
+    )
+  
+  return(p)
+}
+
+
+```
+
+
+# Macrophages
+
+```{r error=TRUE}
+
+# Input the gene you want to plot
+
+target_gene <- "OSM" # <---- here change the gene then run
+
+###########################################################
+
+
+
+### Macrophages
+Celltype <- "Macrophages"
+seurat_obj <- subset(Data, cell_type == Celltype)
+DefaultAssay(seurat_obj) <- "RNA"
+
+### Comparison 
+comp <- c("CMFHM_NC", "CMFHM_TGF")
+
+
+
+p_violin <- plot_gene_violin(
+  seurat_obj  = seurat_obj,            
+  target_gene = target_gene,
+  group_by    = "orig.ident",
+  colors      = c("CMFHM_NC" = "#005EA8", "CMFHM_TGF" = "#9F1C67"),
+  comparisons = list(comp),
+  celltype = Celltype
+)
+
+# Render plot
+print(p_violin)
+
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj, 
+  features = target_gene,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = paste0(Celltype, ": ", target_gene, " Expression"),
+    subtitle = paste0(comp[1], " vs ", comp[2]),
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+```
+
+# Cardiac Fibroblast
+
+```{r error=TRUE}
+
+# Input the gene you want to plot
+
+target_gene <- "BMPR1A" # <---- here change the gene then run
+
+# note: ALK2 does not exist here it is called ACVR1 in this dataset
+# note: ALK3 is called BMPR1A in this dataset
+
+###########################################################
+
+
+
+### Cardiac Fibroblasts
+Celltype <- "Cardiac Fibroblasts"
+CF.only <- subset(Data, cell_type == Celltype)
+DefaultAssay(CF.only) <- "RNA"
+
+### Comparison  1 
+comp <- c("CMF_NC", "CMF_TGF")
+seurat_obj <- subset(CF.only, orig.ident %in% comp)
+
+
+p_violin <- plot_gene_violin(
+  seurat_obj  = seurat_obj,            
+  target_gene = target_gene,
+  group_by    = "orig.ident",
+  colors      = c("CMF_NC" = "#005EA8", "CMF_TGF" = "#9F1C67"),
+  comparisons = list(comp),
+  celltype = Celltype
+)
+
+# Render plot
+print(p_violin)
+
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj, 
+  features = target_gene,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = paste0(Celltype, ": ", target_gene, " Expression"),
+    subtitle = paste0(comp[1], " vs ", comp[2]),
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+
+
+### Comparison  2 
+comp <- c("CMF_TGF", "CMFHM_TGF")
+seurat_obj <- subset(CF.only, orig.ident %in% comp)
+
+
+p_violin <- plot_gene_violin(
+  seurat_obj  = seurat_obj,            
+  target_gene = target_gene,
+  group_by    = "orig.ident",
+  colors      = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67"),
+  comparisons = list(comp),
+  celltype = Celltype
+)
+
+# Render plot
+print(p_violin)
+
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj, 
+  features = target_gene,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = paste0(Celltype, ": ", target_gene, " Expression"),
+    subtitle = paste0(comp[1], " vs ", comp[2]),
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+```
+
+
+# Cardiomyocytes
+
+```{r error=TRUE}
+
+# Input the gene you want to plot
+
+target_gene <- "BMP7" # <---- here change the gene then run
+
+###########################################################
+
+
+
+### Cardiomyocytes
+Celltype <- "Cardiomyocytes"
+CM.only <- subset(Data, cell_type == Celltype)
+DefaultAssay(CM.only) <- "RNA"
+
+### Comparison  1 
+comp <- c("CMF_NC", "CMF_TGF")
+seurat_obj <- subset(CM.only, orig.ident %in% comp)
+
+
+p_violin <- plot_gene_violin(
+  seurat_obj  = seurat_obj,            
+  target_gene = target_gene,
+  group_by    = "orig.ident",
+  colors      = c("CMF_NC" = "#005EA8", "CMF_TGF" = "#9F1C67"),
+  comparisons = list(comp),
+  celltype = Celltype
+)
+
+# Render plot
+print(p_violin)
+
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj, 
+  features = target_gene,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = paste0(Celltype, ": ", target_gene, " Expression"),
+    subtitle = paste0(comp[1], " vs ", comp[2]),
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+
+### Comparison  2 
+comp <- c("CMF_TGF", "CMFHM_TGF")
+seurat_obj <- subset(CM.only, orig.ident %in% comp)
+
+
+p_violin <- plot_gene_violin(
+  seurat_obj  = seurat_obj,            
+  target_gene = target_gene,
+  group_by    = "orig.ident",
+  colors      = c("CMF_TGF" = "#005EA8", "CMFHM_TGF" = "#9F1C67"),
+  comparisons = list(comp),
+  celltype = Celltype
+)
+
+# Render plot
+print(p_violin)
+
+
+p_split <- FeaturePlot_scCustom(
+  seurat_obj, 
+  features = target_gene,     
+  split.by = "orig.ident"
+) 
+
+p_split <- p_split + 
+  plot_annotation(
+    title    = paste0(Celltype, ": ", target_gene, " Expression"),
+    subtitle = paste0(comp[1], " vs ", comp[2]),
+    theme    = theme(
+      plot.title    = element_text(face = "bold", size = 12, hjust = 0),
+      plot.subtitle = element_text(face = "italic", size = 10, hjust = 0)
+    )
+  ) & 
+  theme(
+    aspect.ratio = 1.4,
+    axis.text.y  = element_text(size = 12, hjust = 0),
+    axis.title   = element_text(face = "plain")
+  )
+
+print(p_split)
+```
+
+
