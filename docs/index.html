@@ -476,7 +476,7 @@ $(document).ready(function () {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -487,8 +487,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -497,13 +497,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-08-27
+<strong>Last updated:</strong> 2026-09-10
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MT_Project/</code> <span
@@ -526,33 +526,36 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgitlabcomSophieAliceMTProjecttree188dbbf7a568770f552d5a59d9bc259eb7303e40targetblank188dbbfa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgitlabcomSophieAliceMTProjecttree284b8765ab4c76541edd684636c5e5e5e72923f0targetblank284b876a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://gitlab.com/Sophie-Alice/MT_Project/tree/188dbbf7a568770f552d5a59d9bc259eb7303e40" target="_blank">188dbbf</a>
+<a href="https://gitlab.com/Sophie-Alice/MT_Project/tree/284b8765ab4c76541edd684636c5e5e5e72923f0" target="_blank">284b876</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgitlabcomSophieAliceMTProjecttree188dbbf7a568770f552d5a59d9bc259eb7303e40targetblank188dbbfa"
+id="strongRepositoryversionstrongahrefhttpsgitlabcomSophieAliceMTProjecttree284b8765ab4c76541edd684636c5e5e5e72923f0targetblank284b876a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -562,7 +565,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://gitlab.com/Sophie-Alice/MT_Project/tree/188dbbf7a568770f552d5a59d9bc259eb7303e40" target="_blank">188dbbf</a>.
+<a href="https://gitlab.com/Sophie-Alice/MT_Project/tree/284b8765ab4c76541edd684636c5e5e5e72923f0" target="_blank">284b876</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -581,6 +584,16 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/omnipathr-log/
+    Ignored:    omnipathr-log/
+
+Untracked files:
+    Untracked:  analysis/Mac_Integrated_inspection.Rmd
+
+Unstaged changes:
+    Modified:   .gitignore
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -627,10 +640,10 @@ Message
 <tbody>
 <tr>
 <td>
-Rmd
+html
 </td>
 <td>
-<a href="https://gitlab.com/Sophie-Alice/MT_Project/blob/188dbbf7a568770f552d5a59d9bc259eb7303e40/analysis/index.Rmd" target="_blank">188dbbf</a>
+<a href="https://glcdn.githack.com/Sophie-Alice/MT_Project/raw/284b8765ab4c76541edd684636c5e5e5e72923f0/public/index.html" target="_blank">284b876</a>
 </td>
 <td>
 Sophie.Alice
@@ -639,7 +652,24 @@ Sophie.Alice
 2026-08-27
 </td>
 <td>
-modular plots
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://gitlab.com/Sophie-Alice/MT_Project/blob/c9ec7f28c7da90407d0da36717d56d56224918b4/analysis/index.Rmd" target="_blank">c9ec7f2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-27
+</td>
+<td>
+Fix merge conflict markers in README
 </td>
 </tr>
 <tr>
@@ -1123,9 +1153,21 @@ Marker</a></li>
 </ul></li>
 </ul>
 </div>
+<div id="integration-of-macrophages-into-public-datasets"
+class="section level2" number="6">
+<h2><span class="header-section-number">6</span> Integration of
+Macrophages into public Datasets</h2>
+<ul>
+<li><strong>Integration not shown due to heavy computations</strong>
+<ul>
+<li><a href="Mac_Integrated_inspection.html">Proportion Changes
+compared</a></li>
+</ul></li>
+</ul>
+</div>
 <div id="fibroblast-dgea-method-comparison" class="section level2"
-number="6">
-<h2><span class="header-section-number">6</span> Fibroblast DGEA Method
+number="7">
+<h2><span class="header-section-number">7</span> Fibroblast DGEA Method
 comparison</h2>
 <ul>
 <li><strong>X.1 DGEA - Comparison of 3 Methods</strong>

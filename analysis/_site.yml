@@ -1,5 +1,5 @@
 name: MT_Project
-output_dir: ../public
+output_dir: ../docs
 navbar:
   title: MT_Project
   left:
@@ -109,9 +109,9 @@ navbar:
     - text: X.1.3 NC vs. TGF-beta
       href: Methods_Baseline_TGF_Response_Lenient.html
   right:
-  - icon: fab fa-gitlab
+  - icon: fab fa-github
     text: Source code
-    href: https://gitlab.com/Sophie/MT-Project
+    href: https://github.com/Sophie-Alice/MT_Project
 output:
   workflowr::wflow_html:
     toc: yes
