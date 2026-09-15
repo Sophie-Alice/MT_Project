@@ -523,8 +523,8 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://gitlab.com/Sophie/MT-Project">
-    <span class="fab fa-gitlab"></span>
+  <a href="https://github.com/Sophie-Alice/MT_Project">
+    <span class="fab fa-github"></span>
      
     Source code
   </a>
@@ -577,7 +577,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-08-27
+<strong>Last updated:</strong> 2026-09-15
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -708,15 +708,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgitlabcomSophieAliceMTProjecttree188dbbf7a568770f552d5a59d9bc259eb7303e40targetblank188dbbfa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree1562a98c35651990303958065be4621ac72a899etargetblank1562a98a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://gitlab.com/Sophie-Alice/MT_Project/tree/188dbbf7a568770f552d5a59d9bc259eb7303e40" target="_blank">188dbbf</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/1562a98c35651990303958065be4621ac72a899e" target="_blank">1562a98</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgitlabcomSophieAliceMTProjecttree188dbbf7a568770f552d5a59d9bc259eb7303e40targetblank188dbbfa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree1562a98c35651990303958065be4621ac72a899etargetblank1562a98a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -726,7 +726,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://gitlab.com/Sophie-Alice/MT_Project/tree/188dbbf7a568770f552d5a59d9bc259eb7303e40" target="_blank">188dbbf</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/1562a98c35651990303958065be4621ac72a899e" target="_blank">1562a98</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -745,6 +745,16 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/omnipathr-log/
+    Ignored:    omnipathr-log/
+
+Untracked files:
+    Untracked:  analysis/Mac_Integrated_inspection.Rmd
+
+Unstaged changes:
+    Modified:   .gitignore
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -762,10 +772,10 @@ have uncommitted changes.
 <p>
 These are the previous versions of the repository in which changes were
 made to the R Markdown (<code>analysis/Modular_Plots.Rmd</code>) and
-HTML (<code>public/Modular_Plots.html</code>) files. If you’ve
-configured a remote Git repository (see <code>?wflow_git_remote</code>),
-click on the hyperlinks in the table below to view the files as they
-were in that past version.
+HTML (<code>docs/Modular_Plots.html</code>) files. If you’ve configured
+a remote Git repository (see <code>?wflow_git_remote</code>), click on
+the hyperlinks in the table below to view the files as they were in that
+past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -791,10 +801,27 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/1562a98c35651990303958065be4621ac72a899e/docs/Modular_Plots.html" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+<td>
+Host with GitHub.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie-Alice/MT_Project/blob/188dbbf7a568770f552d5a59d9bc259eb7303e40/analysis/Modular_Plots.Rmd" target="_blank">188dbbf</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/c9ec7f28c7da90407d0da36717d56d56224918b4/analysis/Modular_Plots.Rmd" target="_blank">c9ec7f2</a>
 </td>
 <td>
 Sophie.Alice
@@ -803,7 +830,7 @@ Sophie.Alice
 2026-08-27
 </td>
 <td>
-modular plots
+Fix merge conflict markers in README
 </td>
 </tr>
 </tbody>
@@ -818,8 +845,8 @@ modular plots
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  906996 48.5    1750557 93.5         NA  1321070 70.6
-Vcells 1595830 12.2    8388608 64.0      16384  2393547 18.3</code></pre>
+Ncells  907273 48.5    1751365 93.6         NA  1321031 70.6
+Vcells 1596587 12.2    8388608 64.0      16384  2393601 18.3</code></pre>
 <pre class="r"><code>library(readr)      
 library(dplyr)      
 library(ggplot2)    
@@ -949,6 +976,43 @@ p_violin &lt;- plot_gene_violin(
 # Render plot
 print(p_violin)</code></pre>
 <p><img src="figure/Modular_Plots.Rmd/unnamed-chunk-4-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Modular_Plots.Rmd/unnamed-chunk-4-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>p_split &lt;- FeaturePlot_scCustom(
   seurat_obj, 
   features = target_gene,     
@@ -1011,6 +1075,43 @@ p_violin &lt;- plot_gene_violin(
 # Render plot
 print(p_violin)</code></pre>
 <p><img src="figure/Modular_Plots.Rmd/unnamed-chunk-5-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Modular_Plots.Rmd/unnamed-chunk-5-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>p_split &lt;- FeaturePlot_scCustom(
   seurat_obj, 
   features = target_gene,     
@@ -1054,6 +1155,43 @@ p_violin &lt;- plot_gene_violin(
 # Render plot
 print(p_violin)</code></pre>
 <p><img src="figure/Modular_Plots.Rmd/unnamed-chunk-5-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Modular_Plots.Rmd/unnamed-chunk-5-2.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>p_split &lt;- FeaturePlot_scCustom(
   seurat_obj, 
   features = target_gene,     
@@ -1113,6 +1251,43 @@ p_violin &lt;- plot_gene_violin(
 # Render plot
 print(p_violin)</code></pre>
 <p><img src="figure/Modular_Plots.Rmd/unnamed-chunk-6-1.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Modular_Plots.Rmd/unnamed-chunk-6-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>p_split &lt;- FeaturePlot_scCustom(
   seurat_obj, 
   features = target_gene,     
@@ -1156,6 +1331,43 @@ p_violin &lt;- plot_gene_violin(
 # Render plot
 print(p_violin)</code></pre>
 <p><img src="figure/Modular_Plots.Rmd/unnamed-chunk-6-2.png" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-2">
+Past versions of unnamed-chunk-6-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Modular_Plots.Rmd/unnamed-chunk-6-2.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>p_split &lt;- FeaturePlot_scCustom(
   seurat_obj, 
   features = target_gene,     
@@ -1193,7 +1405,7 @@ Session information
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.6.0 (2026-04-24)
 Platform: aarch64-apple-darwin23
-Running under: macOS Sequoia 15.7.7
+Running under: macOS Sequoia 15.7.9
 
 Matrix products: default
 BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 

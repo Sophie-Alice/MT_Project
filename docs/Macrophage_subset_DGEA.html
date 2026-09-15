@@ -544,8 +544,8 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://gitlab.com/Sophie/MT-Project">
-    <span class="fab fa-gitlab"></span>
+  <a href="https://github.com/Sophie-Alice/MT_Project">
+    <span class="fab fa-github"></span>
      
     Source code
   </a>
@@ -577,7 +577,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -588,8 +588,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -598,13 +598,13 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-08-21
+<strong>Last updated:</strong> 2026-09-15
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>MT_Project/</code> <span
@@ -627,21 +627,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -732,15 +729,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgitlabcomSophieMTProjecttreeaabbb696de600a5a1103831339360754527836b9targetblankaabbb69a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree1562a98c35651990303958065be4621ac72a899etargetblank1562a98a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://gitlab.com/Sophie/MT-Project/tree/aabbb696de600a5a1103831339360754527836b9" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/1562a98c35651990303958065be4621ac72a899e" target="_blank">1562a98</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgitlabcomSophieMTProjecttreeaabbb696de600a5a1103831339360754527836b9targetblankaabbb69a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttree1562a98c35651990303958065be4621ac72a899etargetblank1562a98a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -750,7 +747,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://gitlab.com/Sophie/MT-Project/tree/aabbb696de600a5a1103831339360754527836b9" target="_blank">aabbb69</a>.
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/1562a98c35651990303958065be4621ac72a899e" target="_blank">1562a98</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -769,11 +766,16 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
-    Ignored:    analysis/figure/
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/omnipathr-log/
+    Ignored:    omnipathr-log/
+
+Untracked files:
+    Untracked:  analysis/Mac_Integrated_inspection.Rmd
 
 Unstaged changes:
-    Modified:   analysis/Macrophage_subset_DGEA.Rmd
-    Modified:   analysis/Macrophage_subset_DGEA_Lenient.Rmd
+    Modified:   .gitignore
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -792,7 +794,7 @@ have uncommitted changes.
 These are the previous versions of the repository in which changes were
 made to the R Markdown
 (<code>analysis/Macrophage_subset_DGEA.Rmd</code>) and HTML
-(<code>public/Macrophage_subset_DGEA.html</code>) files. If you’ve
+(<code>docs/Macrophage_subset_DGEA.html</code>) files. If you’ve
 configured a remote Git repository (see <code>?wflow_git_remote</code>),
 click on the hyperlinks in the table below to view the files as they
 were in that past version.
@@ -824,7 +826,41 @@ Message
 html
 </td>
 <td>
-<a href="https://glcdn.githack.com/Sophie/MT-Project/raw/aabbb696de600a5a1103831339360754527836b9/public/Macrophage_subset_DGEA.html" target="_blank">aabbb69</a>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/1562a98c35651990303958065be4621ac72a899e/docs/Macrophage_subset_DGEA.html" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+<td>
+Host with GitHub.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/c819b5d4adca864aa83338c1e36983ba53cab067/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">c819b5d</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-08-25
+</td>
+<td>
+Update Macrophage subset DGEA analysis and figures
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/aabbb696de600a5a1103831339360754527836b9/docs/Macrophage_subset_DGEA.html" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
@@ -838,10 +874,27 @@ Host with GitLab.
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/Macrophage_subset_DGEA.html" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/cf00065fe35c93486e48d4693a21e6da06b638b7/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">cf00065</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/cf00065fe35c93486e48d4693a21e6da06b638b7/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">cf00065</a>
 </td>
 <td>
 Sophie.Alice
@@ -856,10 +909,27 @@ response analyses, including lenient
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/Macrophage_subset_DGEA.html" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/b1e95348c23d3aa26f4b15b34312461ec13a8a53/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">b1e9534</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/b1e95348c23d3aa26f4b15b34312461ec13a8a53/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">b1e9534</a>
 </td>
 <td>
 Sophie.Alice
@@ -874,10 +944,27 @@ response analyses, including lenient
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/Macrophage_subset_DGEA.html" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/295e485ff6530d46b49b316d081d5ccc1787761c/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">295e485</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/295e485ff6530d46b49b316d081d5ccc1787761c/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">295e485</a>
 </td>
 <td>
 Sophie.Alice
@@ -891,10 +978,44 @@ Publish updated Cardiomyocyte, Fibroblast, and Macrophage analysis pages
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/676253fc925536ec951d5aaea3accca913375d85/docs/Macrophage_subset_DGEA.html" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/Macrophage_subset_DGEA.html" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aaec6d04a7fa71647fd1f477da0b06b5612b7f74/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">aaec6d0</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aaec6d04a7fa71647fd1f477da0b06b5612b7f74/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">aaec6d0</a>
 </td>
 <td>
 Sophie.Alice
@@ -908,10 +1029,27 @@ CM DGEA
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/fc83bf14929a13908fe10691d377db35b54f50e6/docs/Macrophage_subset_DGEA.html" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/32a97231e0473ddb2618840d69991ea678c3433e/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">32a9723</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/32a97231e0473ddb2618840d69991ea678c3433e/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">32a9723</a>
 </td>
 <td>
 Sophie.Alice
@@ -925,10 +1063,27 @@ Update viewing of tables
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/Macrophage_subset_DGEA.html" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/067775a455329972400495b19640af5d454a094a/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">067775a</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/067775a455329972400495b19640af5d454a094a/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">067775a</a>
 </td>
 <td>
 Sophie.Alice
@@ -942,10 +1097,27 @@ Adding lenient Thresholds
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/3ae510b50d561ff10a7d7b5247421d450b3c19bb/docs/Macrophage_subset_DGEA.html" target="_blank">3ae510b</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/da89f44b6b9d9b05ce09ae0dbf45696ec8d6ca81/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">da89f44</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/da89f44b6b9d9b05ce09ae0dbf45696ec8d6ca81/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">da89f44</a>
 </td>
 <td>
 Sophie.Alice
@@ -959,10 +1131,27 @@ UPDT
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/Macrophage_subset_DGEA.html" target="_blank">dc39c88</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/bee068d2b55c37c87c9953cfea253e27eef43363/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">bee068d</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/bee068d2b55c37c87c9953cfea253e27eef43363/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">bee068d</a>
 </td>
 <td>
 Sophie.Alice
@@ -976,10 +1165,27 @@ Udpades
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/Macrophage_subset_DGEA.html" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/651d2070683f7b79c284148d6dbfbd9933bc1000/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">651d207</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/651d2070683f7b79c284148d6dbfbd9933bc1000/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">651d207</a>
 </td>
 <td>
 Sophie.Alice
@@ -993,10 +1199,27 @@ Updates
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/0b1bbf6c119402d4b88ac4aba83cda813ecbb28d/docs/Macrophage_subset_DGEA.html" target="_blank">0b1bbf6</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/b844b3a6456d3ee3935bd82ec699a7df399e1ef8/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">b844b3a</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/b844b3a6456d3ee3935bd82ec699a7df399e1ef8/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">b844b3a</a>
 </td>
 <td>
 Sophie.Alice
@@ -1010,10 +1233,27 @@ adding CM subtype identification
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/2eaf68c7be72e00de176d396d47fbf9d186bff17/docs/Macrophage_subset_DGEA.html" target="_blank">2eaf68c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/0d589e1bfd6075ee1e82d2fa97f9661123abedbc/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">0d589e1</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/0d589e1bfd6075ee1e82d2fa97f9661123abedbc/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">0d589e1</a>
 </td>
 <td>
 Sophie.Alice
@@ -1027,10 +1267,27 @@ Adding more
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/116d234456b6fb5f08de18200ea2b5b997b2d5d3/docs/Macrophage_subset_DGEA.html" target="_blank">116d234</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/02b6129145e325659d079ebfaacd10c6fe19792c/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">02b6129</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/02b6129145e325659d079ebfaacd10c6fe19792c/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">02b6129</a>
 </td>
 <td>
 Sophie.Alice
@@ -1044,10 +1301,27 @@ Adding more
 </tr>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Sophie-Alice/MT_Project/4ca3d0f53d825d60cb6111c03d7468bdf2fa6d48/docs/Macrophage_subset_DGEA.html" target="_blank">4ca3d0f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-06-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/0b82e50c20ee503c415e647485a3ecf6c441eb8c/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">0b82e50</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/0b82e50c20ee503c415e647485a3ecf6c441eb8c/analysis/Macrophage_subset_DGEA.Rmd" target="_blank">0b82e50</a>
 </td>
 <td>
 Sophie.Alice
@@ -1071,8 +1345,8 @@ Adding more
 <pre class="r"><code>rm(list=ls())
 gc()</code></pre>
 <pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
-Ncells  908470 48.6    1754768 93.8         NA  1321070 70.6
-Vcells 1603262 12.3    8388608 64.0      16384  2420121 18.5</code></pre>
+Ncells  908481 48.6    1754817 93.8         NA  1321031 70.6
+Vcells 1604256 12.3    8388608 64.0      16384  2509161 19.2</code></pre>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
@@ -1353,13 +1627,90 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-5-2.png" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -1484,13 +1835,57 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-9-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-9-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-9-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-9-1.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-9-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-9-1.png" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -1580,13 +1975,46 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-10-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-10-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-10-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-10-1.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-10-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
 </td>
 </tr>
 </tbody>
@@ -1644,7 +2072,7 @@ simp.up.GO.sign &lt;- as.data.frame(simp.up.GO.show) %&gt;%
 
 create_table(simp.up.GO.show)</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-484ed42468d86de4a421" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-484ed42468d86de4a421">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.041333333333333\" data-max=\"0.3125\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.58349425287356\" data-max=\"11.9719827586207\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.8690775958445\" data-max=\"9.08422648108319\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.517008e-09\" data-max=\"0.004862523963606\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.684814057e-06\" data-max=\"0.098425589229989\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.684814057e-06\" data-max=\"0.098425589229989\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"4\" data-max=\"31\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["GO:0002181","GO:0051093","GO:0061061","GO:1901740","GO:0051146","GO:0140253","GO:0051129","GO:0006941","GO:0007507","GO:0003006","GO:0009719","GO:0048609","GO:0160307","GO:0030514","GO:0009725","GO:0042176","GO:0060390","GO:0090288","GO:0051240","GO:0042274","GO:0008283","GO:0042127","GO:0045596","GO:0006959","GO:1905953","GO:0071772","GO:1901796","GO:0141091","GO:1903829","GO:0007155","GO:0032368","GO:0014706","GO:2000059","GO:0048468","GO:0061448","GO:0048638","GO:0033993","GO:0003002","GO:0016064","GO:0097237","GO:0030155","GO:0010628","GO:0010975","GO:0002274","GO:0009895","GO:0014823","GO:0051961","GO:0009410","GO:0002376","GO:0042255"],["GO:0002181","GO:0051093","GO:0061061","GO:1901740","GO:0051146","GO:0140253","GO:0051129","GO:0006941","GO:0007507","GO:0003006","GO:0009719","GO:0048609","GO:0160307","GO:0030514","GO:0009725","GO:0042176","GO:0060390","GO:0090288","GO:0051240","GO:0042274","GO:0008283","GO:0042127","GO:0045596","GO:0006959","GO:1905953","GO:0071772","GO:1901796","GO:0141091","GO:1903829","GO:0007155","GO:0032368","GO:0014706","GO:2000059","GO:0048468","GO:0061448","GO:0048638","GO:0033993","GO:0003002","GO:0016064","GO:0097237","GO:0030155","GO:0010628","GO:0010975","GO:0002274","GO:0009895","GO:0014823","GO:0051961","GO:0009410","GO:0002376","GO:0042255"],["cytoplasmic translation","negative regulation of developmental process","muscle structure development","negative regulation of myoblast fusion","striated muscle cell differentiation","cell-cell fusion","negative regulation of cellular component organization","striated muscle contraction","heart development","developmental process involved in reproduction","response to endogenous stimulus","multicellular organismal reproductive process","protein biosynthetic process","negative regulation of BMP signaling pathway","response to hormone","regulation of protein catabolic process","regulation of SMAD protein signal transduction","negative regulation of cellular response to growth factor stimulus","positive regulation of multicellular organismal process","ribosomal small subunit biogenesis","cell population proliferation","regulation of cell population proliferation","negative regulation of cell differentiation","humoral immune response","negative regulation of lipid localization","response to BMP","regulation of signal transduction by p53 class mediator","transforming growth factor beta receptor superfamily signaling pathway","positive regulation of protein localization","cell adhesion","regulation of lipid transport","striated muscle tissue development","negative regulation of ubiquitin-dependent protein catabolic process","cell development","connective tissue development","regulation of developmental growth","response to lipid","regionalization","immunoglobulin mediated immune response","cellular response to toxic substance","regulation of cell adhesion","positive regulation of gene expression","regulation of neuron projection development","myeloid leukocyte activation","negative regulation of catabolic process","response to activity","negative regulation of nervous system development","response to xenobiotic stimulus","immune system process","ribosome assembly"],["18/116","24/116","20/116","9/116","13/116","10/116","22/116","11/116","13/116","17/116","27/116","16/116","21/116","5/116","19/116","13/116","5/116","5/116","24/116","7/116","23/116","21/116","12/116","6/116","4/116","6/116","6/116","9/116","12/116","19/116","5/116","7/116","4/116","28/116","6/116","7/116","15/116","5/116","5/116","5/116","14/116","19/116","9/116","7/116","10/116","4/116","4/116","7/116","31/116","4/116"],["123/4444","238/4444","167/4444","32/4444","83/4444","46/4444","259/4444","76/4444","108/4444","182/4444","426/4444","179/4444","299/4444","16/4444","268/4444","149/4444","20/4444","22/4444","430/4444","50/4444","416/4444","366/4444","149/4444","39/4444","15/4444","41/4444","41/4444","98/4444","162/4444","341/4444","33/4444","67/4444","21/4444","617/4444","51/4444","69/4444","251/4444","36/4444","36/4444","36/4444","231/4444","365/4444","115/4444","76/4444","141/4444","26/4444","26/4444","80/4444","750/4444","27/4444"],[0.1463414634146341,0.1008403361344538,0.1197604790419162,0.28125,0.1566265060240964,0.2173913043478261,0.08494208494208494,0.1447368421052632,0.1203703703703704,0.09340659340659341,0.06338028169014084,0.0893854748603352,0.07023411371237458,0.3125,0.0708955223880597,0.08724832214765101,0.25,0.2272727272727273,0.05581395348837209,0.14,0.05528846153846154,0.05737704918032787,0.08053691275167785,0.1538461538461539,0.2666666666666667,0.1463414634146341,0.1463414634146341,0.09183673469387756,0.07407407407407407,0.05571847507331378,0.1515151515151515,0.1044776119402985,0.1904761904761905,0.04538087520259319,0.1176470588235294,0.1014492753623188,0.05976095617529881,0.1388888888888889,0.1388888888888889,0.1388888888888889,0.06060606060606061,0.05205479452054795,0.0782608695652174,0.09210526315789473,0.07092198581560284,0.1538461538461539,0.1538461538461539,0.08749999999999999,0.04133333333333333,0.1481481481481481],[5.606391925988225,3.863228049840626,4.58806524881272,10.77478448275862,6.000415454923141,8.328335832083958,3.254160564505392,5.54491833030853,4.611430395913155,3.578438802576733,2.428120446818844,3.424388364476979,2.690693114980971,11.97198275862069,2.716031909418425,3.342513307104837,9.577586206896552,8.706896551724139,2.138251804330393,5.363448275862069,2.118120026525199,2.198134539287733,3.085396898866003,5.893899204244032,10.21609195402299,5.606391925988226,5.606391925988226,3.518296973961998,2.837803320561941,2.134593993325918,5.804597701149426,4.002573340195574,7.297208538587848,1.738556977589002,4.50709939148073,3.886556721639181,2.289462838301965,5.32088122605364,5.32088122605364,5.32088122605364,2.32183908045977,1.994237128011337,2.998200899550225,3.528584392014519,2.717045732452923,5.893899204244032,5.893899204244032,3.352155172413793,1.583494252873563,5.675606641123882],[8.480956468763649,7.432472475045067,7.736997699052202,9.084226481083189,7.527930775982095,8.178623043714484,6.119423694887648,6.542068543585372,6.219708272855694,5.814459163242199,5.074440862987847,5.41991797437374,4.955205111268167,7.197220808167781,4.743905579503263,4.761207860995425,6.293555340478441,5.932053047265257,4.065438693408224,5.07935226581831,3.921153878277285,3.916932118354118,4.238613321026455,5.025021133783112,5.852792319298911,4.850672986010094,4.850672986010094,4.126659594301794,3.900827385237751,3.569360688792205,4.534913372086554,4.053836954959947,4.735030475215971,3.236092162424446,4.123595771385452,3.955843827676442,3.442760291598357,4.261144983066909,4.261144983066909,4.261144983066909,3.377632332656715,3.245510973022491,3.554003102583319,3.639707296935338,3.391792464287594,4.096871701342512,4.096871701342512,3.475298529665548,2.869077595844497,3.989143639168399],[1.517008669206263e-09,5.336319490975688e-09,6.333335888372759e-09,6.985107517585311e-08,1.511413180174006e-07,1.839196865770325e-07,5.633292318731873e-07,3.265432341291421e-06,3.397506473644194e-06,3.547186819081973e-06,8.234486766836216e-06,1.248524384636754e-05,2.20197195532691e-05,3.858008396184187e-05,5.045633245644227e-05,0.0001118710888437514,0.0001259340182228167,0.0002051402768982924,0.0002247394228607997,0.0002715761409736253,0.0003578902459202622,0.000409329487435976,0.0004400651257476124,0.0004484359846315429,0.000481623324068758,0.0005922848865042513,0.0005922848865042513,0.0009240919089400568,0.0009362183034326741,0.001143061740594496,0.00146995708617861,0.001640226304202934,0.001870784916248107,0.001878879659557602,0.001918795714658796,0.001949390835720556,0.001999340808568796,0.002193853529015115,0.002193853529015115,0.002193853529015115,0.002491035558340757,0.002539299337808367,0.002850634706282311,0.003399711533416647,0.003464686107973744,0.004226082207802971,0.004226082207802971,0.004534754518906029,0.00454783312341495,0.004862523963605841],[3.684814057502013e-06,5.127890957619144e-06,5.127890957619144e-06,2.934664949282351e-05,4.46740918695612e-05,4.46740918695612e-05,0.0001067569786989188,0.0004534798307131637,0.0004534798307131637,0.0004534798307131637,0.0009091621980293258,0.001318550317514206,0.002139435951795626,0.003470778664567181,0.004226152811610285,0.007992202200043302,0.00869394554377107,0.0124571433146488,0.01299742995544958,0.0150148919624362,0.01889816102913732,0.02115449627621246,0.0213578628758827,0.0213578628758827,0.02207288781439647,0.02397766648864711,0.02397766648864711,0.03248677512911379,0.03248677512911379,0.03803420503978126,0.04519652863706131,0.04800132160131238,0.05178616434340239,0.05178616434340239,0.05178616434340239,0.05203373999961792,0.05278694373927832,0.05437622675487463,0.05437622675487463,0.05437622675487463,0.06111843809302727,0.06167958091536523,0.06722516215106537,0.07730675817839978,0.07782532623362375,0.09084206798896828,0.09084206798896828,0.09441612527158047,0.09441612527158047,0.09842558922998823],[3.684814057502013e-06,5.127890957619144e-06,5.127890957619144e-06,2.934664949282351e-05,4.46740918695612e-05,4.46740918695612e-05,0.0001067569786989188,0.0004534798307131638,0.0004534798307131638,0.0004534798307131638,0.0009091621980293258,0.001318550317514206,0.002139435951795626,0.003470778664567181,0.004226152811610285,0.007992202200043303,0.00869394554377107,0.0124571433146488,0.01299742995544958,0.0150148919624362,0.01889816102913732,0.02115449627621246,0.0213578628758827,0.0213578628758827,0.02207288781439647,0.02397766648864711,0.02397766648864711,0.03248677512911379,0.03248677512911379,0.03803420503978126,0.04519652863706131,0.04800132160131238,0.05178616434340239,0.05178616434340239,0.05178616434340239,0.05203373999961792,0.05278694373927833,0.05437622675487464,0.05437622675487464,0.05437622675487464,0.06111843809302726,0.06167958091536523,0.06722516215106536,0.0773067581783998,0.07782532623362375,0.09084206798896828,0.09084206798896828,0.09441612527158047,0.09441612527158047,0.09842558922998822],["RPLP2/RPL5/RPS4X/FAU/RPS6/RPS11/RPL11/RPS27A/RPL37A/RPL39/RPL3/RPL23/RPS18/RPL26/RPLP1/RPL27A/RPL17/RPS21","RPLP2/PPARG/ITGB3/RPL5/SORL1/RPL11/RPL37A/RPL39/SOX4/APOE/CLEC12A/YWHAH/CFL1/RPL23/PTPN13/TOMM70/SMAD7/SPP1/RPLP1/RPL27A/PARP1/SMAD6/RPL17/PSMA4","RPLP2/CD81/BMPR1A/RPL5/PDLIM7/SMARCE1/RPL11/RPL37A/RPL39/SOX4/TCF7L2/ACTC1/RPL23/TOMM70/SMAD7/RPLP1/UQCC2/RPL27A/RPL17/SKIL","RPLP2/RPL5/RPL11/RPL37A/RPL39/RPL23/RPLP1/RPL27A/RPL17","RPLP2/CD81/BMPR1A/RPL5/RPL11/RPL37A/RPL39/ACTC1/RPL23/TOMM70/RPLP1/RPL27A/RPL17","RPLP2/CD81/RPL5/RPL11/RPL37A/RPL39/RPL23/RPLP1/RPL27A/RPL17","RPLP2/PPARG/RPL5/TIMP3/DYNLRB1/SORL1/ADD3/RPS6/APOC1/RPL11/RPL37A/RPL39/APOE/YWHAH/CFL1/RPL23/PTPN13/SPP1/RPLP1/RPL27A/PARP1/RPL17","RPLP2/RPL5/RPL11/RPL37A/RPL39/ACTC1/RPL23/SMAD7/RPLP1/RPL27A/RPL17","BMPR1A/MMP2/PDLIM7/DNAAF4/SMYD2/SOX4/ACTC1/TRAF3IP2/SEMA3C/TOMM70/SMAD7/FN1/SMAD6","RPLP2/MMP2/CCND1/RPL5/TDRD9/RAI14/RPL11/RPL37A/RPL3/RPL23/SPP1/RPLP1/RPL27A/PARP1/RPL17/SKIL/PSMA4","IL1RN/CBX3/CD81/BMPR1A/MMP2/PPARG/ZFYVE27/AGL/ITGB3/RBFOX2/CCND1/TIMP3/SORL1/HTRA4/RPS6/DNAAF4/APOE/TCF7L2/YWHAH/CFL1/HSP90AB1/TOMM70/SMAD7/SPP1/PARP1/SMAD6/SKIL","RPLP2/MMP2/RPL5/TDRD9/RAI14/RPL11/RPL37A/RPL3/RPL23/SPP1/RPLP1/RPL27A/PARP1/RPL17/SKIL/PSMA4","RPLP2/RPL5/RPS4X/FAU/RPS6/RPS11/RPL11/RPS27A/RPL37A/RPL39/RPL3/SERBP1/RPL23/RPS18/RPL26/RPLP1/UQCC2/RPL27A/EEF1G/RPL17/RPS21","PPARG/SORL1/SMAD7/SMAD6/SKIL","IL1RN/CBX3/MMP2/PPARG/AGL/ITGB3/RBFOX2/CCND1/TIMP3/SORL1/RPS6/DNAAF4/TCF7L2/YWHAH/CFL1/TOMM70/SPP1/PARP1/SMAD6","CD81/RPL5/TIMP3/SORL1/DNAAF4/RPL11/SF3B3/APOE/RPL23/HSP90AB1/SMAD7/SUMO2/PSMA4","BMPR1A/PPARG/SMAD7/PARP1/SMAD6","PPARG/SORL1/SMAD7/SMAD6/SKIL","CD81/BMPR1A/PPARG/ZFYVE27/ITGB3/SORL1/ADD3/FCGR3A/SMARCE1/SOX4/APOE/TCF7L2/CLEC12A/HSPD1/TRAF3IP2/CFL1/CD226/TOMM70/SMAD7/SPP1/SLC11A1/PARP1/SKIL/PSMA4","RPS4X/FAU/RPS6/RPS11/RPS27A/KRR1/RPS21","TNFRSF21/CD81/BMPR1A/MMP2/PPARG/ITGB3/RBFOX2/CCND1/RPS4X/RPS6/SMYD2/FCGR3A/SOX4/APOE/TCF7L2/HSPD1/TRAF3IP2/RPL23/SMAD7/FN1/IFNLR1/SLC11A1/SMAD6","TNFRSF21/CD81/BMPR1A/MMP2/PPARG/ITGB3/RBFOX2/CCND1/RPS4X/RPS6/SMYD2/FCGR3A/SOX4/APOE/TCF7L2/TRAF3IP2/RPL23/SMAD7/FN1/IFNLR1/SMAD6","PPARG/ITGB3/SORL1/SOX4/CLEC12A/YWHAH/CFL1/TOMM70/SMAD7/SPP1/SMAD6/PSMA4","TNFRSF21/CD81/FAU/RPL39/TRAF3IP2/SLC11A1","PPARG/ITGB3/APOC1/APOE","BMPR1A/PPARG/SORL1/SMAD7/SMAD6/SKIL","RPL5/SMYD2/RPL11/SOX4/RPL23/RPL26","BMPR1A/PPARG/SORL1/HTRA4/HSP90AB1/SMAD7/PARP1/SMAD6/SKIL","CD81/PPARG/CCT5/BICD1/SORL1/RAB11A/SOX4/APOE/TCF7L2/CFL1/HSP90AB1/PARP1","IL1RN/TNFRSF21/CD81/ITGA6/MMP2/ITGB3/LMO7/SMARCE1/SOX4/HSPD1/CFL1/CD226/SMAD7/SPP1/MAP4K4/FN1/SMAD6/PSMA4/OLR1","PPARG/ITGB3/APOC1/APOE/SPP1","BMPR1A/ACTC1/SEMA3C/TOMM70/SMAD7/UQCC2/SKIL","RPL5/RPL11/RPL23/HSP90AB1","TNFRSF21/CD81/ITGA6/BMPR1A/MMP2/PPARG/ZFYVE27/SORL1/SMARCE1/RAB11A/CDIN1/SOX4/APOE/CLEC12A/YWHAH/ACTC1/TRAF3IP2/CFL1/SEMA3C/TOMM70/SMAD7/SPP1/MAP4K4/FN1/PARP1/SDC2/SKIL/PSMA4","BMPR1A/PPARG/ITGB3/SORL1/SMAD7/PARP1","BMPR1A/ZFYVE27/APOE/CFL1/TOMM70/SMAD7/SPP1","IL1RN/CBX3/MMP2/PPARG/AGL/RBFOX2/CCND1/DNAAF4/TCF7L2/YWHAH/MGST1/SPP1/SLC11A1/PARP1/SMAD6","BMPR1A/DNAAF4/KIF3B/SEMA3C/SMAD6","CD81/FCGR3A/HSPD1/TRAF3IP2/CD226","APOE/ALOX5AP/PTPN13/MGST1/SLC11A1","IL1RN/TNFRSF21/CD81/MMP2/ITGB3/LMO7/SMARCE1/SOX4/HSPD1/CFL1/SMAD7/MAP4K4/FN1/PSMA4","CD81/BMPR1A/PPARG/ITGB3/RPL5/RPS4X/SORL1/FCGR3A/CLEC12A/HSPD1/ACTC1/TRAF3IP2/CD226/TOMM70/RPL26/UQCC2/FN1/SLC11A1/PSMA4","ITGA6/BMPR1A/ZFYVE27/APOE/YWHAH/CFL1/SPP1/SDC2/SKIL","FCGR3A/CLEC12A/HSPD1/TRAF3IP2/CD226/FN1/SLC11A1","RPL5/TIMP3/SORL1/APOC1/RPL11/SF3B3/TRAF3IP2/RPL23/HSP90AB1/SLC11A1","MMP2/ITGB3/CFL1/FN1","SORL1/YWHAH/PTPN13/SPP1","MMP2/ITGB3/CCND1/ADD3/ACTC1/TRAF3IP2/SEMA3C","IL1RN/TNFRSF21/CD81/ITGA6/BMPR1A/MMP2/PPARG/MTUS1/ITGB3/FAU/TMBIM6/FCGR3A/SMARCE1/CDIN1/RPL39/SOX4/APOE/CLEC12A/HSPD1/TRAF3IP2/CD226/SEMA3C/TOMM70/SMAD7/FN1/IFNLR1/SLC11A1/PARP1/SMAD6/PSMA4/OLR1","RPL5/FAU/RPS6/RPL11"],[18,24,20,9,13,10,22,11,13,17,27,16,21,5,19,13,5,5,24,7,23,21,12,6,4,6,6,9,12,19,5,7,4,28,6,7,15,5,5,5,14,19,9,7,10,4,4,7,31,4]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>Description<\/th>\n      <th>GeneRatio<\/th>\n      <th>BgRatio<\/th>\n      <th>RichFactor<\/th>\n      <th>FoldEnrichment<\/th>\n      <th>zScore<\/th>\n      <th>pvalue<\/th>\n      <th>p.adjust<\/th>\n      <th>qvalue<\/th>\n      <th>geneID<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"Description","targets":2},{"name":"GeneRatio","targets":3},{"name":"BgRatio","targets":4},{"name":"RichFactor","targets":5},{"name":"FoldEnrichment","targets":6},{"name":"zScore","targets":7},{"name":"pvalue","targets":8},{"name":"p.adjust","targets":9},{"name":"qvalue","targets":10},{"name":"geneID","targets":11},{"name":"Count","targets":12}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-484ed42468d86de4a421">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.041333333333333\" data-max=\"0.3125\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.58349425287356\" data-max=\"11.9719827586207\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.8690775958445\" data-max=\"9.08422648108319\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.517008e-09\" data-max=\"0.004862523963606\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.684814057e-06\" data-max=\"0.098425589229989\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.684814057e-06\" data-max=\"0.098425589229989\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"4\" data-max=\"31\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["GO:0002181","GO:0051093","GO:0061061","GO:1901740","GO:0051146","GO:0140253","GO:0051129","GO:0006941","GO:0007507","GO:0003006","GO:0009719","GO:0048609","GO:0160307","GO:0030514","GO:0009725","GO:0042176","GO:0060390","GO:0090288","GO:0051240","GO:0042274","GO:0008283","GO:0042127","GO:0045596","GO:0006959","GO:1905953","GO:0071772","GO:1901796","GO:0141091","GO:1903829","GO:0007155","GO:0032368","GO:0014706","GO:2000059","GO:0048468","GO:0061448","GO:0048638","GO:0033993","GO:0003002","GO:0016064","GO:0097237","GO:0030155","GO:0010628","GO:0010975","GO:0002274","GO:0009895","GO:0014823","GO:0051961","GO:0009410","GO:0002376","GO:0042255"],["GO:0002181","GO:0051093","GO:0061061","GO:1901740","GO:0051146","GO:0140253","GO:0051129","GO:0006941","GO:0007507","GO:0003006","GO:0009719","GO:0048609","GO:0160307","GO:0030514","GO:0009725","GO:0042176","GO:0060390","GO:0090288","GO:0051240","GO:0042274","GO:0008283","GO:0042127","GO:0045596","GO:0006959","GO:1905953","GO:0071772","GO:1901796","GO:0141091","GO:1903829","GO:0007155","GO:0032368","GO:0014706","GO:2000059","GO:0048468","GO:0061448","GO:0048638","GO:0033993","GO:0003002","GO:0016064","GO:0097237","GO:0030155","GO:0010628","GO:0010975","GO:0002274","GO:0009895","GO:0014823","GO:0051961","GO:0009410","GO:0002376","GO:0042255"],["cytoplasmic translation","negative regulation of developmental process","muscle structure development","negative regulation of myoblast fusion","striated muscle cell differentiation","cell-cell fusion","negative regulation of cellular component organization","striated muscle contraction","heart development","developmental process involved in reproduction","response to endogenous stimulus","multicellular organismal reproductive process","protein biosynthetic process","negative regulation of BMP signaling pathway","response to hormone","regulation of protein catabolic process","regulation of SMAD protein signal transduction","negative regulation of cellular response to growth factor stimulus","positive regulation of multicellular organismal process","ribosomal small subunit biogenesis","cell population proliferation","regulation of cell population proliferation","negative regulation of cell differentiation","humoral immune response","negative regulation of lipid localization","response to BMP","regulation of signal transduction by p53 class mediator","transforming growth factor beta receptor superfamily signaling pathway","positive regulation of protein localization","cell adhesion","regulation of lipid transport","striated muscle tissue development","negative regulation of ubiquitin-dependent protein catabolic process","cell development","connective tissue development","regulation of developmental growth","response to lipid","regionalization","immunoglobulin mediated immune response","cellular response to toxic substance","regulation of cell adhesion","positive regulation of gene expression","regulation of neuron projection development","myeloid leukocyte activation","negative regulation of catabolic process","response to activity","negative regulation of nervous system development","response to xenobiotic stimulus","immune system process","ribosome assembly"],["18/116","24/116","20/116","9/116","13/116","10/116","22/116","11/116","13/116","17/116","27/116","16/116","21/116","5/116","19/116","13/116","5/116","5/116","24/116","7/116","23/116","21/116","12/116","6/116","4/116","6/116","6/116","9/116","12/116","19/116","5/116","7/116","4/116","28/116","6/116","7/116","15/116","5/116","5/116","5/116","14/116","19/116","9/116","7/116","10/116","4/116","4/116","7/116","31/116","4/116"],["123/4444","238/4444","167/4444","32/4444","83/4444","46/4444","259/4444","76/4444","108/4444","182/4444","426/4444","179/4444","299/4444","16/4444","268/4444","149/4444","20/4444","22/4444","430/4444","50/4444","416/4444","366/4444","149/4444","39/4444","15/4444","41/4444","41/4444","98/4444","162/4444","341/4444","33/4444","67/4444","21/4444","617/4444","51/4444","69/4444","251/4444","36/4444","36/4444","36/4444","231/4444","365/4444","115/4444","76/4444","141/4444","26/4444","26/4444","80/4444","750/4444","27/4444"],[0.1463414634146341,0.1008403361344538,0.1197604790419162,0.28125,0.1566265060240964,0.2173913043478261,0.08494208494208494,0.1447368421052632,0.1203703703703704,0.09340659340659341,0.06338028169014084,0.0893854748603352,0.07023411371237458,0.3125,0.0708955223880597,0.08724832214765101,0.25,0.2272727272727273,0.05581395348837209,0.14,0.05528846153846154,0.05737704918032787,0.08053691275167785,0.1538461538461539,0.2666666666666667,0.1463414634146341,0.1463414634146341,0.09183673469387756,0.07407407407407407,0.05571847507331378,0.1515151515151515,0.1044776119402985,0.1904761904761905,0.04538087520259319,0.1176470588235294,0.1014492753623188,0.05976095617529881,0.1388888888888889,0.1388888888888889,0.1388888888888889,0.06060606060606061,0.05205479452054795,0.0782608695652174,0.09210526315789473,0.07092198581560284,0.1538461538461539,0.1538461538461539,0.08749999999999999,0.04133333333333333,0.1481481481481481],[5.606391925988225,3.863228049840626,4.58806524881272,10.77478448275862,6.000415454923141,8.328335832083958,3.254160564505392,5.54491833030853,4.611430395913155,3.578438802576733,2.428120446818844,3.424388364476979,2.690693114980971,11.97198275862069,2.716031909418425,3.342513307104837,9.577586206896552,8.706896551724139,2.138251804330393,5.363448275862069,2.118120026525199,2.198134539287733,3.085396898866003,5.893899204244032,10.21609195402299,5.606391925988226,5.606391925988226,3.518296973961998,2.837803320561941,2.134593993325918,5.804597701149426,4.002573340195574,7.297208538587848,1.738556977589002,4.50709939148073,3.886556721639181,2.289462838301965,5.32088122605364,5.32088122605364,5.32088122605364,2.32183908045977,1.994237128011337,2.998200899550225,3.528584392014519,2.717045732452923,5.893899204244032,5.893899204244032,3.352155172413793,1.583494252873563,5.675606641123882],[8.480956468763649,7.432472475045067,7.736997699052202,9.084226481083189,7.527930775982095,8.178623043714484,6.119423694887648,6.542068543585372,6.219708272855694,5.814459163242199,5.074440862987847,5.41991797437374,4.955205111268167,7.197220808167781,4.743905579503263,4.761207860995425,6.293555340478441,5.932053047265257,4.065438693408224,5.07935226581831,3.921153878277285,3.916932118354118,4.238613321026455,5.025021133783112,5.852792319298911,4.850672986010094,4.850672986010094,4.126659594301794,3.900827385237751,3.569360688792205,4.534913372086554,4.053836954959947,4.735030475215971,3.236092162424446,4.123595771385452,3.955843827676442,3.442760291598357,4.261144983066909,4.261144983066909,4.261144983066909,3.377632332656715,3.245510973022491,3.554003102583319,3.639707296935338,3.391792464287594,4.096871701342512,4.096871701342512,3.475298529665548,2.869077595844497,3.989143639168399],[1.517008669206263e-09,5.336319490975688e-09,6.333335888372759e-09,6.985107517585311e-08,1.511413180174006e-07,1.839196865770325e-07,5.633292318731873e-07,3.265432341291421e-06,3.397506473644194e-06,3.547186819081973e-06,8.234486766836216e-06,1.248524384636754e-05,2.20197195532691e-05,3.858008396184187e-05,5.045633245644227e-05,0.0001118710888437514,0.0001259340182228167,0.0002051402768982924,0.0002247394228607997,0.0002715761409736253,0.0003578902459202622,0.000409329487435976,0.0004400651257476124,0.0004484359846315429,0.000481623324068758,0.0005922848865042513,0.0005922848865042513,0.0009240919089400568,0.0009362183034326741,0.001143061740594496,0.00146995708617861,0.001640226304202934,0.001870784916248107,0.001878879659557602,0.001918795714658796,0.001949390835720556,0.001999340808568796,0.002193853529015115,0.002193853529015115,0.002193853529015115,0.002491035558340757,0.002539299337808367,0.002850634706282311,0.003399711533416647,0.003464686107973744,0.004226082207802971,0.004226082207802971,0.004534754518906029,0.00454783312341495,0.004862523963605841],[3.684814057502013e-06,5.127890957619144e-06,5.127890957619144e-06,2.934664949282351e-05,4.46740918695612e-05,4.46740918695612e-05,0.0001067569786989188,0.0004534798307131637,0.0004534798307131637,0.0004534798307131637,0.0009091621980293258,0.001318550317514206,0.002139435951795626,0.003470778664567181,0.004226152811610285,0.007992202200043302,0.00869394554377107,0.0124571433146488,0.01299742995544958,0.0150148919624362,0.01889816102913732,0.02115449627621246,0.0213578628758827,0.0213578628758827,0.02207288781439647,0.02397766648864711,0.02397766648864711,0.03248677512911379,0.03248677512911379,0.03803420503978126,0.04519652863706131,0.04800132160131238,0.05178616434340239,0.05178616434340239,0.05178616434340239,0.05203373999961792,0.05278694373927832,0.05437622675487463,0.05437622675487463,0.05437622675487463,0.06111843809302727,0.06167958091536523,0.06722516215106537,0.07730675817839978,0.07782532623362375,0.09084206798896828,0.09084206798896828,0.09441612527158047,0.09441612527158047,0.09842558922998823],[3.684814057502013e-06,5.127890957619144e-06,5.127890957619144e-06,2.934664949282351e-05,4.46740918695612e-05,4.46740918695612e-05,0.0001067569786989188,0.0004534798307131638,0.0004534798307131638,0.0004534798307131638,0.0009091621980293258,0.001318550317514206,0.002139435951795626,0.003470778664567181,0.004226152811610285,0.007992202200043303,0.00869394554377107,0.0124571433146488,0.01299742995544958,0.0150148919624362,0.01889816102913732,0.02115449627621246,0.0213578628758827,0.0213578628758827,0.02207288781439647,0.02397766648864711,0.02397766648864711,0.03248677512911379,0.03248677512911379,0.03803420503978126,0.04519652863706131,0.04800132160131238,0.05178616434340239,0.05178616434340239,0.05178616434340239,0.05203373999961792,0.05278694373927833,0.05437622675487464,0.05437622675487464,0.05437622675487464,0.06111843809302726,0.06167958091536523,0.06722516215106536,0.0773067581783998,0.07782532623362375,0.09084206798896828,0.09084206798896828,0.09441612527158047,0.09441612527158047,0.09842558922998822],["RPL5/RPLP2/RPS11/RPL3/RPL11/RPS27A/RPL37A/RPS18/RPL26/RPS4X/RPL39/RPLP1/RPL17/RPS6/RPL23/RPS21/RPL27A/FAU","PPARG/RPL5/SORL1/RPLP2/PSMA4/CFL1/ITGB3/APOE/RPL11/RPL37A/TOMM70/SMAD7/SPP1/SOX4/RPL39/RPLP1/CLEC12A/YWHAH/PTPN13/SMAD6/RPL17/RPL23/RPL27A/PARP1","BMPR1A/RPL5/RPLP2/PDLIM7/TCF7L2/SKIL/RPL11/ACTC1/RPL37A/TOMM70/SMAD7/SOX4/RPL39/RPLP1/UQCC2/RPL17/CD81/RPL23/RPL27A/SMARCE1","RPL5/RPLP2/RPL11/RPL37A/RPL39/RPLP1/RPL17/RPL23/RPL27A","BMPR1A/RPL5/RPLP2/RPL11/ACTC1/RPL37A/TOMM70/RPL39/RPLP1/RPL17/CD81/RPL23/RPL27A","RPL5/RPLP2/RPL11/RPL37A/RPL39/RPLP1/RPL17/CD81/RPL23/RPL27A","PPARG/RPL5/SORL1/RPLP2/CFL1/APOE/RPL11/TIMP3/RPL37A/SPP1/RPL39/RPLP1/YWHAH/PTPN13/RPL17/ADD3/RPS6/RPL23/RPL27A/DYNLRB1/PARP1/APOC1","RPL5/RPLP2/RPL11/ACTC1/RPL37A/SMAD7/RPL39/RPLP1/RPL17/RPL23/RPL27A","BMPR1A/PDLIM7/ACTC1/SMYD2/TOMM70/SMAD7/SEMA3C/SOX4/MMP2/FN1/TRAF3IP2/SMAD6/DNAAF4","RPL5/RPLP2/CCND1/PSMA4/RPL3/SKIL/RPL11/TDRD9/RPL37A/SPP1/RAI14/RPLP1/MMP2/RPL17/RPL23/RPL27A/PARP1","HTRA4/PPARG/BMPR1A/SORL1/RBFOX2/CCND1/CFL1/TCF7L2/ITGB3/APOE/SKIL/TIMP3/TOMM70/SMAD7/SPP1/CBX3/ZFYVE27/IL1RN/YWHAH/MMP2/AGL/HSP90AB1/SMAD6/CD81/RPS6/DNAAF4/PARP1","RPL5/RPLP2/PSMA4/RPL3/SKIL/RPL11/TDRD9/RPL37A/SPP1/RAI14/RPLP1/MMP2/RPL17/RPL23/RPL27A/PARP1","EEF1G/RPL5/RPLP2/RPS11/RPL3/RPL11/RPS27A/RPL37A/SERBP1/RPS18/RPL26/RPS4X/RPL39/RPLP1/UQCC2/RPL17/RPS6/RPL23/RPS21/RPL27A/FAU","PPARG/SORL1/SKIL/SMAD7/SMAD6","PPARG/SORL1/RBFOX2/CCND1/CFL1/TCF7L2/ITGB3/TIMP3/TOMM70/SPP1/CBX3/IL1RN/YWHAH/MMP2/AGL/SMAD6/RPS6/DNAAF4/PARP1","SUMO2/RPL5/SORL1/PSMA4/APOE/RPL11/TIMP3/SMAD7/SF3B3/HSP90AB1/CD81/RPL23/DNAAF4","PPARG/BMPR1A/SMAD7/SMAD6/PARP1","PPARG/SORL1/SKIL/SMAD7/SMAD6","PPARG/BMPR1A/SORL1/PSMA4/CFL1/TCF7L2/SLC11A1/ITGB3/APOE/SKIL/FCGR3A/TOMM70/SMAD7/SPP1/CD226/SOX4/ZFYVE27/CLEC12A/HSPD1/TRAF3IP2/CD81/ADD3/SMARCE1/PARP1","RPS11/KRR1/RPS27A/RPS4X/RPS6/RPS21/FAU","IFNLR1/PPARG/BMPR1A/RBFOX2/CCND1/TCF7L2/SLC11A1/ITGB3/APOE/SMYD2/FCGR3A/SMAD7/RPS4X/SOX4/TNFRSF21/HSPD1/MMP2/FN1/TRAF3IP2/SMAD6/CD81/RPS6/RPL23","IFNLR1/PPARG/BMPR1A/RBFOX2/CCND1/TCF7L2/ITGB3/APOE/SMYD2/FCGR3A/SMAD7/RPS4X/SOX4/TNFRSF21/MMP2/FN1/TRAF3IP2/SMAD6/CD81/RPS6/RPL23","PPARG/SORL1/PSMA4/CFL1/ITGB3/TOMM70/SMAD7/SPP1/SOX4/CLEC12A/YWHAH/SMAD6","SLC11A1/RPL39/TNFRSF21/TRAF3IP2/CD81/FAU","PPARG/ITGB3/APOE/APOC1","PPARG/BMPR1A/SORL1/SKIL/SMAD7/SMAD6","RPL5/RPL11/SMYD2/RPL26/SOX4/RPL23","HTRA4/PPARG/BMPR1A/SORL1/SKIL/SMAD7/HSP90AB1/SMAD6/PARP1","CCT5/PPARG/SORL1/BICD1/CFL1/TCF7L2/RAB11A/APOE/SOX4/HSP90AB1/CD81/PARP1","MAP4K4/PSMA4/LMO7/CFL1/ITGB3/OLR1/SMAD7/SPP1/CD226/SOX4/IL1RN/TNFRSF21/HSPD1/MMP2/FN1/SMAD6/CD81/ITGA6/SMARCE1","PPARG/ITGB3/APOE/SPP1/APOC1","BMPR1A/SKIL/ACTC1/TOMM70/SMAD7/SEMA3C/UQCC2","RPL5/RPL11/HSP90AB1/RPL23","CDIN1/PPARG/BMPR1A/MAP4K4/SORL1/SDC2/PSMA4/CFL1/RAB11A/APOE/SKIL/ACTC1/TOMM70/SMAD7/SEMA3C/SPP1/SOX4/ZFYVE27/TNFRSF21/CLEC12A/YWHAH/MMP2/FN1/TRAF3IP2/CD81/ITGA6/SMARCE1/PARP1","PPARG/BMPR1A/SORL1/ITGB3/SMAD7/PARP1","BMPR1A/CFL1/APOE/TOMM70/SMAD7/SPP1/ZFYVE27","PPARG/RBFOX2/CCND1/TCF7L2/SLC11A1/MGST1/SPP1/CBX3/IL1RN/YWHAH/MMP2/AGL/SMAD6/DNAAF4/PARP1","BMPR1A/KIF3B/SEMA3C/SMAD6/DNAAF4","FCGR3A/CD226/HSPD1/TRAF3IP2/CD81","SLC11A1/APOE/MGST1/ALOX5AP/PTPN13","MAP4K4/PSMA4/LMO7/CFL1/ITGB3/SMAD7/SOX4/IL1RN/TNFRSF21/HSPD1/MMP2/FN1/CD81/SMARCE1","PPARG/BMPR1A/RPL5/SORL1/PSMA4/SLC11A1/ITGB3/ACTC1/FCGR3A/TOMM70/RPL26/RPS4X/CD226/CLEC12A/HSPD1/UQCC2/FN1/TRAF3IP2/CD81","BMPR1A/SDC2/CFL1/APOE/SKIL/SPP1/ZFYVE27/YWHAH/ITGA6","SLC11A1/FCGR3A/CD226/CLEC12A/HSPD1/FN1/TRAF3IP2","RPL5/SORL1/SLC11A1/RPL11/TIMP3/SF3B3/TRAF3IP2/HSP90AB1/RPL23/APOC1","CFL1/ITGB3/MMP2/FN1","SORL1/SPP1/YWHAH/PTPN13","CCND1/ITGB3/ACTC1/SEMA3C/MMP2/TRAF3IP2/ADD3","IFNLR1/CDIN1/PPARG/BMPR1A/PSMA4/SLC11A1/ITGB3/APOE/TMBIM6/OLR1/FCGR3A/TOMM70/SMAD7/SEMA3C/CD226/SOX4/RPL39/IL1RN/TNFRSF21/CLEC12A/HSPD1/MMP2/FN1/TRAF3IP2/SMAD6/CD81/ITGA6/MTUS1/SMARCE1/PARP1/FAU","RPL5/RPL11/RPS6/FAU"],[18,24,20,9,13,10,22,11,13,17,27,16,21,5,19,13,5,5,24,7,23,21,12,6,4,6,6,9,12,19,5,7,4,28,6,7,15,5,5,5,14,19,9,7,10,4,4,7,31,4]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>Description<\/th>\n      <th>GeneRatio<\/th>\n      <th>BgRatio<\/th>\n      <th>RichFactor<\/th>\n      <th>FoldEnrichment<\/th>\n      <th>zScore<\/th>\n      <th>pvalue<\/th>\n      <th>p.adjust<\/th>\n      <th>qvalue<\/th>\n      <th>geneID<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"Description","targets":2},{"name":"GeneRatio","targets":3},{"name":"BgRatio","targets":4},{"name":"RichFactor","targets":5},{"name":"FoldEnrichment","targets":6},{"name":"zScore","targets":7},{"name":"pvalue","targets":8},{"name":"p.adjust","targets":9},{"name":"qvalue","targets":10},{"name":"geneID","targets":11},{"name":"Count","targets":12}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>###################################### downregulated genes
 
 down.GO &lt;- enrichGO(
@@ -1667,7 +2095,7 @@ simp.down.GO.sign &lt;- as.data.frame(simp.down.GO.show) %&gt;%
 
 create_table(simp.down.GO.show)</code></pre>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-697d58abce2053a24549" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-697d58abce2053a24549">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.041333333333333\" data-max=\"0.235294117647059\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.80083660130719\" data-max=\"10.2514417531719\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.68654409534341\" data-max=\"6.15506935678176\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.102841903e-06\" data-max=\"0.000512058300723\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.002553901492368\" data-max=\"0.095676124035051\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.002553901492368\" data-max=\"0.095676124035051\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"4\" data-max=\"31\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["GO:0006954","GO:0001818","GO:0002250","GO:0042110","GO:0001816","GO:0002376","GO:0045066","GO:1903039"],["GO:0006954","GO:0001818","GO:0002250","GO:0042110","GO:0001816","GO:0002376","GO:0045066","GO:1903039"],["inflammatory response","negative regulation of cytokine production","adaptive immune response","T cell activation","cytokine production","immune system process","regulatory T cell differentiation","positive regulation of leukocyte cell-cell adhesion"],["19/102","11/102","12/102","12/102","16/102","31/102","4/102","8/102"],["246/4444","94/4444","148/4444","155/4444","256/4444","750/4444","17/4444","82/4444"],[0.07723577235772358,0.1170212765957447,0.08108108108108109,0.07741935483870968,0.0625,0.04133333333333333,0.2352941176470588,0.0975609756097561],[3.365056591742388,5.098456403838131,3.532591414944356,3.373055028462999,2.723039215686275,1.800836601307189,10.25144175317186,4.250597800095648],[5.848994412562421,6.155069356781763,4.802387330962742,4.608811735162507,4.352162885301653,3.68654409534341,5.856962609217288,4.553241291297547],[2.102841903967872e-06,7.663372032488386e-06,0.0001214476200130022,0.0001889578148804595,0.0001971629459924723,0.0004636485802736222,0.0004947563821060205,0.0005120583007227907],[0.002553901492368981,0.00620477688897143,0.04789087958157153,0.04789087958157153,0.04789087958157153,0.09567612403505066,0.09567612403505066,0.09567612403505066],[0.002553901492368981,0.00620477688897143,0.04789087958157153,0.04789087958157153,0.04789087958157153,0.09567612403505064,0.09567612403505064,0.09567612403505064],["FCGR2C/VNN1/METRNL/IGF1/CD163/HLA-DRB1/NAMPT/FCGR2A/NLRP1/THEMIS2/AOAH/CXCL2/HDAC9/IL10RA/SIGLEC1/CMKLR1/NAIP/STAB1/NLRP3","IGF1/HLA-DRB1/CR1/SRGN/VSIR/CLEC4A/HDAC9/SIGLEC1/XAF1/CMKLR1/NLRP3","FCGR2C/HLA-DRB1/ZBTB46/FCGR2A/CR1/MPEG1/PRDM1/HLA-DQA1/GPR183/CLEC4A/LILRB5/NLRP3","VNN1/IGF1/HLA-DRB1/ZBTB46/JAML/CR1/PRDM1/HLA-DQA1/VSIR/GPR183/CLEC4A/NLRP3","FCGR2C/IGF1/HLA-DRB1/FCGR2A/CR1/SRGN/VSIR/NLRP1/CLEC4A/HDAC9/FCN1/SIGLEC1/XAF1/CMKLR1/NAIP/NLRP3","FCGR2C/VNN1/IGF1/HLA-DRB1/ZBTB46/FCGR2A/JAML/CR1/MPEG1/PRDM1/HLA-DQA1/VAV2/GCNT1/VSIR/GPR183/NLRP1/THEMIS2/IGSF6/ADAMDEC1/COLEC12/CLEC4A/CXCL2/HDAC9/FCN1/ATP1B1/TMEM176B/CMKLR1/NAIP/LILRB5/CD48/NLRP3","HLA-DRB1/ZBTB46/CR1/VSIR","VNN1/IGF1/HLA-DRB1/CR1/HLA-DQA1/GCNT1/VSIR/NLRP3"],[19,11,12,12,16,31,4,8]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>Description<\/th>\n      <th>GeneRatio<\/th>\n      <th>BgRatio<\/th>\n      <th>RichFactor<\/th>\n      <th>FoldEnrichment<\/th>\n      <th>zScore<\/th>\n      <th>pvalue<\/th>\n      <th>p.adjust<\/th>\n      <th>qvalue<\/th>\n      <th>geneID<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"Description","targets":2},{"name":"GeneRatio","targets":3},{"name":"BgRatio","targets":4},{"name":"RichFactor","targets":5},{"name":"FoldEnrichment","targets":6},{"name":"zScore","targets":7},{"name":"pvalue","targets":8},{"name":"p.adjust","targets":9},{"name":"qvalue","targets":10},{"name":"geneID","targets":11},{"name":"Count","targets":12}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-697d58abce2053a24549">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.041333333333333\" data-max=\"0.235294117647059\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.80083660130719\" data-max=\"10.2514417531719\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.68654409534341\" data-max=\"6.15506935678176\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.102841903e-06\" data-max=\"0.000512058300723\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.002553901492368\" data-max=\"0.095676124035051\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.002553901492368\" data-max=\"0.095676124035051\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"4\" data-max=\"31\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["GO:0006954","GO:0001818","GO:0002250","GO:0042110","GO:0001816","GO:0002376","GO:0045066","GO:1903039"],["GO:0006954","GO:0001818","GO:0002250","GO:0042110","GO:0001816","GO:0002376","GO:0045066","GO:1903039"],["inflammatory response","negative regulation of cytokine production","adaptive immune response","T cell activation","cytokine production","immune system process","regulatory T cell differentiation","positive regulation of leukocyte cell-cell adhesion"],["19/102","11/102","12/102","12/102","16/102","31/102","4/102","8/102"],["246/4444","94/4444","148/4444","155/4444","256/4444","750/4444","17/4444","82/4444"],[0.07723577235772358,0.1170212765957447,0.08108108108108109,0.07741935483870968,0.0625,0.04133333333333333,0.2352941176470588,0.0975609756097561],[3.365056591742388,5.098456403838131,3.532591414944356,3.373055028462999,2.723039215686275,1.800836601307189,10.25144175317186,4.250597800095648],[5.848994412562421,6.155069356781763,4.802387330962742,4.608811735162507,4.352162885301653,3.68654409534341,5.856962609217288,4.553241291297547],[2.102841903967872e-06,7.663372032488386e-06,0.0001214476200130022,0.0001889578148804595,0.0001971629459924723,0.0004636485802736222,0.0004947563821060205,0.0005120583007227907],[0.002553901492368981,0.00620477688897143,0.04789087958157153,0.04789087958157153,0.04789087958157153,0.09567612403505066,0.09567612403505066,0.09567612403505066],[0.002553901492368981,0.00620477688897143,0.04789087958157153,0.04789087958157153,0.04789087958157153,0.09567612403505064,0.09567612403505064,0.09567612403505064],["CMKLR1/SIGLEC1/FCGR2A/STAB1/NAIP/HDAC9/VNN1/NLRP3/METRNL/THEMIS2/NLRP1/NAMPT/IL10RA/CD163/IGF1/HLA-DRB1/CXCL2/FCGR2C/AOAH","CMKLR1/SIGLEC1/SRGN/VSIR/CR1/HDAC9/CLEC4A/XAF1/NLRP3/IGF1/HLA-DRB1","GPR183/FCGR2A/CR1/MPEG1/CLEC4A/HLA-DQA1/LILRB5/NLRP3/HLA-DRB1/ZBTB46/FCGR2C/PRDM1","GPR183/JAML/VSIR/CR1/CLEC4A/HLA-DQA1/VNN1/NLRP3/IGF1/HLA-DRB1/ZBTB46/PRDM1","CMKLR1/SIGLEC1/SRGN/FCGR2A/VSIR/CR1/NAIP/HDAC9/CLEC4A/XAF1/NLRP3/NLRP1/IGF1/HLA-DRB1/FCN1/FCGR2C","COLEC12/GPR183/CMKLR1/FCGR2A/JAML/CD48/ATP1B1/GCNT1/VSIR/CR1/MPEG1/NAIP/HDAC9/TMEM176B/CLEC4A/HLA-DQA1/IGSF6/LILRB5/VAV2/VNN1/NLRP3/THEMIS2/NLRP1/IGF1/HLA-DRB1/CXCL2/ZBTB46/FCN1/FCGR2C/PRDM1/ADAMDEC1","VSIR/CR1/HLA-DRB1/ZBTB46","GCNT1/VSIR/CR1/HLA-DQA1/VNN1/NLRP3/IGF1/HLA-DRB1"],[19,11,12,12,16,31,4,8]],"container":"<table class=\"cell-border stripe hover nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>Description<\/th>\n      <th>GeneRatio<\/th>\n      <th>BgRatio<\/th>\n      <th>RichFactor<\/th>\n      <th>FoldEnrichment<\/th>\n      <th>zScore<\/th>\n      <th>pvalue<\/th>\n      <th>p.adjust<\/th>\n      <th>qvalue<\/th>\n      <th>geneID<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf"],"pageLength":10,"lengthMenu":[10,25,50,100],"autoWidth":true,"columnDefs":[{"targets":"_all","className":"dt-nowrap"},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"Description","targets":2},{"name":"GeneRatio","targets":3},{"name":"BgRatio","targets":4},{"name":"RichFactor","targets":5},{"name":"FoldEnrichment","targets":6},{"name":"zScore","targets":7},{"name":"pvalue","targets":8},{"name":"p.adjust","targets":9},{"name":"qvalue","targets":10},{"name":"geneID","targets":11},{"name":"Count","targets":12}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 <div id="visualisations" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Visualisations</h2>
 <pre class="r"><code>go_up_df   &lt;- as.data.frame(simp.up.GO) %&gt;% mutate(Direction = &quot;Up-regulated&quot;)
@@ -1741,13 +2169,68 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd49b339ff33b9fe8f9b2152ae0eff5ba87cb7c9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-13-1.png" target="_blank">fd49b33</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -1815,13 +2298,112 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/3ae510b50d561ff10a7d7b5247421d450b3c19bb/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">3ae510b</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-07
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-1.png" target="_blank">dc39c88</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -1879,13 +2461,79 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/3ae510b50d561ff10a7d7b5247421d450b3c19bb/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" target="_blank">3ae510b</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-07
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-2.png" target="_blank">dc39c88</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -1946,13 +2594,35 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-3.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-3.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-3.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-3.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
 </td>
 </tr>
 </tbody>
@@ -2010,13 +2680,35 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-4.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-4.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-4.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-4.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
 </td>
 </tr>
 </tbody>
@@ -2090,13 +2782,35 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-5.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-5.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-5.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-14-5.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
 </td>
 </tr>
 </tbody>
@@ -2220,13 +2934,123 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fc83bf14929a13908fe10691d377db35b54f50e6/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">fc83bf1</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/3ae510b50d561ff10a7d7b5247421d450b3c19bb/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">3ae510b</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-07
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-17-1.png" target="_blank">dc39c88</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -2275,13 +3099,101 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-1.png" target="_blank">dc39c88</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -2313,13 +3225,90 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/3ae510b50d561ff10a7d7b5247421d450b3c19bb/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">3ae510b</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-07
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-2.png" target="_blank">dc39c88</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -2351,13 +3340,46 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-3.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-3.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-3.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-3.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-18-3.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
 </td>
 </tr>
 </tbody>
@@ -2412,13 +3434,101 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/2c12ae260f6c6e9608d631fdad626eeb1246bd5a/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">2c12ae2</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/dc39c882346d9a8fbe7a3b7017e24f0ae66a74e6/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-19-1.png" target="_blank">dc39c88</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-03
 </td>
 </tr>
 </tbody>
@@ -2467,13 +3577,79 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-1.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/de6f901006f8f1dff0eade58867e49a25a2d4314/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-1.png" target="_blank">de6f901</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/676253fc925536ec951d5aaea3accca913375d85/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-1.png" target="_blank">676253f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
 </td>
 </tr>
 </tbody>
@@ -2505,13 +3681,46 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-2.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-2.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-2.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/24f1f562e45696b13dbb99fe17c74a5f9063dd3f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-2.png" target="_blank">24f1f56</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-20-2.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
 </td>
 </tr>
 </tbody>
@@ -2609,13 +3818,46 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-23-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-23-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-23-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-23-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-23-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
 </td>
 </tr>
 </tbody>
@@ -2654,13 +3896,46 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-24-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-24-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-24-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-24-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-24-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
 </td>
 </tr>
 </tbody>
@@ -2701,13 +3976,46 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-25-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-25-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-25-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-25-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/a41e2a7c51aa61d55267655d1bbbef1b5c276021/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-25-1.png" target="_blank">a41e2a7</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-15
 </td>
 </tr>
 </tbody>
@@ -2746,13 +4054,35 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://gitlab.com/Sophie/MT-Project/blob/aabbb696de600a5a1103831339360754527836b9/public/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-26-1.png" target="_blank">aabbb69</a>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/1562a98c35651990303958065be4621ac72a899e/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-26-1.png" target="_blank">1562a98</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/aabbb696de600a5a1103831339360754527836b9/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-26-1.png" target="_blank">aabbb69</a>
 </td>
 <td>
 Sophie.Alice
 </td>
 <td>
 2026-08-21
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/28d634c4d2778b4ed084177ac9fe5e141055bc6f/docs/figure/Macrophage_subset_DGEA.Rmd/unnamed-chunk-26-1.png" target="_blank">28d634c</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-07-16
 </td>
 </tr>
 </tbody>
@@ -2770,7 +4100,7 @@ Session information
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.6.0 (2026-04-24)
 Platform: aarch64-apple-darwin23
-Running under: macOS Sequoia 15.7.7
+Running under: macOS Sequoia 15.7.9
 
 Matrix products: default
 BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
