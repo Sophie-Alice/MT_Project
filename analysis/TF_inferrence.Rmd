@@ -1,0 +1,309 @@
+---
+title: "TF inference - Overview"
+author: "Sophie.Alice"
+date: "2026-10-27"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: inline
+---
+
+
+# Setup
+
+```{r, message=FALSE, warning = FALSE}
+rm(list=ls())
+gc()
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+library(aPEAR)
+
+# for omnipath
+library(OmnipathR)
+library(decoupleR)
+library(mgcv)
+```
+
+
+# Get the Data
+
+```{r, warning = FALSE}
+path <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds"
+Data <- read_rds(path)
+Data
+# Cardiomyocytes <- subset(Data, cell_type == "Cardiomyocytes")
+
+
+path2 <- "/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Cardiomyocytes_DEG_Lists_Lenient.rds"
+
+DEG.lists <- read_rds(path2)
+
+custom_palette <- colorRampPalette(c("#005EA8", "#6DB335", "#FFD966", "#EDAAD2", "#9F1C67"))
+gradient_colors2 <- custom_palette(2)
+gradient_colors3 <- custom_palette(6)
+gradient_colors4 <- custom_palette(4)
+```
+
+# Get the reference DB
+
+```{r, warning = FALSE}
+
+collectri_raw <- read.csv("https://rescued.omnipathdb.org/CollecTRI.csv", stringsAsFactors = FALSE)
+net <- collectri_raw %>%
+  rename(
+    source = source,
+    target = target,
+    mor = weight  # 'weight' contains 1 (activation) and -1 (repression)
+  ) %>%
+  dplyr::select(source, target, mor) %>%
+  distinct()
+head(net)
+
+```
+
+# Run ulm on the whole dataset
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+# Extract normalized expression matrix from Seurat
+mat <- as.matrix(GetAssayData(Data, layer = "data"))
+
+
+# Run ulm
+acts <- decoupleR::run_ulm(mat = mat, 
+                           net = net, 
+                           .source = 'source', 
+                           .target = 'target',
+                           .mor='mor', 
+                           minsize = 5)
+head(acts)
+
+```
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+# Extract ulm and store it in tfsulm and safe the object
+Data[['tfsulm']] <- acts %>%
+                    tidyr::pivot_wider(id_cols = 'source', 
+                                       names_from = 'condition',
+                                       values_from = 'score') %>%
+                    tibble::column_to_rownames('source') %>%
+                    Seurat::CreateAssayObject(.)
+
+# Change assay
+DefaultAssay(object = Data) <- "tfsulm"
+
+# Scale the data
+Data <- Seurat::ScaleData(Data)
+
+# add the scaled data to the data column
+Data@assays$tfsulm@data <- Data@assays$tfsulm@scale.data
+
+path <- "/home/sopwag/KeratinocytesProject/08_09_Slingshot/"
+#saveRDS(Data, file.path(path, "_Seurat_processed.rds"))
+
+
+```
+
+## Safe the matrix
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+tf_auc_matrix <- acts %>%
+  filter(statistic == "ulm") %>%
+  tidyr::pivot_wider(id_cols = "condition", names_from = "source", values_from = "score") %>%
+  column_to_rownames("condition") %>%
+  as.matrix()
+
+# sanity check before saving — catch problems now, not after reloading elsewhere
+stopifnot(is.matrix(tf_auc_matrix))
+stopifnot(!any(is.na(rownames(tf_auc_matrix))))
+message("Saving tf_auc_matrix: ", nrow(tf_auc_matrix), " cells x ", ncol(tf_auc_matrix), " TFs")
+
+```
+
+## Get the top TFs per cluster
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+n_tfs <- 30
+# Idents(seurat_subset) <- "group.ident"
+head(Data@meta.data)
+Idents(Data) <- "cell_type"
+# Extract activities from object as a long dataframe
+df <- t(as.matrix(Data@assays$tfsulm@data)) %>%
+      as.data.frame() %>%
+      dplyr::mutate(cluster = Seurat::Idents(Data)) %>%
+      tidyr::pivot_longer(cols = -cluster, 
+                          names_to = "source", 
+                          values_to = "score") %>%
+      dplyr::group_by(cluster, source) %>%
+      dplyr::summarise(mean = mean(score))
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+# Get top tfs with more variable means across clusters
+tfs <- df %>%
+       dplyr::group_by(source) %>%
+       dplyr::summarise(std = stats::sd(mean)) %>%
+       dplyr::arrange(-abs(std)) %>%
+       head(n_tfs) %>%
+       dplyr::pull(source)
+
+tfs5 <- df %>%
+  dplyr::group_by(cluster) %>%
+  dplyr::slice_max(order_by = mean, n = 5, with_ties = FALSE) %>%
+  dplyr::pull(source) %>%
+  unique()
+
+# Subset long data frame to top tfs and transform to wide matrix
+top_acts_mat <- df %>%
+                dplyr::filter(source %in% tfs5) %>%
+                tidyr::pivot_wider(id_cols = 'cluster', 
+                                   names_from = 'source',
+                                   values_from = 'mean') %>%
+                tibble::column_to_rownames('cluster') %>%
+                as.matrix()
+
+# subsetting only the 3 main celltypes
+# table(Data$cell_type)
+# 
+# my_vec <- c("Cardiomyocytes", "Macrophages", "Cardiac Fibroblasts")
+# 
+# 
+# # Reorder matrix rows directly
+# top_acts_mat <- top_acts_mat[my_vec, , drop = FALSE]
+
+# Choose color palette
+colors <- rev(RColorBrewer::brewer.pal(n = 10, name = "RdBu"))
+colors.use <- grDevices::colorRampPalette(colors = colors)(100)
+
+my_breaks <- c(seq(-2, 0, length.out = ceiling(100 / 2) + 1),
+               seq(0.05, 2, length.out = floor(100 / 2)))
+
+# Plot
+pheatmap::pheatmap(mat = t(top_acts_mat),
+                   color = colors.use,
+                   border_color = "white",
+                   breaks = my_breaks,
+                   cellwidth = 15,
+                   cluster_cols = FALSE,
+                   cellheight = 10,
+                   treeheight_row = 20,
+                   treeheight_col = 20)
+
+```
+
+## Check specific TF in their activity pattern
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+p <- Seurat::DimPlot(Data,
+                      reduction = "umap",
+                      label = TRUE,
+                      pt.size = 0.5) +
+      Seurat::NoLegend() +
+      ggplot2::ggtitle('Cell types')
+
+
+colors <- rev(RColorBrewer::brewer.pal(n = 11, name = "RdBu")[c(2, 10)])
+
+Seurat::DefaultAssay(Data) <- "tfsulm"
+
+p1 <- Seurat::FeaturePlot(Data, features = c("TWIST2"), reduction = "umap") +
+      ggplot2::scale_colour_gradient2(low = colors[1], mid = 'white', high = colors[2]) +
+      ggplot2::ggtitle('TWIST2 activity')
+
+Seurat::DefaultAssay(Data) <- "RNA"
+
+p2 <- Seurat::FeaturePlot(Data, features = c("TWIST2"), reduction = "umap") +
+      ggplot2::scale_colour_gradient2(low = colors[1], mid = 'white', high = colors[2]) +
+      ggplot2::ggtitle('TWIST2 expression')
+
+Seurat::DefaultAssay(Data) <- "tfsulm"
+
+p3 <- Seurat::FeaturePlot(Data, features = c("SMAD3"), reduction = "umap") +
+      ggplot2::scale_colour_gradient2(low = colors[1], mid = 'white', high = colors[2]) +
+      ggplot2::ggtitle('SMAD3 activity')
+
+Seurat::DefaultAssay(Data) <- "RNA"
+
+p4 <- Seurat::FeaturePlot(Data, features = c("SMAD3"), reduction = "umap") +
+      ggplot2::scale_colour_gradient2(low = colors[1], mid = 'white', high = colors[2]) +
+      ggplot2::ggtitle('SMAD3 expression')
+
+p
+
+
+(p1 | p2) / (p3 | p4)
+
+```
+
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+```
+
+```{r, warning = FALSE, fig.width=8, fig.height=7}
+
+
+```
+
