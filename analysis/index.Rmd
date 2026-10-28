@@ -77,12 +77,20 @@ Project MT
 
 * **5.4 Cell Chat**
     * [5.1 Cellchat](Chellchat.html)
-    
+
+## Transcription inference
+
+* **Transcription inference**
+    * [6.1 Overview](TF_inferrence.html)
+    * [6.2.1 Macrophage Focus](Mac_TF_inferrence.html)
+    * [6.2.2 Cardiac Fibroblasts Focus](CF_TF_inferrence.html)
+    * [6.2.3 Cardiomyocytes Focus](CM_TF_inferrence.html)
+
+
 ## Fibroblast DGEA Method comparison
 
 * **X.1 DGEA - Comparison of 3 Methods**
     * [X.1.1 NC vs. Macrophages](Method1_Baseline_Mac_Response_Lenient.html)
     * [X.1.2 TGF-$\beta$ vs. Macrophages + TGF-$\beta$](Methods_Stim_Mac_Response_Lenient.html)
     * [X.1.3 NC vs. TGF-$\beta$](Methods_Baseline_TGF_Response_Lenient.html)
-
 
