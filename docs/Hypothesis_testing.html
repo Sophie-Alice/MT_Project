@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Sophie.Alice" />
+
+<meta name="date" content="2026-10-28" />
+
+<title>Hypothesis_testing</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MT_Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Global Overview
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Checking_Cellbender.html">1. Cellbender vs. Raw Data QC Comparison</a>
+    </li>
+    <li>
+      <a href="QC.html">2. Quality Control (QC)</a>
+    </li>
+    <li>
+      <a href="Dim_Reduction.html">3. Clustering and Annotation</a>
+    </li>
+    <li>
+      <a href="Checking_cellscores.html">3.1 Cell scores</a>
+    </li>
+    <li>
+      <a href="Proportions.html">4. Celltype Proportions</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="Chellchat.html">5. Cellchat</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Cardiomyocytes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="CM_Subtypes.html">.1.0 CM Subtypes</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="#">Standard Thresholds (DGEA)</a>
+    </li>
+    <li>
+      <a href="CM_DGEA.html">Overview Dashboard</a>
+    </li>
+    <li>
+      <a href="CM_Baseline_TGF_Response.html">.1.1 Baseline TGF-beta Response</a>
+    </li>
+    <li>
+      <a href="CM_Modulated_TGF_Response.html">.1.2 Modulated TGF-beta Response</a>
+    </li>
+    <li>
+      <a href="CM_Baseline_Mac_Response.html">.1.3 Baseline Macrophage Response</a>
+    </li>
+    <li>
+      <a href="CM_Stim_Mac_Response.html">.1.4 Stimulated Macrophage Response</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="#">Lenient Thresholds (DGEA)</a>
+    </li>
+    <li>
+      <a href="CM_DGEA_Lenient.html">Overview Dashboard</a>
+    </li>
+    <li>
+      <a href="CM_Baseline_TGF_Response_Lenient.html">.2.1 Baseline TGF-beta Response</a>
+    </li>
+    <li>
+      <a href="CM_Modulated_TGF_Response_Lenient.html">.2.2 Modulated TGF-beta Response</a>
+    </li>
+    <li>
+      <a href="CM_Baseline_Mac_Response_Lenient.html">.2.3 Baseline Macrophage Response</a>
+    </li>
+    <li>
+      <a href="CM_Baseline_Mac_Response_Lenient.html">.2.4 Stimulated Macrophage Response</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Macrophages
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Macrophage_subset_DGEA.html">.1 Differential Gene Expression (DGEA)</a>
+    </li>
+    <li>
+      <a href="Macrophage_subset_DGEA_Lenient.html">.2 DGEA - Lenient Thresholds</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Fibroblasts
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="#">Global Comparisons</a>
+    </li>
+    <li>
+      <a href="Fibroblasts_DEG_Overlap.html">Overview &amp; DEG Overlap</a>
+    </li>
+    <li>
+      <a href="Fibroblast_Comparisons.html">All Fibroblast Comparisons Dashboard</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="#">Standard Thresholds (DGEA)</a>
+    </li>
+    <li>
+      <a href="DGEA.html">Overview Dashboard</a>
+    </li>
+    <li>
+      <a href="Fibro_Baseline_TGF_Response.html">.1.1 Baseline TGF-beta Response</a>
+    </li>
+    <li>
+      <a href="Fibro_Modulated_TGF_Response_Lenient.html">.1.2 Modulated TGF-beta Response</a>
+    </li>
+    <li>
+      <a href="Fibro_Baseline_Mac_Response.html">.1.3 Baseline Macrophage Response</a>
+    </li>
+    <li>
+      <a href="Fibro_Stim_Mac_Response.html">.1.4 Stimulated Macrophage Response</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="#">Lenient Thresholds (DGEA)</a>
+    </li>
+    <li>
+      <a href="DGEA_Lenient.html">Overview Dashboard</a>
+    </li>
+    <li>
+      <a href="Fibro_Baseline_TGF_Response_Lenient.html">.2.1 Baseline TGF-beta Response</a>
+    </li>
+    <li>
+      <a href="Fibro_Modulated_TGF_Response_Lenient.html">.2.2 Modulated TGF-beta Response</a>
+    </li>
+    <li>
+      <a href="Fibro_Baseline_Mac_Response_Lenient.html">.2.3 Baseline Macrophage Response</a>
+    </li>
+    <li>
+      <a href="Fibro_Stim_Mac_Response_Lenient.html">.2.4 Stimulated Macrophage Response</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="#">Subclusters</a>
+    </li>
+    <li>
+      <a href="fib_markers.html">.3.1 Unmodified - Fibroblast Marker</a>
+    </li>
+    <li>
+      <a href="Subclusters_Fib.html">.3.2 Modified - Fibroblast Marker</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="CellScore.html">.4.1 Cell Scores</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Method Comparison
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Method1_Baseline_Mac_Response_Lenient.html">X.1.1 NC vs. Macrophages</a>
+    </li>
+    <li>
+      <a href="Methods_Stim_Mac_Response_Lenient.html">X.1.2 TGF-beta vs. Macrophages + TGF-beta</a>
+    </li>
+    <li>
+      <a href="Methods_Baseline_TGF_Response_Lenient.html">X.1.3 NC vs. TGF-beta</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Sophie-Alice/MT_Project">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Hypothesis_testing</h1>
+<h4 class="author">Sophie.Alice</h4>
+<h4 class="date">2026-10-28</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2026-10-29
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>MT_Project/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.2). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20260612code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20260612)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20260612code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20260612)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreefd01b0f19c03504a0a17771e4b3b000b7ef81cddtargetblankfd01b0fa">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/fd01b0f19c03504a0a17771e4b3b000b7ef81cdd" target="_blank">fd01b0f</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomSophieAliceMTProjecttreefd01b0f19c03504a0a17771e4b3b000b7ef81cddtargetblankfd01b0fa"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Sophie-Alice/MT_Project/tree/fd01b0f19c03504a0a17771e4b3b000b7ef81cdd" target="_blank">fd01b0f</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/omnipathr-log/
+    Ignored:    omnipathr-log/
+
+Unstaged changes:
+    Modified:   .gitignore
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/Hypothesis_testing.Rmd</code>)
+and HTML (<code>docs/Hypothesis_testing.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Sophie-Alice/MT_Project/blob/fd01b0f19c03504a0a17771e4b3b000b7ef81cdd/analysis/Hypothesis_testing.Rmd" target="_blank">fd01b0f</a>
+</td>
+<td>
+Sophie.Alice
+</td>
+<td>
+2026-10-29
+</td>
+<td>
+Hyptoh
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="setup" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Setup</h1>
+<pre class="r"><code>rm(list=ls())
+gc()</code></pre>
+<pre><code>          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
+Ncells  907934 48.5    1753237 93.7         NA  1321070 70.6
+Vcells 1600266 12.3    8388608 64.0      16384  2494785 19.1</code></pre>
+<pre class="r"><code>library(readr)
+library(dplyr)
+library(ggplot2)
+library(Seurat)
+library(hdf5r)
+library(scCustomize)
+library(patchwork)
+library(cowplot)
+library(ggrepel)
+library(workflowr)
+library(scDblFinder)
+library(clustree)
+library(harmony)
+library(speckle)
+library(MAST)
+library(tibble)
+library(EnhancedVolcano)
+
+library(ggarchery)
+library(ggtangle)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(DOSE)
+library(fgsea)
+library(forcats)
+library(SCpubr)
+library(assertthat)
+library(UCell)
+library(DT)
+
+library(ggforce) 
+library(enrichplot)
+library(ggrain)
+library(aPEAR)
+
+# for omnipath
+library(OmnipathR)
+library(decoupleR)
+library(mgcv)
+
+library(ggridges)</code></pre>
+</div>
+<div id="get-the-data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Get the Data</h1>
+<pre class="r"><code>path &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/Post_Annotation.rds&quot;
+Data &lt;- read_rds(path)
+Data</code></pre>
+<pre><code>An object of class Seurat 
+65557 features across 12824 samples within 2 assays 
+Active assay: RNA (38606 features, 0 variable features)
+ 2 layers present: counts, data
+ 1 other assay present: SCT
+ 3 dimensional reductions calculated: pca, harmony, umap</code></pre>
+<pre class="r"><code># Cardiomyocytes &lt;- subset(Data, cell_type == &quot;Cardiomyocytes&quot;)
+
+
+path2 &lt;- &quot;/Users/sophiewagner/Desktop/USZ 25:26/Gabi_Project_Setup/Laila_MT_Project/Laila_MT_Project/RDS_Files/All_Cardiomyocytes_DEG_Lists_Lenient.rds&quot;
+
+DEG.lists &lt;- read_rds(path2)
+
+custom_palette &lt;- colorRampPalette(c(&quot;#005EA8&quot;, &quot;#6DB335&quot;, &quot;#FFD966&quot;, &quot;#EDAAD2&quot;, &quot;#9F1C67&quot;))
+gradient_colors2 &lt;- custom_palette(2)
+gradient_colors3 &lt;- custom_palette(6)
+gradient_colors4 &lt;- custom_palette(4)
+colorvalues &lt;- c(&quot;CMFHM_NC&quot; = &quot;#005EA8&quot;, &quot;CMFHM_TGF&quot; = &quot;#9F1C67&quot;, &quot;CMF_NC&quot; = &quot;#9DBF45&quot;, &quot;CMF_TGF&quot; = &quot;#F3B9AD&quot;)</code></pre>
+</div>
+<div id="functions" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Functions</h1>
+<pre class="r"><code>plot_expression_violin &lt;- function(
+    df, 
+    score_col,  
+    title = &quot;Gene Expression&quot;, 
+    subtitle = &quot;CMF_TGF vs CMFHM_TGF&quot;,
+    colors = colorvalues,
+    comparisons = list(c(&quot;CMFHM_NC&quot;, &quot;CMFHM_TGF&quot;))
+) {
+  
+  p &lt;- ggplot(df, aes(x = orig.ident, y = .data[[score_col]], fill = orig.ident)) +
+    geom_violin(alpha = 0.5, color = NA, scale = &quot;area&quot;) +
+    geom_boxplot(width = 0.2, color = &quot;black&quot;, outlier.shape = NA, alpha = 0.8) +
+    scale_fill_manual(values = colors) +
+    
+    # stat_compare_means(
+    #   comparisons = comparisons,
+    #   method = &quot;wilcox.test&quot;,
+    #   label = &quot;p.signif&quot; 
+    # ) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+    
+    theme_bw() +
+    labs(
+      title    = title,
+      subtitle = subtitle,
+      x        = &quot;&quot;,
+      y        = ifelse(score_col == &quot;Mean_Expression&quot;, &quot;Mean Expression&quot;, paste(score_col, &quot;Expression&quot;))
+    ) +
+    theme(
+      plot.title.position = &quot;plot&quot;,
+      plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+      plot.subtitle = element_text(face = &quot;italic&quot;, size = 10, hjust = 0),
+      legend.position = &quot;none&quot;
+    )
+  
+  return(p)
+}</code></pre>
+</div>
+<div id="get-the-reference-db" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Get the reference
+DB</h1>
+<pre class="r"><code>collectri_raw &lt;- read.csv(&quot;https://rescued.omnipathdb.org/CollecTRI.csv&quot;, stringsAsFactors = FALSE)
+net &lt;- collectri_raw %&gt;%
+  rename(
+    source = source,
+    target = target,
+    mor = weight  # &#39;weight&#39; contains 1 (activation) and -1 (repression)
+  ) %&gt;%
+  dplyr::select(source, target, mor) %&gt;%
+  distinct()
+head(net)</code></pre>
+<pre><code>  source target mor
+1    MYC   TERT   1
+2   SPI1  BGLAP   1
+3    AP1    JUN   1
+4  SMAD3    JUN   1
+5  SMAD4    JUN   1
+6 STAT5A    IL2   1</code></pre>
+</div>
+<div id="run-ulm-on-the-whole-dataset" class="section level1"
+number="5">
+<h1><span class="header-section-number">5</span> Run ulm on the whole
+dataset</h1>
+<pre class="r"><code># Extract normalized expression matrix from Seurat
+mat &lt;- as.matrix(GetAssayData(Data, layer = &quot;data&quot;))
+
+
+# Run ulm
+acts &lt;- decoupleR::run_ulm(mat = mat, 
+                           net = net, 
+                           .source = &#39;source&#39;, 
+                           .target = &#39;target&#39;,
+                           .mor=&#39;mor&#39;, 
+                           minsize = 5)
+head(acts)</code></pre>
+<pre><code># A tibble: 6 × 5
+  statistic source condition                    score p_value
+  &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;                        &lt;dbl&gt;   &lt;dbl&gt;
+1 ulm       ABL1   CMFHM_NC_AAACCATTCACATGCA-1  1.84   0.0655
+2 ulm       ABL1   CMFHM_NC_AAACCATTCAGGACTC-1 -0.464  0.642 
+3 ulm       ABL1   CMFHM_NC_AAACCATTCGAACGTC-1 -1.30   0.194 
+4 ulm       ABL1   CMFHM_NC_AAACCATTCGAATCAT-1 -0.182  0.856 
+5 ulm       ABL1   CMFHM_NC_AAACCATTCGTTCCTG-1  0.758  0.448 
+6 ulm       ABL1   CMFHM_NC_AAACCGCTCAGGAGCA-1  1.24   0.214 </code></pre>
+<pre class="r"><code># Extract ulm and store it in tfsulm and safe the object
+Data[[&#39;tfsulm&#39;]] &lt;- acts %&gt;%
+                    tidyr::pivot_wider(id_cols = &#39;source&#39;, 
+                                       names_from = &#39;condition&#39;,
+                                       values_from = &#39;score&#39;) %&gt;%
+                    tibble::column_to_rownames(&#39;source&#39;) %&gt;%
+                    Seurat::CreateAssayObject(.)
+
+# Change assay
+DefaultAssay(object = Data) &lt;- &quot;tfsulm&quot;
+
+# Scale the data
+Data &lt;- Seurat::ScaleData(Data)</code></pre>
+<pre><code>Centering and scaling data matrix</code></pre>
+<pre class="r"><code># add the scaled data to the data column
+Data@assays$tfsulm@data &lt;- Data@assays$tfsulm@scale.data
+
+path &lt;- &quot;/home/sopwag/KeratinocytesProject/08_09_Slingshot/&quot;
+#saveRDS(Data, file.path(path, &quot;_Seurat_processed.rds&quot;))</code></pre>
+<div id="safe-the-matrix" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Safe the matrix</h2>
+<pre class="r"><code>tf_auc_matrix &lt;- acts %&gt;%
+  filter(statistic == &quot;ulm&quot;) %&gt;%
+  tidyr::pivot_wider(id_cols = &quot;condition&quot;, names_from = &quot;source&quot;, values_from = &quot;score&quot;) %&gt;%
+  column_to_rownames(&quot;condition&quot;) %&gt;%
+  as.matrix()
+
+# sanity check before saving — catch problems now, not after reloading elsewhere
+stopifnot(is.matrix(tf_auc_matrix))
+stopifnot(!any(is.na(rownames(tf_auc_matrix))))
+message(&quot;Saving tf_auc_matrix: &quot;, nrow(tf_auc_matrix), &quot; cells x &quot;, ncol(tf_auc_matrix), &quot; TFs&quot;)</code></pre>
+<pre><code>Saving tf_auc_matrix: 12824 cells x 771 TFs</code></pre>
+<p>In macrophages: ALDH1A2 increased upon TGF-B stim Retinaldehyde is
+made to retinoic acid?</p>
+<p>In Cardiomyocytes: retinoic acid? (RAR/RXR?) is a inducer of
+BMP7?</p>
+<p>in Cardiac fibroblasts: BMP7 directs BMP7R-SMAD1/5/9 signaling</p>
+</div>
+</div>
+<div id="in-macrophages" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> In macrophages</h1>
+<p>In macrophages: ALDH1A2 increased upon TGF-B stim. Retinaldehyde
+(Vitamin A) is made to retinoic acid There’s different isoforms of
+retinoic acid : All-trans-retinoic acid acts by binding to the retinoic
+acid receptor (RAR), which is bound to DNA as a heterodimer with the
+retinoid X receptor (RXR) in regions called retinoic acid response
+elements (RAREs). Binding of the all-trans-retinoic acid ligand to RAR
+alters the conformation of the RAR, which affects the binding of other
+proteins that either induce or repress transcription of a nearby gene
+(including Hox genes and several other target genes). RARs mediate
+transcription of different sets of genes controlling differentiation of
+a variety of cell types, thus the target genes regulated depend upon the
+target cells.</p>
+<pre class="r"><code>Seurat::DefaultAssay(Data) &lt;- &quot;RNA&quot;
+
+target_gene &lt;- &quot;ALDH1A2&quot;
+&quot;ALDH1A2&quot; %in% rownames(Data)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>Celltype &lt;- &quot;Macrophages&quot;
+comp &lt;- c(&quot;CMFHM_TGF&quot;, &quot;CMFHM_NC&quot;)
+plot_subtitle &lt;- &quot;CMFHM_NC (No TGF-B) vs CMFHM_TGF (With TGF-B)&quot;
+
+
+# Extract metadata alongside target gene expression directly
+
+df_plot &lt;- FetchData(Data, vars = c(&quot;orig.ident&quot;, &quot;cell_type&quot;, target_gene), layer = &quot;data&quot;) %&gt;% 
+  dplyr::filter(cell_type == &quot;Macrophages&quot;, orig.ident %in% comp)
+
+# 2. Generate Violin Plot for single gene
+p_violin &lt;- plot_expression_violin(
+  df = df_plot, 
+  score_col = target_gene,     
+  title = paste(Celltype, &quot;:&quot;, target_gene, &quot;Expression&quot;),
+  subtitle = plot_subtitle
+)
+
+print(p_violin)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-8-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Mac &lt;- subset(Data, cell_type == &quot;Macrophages&quot;) 
+
+FeaturePlot_scCustom(Mac, feature = target_gene, split.by = &quot;TGF_status&quot;)</code></pre>
+<pre><code>
+NOTE: FeaturePlot_scCustom uses a specified `na_cutoff` when plotting to
+color cells with no expression as background color separate from color scale.
+Please ensure `na_cutoff` value is appropriate for feature being plotted.
+Default setting is appropriate for use when plotting from &#39;RNA&#39; assay.
+When `na_cutoff` not appropriate (e.g., module scores) set to NULL to
+plot all cells in gradient color palette.
+
+-----This message will be shown once per session.-----</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-8-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="vizualize-target-gene-expression-proportions"
+class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Vizualize Target gene
+expression proportions</h1>
+<pre class="r"><code>expr_vec &lt;- FetchData(Mac, vars = target_gene, layer = &quot;data&quot;)[[target_gene]]
+summary(expr_vec)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  0.0000  0.0000  0.2808  0.5509  3.5555 </code></pre>
+<pre class="r"><code>p_density &lt;- ggplot(data.frame(x = expr_vec), aes(x = x)) +
+  geom_density(color = &quot;#005EA8&quot;, linewidth = 1) +
+  theme_bw() +
+  labs(
+    title = &quot;Gene Expression Density&quot;,
+    x = &quot;Normalized Expression&quot;,
+    y = &quot;Density&quot;
+  ) +
+  theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+p_density</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-9-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># find a better cutoff estimation - if we use cells with &gt; 0 expression we also include noise
+
+# get density object
+d &lt;- density(expr_vec)
+
+# search for the lowest point between 0 and 1
+valid_range &lt;- d$x &gt; 0 &amp; d$x &lt; 1.0
+trough_x &lt;- d$x[valid_range][which.min(d$y[valid_range])]
+
+
+cat(&quot;Optimal cutoff:&quot;, round(trough_x, 3), &quot;\n&quot;)</code></pre>
+<pre><code>Optimal cutoff: 0.289 </code></pre>
+<pre class="r"><code># Add an expression status column to metadata (using hte calculated cutoff before)
+Mac$Expression_Status &lt;- ifelse(
+  expr_vec &gt; trough_x, 
+  paste0(target_gene, &quot;+&quot;), 
+  paste0(target_gene, &quot;-&quot;)
+)
+
+# get counts
+cellCounts &lt;- table(Status = Mac$Expression_Status, TGF_status = Mac$TGF_status)
+
+# Generate both Barplot (stacked and filled)
+
+p1 &lt;- ggplot(data = as.data.frame(cellCounts), aes(x = TGF_status, fill = Status, y = Freq)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;stack&quot;) +
+  scale_fill_manual(values = setNames(c(&quot;#005EA8&quot;, &quot;#E4E6E8&quot;), c(paste0(target_gene, &quot;+&quot;), paste0(target_gene, &quot;-&quot;)))) +
+  theme_bw() + 
+  labs(
+    title = paste(&quot;Count of&quot;, target_gene, &quot;Expressing Cells across Conditions&quot;), 
+    x = &quot;&quot;, 
+    y = &quot;Count of Cells&quot;,
+    fill = &quot;Status&quot;
+  )+
+  theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+
+p2 &lt;- ggplot(data = as.data.frame(cellCounts), aes(x = TGF_status, fill = Status, y = Freq)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;fill&quot;) +
+  scale_fill_manual(values = setNames(c(&quot;#005EA8&quot;, &quot;#E4E6E8&quot;), c(paste0(target_gene, &quot;+&quot;), paste0(target_gene, &quot;-&quot;)))) +
+  theme_bw() + 
+  labs(
+    title = paste(&quot;Proportion of&quot;, target_gene, &quot;Expressing Cells across Conditions&quot;), 
+    x = &quot;&quot;, 
+    y = &quot;Proportion of Cells&quot;,
+    fill = &quot;Status&quot;
+  )+
+  theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+
+
+print(p1)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-9-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>print(p2)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-9-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p_density_overlay &lt;- ggplot(df_plot, aes(x = ALDH1A2, color = orig.ident, fill = orig.ident)) +
+  geom_density(alpha = 0.1, linewidth = 1) +
+  scale_color_manual(values = colorvalues) +
+  scale_fill_manual(values = colorvalues) +
+  theme_bw() +
+  labs(
+    title = &quot;ALDH1A2 Expression Density across Conditions&quot;,
+    x = &quot;Normalized Expression&quot;,
+    y = &quot;Density&quot;,
+    color = &quot;Condition&quot;,
+    fill = &quot;Condition&quot;
+  ) +
+  theme(
+    plot.title.position = &quot;plot&quot;,
+    plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+    axis.text.x   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+    axis.text.y   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+    axis.title.x  = element_text(face = &quot;bold&quot;),
+    axis.title.y  = element_text(face = &quot;bold&quot;)
+  )
+
+print(p_density_overlay)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-10-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="in-cardiomyocytes" class="section level1 tabset" number="8">
+<h1 class="tabset"><span class="header-section-number">8</span> In
+Cardiomyocytes</h1>
+<p>In Cardiomyocytes: retinoic acid? (RAR/RXR?) is a inducer of
+BMP7?</p>
+<div id="rarrax-expression" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> RAR/RAX
+expression</h2>
+<p>The Retinoic acid (specific isoforms) binds to RAR/RXR</p>
+<pre class="r"><code>RARRAX &lt;- c(&quot;RARB&quot;, &quot;RXRA&quot;, &quot;RARA&quot;, &quot;RARG&quot;, &quot;PPARA&quot;)
+
+# First we check if the RAR/RXR genes are present in our expression layer
+
+Seurat::DefaultAssay(Data) &lt;- &quot;RNA&quot;
+RARRAX %in% rownames(Data)</code></pre>
+<pre><code>[1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<pre class="r"><code># Yes they are all present
+
+# then we check if the RAR/RXR genes are present in our TF inferrence layer
+Seurat::DefaultAssay(Data) &lt;- &quot;tfsulm&quot;
+
+RARRAX %in% rownames(Data)</code></pre>
+<pre><code>[1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<pre class="r"><code># Yes they are all present </code></pre>
+<pre class="r"><code>Celltype &lt;- &quot;Cardiomyocytes&quot;
+
+CM &lt;- subset(Data, cell_type == &quot;Cardiomyocytes&quot;) 
+
+# Extract metadata alongside target gene expression directly in a loop
+
+
+for (target_gene in RARRAX) {
+  
+  Seurat::DefaultAssay(Data) &lt;- &quot;RNA&quot;
+  
+  df_plot &lt;- FetchData(Data, vars = c(&quot;orig.ident&quot;, &quot;cell_type&quot;, target_gene), layer = &quot;data&quot;) %&gt;% 
+    dplyr::filter(cell_type == &quot;Cardiomyocytes&quot;)
+  
+  # 2. Generate Violin Plot for single gene
+  p_violin.exp &lt;- plot_expression_violin(
+    df = df_plot, 
+    score_col = target_gene,     
+    title = paste(Celltype, &quot;:&quot;, target_gene, &quot;Expression&quot;),
+    subtitle = &quot;Gene Expression per Condition&quot;)
+  
+  Seurat::DefaultAssay(Data) &lt;- &quot;tfsulm&quot;
+  
+  df_plot &lt;- FetchData(Data, vars = c(&quot;orig.ident&quot;, &quot;cell_type&quot;, target_gene), layer = &quot;data&quot;) %&gt;% 
+    dplyr::filter(cell_type == &quot;Cardiomyocytes&quot;)
+  
+  # 2. Generate Violin Plot for single gene
+  p_violin.act &lt;- plot_expression_violin(
+    df = df_plot, 
+    score_col = target_gene,     
+    title = paste(Celltype, &quot;:&quot;, target_gene, &quot;Activity&quot;),
+    subtitle = &quot;Infered TF Activity per Condition&quot;
+  )
+  
+  print(p_violin.exp + p_violin.act)
+
+}</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-12-1.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-12-2.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-12-3.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-12-4.png" alt="" width="768" style="display: block; margin: auto;" /><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-12-5.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="vizualize-target-gene-expression-proportions-1"
+class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Vizualize Target gene
+expression proportions</h1>
+<pre class="r"><code>for (target_gene in RARRAX) {
+    
+  Seurat::DefaultAssay(Data) &lt;- &quot;RNA&quot;
+  
+  df_plot &lt;- FetchData(Data, vars = c(&quot;orig.ident&quot;, &quot;cell_type&quot;, target_gene), layer = &quot;data&quot;) %&gt;% 
+    dplyr::filter(cell_type == &quot;Cardiomyocytes&quot;)
+  
+  expr_vec &lt;- FetchData(CM, vars = target_gene, layer = &quot;data&quot;)[[target_gene]]
+  summary(expr_vec)
+  
+  p_density &lt;- ggplot(data.frame(x = expr_vec), aes(x = x)) +
+    geom_density(color = &quot;#005EA8&quot;, linewidth = 1) +
+    theme_bw() +
+    labs(
+      title = paste0(target_gene , &quot; Gene Expression Density&quot;),
+      x = &quot;Normalized Expression&quot;,
+      y = &quot;Density&quot;
+    ) +
+    theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+  
+  
+  # find a better cutoff estimation - if we use cells with &gt; 0 expression we also include noise
+  
+  # get density object
+  d &lt;- density(expr_vec)
+  
+  # search for the lowest point between 0 and 1
+  valid_range &lt;- d$x &gt; 0 &amp; d$x &lt; 1.0
+  trough_x &lt;- d$x[valid_range][which.min(d$y[valid_range])]
+  
+  
+  cat(&quot;Optimal cutoff:&quot;, round(trough_x, 3), &quot;\n&quot;)
+  
+  
+  # Add an expression status column to metadata (using hte calculated cutoff before)
+  CM$Expression_Status &lt;- ifelse(
+    expr_vec &gt; trough_x, 
+    paste0(target_gene, &quot;+&quot;), 
+    paste0(target_gene, &quot;-&quot;)
+  )
+  
+  # get counts
+  cellCounts &lt;- table(Status = CM$Expression_Status, Ident = CM$orig.ident)
+  
+  # Generate both Barplot (stacked and filled)
+  
+  p1 &lt;- ggplot(data = as.data.frame(cellCounts), aes(x = Ident, fill = Status, y = Freq)) +
+    geom_bar(stat = &quot;identity&quot;, position = &quot;stack&quot;) +
+    scale_fill_manual(values = setNames(c(&quot;#005EA8&quot;, &quot;#E4E6E8&quot;), c(paste0(target_gene, &quot;+&quot;), paste0(target_gene, &quot;-&quot;)))) +
+    theme_bw() + 
+    labs(
+      title = paste(&quot;Count of&quot;, target_gene, &quot;Expressing Cells&quot;), 
+      x = &quot;&quot;, 
+      y = &quot;Count of Cells&quot;,
+      fill = &quot;Status&quot;
+    )+
+    theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+  
+  p2 &lt;- ggplot(data = as.data.frame(cellCounts), aes(x = Ident, fill = Status, y = Freq)) +
+    geom_bar(stat = &quot;identity&quot;, position = &quot;fill&quot;) +
+    scale_fill_manual(values = setNames(c(&quot;#005EA8&quot;, &quot;#E4E6E8&quot;), c(paste0(target_gene, &quot;+&quot;), paste0(target_gene, &quot;-&quot;)))) +
+    theme_bw() + 
+    labs(
+      title = paste(&quot;Proportion of&quot;, target_gene, &quot;Expressing Cells&quot;), 
+      x = &quot;&quot;, 
+      y = &quot;Proportion of Cells&quot;,
+      fill = &quot;Status&quot;
+    )+
+    theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+  
+    p_density_overlay &lt;- ggplot(df_plot, aes(x = df_plot[3], color = orig.ident, fill = orig.ident)) +
+    geom_density(alpha = 0.1, linewidth = 1) +
+    scale_color_manual(values = colorvalues) +
+    scale_fill_manual(values = colorvalues) +
+    theme_bw() +
+    labs(
+      title = paste0(target_gene , &quot; Gene Expression Density&quot;),
+      x = &quot;Normalized Expression&quot;,
+      y = &quot;Density&quot;,
+      color = &quot;Condition&quot;,
+      fill = &quot;Condition&quot;
+    ) +
+    theme(
+      plot.title.position = &quot;plot&quot;,
+      plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+      axis.text.x   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.text.y   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.title.x  = element_text(face = &quot;bold&quot;),
+      axis.title.y  = element_text(face = &quot;bold&quot;)
+    )
+    
+  p_density_overlay &lt;- ggplot(df_plot, aes(x = df_plot[[3]], color = orig.ident, fill = orig.ident)) +
+    geom_density(alpha = 0.1, linewidth = 1) +
+    scale_color_manual(values = colorvalues) +
+    scale_fill_manual(values = colorvalues) +
+    theme_bw() +
+    labs(
+      title = paste0(target_gene , &quot; Gene Expression Density&quot;),
+      x = &quot;Normalized Expression&quot;,
+      y = &quot;Density&quot;,
+      color = &quot;Condition&quot;,
+      fill = &quot;Condition&quot;
+    ) +
+    theme(
+      plot.title.position = &quot;plot&quot;,
+      plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+      axis.text.x   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.text.y   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.title.x  = element_text(face = &quot;bold&quot;),
+      axis.title.y  = element_text(face = &quot;bold&quot;)
+    )
+
+  print(p_density / p1 | p_density_overlay / p2)
+  
+}</code></pre>
+<pre><code>Optimal cutoff: 0.993 </code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-13-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>Optimal cutoff: 0.996 </code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-13-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>Optimal cutoff: 0.999 </code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-13-3.png" alt="" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>Optimal cutoff: 0.999 </code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-13-4.png" alt="" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>Optimal cutoff: 0.986 </code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-13-5.png" alt="" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="vizualize-target-gene-tf-inference-activity"
+class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Vizualize Target gene
+TF inference Activity</h1>
+<pre class="r"><code>for (target_gene in RARRAX) {
+    
+  Seurat::DefaultAssay(Data) &lt;- &quot;tfsulm&quot;
+  Seurat::DefaultAssay(CM) &lt;- &quot;tfsulm&quot;
+  
+  df_plot &lt;- FetchData(Data, vars = c(&quot;orig.ident&quot;, &quot;cell_type&quot;, target_gene), layer = &quot;data&quot;) %&gt;% 
+    dplyr::filter(cell_type == &quot;Cardiomyocytes&quot;)
+  
+  expr_vec &lt;- FetchData(CM, vars = target_gene, layer = &quot;data&quot;)[[target_gene]]
+  summary(expr_vec)
+  
+  p_density &lt;- ggplot(data.frame(x = expr_vec), aes(x = x)) +
+    geom_density(color = &quot;#005EA8&quot;, linewidth = 1) +
+    theme_bw() +
+    labs(
+      title = paste0(target_gene , &quot; TF Activity Density&quot;),
+      x = &quot;Inferred Activity&quot;,
+      y = &quot;Density&quot;
+    ) +
+    theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+
+  
+  
+  # Awe just to ned. and pos activity
+  CM$Expression_Status &lt;- ifelse(
+    expr_vec &gt; 0,
+    paste0(target_gene, &quot;+&quot;),
+    paste0(target_gene, &quot;-&quot;)
+  )
+  # CM$Expression_Status &lt;- case_when(
+  #   expr_vec &gt; 0.1 ~ paste0(target_gene, &quot;+&quot;),
+  #   expr_vec &lt; -0.1 ~ paste0(target_gene, &quot;-&quot;),
+  #   TRUE           ~ paste0(target_gene, &quot;0&quot;) # Default fallback for expr_vec == 0
+  #   )
+  
+  # get counts
+  cellCounts &lt;- table(Status = CM$Expression_Status, Ident = CM$orig.ident)
+  
+  # Generate both Barplot (stacked and filled)
+  
+  p1 &lt;- ggplot(data = as.data.frame(cellCounts), aes(x = Ident, fill = Status, y = Freq)) +
+    geom_bar(stat = &quot;identity&quot;, position = &quot;stack&quot;, alpha = 0.7) +
+    scale_fill_manual(values = setNames(c(&quot;#005EA8&quot;, &quot;#9F1C67&quot;, &quot;#E4E6E8&quot;), c(paste0(target_gene, &quot;+&quot;), paste0(target_gene, &quot;-&quot;), paste0(target_gene, &quot;0&quot;)))) +
+    theme_bw() + 
+    labs(
+      title = paste( target_gene, &quot;Directional Activity&quot;), 
+      x = &quot;&quot;, 
+      y = &quot;Count of Cells&quot;,
+      fill = &quot;Status&quot;
+    )+
+    theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+  
+  p2 &lt;- ggplot(data = as.data.frame(cellCounts), aes(x = Ident, fill = Status, y = Freq)) +
+    geom_bar(stat = &quot;identity&quot;, position = &quot;fill&quot;, alpha = 0.7) +
+    scale_fill_manual(values = setNames(c(&quot;#005EA8&quot;, &quot;#9F1C67&quot;, &quot;#E4E6E8&quot;), c(paste0(target_gene, &quot;+&quot;), paste0(target_gene, &quot;-&quot;), paste0(target_gene, &quot;0&quot;)))) +
+    theme_bw() + 
+    labs(
+      title = paste( target_gene, &quot;Directional Activity&quot;), 
+      x = &quot;&quot;, 
+      y = &quot;Proportion of Cells&quot;,
+      fill = &quot;Status&quot;
+    )+
+    theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+  
+    p_density_overlay &lt;- ggplot(df_plot, aes(x = df_plot[3], color = orig.ident, fill = orig.ident)) +
+    geom_density(alpha = 0.1, linewidth = 1) +
+    scale_color_manual(values = colorvalues) +
+    scale_fill_manual(values = colorvalues) +
+    theme_bw() +
+    labs(
+      title = paste0(target_gene , &quot; Inferred Activity Density&quot;),
+      x = &quot;Inferred Activity&quot;,
+      y = &quot;Density&quot;,
+      color = &quot;Condition&quot;,
+      fill = &quot;Condition&quot;
+    ) +
+    theme(
+      plot.title.position = &quot;plot&quot;,
+      plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+      axis.text.x   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.text.y   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.title.x  = element_text(face = &quot;bold&quot;),
+      axis.title.y  = element_text(face = &quot;bold&quot;)
+    )
+    
+  p_density_overlay &lt;- ggplot(df_plot, aes(x = df_plot[[3]], color = orig.ident, fill = orig.ident)) +
+    geom_density(alpha = 0.1, linewidth = 1) +
+    scale_color_manual(values = colorvalues) +
+    scale_fill_manual(values = colorvalues) +
+    theme_bw() +
+    labs(
+      title = paste0(target_gene , &quot; Inferred Activity Density&quot;),
+      x = &quot;Inferred Activity&quot;,
+      y = &quot;Density&quot;,
+      color = &quot;Condition&quot;,
+      fill = &quot;Condition&quot;
+    ) +
+    theme(
+      plot.title.position = &quot;plot&quot;,
+      plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+      axis.text.x   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.text.y   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+      axis.title.x  = element_text(face = &quot;bold&quot;),
+      axis.title.y  = element_text(face = &quot;bold&quot;)
+    )
+
+  print(p_density / p1 | p_density_overlay / p2)
+  
+}</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-14-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-14-2.png" alt="" width="960" style="display: block; margin: auto;" /><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-14-3.png" alt="" width="960" style="display: block; margin: auto;" /><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-14-4.png" alt="" width="960" style="display: block; margin: auto;" /><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-14-5.png" alt="" width="960" style="display: block; margin: auto;" /></p>
+<div id="bmp7" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> BMP7</h2>
+<pre class="r"><code>Seurat::DefaultAssay(Data) &lt;- &quot;RNA&quot;
+Seurat::DefaultAssay(CM) &lt;- &quot;RNA&quot;
+
+target_gene &lt;- &quot;BMP7&quot;
+
+&quot;BMP7&quot; %in% rownames(Data)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>Celltype &lt;- &quot;Cardiomyocytes&quot;
+comp &lt;- c(&quot;CMFHM_TGF&quot;, &quot;CMFHM_NC&quot;)
+plot_subtitle &lt;- &quot;CMFHM_NC (No TGF-B) vs CMFHM_TGF (With TGF-B)&quot;
+
+
+# Extract metadata alongside target gene expression directly
+
+df_plot &lt;- FetchData(Data, vars = c(&quot;orig.ident&quot;, &quot;cell_type&quot;, target_gene), layer = &quot;data&quot;) %&gt;% 
+  dplyr::filter(cell_type == &quot;Cardiomyocytes&quot;)
+
+# 2. Generate Violin Plot for single gene
+p_violin &lt;- plot_expression_violin(
+  df = df_plot, 
+  score_col = target_gene,     
+  title = paste(Celltype, &quot;:&quot;, target_gene, &quot;Expression&quot;),
+  subtitle = plot_subtitle
+)
+
+print(p_violin)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-15-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot_scCustom(CM, feature = target_gene, split.by = &quot;orig.ident&quot;)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-15-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="vizualize-target-gene-expression-proportions-2"
+class="section level1" number="11">
+<h1><span class="header-section-number">11</span> Vizualize Target gene
+expression proportions</h1>
+<pre class="r"><code>expr_vec &lt;- FetchData(CM, vars = target_gene, layer = &quot;data&quot;)[[target_gene]]
+summary(expr_vec)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  0.0000  0.6886  0.6895  1.1792  3.3259 </code></pre>
+<pre class="r"><code>p_density &lt;- ggplot(data.frame(x = expr_vec), aes(x = x)) +
+  geom_density(color = &quot;#005EA8&quot;, linewidth = 1) +
+  theme_bw() +
+  labs(
+    title = &quot;Gene Expression Density&quot;,
+    x = &quot;Normalized Expression&quot;,
+    y = &quot;Density&quot;
+  ) +
+  theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+p_density</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-16-1.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># find a better cutoff estimation - if we use cells with &gt; 0 expression we also include noise
+
+# get density object
+d &lt;- density(expr_vec)
+
+# search for the lowest point between 0 and 1
+valid_range &lt;- d$x &gt; 0 &amp; d$x &lt; 1.0
+trough_x &lt;- d$x[valid_range][which.min(d$y[valid_range])]
+
+
+cat(&quot;Optimal cutoff:&quot;, round(trough_x, 3), &quot;\n&quot;)</code></pre>
+<pre><code>Optimal cutoff: 0.269 </code></pre>
+<pre class="r"><code># Add an expression status column to metadata (using hte calculated cutoff before)
+CM$Expression_Status &lt;- ifelse(
+  expr_vec &gt; trough_x, 
+  paste0(target_gene, &quot;+&quot;), 
+  paste0(target_gene, &quot;-&quot;)
+)
+
+# get counts
+cellCounts &lt;- table(Status = CM$Expression_Status, Ident = CM$orig.ident)
+
+# Generate both Barplot (stacked and filled)
+
+p1 &lt;- ggplot(data = as.data.frame(cellCounts), aes(x = Ident, fill = Status, y = Freq)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;stack&quot;) +
+  scale_fill_manual(values = setNames(c(&quot;#005EA8&quot;, &quot;#E4E6E8&quot;), c(paste0(target_gene, &quot;+&quot;), paste0(target_gene, &quot;-&quot;)))) +
+  theme_bw() + 
+  labs(
+    title = paste(&quot;Count of&quot;, target_gene, &quot;Expressing Cells across Conditions&quot;), 
+    x = &quot;&quot;, 
+    y = &quot;Count of Cells&quot;,
+    fill = &quot;Status&quot;
+  )+
+  theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+
+p2 &lt;- ggplot(data = as.data.frame(cellCounts), aes(x = Ident, fill = Status, y = Freq)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;fill&quot;) +
+  scale_fill_manual(values = setNames(c(&quot;#005EA8&quot;, &quot;#E4E6E8&quot;), c(paste0(target_gene, &quot;+&quot;), paste0(target_gene, &quot;-&quot;)))) +
+  theme_bw() + 
+  labs(
+    title = paste(&quot;Proportion of&quot;, target_gene, &quot;Expressing Cells across Conditions&quot;), 
+    x = &quot;&quot;, 
+    y = &quot;Proportion of Cells&quot;,
+    fill = &quot;Status&quot;
+  )+
+  theme(plot.title = element_text(face = &quot;bold&quot;, size = 12, hjust = 0))
+
+
+
+p_density_overlay &lt;- ggplot(df_plot, aes(x = df_plot[[3]], color = orig.ident, fill = orig.ident)) +
+  geom_density(alpha = 0.1, linewidth = 1) +
+  scale_color_manual(values = colorvalues) +
+  scale_fill_manual(values = colorvalues) +
+  theme_bw() +
+  labs(
+    title = paste0(target_gene , &quot; Expression Density across Conditions&quot;),
+    x = &quot;Normalized Expression&quot;,
+    y = &quot;Density&quot;,
+    color = &quot;Condition&quot;,
+    fill = &quot;Condition&quot;
+  ) +
+  theme(
+    plot.title.position = &quot;plot&quot;,
+    plot.title    = element_text(face = &quot;bold&quot;, size = 12, hjust = 0),
+    axis.text.x   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+    axis.text.y   = element_text(face = &quot;bold&quot;, color = &quot;black&quot;),
+    axis.title.x  = element_text(face = &quot;bold&quot;),
+    axis.title.y  = element_text(face = &quot;bold&quot;)
+  )
+
+print(p_density_overlay)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-16-2.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>print(p1)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-16-3.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>print(p2)</code></pre>
+<p><img src="figure/Hypothesis_testing.Rmd/unnamed-chunk-16-4.png" alt="" width="768" style="display: block; margin: auto;" /></p>
+<p>in Cardiac fibroblasts: BMP7 directs BMP7R-SMAD1/5/9 signaling</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.6.0 (2026-04-24)
+Platform: aarch64-apple-darwin23
+Running under: macOS Sequoia 15.7.9
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/Zurich
+tzcode source: internal
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] ggridges_0.5.7              mgcv_1.9-4                 
+ [3] nlme_3.1-169                decoupleR_2.17.0           
+ [5] OmnipathR_4.0.0             aPEAR_1.0                  
+ [7] ggrain_0.1.2                enrichplot_1.32.0          
+ [9] ggforce_0.5.0               DT_0.34.0                  
+[11] UCell_2.16.0                assertthat_0.2.1           
+[13] SCpubr_3.0.1                forcats_1.0.1              
+[15] fgsea_1.38.0                DOSE_4.6.0                 
+[17] GO.db_3.23.1                org.Hs.eg.db_3.23.1        
+[19] AnnotationDbi_1.74.0        clusterProfiler_4.20.0     
+[21] ggtangle_0.1.2              ggarchery_0.4.4            
+[23] EnhancedVolcano_1.30.0      tibble_3.3.1               
+[25] MAST_1.38.0                 speckle_1.12.0             
+[27] harmony_2.0.5               Rcpp_1.1.1-1.1             
+[29] clustree_0.5.1              ggraph_2.2.2               
+[31] scDblFinder_1.26.2          SingleCellExperiment_1.34.0
+[33] SummarizedExperiment_1.42.0 Biobase_2.72.0             
+[35] GenomicRanges_1.64.0        Seqinfo_1.2.0              
+[37] IRanges_2.46.0              S4Vectors_0.50.1           
+[39] BiocGenerics_0.58.1         generics_0.1.4             
+[41] MatrixGenerics_1.24.0       matrixStats_1.5.0          
+[43] ggrepel_0.9.8               cowplot_1.2.0              
+[45] patchwork_1.3.2             scCustomize_3.3.0          
+[47] hdf5r_1.3.12                Seurat_5.5.0               
+[49] SeuratObject_5.4.0          sp_2.2-1                   
+[51] ggplot2_4.0.3               dplyr_1.2.1                
+[53] readr_2.2.0                 workflowr_1.7.2            
+
+loaded via a namespace (and not attached):
+  [1] igraph_2.3.2             ica_1.0-3                plotly_4.12.0           
+  [4] scater_1.40.1            rematch2_2.1.2           tidyselect_1.2.1        
+  [7] rvest_1.0.5              bit_4.6.0                lattice_0.22-9          
+ [10] rjson_0.2.23             blob_1.3.0               stringr_1.6.0           
+ [13] S4Arrays_1.12.0          parallel_4.6.0           png_0.1-9               
+ [16] cli_3.6.6                ggplotify_0.1.3          goftest_1.2-3           
+ [19] BiocIO_1.22.0            bluster_1.22.0           purrr_1.2.2             
+ [22] BiocNeighbors_2.6.0      uwot_0.2.4               curl_7.1.0              
+ [25] mime_0.13                evaluate_1.0.5           tidytree_0.4.7          
+ [28] stringi_1.8.7            backports_1.5.1          XML_3.99-0.23           
+ [31] lubridate_1.9.5          httpuv_1.6.17            paletteer_1.7.0         
+ [34] magrittr_2.0.5           rappdirs_0.3.4           splines_4.6.0           
+ [37] logger_0.4.2             sctransform_0.4.3        ggbeeswarm_0.7.3        
+ [40] sessioninfo_1.2.4        DBI_1.3.0                jquerylib_0.1.4         
+ [43] withr_3.0.3              git2r_0.36.2             systemfonts_1.3.2       
+ [46] rprojroot_2.1.1          xgboost_3.2.1.1          lmtest_0.9-40           
+ [49] ggnewscale_0.5.2         tidygraph_1.3.1          rtracklayer_1.72.0      
+ [52] htmlwidgets_1.6.4        fs_2.1.0                 labeling_0.4.3          
+ [55] SparseArray_1.12.2       cellranger_1.1.0         reticulate_1.46.0       
+ [58] zoo_1.8-15               XVector_0.52.0           knitr_1.51              
+ [61] UCSC.utils_1.7.1         timechange_0.4.0         foreach_1.5.2           
+ [64] grid_4.6.0               data.table_1.18.4        ggtree_4.2.0            
+ [67] R.oo_1.27.1              bayesbio_1.0.0           ggiraph_0.9.6           
+ [70] RSpectra_0.16-2          irlba_2.3.7              ggrastr_1.0.2           
+ [73] fastDummies_1.7.6        gridGraphics_0.5-1       lazyeval_0.2.3          
+ [76] yaml_2.3.12              survival_3.8-6           scattermore_1.2         
+ [79] crayon_1.5.3             RcppAnnoy_0.0.23         RColorBrewer_1.1-3      
+ [82] tidyr_1.3.2              progressr_0.19.0         tweenr_2.0.3            
+ [85] later_1.4.8              codetools_0.2-20         GlobalOptions_0.1.4     
+ [88] KEGGREST_1.52.2          Rtsne_0.17               shape_1.4.6.1           
+ [91] limma_3.68.4             gdtools_0.5.1            Rsamtools_2.28.0        
+ [94] pkgconfig_2.0.3          xml2_1.6.0               spatstat.univar_3.2-0   
+ [97] GenomicAlignments_1.48.0 getPass_0.2-4            aplot_0.3.0             
+[100] spatstat.sparse_3.2-0    ape_5.8-1                viridisLite_0.4.3       
+[103] xtable_1.8-8             plyr_1.8.9               httr_1.4.8              
+[106] tools_4.6.0              globals_0.19.1           beeswarm_0.4.0          
+[109] checkmate_2.3.4          MCL_1.0                  digest_0.6.39           
+[112] Matrix_1.7-5             farver_2.1.2             tzdb_0.5.0              
+[115] reshape2_1.4.5           yulab.utils_0.2.4        SnowballC_0.7.1         
+[118] viridis_0.6.5            glue_1.8.1               cachem_1.1.0            
+[121] polyclip_1.10-7          Biostrings_2.80.1        parallelly_1.47.0       
+[124] statmod_1.5.2            RcppHNSW_0.7.0           ScaledMatrix_1.20.0     
+[127] fontBitstreamVera_0.1.1  pbapply_1.7-4            httr2_1.2.3             
+[130] tcltk_4.6.0              spam_2.11-4              gson_0.1.0              
+[133] dqrng_0.4.1              utf8_1.2.6               graphlayouts_1.2.4      
+[136] readxl_1.5.0             lsa_0.73.4               gridExtra_2.3.1         
+[139] shiny_1.14.0             tidydr_0.0.6             R.utils_2.13.0          
+[142] arules_1.7.14            RCurl_1.98-1.19          memoise_2.0.1           
+[145] rmarkdown_2.31           scales_1.4.0             R.methodsS3_1.8.2       
+[148] future_1.70.0            RANN_2.6.2               fontLiberation_0.1.0    
+[151] ggpp_0.6.1               spatstat.data_3.1-9      rstudioapi_0.19.0       
+[154] cluster_2.1.8.2          whisker_0.4.1            janitor_2.2.1           
+[157] spatstat.utils_3.2-3     hms_1.1.4                fitdistrplus_1.2-6      
+[160] colorspace_2.1-2         rlang_1.2.0              GenomeInfoDb_1.48.0     
+[163] dotCall64_1.2            circlize_0.4.18          scuttle_1.22.0          
+[166] xfun_0.59                aisdk_1.4.12             iterators_1.0.14        
+[169] abind_1.4-8              GOSemSim_2.38.0          treeio_1.36.1           
+[172] bitops_1.0-9             promises_1.5.0           scatterpie_0.2.6        
+[175] RSQLite_3.53.2           qvalue_2.44.0            DelayedArray_0.38.2     
+[178] compiler_4.6.0           prettyunits_1.2.0        beachmat_2.28.0         
+[181] polynom_1.4-1            listenv_1.0.0            fontquiver_0.2.1        
+[184] edgeR_4.10.1             BiocSingular_1.28.0      tensor_1.5.1            
+[187] MASS_7.3-65              progress_1.2.3           BiocParallel_1.46.0     
+[190] spatstat.random_3.5-0    R6_2.6.1                 fastmap_1.2.0           
+[193] fastmatch_1.1-8          vipor_0.4.7              ROCR_1.0-12             
+[196] mcprogress_0.1.1         rsvd_1.0.5               enrichit_0.1.5          
+[199] gtable_0.3.6             KernSmooth_2.23-26       miniUI_0.1.2            
+[202] deldir_2.0-4             htmltools_0.5.9          bit64_4.8.2             
+[205] spatstat.explore_3.8-1   lifecycle_1.0.5          ggprism_1.0.7           
+[208] S7_0.2.2                 zip_3.0.0                processx_3.9.0          
+[211] callr_3.8.0              restfulr_0.0.17          sass_0.4.10             
+[214] vctrs_0.7.3              spatstat.geom_3.8-1      snakecase_0.11.1        
+[217] scran_1.40.0             ggfun_0.2.0              future.apply_1.20.2     
+[220] bslib_0.11.0             pillar_1.11.1            metapod_1.20.0          
+[223] locfit_1.5-9.12          otel_0.2.0               jsonlite_2.0.0          
+[226] expm_1.0-0               cigarillo_1.2.0         </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
