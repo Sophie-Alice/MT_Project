@@ -86,6 +86,10 @@ Project MT
     * [6.2.2 Cardiac Fibroblasts Focus](CF_TF_inferrence.html)
     * [6.2.3 Cardiomyocytes Focus](CM_TF_inferrence.html)
 
+## BMP7 Hypothesis testing
+
+* **Expression and infered Activity exploration**
+    * [7.1 Allg. Hypothesis testing](Hypothesis_testing.html)
 
 ## Fibroblast DGEA Method comparison
 
