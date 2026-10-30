@@ -202,12 +202,6 @@ message("Saving tf_auc_matrix: ", nrow(tf_auc_matrix), " cells x ", ncol(tf_auc_
 
 ```
 
-In macrophages: ALDH1A2 increased upon TGF-B stim
-Retinaldehyde is made to retinoic acid?
-
-In Cardiomyocytes: retinoic acid? (RAR/RXR?) is a inducer of BMP7?
-
-in Cardiac fibroblasts: BMP7 directs BMP7R-SMAD1/5/9 signaling
 
 # In macrophages
 
@@ -240,16 +234,14 @@ p_violin <- plot_expression_violin(
   subtitle = plot_subtitle
 )
 
-print(p_violin)
 
 
 Mac <- subset(Data, cell_type == "Macrophages") 
 
-FeaturePlot_scCustom(Mac, feature = target_gene, split.by = "TGF_status")
 
 ```
 
-## Vizualize Target gene expression proportions
+## Target gene expression proportions
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
@@ -265,7 +257,7 @@ p_density <- ggplot(data.frame(x = expr_vec), aes(x = x)) +
     y = "Density"
   ) +
   theme(plot.title = element_text(face = "bold", size = 12, hjust = 0))
-p_density
+
 
 # find a better cutoff estimation - if we use cells with > 0 expression we also include noise
 
@@ -318,8 +310,6 @@ p2 <- ggplot(data = as.data.frame(cellCounts), aes(x = TGF_status, fill = Status
   theme(plot.title = element_text(face = "bold", size = 12, hjust = 0))
 
 
-print(p1)
-print(p2)
 ```
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
@@ -346,16 +336,16 @@ p_density_overlay <- ggplot(df_plot, aes(x = ALDH1A2, color = orig.ident, fill =
     axis.title.y  = element_text(face = "bold")
   )
 
-print(p_density_overlay)
+print(p_density / p1 | p_density_overlay / p2)
 
 ```
 
 
 
 
-# In Cardiomyocytes  {.tabset}
+# In Cardiomyocytes {.tabset}
 
-In Cardiomyocytes: retinoic acid? (RAR/RXR?) is a inducer of BMP7?
+In Cardiomyocytes: retinoic acid ( via RAR/RXR) is a inducer of BMP7?
 
 ## RAR/RAX expression {.tabset}
 
@@ -425,13 +415,14 @@ for (target_gene in RARRAX) {
 
 ```
 
-### Vizualize Target gene expression proportions
+### Target gene expression proportions
 
 ```{r, warning = FALSE, fig.width=10, fig.height=8}
 
 for (target_gene in RARRAX) {
     
   Seurat::DefaultAssay(Data) <- "RNA"
+  Seurat::DefaultAssay(CM) <- "RNA"
   
   df_plot <- FetchData(Data, vars = c("orig.ident", "cell_type", target_gene), layer = "data") %>% 
     dplyr::filter(cell_type == "Cardiomyocytes")
@@ -547,7 +538,7 @@ for (target_gene in RARRAX) {
 
 ```
 
-### Vizualize Target gene TF inference Activity
+### Target gene TF inference Activity
 
 ```{r, warning = FALSE, fig.width=10, fig.height=8}
 
@@ -695,11 +686,9 @@ p_violin <- plot_expression_violin(
 print(p_violin)
 
 
-FeaturePlot_scCustom(CM, feature = target_gene, split.by = "orig.ident")
-
 ```
 
-### Vizualize Target gene expression proportions
+### Target gene expression proportions
 
 ```{r, warning = FALSE, fig.width=8, fig.height=6}
 
@@ -715,7 +704,7 @@ p_density <- ggplot(data.frame(x = expr_vec), aes(x = x)) +
     y = "Density"
   ) +
   theme(plot.title = element_text(face = "bold", size = 12, hjust = 0))
-p_density
+
 
 # find a better cutoff estimation - if we use cells with > 0 expression we also include noise
 
@@ -790,30 +779,26 @@ p_density_overlay <- ggplot(df_plot, aes(x = df_plot[[3]], color = orig.ident, f
     axis.title.y  = element_text(face = "bold")
   )
 
-print(p_density_overlay)
 
 
-print(p1)
-print(p2)
+print(p_density / p1 | p_density_overlay / p2)
+
 ```
 
 
-# In Cardiac fibroblasts
+# In Cardiac fibroblasts {.tabset}
 
-BMP7 directs BMP7R-SMAD1/5/9 signaling
+ - BMP7 directs BMP7R-SMAD1/5/9 signaling
  
-## BMP7R-SMAD1/5/9 signaling expression {.tabset}
-
-BMPR1A, BMPR2, ACVR1
-pSMAD2/3
-pSMAD1/5/9 - SMAD4
-SMAD3 down?
+  BMPR1A, BMPR2, ACVR1
+  pSMAD2/3
+  pSMAD1/5/9 - SMAD4
+  SMAD3 down?
 
 As such, a better way to define what a BMP is might be to limit the category to proteins that preferentially signal through a specific set of type I receptors (ACVRL1 {Alk1}, ACVR1 {Alk2}, BMPR1A {Alk3}, and BMPR1B {Alk6}) that ultimately activate transcription through the phosphorylation of SMADs 1, 5 and 9 [4–5, 18–19]. This is distinct from the SMAD2/3 activation that occurs through the type 1 receptors ACVR1B (Alk4), TGFBR1 (Alk5), and ACVR1C (Alk7), which is characteristic of signaling by members of the Activin and TGFβ classes [4–5, 18–19]. However, ligands such as activin A and B through Alk2 and TGFβ through Alk1, possess some situational ability to activate SMAD1/5/9 signaling [20–22]. However, these other proteins generally activate SMAD 1/5/9 in rare situations, leaving us to focus on those TGFβ growth factors that primarily utilize SMAD1/5/9. 
 
-### Check the BMP Receptors
+## BMP Receptors {.tabset}
 
-later: BMPS <- c("BMP7", "BMPR2", "SMAD1", "SMAD5", "SMAD9")
 
 From StrringR DB: 
  - BMP7 ->(positive regulation) -> BMPR1A, BMPR1B, BMPR2, ACVR1, ACVR2A, ACVR2B
@@ -897,7 +882,7 @@ for (target_gene in BMPs) {
 
 ```
 
-### Vizualize Target gene expression proportions
+### Target gene expression proportions
 
 ```{r, warning = FALSE, fig.width=10, fig.height=8}
 
@@ -1019,7 +1004,7 @@ for (target_gene in BMPs) {
 
 ```
 
-### Check the ACV Receptors.
+## ACV Receptors {.tabset}
 
 later: BMPS <- c("BMP7", "BMPR2", "SMAD1", "SMAD5", "SMAD9")
 
@@ -1103,7 +1088,7 @@ for (target_gene in ACVs) {
 
 ```
 
-### Visualize Target gene expression proportions
+### Target gene expression proportions
 
 ```{r, warning = FALSE, fig.width=10, fig.height=8}
 
@@ -1226,7 +1211,7 @@ for (target_gene in ACVs) {
 ```
 
 
-### Check the SMADs
+## SMADs 
 
 From StrringR DB: 
 
@@ -1308,7 +1293,7 @@ for (target_gene in SMADs) {
 
 ```
 
-### Visualize Target gene expression proportions
+### Target gene expression proportions
 
 ```{r, warning = FALSE, fig.width=10, fig.height=8}
 
@@ -1430,7 +1415,7 @@ for (target_gene in SMADs) {
 
 ```
 
-### Vizualize Target gene TF inference Activity
+### Target gene TF inference Activity
 
 ```{r, warning = FALSE, fig.width=10, fig.height=8}
 
